@@ -1,0 +1,11 @@
+div .layout {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    justify-content: stretch;
+    align-items: stretch;
+}
+
+.main {
+    flex-grow: 1;
+}
