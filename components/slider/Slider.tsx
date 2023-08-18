@@ -5,7 +5,6 @@ import img1 from '../../public/service-provider1.svg'
 import img2 from '../../public/service-provider2.svg'
 import img3 from '../../public/service-provider3.svg'
 import img4 from '../../public/service-provider4.svg'
-import sliderStyles from './slider.module.css'
 import Image from 'next/image'
 
 
@@ -19,7 +18,7 @@ export const ImgSlider = () => {
         slidesToScroll: 1
     };
     return (
-        <div className={sliderStyles['slider-cont']}>
+        <div className={`w-[500px]`}>
             <Slider {...settings}>
                 {[
                     img1,
@@ -27,7 +26,7 @@ export const ImgSlider = () => {
                     img3,
                     img4
                 ].map((image, index) => (
-                    <div className={`${sliderStyles['img1']}`} key={image}>
+                    <div className={`relative w-[365px] h-[495px] `} key={image}>
                         <Image fill src={`/service-provider${index + 1}.svg`} alt="" />
                     </div >
                 ))}

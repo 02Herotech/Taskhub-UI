@@ -41,6 +41,7 @@ const config: Config = {
       purple: '#BF246E',
       purpleLight: '#7E0640',
       transparent: 'transparent',
+      grey: '#F1F1F1'
 
     },
     extend: {
