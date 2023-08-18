@@ -1,19 +1,53 @@
 import type { Config } from 'tailwindcss'
+const defaultTheme = require("tailwindcss/defaultTheme");
 
 const config: Config = {
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
+    './components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+
   ],
   theme: {
-    extend: {
-      backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic':
-          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-      },
+    screens: {
+      sm: '480px',
+      md: '768px',
+      lg: '976px',
+      xl: '1440px',
     },
+    fontSize: {
+      base: '14px',
+      sm: '18px',
+      md: '20px',
+      lg: '24px',
+      xl: '32px',
+      '2xl': '40px',
+    },
+    colors: {
+      black: '#000000',
+      white: '#ffffff',
+      light: '#f4f4f4',
+      lightMedium: '#d8d8d8',
+      medium: '#969696',
+      mediumDark: '646464',
+      dark: '#323232',
+      yellow: '#f6dc41',
+      orange: '#ff8b00',
+      red: '#e33e38',
+      blue: '#1ba2e8',
+      blueLight: '1891D0',
+      green: '#41d33e',
+      greenLight: '#35B233',
+      purple: '#BF246E',
+      purpleLight: '#7E0640',
+      transparent: 'transparent',
+
+    },
+    extend: {
+      fontFamily: {
+        Montserrat: ["Montserrat", ...defaultTheme.fontFamily.sans],
+      },
+    }
   },
   plugins: [],
 }
