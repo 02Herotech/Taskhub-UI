@@ -34,13 +34,13 @@ const Nav = () => {
         <Link href='#'>
           <Button
             btnValue='Sign Up'
-            className='w-[100px] text-white p-2'
+            className='w-[110px] text-white p-2'
           />
         </Link>
         <Link href='#'>
           <Button
             btnValue='Log in'
-            className='bg-transparent border-[1px] w-[100px] p-2 border-purple text-black  hover:text-white'
+            className='bg-transparent border-[1px] w-[110px] p-2 border-purple text-black  hover:text-white'
           />
         </Link>
       </div>

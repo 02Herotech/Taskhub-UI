@@ -67,7 +67,7 @@ export default function Home() {
               <Image src={serviceProvImg} width={315} height={350} alt='' />
             </div>
           </div>
-          <div className={`items-end  absolute bottom-[7rem] right-[18rem] `}>
+          <div className={`items-end  absolute bottom-[5rem] right-[18rem] `}>
             4<div className={``}>
               <Image src={serviceProvChatImg} width={300} height={85} alt='' />
             </div>
@@ -101,10 +101,7 @@ export default function Home() {
 
       </div>
 
-      <ServicesLayout />
-
-
-
+      <ServicesLayout id={0} category={''} categoryImage={undefined} services={[]} description={''} />
 
     </main >
   )
