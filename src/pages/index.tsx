@@ -1,6 +1,8 @@
+/* eslint-disable react/no-unescaped-entities */
 import { Inter } from 'next/font/google'
 import Image from 'next/image'
 import Link from 'next/link'
+import { StaticImageData } from 'next/image'
 
 import homepageStyles from '../styles/homepage.module.css'
 import Nav from '../../components/nav/Nav'
@@ -9,6 +11,7 @@ import { SearchButton } from '../../components/buttons/Button'
 import { Button } from '../../components/buttons/Button'
 import ServicesLayout from '../../components/services/ServicesLayout'
 
+
 import serviceProvImg from '../../public/service-provider5.svg'
 import serviceProvChatImg from '../../public/hero-chat-img.png'
 import trusted from '../../public/Trusted_.svg'
@@ -16,6 +19,9 @@ import paypal from '../../public/paypal.svg'
 import mastercard from '../../public/mastercard.svg'
 import google from '../../public/Google.svg'
 import visa from '../../public/card-visa.svg'
+import { FAQLandingPage } from '../../components/FAQDetails/FAQData'
+const automative = require('../../public/automative.png') as StaticImageData;
+
 
 
 
@@ -101,7 +107,11 @@ export default function Home() {
 
       </div>
 
-      <ServicesLayout id={0} category={''} categoryImage={undefined} services={[]} description={''} />
+      <ServicesLayout id={0} category={''} categoryImage={automative} services={[]} description={''} />
+
+      <FAQLandingPage />
+
+
 
     </main >
   )

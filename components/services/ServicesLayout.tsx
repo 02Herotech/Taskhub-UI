@@ -34,7 +34,7 @@ const ServicesLayout: React.FC<ServicesDetailsProps> = ({ id }) => {
 
     return (
         <div className={`container mx-auto my-[50px]`}>
-            <div className={`w-[370px] h-[65px] my-6 mx-auto text-white text-lg font-bold bg-purple flex justify-center items-center rounded-xl`}>
+            <div className={`w-[370px] h-[65px] my-6 mx-auto text-white text-lg font-bold bg-purple flex justify-center items-center `}>
                 <h3>SERVICE CATEGORIES</h3>
             </div>
             <div className={`flex flex-wrap `}>
