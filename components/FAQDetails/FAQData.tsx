@@ -13,40 +13,52 @@ export interface FAQProps {
 
 export const FAQData = [
     {
-        question: 'What is CourseConnekt?',
-        answer: 'CourseConnekt is a platform that provides a wide range of courses to students. It is a platform that connects students with the best courses available online.',
+        question: 'How does TaskHub work?',
+        answer: 'TaskHub provides an online marketplace connecting two types of members service providers and customers.The customers who need to outsource tasks and For service providers who need to earn some money.',
         id: 1
     },
 
     {
-        question: 'How do I enroll in a course?',
-        answer: 'To enroll in a course by clicking on the Apply button on the course page. You will be redirected to the course page where you can start the course.',
+        question: 'Who can create an account on TaskHub?',
+        answer: ' Our sign up process is quick and easy it takes only 90seconds. You can sign up using your google account or email.Head Homepage to get started.',
         id: 2
     },
 
     {
-        question: "What if I don't like the course?",
-        answer: "Please don't hesitate to make the decision to leave the course whenever you feel it's appropriate. Furthermore, if you're interested in pursuing another course, you're welcome to do so.",
+        question: "What information is needed for me to start?",
+        answer: "You can start using TaskHub as soon as you sign up; however there are some things you be prompted to provide when you use certain features",
         id: 3
     },
 
     {
-        question: 'For enquires and complaints, how can I contact you?',
-        answer: 'You can contact us through the Contact Us page. We will get back to you as soon as possible.',
+        question: 'Are they any rules to TaskHub?',
+        answer: 'We have a set of Community Guidelines for our Customers and service providers, that you agree to when you create an account. These guidelines have been created in line with the Terms and Conditions, and are in place to help all members have a fair, enjoyable and safe experience on the platform.',
         id: 4
     },
 
     {
-        question: 'Whats the duration of the course?',
-        answer: 'The duration of the course depends on the course you choose and how fast you complete the course but the minumum duration is 6 month.',
+        question: 'Where can I go if I need help?',
+        answer: 'We have a great range of handy articles on our Help Centre, with tones of information.',
         id: 5
     },
 
     {
-        question: ' Will I get a certificate after completing the course?',
-        answer: 'No, we do not provide any certificate after completing the course.',
+        question: ' How fast can I get paid as a service provider?',
+        answer: 'As soon as the service is completed',
         id: 6
-    }
+    },
+
+    {
+        question: 'What are the dispute regulations in place?',
+        answer: 'Visit the dispute page',
+        id: 7
+    },
+
+    {
+        question: 'Do you have a customer care number?',
+        answer: 'Do you have a customer care number?',
+        id: 8
+    },
 
 ]
 
@@ -59,9 +71,9 @@ export const FAQlayout: React.FC<FAQProps> = ({ question, answer, className }) =
     };
 
     return (
-        <div className="py-5 min-h-[50px] my-0">
-            <div className="flex justify-between items-center cursor-pointer px-2">
-                <h3 className={`w-[320px] mb-2 font-bold`}>
+        <div className=" min-h-[50px] my-0 ">
+            <div className="flex justify-between items-cente cursor-pointer  space-x-1 px-2 w-full">
+                <h3 className={`w-[320px] pr-10 mb-2 font-extrabold `}>
                     {question}
                     <span
                         className={`flex mt-[-20px] transition-transform transform justify-items-end  ${isOpen ? 'rotate-0 justify-end' : '-rotate-180'}`}
@@ -72,7 +84,7 @@ export const FAQlayout: React.FC<FAQProps> = ({ question, answer, className }) =
                 </h3>
 
             </div>
-            {isOpen && <p className={`my-2 px-2 ${className}`}>{answer}</p>}
+            {isOpen && <p className={`my-2 px-2 font-normal ${className}`}>{answer}</p>}
         </div>
 
     )
