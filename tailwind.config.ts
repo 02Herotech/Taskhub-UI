@@ -41,7 +41,10 @@ const config: Config = {
       purple: '#BF246E',
       purpleLight: '#7E0640',
       transparent: 'transparent',
-      grey: '#F1F1F1'
+      grey: '#F1F1F1',
+      ash: '#3F3C3C',
+      cream: '#FEF7F7'
+
 
     },
     extend: {
