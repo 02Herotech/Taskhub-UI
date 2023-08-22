@@ -80,7 +80,7 @@ export default function Home() {
               </div>
             </div>
             <div className={`items-end  absolute bottom-[5rem] right-[18rem] `}>
-              4<div className={``}>
+              <div className={``}>
                 <Image src={serviceProvChatImg} width={300} height={85} alt='' />
               </div>
             </div>
