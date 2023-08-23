@@ -76,7 +76,7 @@ export const Button: React.FC<ButtonProps> = ({ btnValue, className }) => {
             <input
                 type="button"
                 value={btnValue}
-                className={` text-[15px] rounded-xl bg-purple hover:bg-purpleLight p-1 w-full text-center justify-center items-center ${className} `}
+                className={` text-[15px] rounded-[8px] bg-purple border-[1px] hover:bg-purpleLight p-1 w-full text-center justify-center items-center ${className} `}
             />
         </div>
     )
