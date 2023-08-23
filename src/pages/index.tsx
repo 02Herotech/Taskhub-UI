@@ -11,7 +11,6 @@ import { SearchButton } from '../../components/buttons/Button'
 import { Button } from '../../components/buttons/Button'
 import ServicesLayout from '../../components/services/ServicesLayout'
 
-
 import serviceProvImg from '../../public/service-provider5.svg'
 import serviceProvChatImg from '../../public/hero-chat-img.png'
 import trusted from '../../public/Trusted_.svg'
@@ -21,10 +20,6 @@ import google from '../../public/Google.svg'
 import visa from '../../public/card-visa.svg'
 import { FAQLandingPage } from '../../components/FAQDetails/FAQData'
 const automative = require('../../public/automative.png') as StaticImageData;
-
-
-
-
 
 
 const inter = Inter({ subsets: ['latin'] })
