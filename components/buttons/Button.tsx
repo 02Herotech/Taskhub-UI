@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
 import { FaSearch, FaMapMarkerAlt } from 'react-icons/fa';
+import { BsArrowLeftCircle } from 'react-icons/bs'
+import Link from 'next/link';
+
+
 
 interface SearchButtonProps {
     btnPlaceholder1: string;
@@ -9,6 +13,11 @@ interface SearchButtonProps {
 interface ButtonProps {
     btnValue: string,
     className?: string
+}
+
+interface BackBtnProps {
+    btnValue: string,
+    btnLink: string
 }
 
 export const SearchButton: React.FC<SearchButtonProps> = ({ btnPlaceholder1, btnPlaceholder2 }) => {
@@ -30,7 +39,7 @@ export const SearchButton: React.FC<SearchButtonProps> = ({ btnPlaceholder1, btn
     };
 
     return (
-        <div className={`flex flex-row mr-12 items-center mt-[-30px]`}>
+        <div className={`flex flex-row mr-12 cursor-pointer items-center mt-[-30px]`}>
             <div className={`my-4 px-3 self-stretch bg-white flex p-1.5 h-[60px] items-center`}>
                 <div className={`flex text-purple items-center justify-center w-[30px] text-md`}>
                     <FaMapMarkerAlt />
@@ -76,9 +85,19 @@ export const Button: React.FC<ButtonProps> = ({ btnValue, className }) => {
             <input
                 type="button"
                 value={btnValue}
-                className={` text-[15px] rounded-[8px] bg-purple border-[1px] hover:bg-purpleLight p-1 w-full text-center justify-center items-center ${className} `}
+                className={` text-[15px] rounded-[8px] cursor-pointer bg-purple border-[1px] hover:bg-purpleLight py-1 px-2 w-full text-center justify-center items-center ${className} `}
             />
         </div>
     )
 
+}
+
+export const BackButton: React.FC<BackBtnProps> = ({ btnValue, btnLink }) => {
+    return (
+        <div className={`flex justify-center items-center font-bold cursor-pointer pt-10 hover:text-[20px]`}>
+            <BsArrowLeftCircle className={`text-md mr-2`} />
+            <Link href={`${btnLink}`} className={`text-center  hover:underline p-1 flex`}>{btnValue}</Link>
+        </div >
+
+    )
 }

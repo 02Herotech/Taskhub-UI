@@ -7,7 +7,8 @@
     html,
     body {
         background: white;
-        font-family: 'Montserrat', sans-serif;
+        /* font-family: 'Montserrat', sans-serif; */
+        @apply font-sans;
         color: black;
         margin: 0;
         padding: 0;

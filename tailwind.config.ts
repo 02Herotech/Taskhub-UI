@@ -50,7 +50,11 @@ const config: Config = {
     extend: {
       fontFamily: {
         Montserrat: ["Montserrat", ...defaultTheme.fontFamily.sans],
+        sans: ["var(--Montserrat)"]
       },
+      backgroundImage: {
+        signupBg: "url('../../public/signupBg.png')",
+      }
     }
   },
   plugins: [],
