@@ -123,7 +123,7 @@ const authSignup = () => {
                                     </label>
                                     <div className={`flex items-center space-x-4`}>
                                         <h4 className={`border-medium border-[1px] text-base text-black font-bold p-3 rounded-xl`}>AU +61</h4>
-                                        <input type="text" placeholder='Enter phone number' className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl`} value={phoneNumber} onChange={handlePhoneNumberChange} required maxLength={9}
+                                        <input type="text" placeholder='Enter phone number' className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl`} value={phoneNumber} onChange={handlePhoneNumberChange} required maxLength={10}
                                         />
                                     </div>
                                 </div>

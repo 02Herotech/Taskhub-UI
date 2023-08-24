@@ -31,7 +31,7 @@ const Footer = () => {
                 <div className={`flex flex-col py-10 space-y-2`}>
                     <Link href='/support' className={`hover:text-medium`}> FAQs </Link>
                     <Link href='/about' className={`hover:text-medium`}> About Us </Link>
-                    <Link href='/terms' className={`hover:text-medium`}> Terms </Link>
+                    <Link href='/termsAndConditions' className={`hover:text-medium`}> Terms </Link>
                     <Link href='/privacy' className={`hover:text-medium`}> Privacy </Link>
                 </div>
 
