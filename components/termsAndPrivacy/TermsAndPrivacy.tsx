@@ -2,7 +2,7 @@ import React from 'react'
 
 export const TermsAndConditions = () => {
     return (
-        <div className={`bg-white text-left text-black py-10 px-20`}>
+        <div className={`bg-white text-left text-black pt-5 pb-10 px-20`}>
             <h3 className='text-lg text-center'>TERMS AND CONDITIONS</h3>
             <div className='text-base'>
                 {`Here are our terms and conditions. Country Specific Terms in Appendix B shall also apply to this Agreement. Please contact us here if you have any other questions. Thanks for connecting.
