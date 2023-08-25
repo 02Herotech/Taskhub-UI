@@ -12,7 +12,7 @@ const Nav = () => {
     return router.pathname === linkPath;
   };
   return (
-    <div className={`p-1 flex items-center justify-around h-[100px]`}>
+    <div className={`p-1 flex items-center justify-around h-[100px] drop-shadow-md fixed z-50 w-full bg-white mt-[-100px]`}>
       <Link href='/'>
         <Image src={logoImg} width={162} height={162} alt='' />
       </Link>
@@ -39,13 +39,13 @@ const Nav = () => {
         <Link href='/auth'>
           <Button
             btnValue='Sign Up'
-            className='w-[110px] text-white p-2'
+            className='w-[90px] text-white h-[45px]'
           />
         </Link>
         <Link href='#'>
           <Button
             btnValue='Log in'
-            className='bg-transparent border-[1px] w-[110px] p-2 border-purple text-black  hover:text-white'
+            className='bg-transparent border-[1px] w-[90px] h-[45px]  border-purple text-black  hover:text-white'
           />
         </Link>
       </div>

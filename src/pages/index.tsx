@@ -1,5 +1,4 @@
 /* eslint-disable react/no-unescaped-entities */
-import { Inter } from 'next/font/google'
 import Image from 'next/image'
 import Link from 'next/link'
 import { StaticImageData } from 'next/image'
@@ -22,14 +21,13 @@ import google from '../../public/Google.svg'
 import visa from '../../public/card-visa.svg'
 import { FAQLandingPage } from '../../components/FAQDetails/FAQData'
 import Newsletter from '../../components/newsletter/Newsletter'
+import { montsearrat } from '@/styles/font'
 const automative = require('../../public/automative.png') as StaticImageData;
 
 
 
 
 
-
-const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
   return (
@@ -38,10 +36,10 @@ export default function Home() {
         <title>TaskHUB  | HomePage </title>
       </Head>
       <main
-        className={`min-h-screen ${inter.className}`}>
+        className={`min-h-screen ${montsearrat.className}`}>
         <Nav />
 
-        <div className={` w-full relative p-5 h-[650px] ${homepageStyles.getStartedCont}`}>
+        <div className={` w-full relative p-5 h-[650px] mt-[100px] ${homepageStyles.getStartedCont}`}>
           <div className="flex justify-between">
             <div className={`px-20 py-14 flex flex-col justify-around text-white space-y-10`}>
               <h1 className={`text-2xl  font-extrabold w-[550px] mb-[-20px]`}>
@@ -67,7 +65,7 @@ export default function Home() {
               <div className={`w-[160px]`}>
                 <Link href='/auth/'>
                   <Button btnValue='Get Started'
-                    className='h-[55px]'
+                    className='h-[55px] border-none'
                   />
 
                 </Link>
