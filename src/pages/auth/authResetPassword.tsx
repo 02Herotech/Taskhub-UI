@@ -6,21 +6,38 @@ import Link from 'next/link'
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai'
 import { BackButton } from '../../../components/buttons/Button'
 
+interface FormState {
+    newPassword: string;
+    confirmNewPassword: string;
+    error: string;
+}
 
 
-const authResetPassword = () => {
-    const [newPassword, setNewPassword] = useState('')
-    const [confirmNewPassword, setConfirmNewPassword] = useState('')
+
+const authResetPassword: React.FC<FormState> = () => {
+    const [formData, setFormData] = useState({
+        newPassword: '',
+        confirmNewPassword: '',
+        error: '',
+    });
     const [showPassword, setShowPassword] = useState(false)
 
 
-    const handleNewPasswordChange = (event: { target: { value: React.SetStateAction<string> } }) => {
-        setNewPassword(event.target.value)
+    const handleChange = (e: any) => {
+        const { name, value } = e.target;
+        setFormData((prevData) => ({
+            ...prevData,
+            [name]: value,
+
+        }));
+    };
+
+    const isAllFieldsFilled = () => {
+        const requiredFields: (keyof FormState)[] = ['newPassword', 'confirmNewPassword'];
+        return requiredFields.every(field => formData[field] !== '')
     }
 
-    const handleConfirmNewPasswordChange = (event: { target: { value: React.SetStateAction<string> } }) => {
-        setConfirmNewPassword(event.target.value)
-    }
+
 
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
@@ -29,8 +46,13 @@ const authResetPassword = () => {
 
     const onSubmit = (event: { preventDefault: () => void }) => {
         event.preventDefault();
-        console.log(newPassword)
-        console.log(confirmNewPassword)
+        if (formData.newPassword !== formData.confirmNewPassword) {
+            setFormData((prevData) => ({
+                ...prevData,
+                error: 'Password should be same',
+            }));
+            return;
+        }
 
     }
 
@@ -51,7 +73,7 @@ const authResetPassword = () => {
                                 New Password <span className={`text-red`}>*</span>
                             </label>
                             <div className={`relative`}>
-                                <input type={showPassword ? 'text' : 'password'} id='password' name='password' placeholder='Enter your password' className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl w-full`} value={newPassword} onChange={handleNewPasswordChange} required
+                                <input type={showPassword ? 'text' : 'password'} id='password' name='password' placeholder='Enter your password' className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl w-full`} value={formData.newPassword} onChange={handleChange} required
                                 />
                                 <button
                                     type="button"
@@ -72,7 +94,7 @@ const authResetPassword = () => {
                                 Confirm Password <span className={`text-red`}>*</span>
                             </label>
                             <div className={`relative`}>
-                                <input type={showPassword ? 'text' : 'password'} id='password' name='password' placeholder='Enter your password' className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl w-full`} value={confirmNewPassword} onChange={handleConfirmNewPasswordChange} required
+                                <input type={showPassword ? 'text' : 'password'} id='password' name='password' placeholder='Enter your password' className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl w-full`} value={formData.confirmNewPassword} onChange={handleChange} required
                                 />
                                 <button
                                     type="button"
@@ -86,13 +108,16 @@ const authResetPassword = () => {
                                     )}
                                 </button>
                             </div>
+                            <p className={`text-red p-2`}>{formData.error}</p>
+
                         </div>
 
 
                         <div className={`flex justify-center items-center`}>
                             <button
                                 type="submit"
-                                className="w-4/6 bg-purple text-white py-2 px-4 rounded-md hover:bg-purpleLight"
+                                className={`w-4/6 bg-purple text-white py-2 px-4 rounded-md hover:bg-purpleLight  ${isAllFieldsFilled() ? '' : 'cursor-not-allowed opacity-50'}`}
+                                disabled={!isAllFieldsFilled()}
                             >
                                 Save Password
                             </button>

@@ -19,6 +19,12 @@ const authResetPassword = () => {
 
 
 
+    const isAllFieldsFilled = () => {
+        const requiredField = ['email'];
+        return requiredField.every(field => email !== '');
+    }
+
+
 
 
     const onSubmit = (event: { preventDefault: () => void }) => {
@@ -53,7 +59,8 @@ const authResetPassword = () => {
                         <div className={`flex justify-center items-center`}>
                             <button
                                 type="submit"
-                                className="w-4/6 bg-purple text-white py-2 px-4 rounded-md hover:bg-purpleLight"
+                                className={`w-4/6 bg-purple text-white py-2 px-4 rounded-md hover:bg-purpleLight ${isAllFieldsFilled() ? '' : 'cursor-not-allowed opacity-50'}`}
+                                disabled={!isAllFieldsFilled()}
                             >
                                 Reset Password
                             </button>

@@ -54,7 +54,8 @@ const config: Config = {
       },
       backgroundImage: {
         signupBg: "url('../../public/signupBg.png')",
-      }
+      },
+
     }
   },
   plugins: [],

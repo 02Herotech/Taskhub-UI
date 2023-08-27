@@ -6,38 +6,51 @@ import Link from 'next/link'
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai'
 import { BackButton } from '../../../components/buttons/Button'
 
+interface FormState {
+    email: string;
+    password: string;
+    rememberMe: boolean;
+    error: string;
+}
 
 
-const authLogin = () => {
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
+
+const authLogin: React.FC<FormState> = () => {
+    const [formData, setFormData] = useState({
+        email: '',
+        password: '',
+        rememberMe: false,
+        error: '',
+    });
     const [showPassword, setShowPassword] = useState(false)
-    const [rememberMe, setRememberME] = useState(false)
 
 
-    const handleEmailChange = (event: { target: { value: React.SetStateAction<string> } }) => {
-        setEmail(event.target.value)
+    const handleChange = (e: any) => {
+        const { name, value } = e.target;
+        setFormData((prevData) => ({
+            ...prevData,
+            [name]: value,
+
+        }));
+    };
+
+    const isAllFieldsFilled = () => {
+        const requiredFields: (keyof FormState)[] = ['email', 'password'];
+        return requiredFields.every(field => formData[field] !== '') && formData.rememberMe;
     }
 
-    const handlePasswordChange = (event: { target: { value: React.SetStateAction<string> } }) => {
-        setPassword(event.target.value)
-    }
+
 
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
     };
 
-    const handleRememberMeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setRememberME(event.target.checked)
-    }
 
     const onSubmit = (event: { preventDefault: () => void }) => {
         event.preventDefault();
-        console.log(email)
-        console.log(password)
-        console.log(rememberMe)
 
     }
+
 
 
 
@@ -54,7 +67,7 @@ const authLogin = () => {
                             <label htmlFor="email" className={`font-bold text-[16px] px-2 my-1`}>
                                 Email <span className={`text-red`}>*</span>
                             </label>
-                            <input type="email" placeholder='Enter your email-address' id='email' name='email' className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl w-full`} value={email} onChange={handleEmailChange} required
+                            <input type="email" placeholder='Enter your email-address' id='email' name='email' className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl w-full`} value={formData.email} onChange={handleChange} required
                             />
                         </div>
 
@@ -63,7 +76,7 @@ const authLogin = () => {
                                 Password <span className={`text-red`}>*</span>
                             </label>
                             <div className={`relative`}>
-                                <input type={showPassword ? 'text' : 'password'} id='password' name='password' placeholder='Enter your password' className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl w-full`} value={password} onChange={handlePasswordChange} required
+                                <input type={showPassword ? 'text' : 'password'} id='password' name='password' placeholder='Enter your password' className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl w-full`} value={formData.password} onChange={handleChange} required
                                 />
                                 <button
                                     type="button"
@@ -80,7 +93,7 @@ const authLogin = () => {
                         </div>
                         <div className={`flex justify-between`}>
                             <div className={`space-x-2 px-2 flex`}>
-                                <input onChange={handleRememberMeChange} type="checkbox" name="rememberMe" id="rememberMe" required />
+                                <input onChange={handleChange} type="checkbox" name="rememberMe" id="rememberMe" required />
                                 <label htmlFor="rememberMe" className={`font-normal text-base`}>Remember Me</label>
                             </div>
 
@@ -93,7 +106,8 @@ const authLogin = () => {
                         <div className={`flex justify-center items-center`}>
                             <button
                                 type="submit"
-                                className="w-4/6 bg-purple text-white py-2 px-4 rounded-md hover:bg-purpleLight"
+                                className={`w-4/6 bg-purple text-white py-2 px-4 rounded-md hover:bg-purpleLight  ${isAllFieldsFilled() ? '' : 'cursor-not-allowed opacity-50'}`}
+                                disabled={!isAllFieldsFilled()}
                             >
                                 Log In
                             </button>
