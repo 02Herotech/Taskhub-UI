@@ -95,7 +95,7 @@ const authSignup: React.FC<FormState> = () => {
                 lastName: formData.lastName,
                 address: formData.address,
                 phoneNumber: formData.phoneNumber,
-                emailAddrress: formData.email,
+                emailAddress: formData.email,
                 password: formData.password
             }, queryString);
 

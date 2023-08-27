@@ -14,7 +14,6 @@ interface FormState {
 }
 
 
-
 const authLogin: React.FC<FormState> = () => {
     const [formData, setFormData] = useState({
         email: '',
