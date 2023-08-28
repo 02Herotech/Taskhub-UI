@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 /* eslint-disable react-hooks/rules-of-hooks */
 import React, { useState, useRef, useEffect } from 'react'
 import Link from 'next/link'
@@ -232,9 +233,9 @@ const authServiceProviderSignup: React.FC<FormState> = () => {
                                     </label>
                                     <select name="identification" id="identification" className={`border-medium border-[1px] text-base text-black font-bold py-3 px-3 rounded-xl w-2/3 bg-contain`} >
                                         <option value="none">None</option>
-                                        <option value="drivers_license">National Driver's License</option>
+                                        <option value="drivers_license">National Driver&rsquo;s License</option>
                                         <option value="national_id">National ID</option>
-                                        <option value="voters_card">Voter's Card</option>
+                                        <option value="voters_card">Voter&rsquo;s Card</option>
                                         <option value="passport">International Passport</option>
                                     </select>
 
