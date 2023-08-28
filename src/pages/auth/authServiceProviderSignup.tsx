@@ -71,7 +71,7 @@ const authServiceProviderSignup: React.FC<FormState> = () => {
     };
 
     const isAllFieldsFilled = () => {
-        const requiredFields = ['firstName', 'lastName', 'address', 'phoneNumber', 'email', 'password', 'confirmPassword', 'idNumber'];
+        const requiredFields: (keyof typeof formData)[] = ['firstName', 'lastName', 'address', 'phoneNumber', 'email', 'password', 'confirmPassword', 'idNumber'];
         return requiredFields.every(field => formData[field] !== '') && formData.agreement;
     }
 
