@@ -72,16 +72,17 @@ export const FAQlayout: React.FC<FAQProps> = ({ question, answer, className }) =
 
     return (
         <div className=" min-h-[50px] my-0 ">
-            <div className="flex justify-between items-cente cursor-pointer  space-x-1 px-2 w-full">
-                <h3 className={`w-[320px] pr-10 mb-2 font-extrabold `}>
+            <div className="flex  items-center cursor-pointer w-full">
+                <h3 className={`w-[320px]  mb-2 font-extrabold `}>
                     {question}
-                    <span
-                        className={`flex mt-[-20px] transition-transform transform justify-items-end  ${isOpen ? 'rotate-0 justify-end' : '-rotate-180'}`}
-                        onClick={toggleOpen}
-                    >
-                        {isOpen ? <>&#x2212;</> : <>&#x2B;</>}
-                    </span>
+
                 </h3>
+                <span
+                    className={`flex transition-transform transform justify-items-end  ${isOpen ? 'rotate-0 justify-end' : '-rotate-180'}`}
+                    onClick={toggleOpen}
+                >
+                    {isOpen ? <>&#x2212;</> : <>&#x2B;</>}
+                </span>
 
             </div>
             {isOpen && <p className={`my-2 px-2 font-normal ${className}`}>{answer}</p>}
