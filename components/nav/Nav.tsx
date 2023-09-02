@@ -42,7 +42,7 @@ const Nav = () => {
             className='w-[90px] text-white h-[45px]'
           />
         </Link>
-        <Link href='#'>
+        <Link href='/auth/authLogin'>
           <Button
             btnValue='Log in'
             className='bg-transparent border-[1px] w-[90px] h-[45px]  border-purple text-black  hover:text-white'

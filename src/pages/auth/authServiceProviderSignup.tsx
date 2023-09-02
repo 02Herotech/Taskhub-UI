@@ -92,7 +92,7 @@ const authServiceProviderSignup: React.FC<FormState> = () => {
             return;
         }
 
-        const formattedPhoneNumber = formData.phoneNumber.startsWith("+61") ? formData.phoneNumber : "+61" + formData.phoneNumber;
+        const formattedPhoneNumber = formData.phoneNumber.startsWith("+61") ? formData.phoneNumber : "08" + formData.phoneNumber;
 
 
         try {
@@ -107,7 +107,21 @@ const authServiceProviderSignup: React.FC<FormState> = () => {
                 idNumber: formData.idNumber,
             }
 
-            const res = await serviceProviderSignup(user);
+            const payload = {
+                request: {
+                    firstName: formData.firstName,
+                    lastName: formData.lastName,
+                    phoneNumber: formattedPhoneNumber, // Use the formatted phone number here
+                    emailAddress: formData.email,
+                    password: formData.password,
+                },
+                idNumber: formData.idNumber,
+            }
+
+            // const res = await serviceProviderSignup(user);
+
+            console.log('Signup payload:', payload);
+            const res = await fetch('https://service-rppp.onrender.com/api/v1/service_provider/sign-up', { method: 'POST', body: JSON.stringify(payload) })
 
             console.log('Signup response:', res);
         } catch (error) {
@@ -157,7 +171,7 @@ const authServiceProviderSignup: React.FC<FormState> = () => {
                                     <label htmlFor="address" className={`font-bold text-[16px] my-3`}>
                                         Address <span className={`text-red`}>*</span>
                                     </label>
-                                    <input type="text" id='address' name='address' placeholder='Enter your address' className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl w-[400px]`} value={formData.address} onChange={handleChange} required
+                                    <input type="text" id='address' name='address' placeholder='Enter your address' className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl w-full`} value={formData.address} onChange={handleChange} required
                                     />
                                 </div>
 
@@ -165,9 +179,9 @@ const authServiceProviderSignup: React.FC<FormState> = () => {
                                     <label htmlFor="phoneNumber" className={`font-bold text-[16px] my-3`}>
                                         Phone Number <span className={`text-red`}>*</span>
                                     </label>
-                                    <div className={`flex items-center space-x-4`}>
-                                        <h4 className={`border-medium border-[1px] text-base text-black font-bold p-3 rounded-xl`}>AU +61</h4>
-                                        <input type="text" placeholder='Enter phone number' name='phoneNumber' id='phoneNumber' className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl`} value={formData.phoneNumber} onChange={handleChange} required maxLength={9} minLength={9}
+                                    <div className={`flex items-center justify-around`}>
+                                        <h4 className={`border-medium border-[1px] text-base text-black font-bold p-3 rounded-xl`}>AU 08</h4>
+                                        <input type="text" placeholder='Enter phone number' name='phoneNumber' id='phoneNumber' className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl w-5/6`} value={formData.phoneNumber} onChange={handleChange} required maxLength={8} minLength={8}
                                         />
                                     </div>
                                 </div>
@@ -176,7 +190,7 @@ const authServiceProviderSignup: React.FC<FormState> = () => {
                                     <label htmlFor="email" className={`font-bold text-[16px] my-3`}>
                                         Email <span className={`text-red`}>*</span>
                                     </label>
-                                    <input type="email" placeholder='Enter your email-address' id='email' name='email' className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl w-2/3`} value={formData.email} onChange={handleChange} required
+                                    <input type="email" placeholder='Enter your email-address' id='email' name='email' className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl w-full`} value={formData.email} onChange={handleChange} required
                                     />
                                 </div>
 
@@ -185,12 +199,12 @@ const authServiceProviderSignup: React.FC<FormState> = () => {
                                         Password <span className={`text-red`}>*</span>
                                     </label>
                                     <div className={`relative`}>
-                                        <input type={showPassword ? 'text' : 'password'} id='password' name='password' placeholder='Enter your password' className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl w-2/3`} value={formData.password} onChange={handleChange} required maxLength={15}
+                                        <input type={showPassword ? 'text' : 'password'} id='password' name='password' placeholder='Enter your password' className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl w-full`} value={formData.password} onChange={handleChange} required maxLength={15}
                                         />
                                         <button
                                             type="button"
                                             onClick={togglePasswordVisibility}
-                                            className="absolute inset-y-0 right-[10rem] pr-3 flex items-center focus:outline-none"
+                                            className="absolute inset-y-0 right-0 pr-3 flex items-center focus:outline-none"
                                         >
                                             {showPassword ? (
                                                 <AiOutlineEye className="h-5 w-5 text-black" />
@@ -211,12 +225,12 @@ const authServiceProviderSignup: React.FC<FormState> = () => {
                                         Confirm your Password <span className={`text-red`}>*</span>
                                     </label>
                                     <div className={`relative`}>
-                                        <input type={showConfirmPassword ? 'text' : 'password'} id='confirmPassword' name='confirmPassword' placeholder='Enter your password' className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl w-2/3`} value={formData.confirmPassword} onChange={handleChange} required maxLength={15}
+                                        <input type={showConfirmPassword ? 'text' : 'password'} id='confirmPassword' name='confirmPassword' placeholder='Enter your password' className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl w-full`} value={formData.confirmPassword} onChange={handleChange} required maxLength={15}
                                         />
                                         <button
                                             type="button"
                                             onClick={toggleConfirmPasswordVisibility}
-                                            className="absolute inset-y-0 right-[10rem] pr-3 flex items-center focus:outline-none"
+                                            className="absolute inset-y-0 right-0 pr-3 flex items-center focus:outline-none"
                                         >
                                             {showConfirmPassword ? (
                                                 <AiOutlineEye className="h-5 w-5 text-black" />
@@ -231,7 +245,7 @@ const authServiceProviderSignup: React.FC<FormState> = () => {
                                     <label htmlFor="identification" className={`font-bold text-[16px] my-3`}>
                                         MEANS OF IDENTIFICATION <span className={`text-red`}>*</span>
                                     </label>
-                                    <select name="identification" id="identification" className={`border-medium border-[1px] text-base text-black font-bold py-3 px-3 rounded-xl w-2/3 bg-contain`} >
+                                    <select name="identification" id="identification" className={`border-medium border-[1px] text-base text-black font-bold py-3 px-3 rounded-xl w-full bg-contain`} >
                                         <option value="none">None</option>
                                         <option value="drivers_license">National Driver&rsquo;s License</option>
                                         <option value="national_id">National ID</option>
@@ -245,7 +259,7 @@ const authServiceProviderSignup: React.FC<FormState> = () => {
                                     <label htmlFor="idNumber" className={`font-bold text-[16px]`}>
                                         Valid ID NUMBER
                                     </label>
-                                    <input type="text" placeholder='Enter the ID number' name='idNumber' id='idNumber' className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl w-2/3 my-3`} value={formData.idNumber} onChange={handleChange} required
+                                    <input type="text" placeholder='Enter the ID number' name='idNumber' id='idNumber' className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl w-full my-3`} value={formData.idNumber} onChange={handleChange} required
                                     />
 
                                 </div>
@@ -268,7 +282,7 @@ const authServiceProviderSignup: React.FC<FormState> = () => {
                                 </button>
                             </div>
                         </form>
-                        <div className={`flex justify-center space-x-2 my-5`}>
+                        <div className={`flex justify-evenly my-5`}>
                             <h5>Already have an account?</h5>
                             <Link href='/auth/authLogin' className={`text-purple hover:text-[17px] underline`}>log in</Link>
                         </div>
@@ -278,7 +292,7 @@ const authServiceProviderSignup: React.FC<FormState> = () => {
             </div>
             <div className={`w-1/3 bg-signupBg flex items-center justify-center`}>
                 <div className="flex flex-col text-center text-white  ">
-                    <h1 className={`font-bold text-xl w-[300px]`}>Welcome to the <br /><span className={`text-purple text-xl font-extrabold`}>SignUp</span><br />page</h1>
+                    <h1 className={`font-bold text-xl w-[300px]`}><span className={`text-purple text-xl font-extrabold`}>Service Provider&rsquo;s</span><br />Sign up page</h1>
                     <div className={`flex justify-center  items-center pt-10`}>
                         <BackButton btnLink='/auth' btnValue='Go back' />
                     </div>

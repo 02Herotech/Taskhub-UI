@@ -56,7 +56,7 @@ const authResetPassword = () => {
 
 
 
-                        <div className={`flex justify-center items-center`}>
+                        <div className={`flex justify-center items-center text-sm`}>
                             <button
                                 type="submit"
                                 className={`w-4/6 bg-purple text-white py-2 px-4 rounded-md hover:bg-purpleLight ${isAllFieldsFilled() ? '' : 'cursor-not-allowed opacity-50'}`}
@@ -68,7 +68,7 @@ const authResetPassword = () => {
 
                     </form>
                 </div>
-                <div className={`flex justify-around space-x-1 mt-5`}>
+                <div className={`flex justify-around space-x-1 mt-5 text-base`}>
                     <h5>Remember your password? </h5>
                     <Link href='/auth/authLogin' className={`text-purple hover:text-[17px] underline`}>Log in</Link>
                 </div>

@@ -113,7 +113,7 @@ const authResetPassword: React.FC<FormState> = () => {
                         </div>
 
 
-                        <div className={`flex justify-center items-center`}>
+                        <div className={`flex justify-center items-center text-sm`}>
                             <button
                                 type="submit"
                                 className={`w-4/6 bg-purple text-white py-2 px-4 rounded-md hover:bg-purpleLight  ${isAllFieldsFilled() ? '' : 'cursor-not-allowed opacity-50'}`}

@@ -106,7 +106,7 @@ const authLogin: React.FC<FormState> = () => {
                         <div className={`flex justify-center items-center`}>
                             <button
                                 type="submit"
-                                className={`w-4/6 bg-purple text-white py-2 px-4 rounded-md hover:bg-purpleLight  ${isAllFieldsFilled() ? '' : 'cursor-not-allowed opacity-50'}`}
+                                className={`w-4/6 bg-purple text-white py-2 px-4 rounded-md hover:bg-purpleLight text-sm ${isAllFieldsFilled() ? '' : 'cursor-not-allowed opacity-50'}`}
                                 disabled={!isAllFieldsFilled()}
                             >
                                 Log In
@@ -114,13 +114,13 @@ const authLogin: React.FC<FormState> = () => {
                         </div>
 
                     </form>
-                    <div className={`flex justify-around space-x-1 mt-5`}>
+                    <div className={`flex justify-around space-x-1 mt-5 text-base`}>
                         <h5>Don't have an account before? </h5>
                         <Link href='/auth' className={`text-purple hover:text-[17px] underline`}>Sign Up</Link>
                     </div>
                 </div>
                 <div className={`flex justify-center  items-center mt-[-20px]`}>
-                    <BackButton btnLink='/auth' btnValue='Go back' />
+                    <BackButton btnLink='/' btnValue='Go back' />
                 </div>
             </div >
         </div >
