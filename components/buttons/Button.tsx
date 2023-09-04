@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import { FaSearch, FaMapMarkerAlt } from 'react-icons/fa';
 import { BsArrowLeftCircle } from 'react-icons/bs'
 import Link from 'next/link';
+import { poppins } from '@/styles/font'
 
 
 
 interface SearchButtonProps {
     btnPlaceholder1: string;
-    btnPlaceholder2: string;
+    btnPlaceholder2?: string;
 }
 
 interface ButtonProps {
@@ -85,7 +86,7 @@ export const Button: React.FC<ButtonProps> = ({ btnValue, className }) => {
             <input
                 type="button"
                 value={btnValue}
-                className={` text-[15px] rounded-[8px] cursor-pointer bg-purple border-[1px] hover:bg-purpleLight py-1 px-2 w-full text-center justify-center items-center ${className} `}
+                className={` text-[15px] rounded-[8px] cursor-pointer bg-purpleBase border-[1px] hover:bg-purple5 py-1 px-2 w-full text-center justify-center items-center ${className} `}
             />
         </div>
     )

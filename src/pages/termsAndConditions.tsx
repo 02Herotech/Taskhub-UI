@@ -1,13 +1,13 @@
 import { BackButton } from '../../components/buttons/Button'
 import Nav from '../../components/nav/Nav'
 import { TermsAndConditions } from '../../components/termsAndPrivacy/TermsAndPrivacy'
-import { montsearrat } from '@/styles/font'
+import { poppins, revalia } from '@/styles/font'
 
 
 
 const terms = () => {
     return (
-        <div className={`min-h-screen ${montsearrat.className}`}>
+        <div className={`min-h-screen ${poppins.className}`}>
             <Nav />
 
             <div className='mt-[100px]'>

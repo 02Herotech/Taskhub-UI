@@ -1,5 +1,5 @@
 import React from 'react'
-import { montsearrat } from '@/styles/font'
+import { poppins, revalia } from '@/styles/font'
 import Link from 'next/link'
 import Image from 'next/image'
 import thumbsUp from '../../../public/thumbsUp.svg'
@@ -10,7 +10,7 @@ import thumbsUp from '../../../public/thumbsUp.svg'
 const authResetPasswordConfirmation = () => {
     return (
         <div className="flex m-auto h-screen">
-            <div className={`${montsearrat.className} space-y-3 flex h-full flex-col items-center justify-center m-auto p-20`}>
+            <div className={`${poppins.className} space-y-3 flex h-full flex-col items-center justify-center m-auto p-20`}>
                 <div className={`w-[160px] h-[160px]`}>
                     <Image src={thumbsUp} width={157} height={157} alt='' />
                 </div>

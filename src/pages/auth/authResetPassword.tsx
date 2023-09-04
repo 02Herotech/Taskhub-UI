@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable react-hooks/rules-of-hooks */
 import React, { useState } from 'react'
-import { montsearrat } from '@/styles/font'
+import { poppins, revalia } from '@/styles/font'
 import Link from 'next/link'
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai'
 import { BackButton } from '../../../components/buttons/Button'
@@ -60,7 +60,7 @@ const authResetPassword: React.FC<FormState> = () => {
 
     return (
         <div className="flex m-auto">
-            <div className={`${montsearrat.className} w-[550px] flex h-full flex-col m-auto p-20 `}>
+            <div className={`${poppins.className} w-[550px] flex h-full flex-col m-auto p-20 `}>
                 <div className={`justify-start my-5 space-y-3  text-center px-2`}>
                     <h1 className={`text-md font-extrabold`}>Password reset</h1>
                     <h2 className={`text-base`}>Enter your new password and  your password

@@ -4,7 +4,7 @@ import React, { useState, useRef, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import logo from '../../../public/logo.png'
-import { montsearrat } from '@/styles/font'
+import { poppins, revalia } from '@/styles/font'
 // import { useRouter } from 'next/dist/client/router'
 
 
@@ -134,7 +134,7 @@ const authServiceProviderSignup: React.FC<FormState> = () => {
 
 
     return (
-        <div className={`flex h-screen overflow-y-hidden justify-between w-full overflow-x-hidden  ${montsearrat.className}`}>
+        <div className={`flex h-screen overflow-y-hidden justify-between w-full overflow-x-hidden  ${poppins.className}`}>
             <div className={`overflow-y-auto w-2/3 py-3 px-10 `}>
                 <div className={`mt-[-20px]`}>
                     <Image src={logo} width={162} height={162} alt='' />

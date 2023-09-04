@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable react-hooks/rules-of-hooks */
 import React, { useState } from 'react'
-import { montsearrat } from '@/styles/font'
+import { poppins, revalia } from '@/styles/font'
 import Link from 'next/link'
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai'
 import { BackButton } from '../../../components/buttons/Button'
@@ -56,7 +56,7 @@ const authLogin: React.FC<FormState> = () => {
 
     return (
         <div className="flex m-auto">
-            <div className={`${montsearrat.className} w-[550px] flex h-full flex-col m-auto p-20 `}>
+            <div className={`${poppins.className} w-[550px] flex h-full flex-col m-auto p-20 `}>
                 <div className={`font-extrabold justify-start my-5  px-2`}>
                     <h1 className={`text-md`}>Welcome Back,</h1>
                     <h2 className={`text-lg`}>Log <span className={`text-purple`}>In</span></h2>

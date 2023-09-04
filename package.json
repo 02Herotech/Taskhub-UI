@@ -17,6 +17,7 @@
     "classnames": "^2.3.2",
     "eslint": "8.47.0",
     "eslint-config-next": "13.4.16",
+    "gsap": "^3.12.2",
     "lib-utils-ts": "^2.0.4-stable",
     "next": "13.4.16",
     "postcss": "8.4.27",

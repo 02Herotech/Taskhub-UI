@@ -4,7 +4,9 @@ import { useRouter } from 'next/router';
 import Image from 'next/image'
 import logoImg from '../../public/logo.png'
 import { Button } from '../buttons/Button';
-import { FaArrowDown } from 'react-icons/fa'
+import { poppins, revalia } from '@/styles/font'
+
+import { SlArrowDown } from 'react-icons/sl'
 
 const Nav = () => {
   const router = useRouter();
@@ -12,40 +14,46 @@ const Nav = () => {
     return router.pathname === linkPath;
   };
   return (
-    <div className={`p-1 flex items-center justify-around h-[100px] drop-shadow-md fixed z-50 w-full bg-white mt-[-100px]`}>
-      <Link href='/'>
-        <Image src={logoImg} width={162} height={162} alt='' />
-      </Link>
+    <div className={`p-1 flex items-center justify-around h-[100px] drop-shadow-md fixed z-50 w-full bg-white mt-[-100px] ${poppins.className} font-extrabold`}>
+      <div>
+        <Link href='/' className={`flex space-x-3 items-center`}>
+          <Image src={logoImg} width={61} height={55} alt='' className={`mt-[-10px]`} />
+          <h4 className={`text-lg font-extrabold `}>TaskHub</h4>
+        </Link>
+      </div>
 
-      <div className="flex  space-x-12 items-center ">
-        <Link href="/" className={`text-sm font-bold text-black hover:text-medium ${isLinkActive("/") ? "text-[23px]" : ""}`} >
+      <div className="flex  space-x-12 items-center font-extrabold text-sm text-black  ">
+        <Link href="/" className={` hover:text-grey4 ${isLinkActive("/") ? "text-[22px]" : ""}`} >
           Home
         </Link>
-        <Link href='/about' className={`text-sm font-bold text-black hover:text-medium ${isLinkActive("/about") ? "text-[23px]" : ""}`}  >
+        <Link href='/about' className={`hover:text-grey4 ${isLinkActive("/about") ? "text-[22px]" : ""}`}  >
           About Us
         </Link>
-        <Link href="/services" className={`text-sm font-bold text-black hover:text-medium ${isLinkActive("/services") ? "text-[23px]" : ""}`} >
+        <Link href="/services" className={` hover:text-grey4 ${isLinkActive("/services") ? "text-[22px]" : ""}`} >
           Services
         </Link>
-        <Link href="/faq" className={`text-sm font-bold text-black hover:text-medium ${isLinkActive("/faq") ? "text-[23px]" : ""}`} >
+        <Link href="/faq" className={` hover:text-grey4 ${isLinkActive("/faq") ? "text-[22px]" : ""}`} >
           FAQs
         </Link>
-        <Link href="/help" className={`text-sm font-bold text-black hover:text-medium ${isLinkActive("/help ") ? "text-[23px] " : ""}`} >
-          Help
+        <div>   <Link href="/help" className={`hover:text-grey4 ${isLinkActive("/help ") ? "text-[22px] " : ""}`} >
+          Contact Us
         </Link>
+          <SlArrowDown className={`inline-block ml-3`} />
+        </div>
+
       </div>
 
       <div className={`flex space-x-3 items-center`}>
         <Link href='/auth'>
           <Button
             btnValue='Sign Up'
-            className='w-[90px] text-white h-[45px]'
+            className='w-[95px] px-3 bg-purpleBase text-white  text-base font-extralight h-[45px] hover:bg-purple5'
           />
         </Link>
         <Link href='/auth/authLogin'>
           <Button
             btnValue='Log in'
-            className='bg-transparent border-[1px] w-[90px] h-[45px]  border-purple text-black  hover:text-white'
+            className='bg-white border-[1px] w-[95px] h-[45px]  px-4 border-purpleBase text-black  hover:text-white font-extralight text-base hover:bg-purple5'
           />
         </Link>
       </div>

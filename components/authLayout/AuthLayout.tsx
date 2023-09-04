@@ -1,13 +1,13 @@
 import React from 'react'
 import Link from 'next/link'
 import { BackButton, Button } from '../../components/buttons/Button'
-import { montsearrat } from '@/styles/font'
+import { poppins, revalia } from '@/styles/font'
 
 
 
 const AuthLayout = () => {
     return (
-        <div className={`p-20 flex items-center justify-center w-full ${montsearrat.className}`}>
+        <div className={`p-20 flex items-center justify-center w-full ${poppins.className}`}>
             <div className={`px-20  flex justify-center items-center m-auto flex-col  `}>
                 <div className={`text-white text-2xl text-center font-extrabold w-[500px] my-10`}>
                     <h1>CHOOSE YOUR <br />SIGN-UP <br /> METHOD</h1>
