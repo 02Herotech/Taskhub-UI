@@ -3,6 +3,8 @@
 import React, { useState } from 'react'
 import { poppins, revalia } from '@/styles/font'
 import Link from 'next/link'
+import Image from 'next/image'
+import logo from '../../../public/logo.png'
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai'
 import { BackButton } from '../../../components/buttons/Button'
 
@@ -36,7 +38,7 @@ const authLogin: React.FC<FormState> = () => {
 
     const isAllFieldsFilled = () => {
         const requiredFields: (keyof FormState)[] = ['email', 'password'];
-        return requiredFields.every(field => formData[field] !== '') && formData.rememberMe;
+        return requiredFields.every(field => formData[field] !== '');
     }
 
 
@@ -55,17 +57,29 @@ const authLogin: React.FC<FormState> = () => {
 
 
     return (
-        <div className="flex m-auto">
-            <div className={`${poppins.className} w-[550px] flex h-full flex-col m-auto p-20 `}>
-                <div className={`font-extrabold justify-start my-5  px-2`}>
-                    <h1 className={`text-md`}>Welcome Back,</h1>
-                    <h2 className={`text-lg`}>Log <span className={`text-purple`}>In</span></h2>
+        <div className={` w-full ${poppins.className} text-black`}>
+            <div className={`w-full p-10 flex drop-shadow-md bg-white h-[80px]`}>
+                <Link href='/' className={`flex space-x-3 items-center`}>
+                    <Image src={logo} width={61} height={55} alt='' className={`mt-[-10px]`} />
+                    <h4 className={`text-lg font-extrabold `}>TaskHub</h4>
+                </Link>
+            </div>
+            <div className={` flex font-bold h-full flex-col m-auto py-12  justify-center items-center `}>
+                <div className={` p-3 space-y-5 text-center mb-2`}>
+                    <div className={`text-[30px] font-bold w-full  `}>
+                        <h1 className={``}>Login into your TaskHub account</h1>
+                    </div>
+
+                    <div className={`flex justify-around font-[600] w-[300px]  mx-auto`}>
+                        <h5>Don't have an account?</h5>
+                        <Link href='/auth' className={`text-purpleBase hover:text-[17px] `}>Create one</Link>
+                    </div>
                 </div>
-                <div className='p-2'>
-                    <form action="" onSubmit={onSubmit} className={`space-y-5     py-5`}>
+                <div className='w-[450px]'>
+                    <form action="" onSubmit={onSubmit} className={`space-y-5  p-5`}>
                         <div className={`flex flex-col `}>
                             <label htmlFor="email" className={`font-bold text-[16px] px-2 my-1`}>
-                                Email <span className={`text-red`}>*</span>
+                                Email <span className={`text-red10`}>*</span>
                             </label>
                             <input type="email" placeholder='Enter your email-address' id='email' name='email' className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl w-full`} value={formData.email} onChange={handleChange} required
                             />
@@ -73,7 +87,7 @@ const authLogin: React.FC<FormState> = () => {
 
                         <div className={`flex flex-col`}>
                             <label htmlFor="password" className={`font-bold text-[16px] px-2 my-1`}>
-                                Password <span className={`text-red`}>*</span>
+                                Password <span className={`text-red10`}>*</span>
                             </label>
                             <div className={`relative`}>
                                 <input type={showPassword ? 'text' : 'password'} id='password' name='password' placeholder='Enter your password' className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl w-full`} value={formData.password} onChange={handleChange} required
@@ -91,36 +105,21 @@ const authLogin: React.FC<FormState> = () => {
                                 </button>
                             </div>
                         </div>
-                        <div className={`flex justify-between`}>
-                            <div className={`space-x-2 px-2 flex`}>
-                                <input onChange={handleChange} type="checkbox" name="rememberMe" id="rememberMe" required />
-                                <label htmlFor="rememberMe" className={`font-normal text-base`}>Remember Me</label>
-                            </div>
-
-                            <div>
-                                <Link href='/auth/authForgetPassword' className={`text-base hover:underline hover:text-purple`}>Forget Password?</Link>
-
-                            </div>
+                        <div className={`flex justify-around font-[600] w-[300px] text-base mx-auto`}>
+                            <h5>Forgot your Password?</h5>
+                            <Link href='/auth/authForgetPassword' className={`text-purpleBase hover:text-[16px] `}>Reset here</Link>
                         </div>
 
                         <div className={`flex justify-center items-center`}>
                             <button
                                 type="submit"
-                                className={`w-4/6 bg-purple text-white py-2 px-4 rounded-md hover:bg-purpleLight text-sm ${isAllFieldsFilled() ? '' : 'cursor-not-allowed opacity-50'}`}
+                                className={`w-4/6 bg-purpleBase text-white py-2 px-4 rounded-md hover:bg-purple5 text-sm ${isAllFieldsFilled() ? '' : 'cursor-not-allowed opacity-50'}`}
                                 disabled={!isAllFieldsFilled()}
                             >
                                 Log In
                             </button>
                         </div>
-
                     </form>
-                    <div className={`flex justify-around space-x-1 mt-5 text-base`}>
-                        <h5>Don't have an account before? </h5>
-                        <Link href='/auth' className={`text-purple hover:text-[17px] underline`}>Sign Up</Link>
-                    </div>
-                </div>
-                <div className={`flex justify-center  items-center mt-[-20px]`}>
-                    <BackButton btnLink='/' btnValue='Go back' />
                 </div>
             </div >
         </div >

@@ -3,7 +3,7 @@
 import React, { useState, useRef, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import logo from '../../../public/logo.png'
+import logoImg from '../../../public/logo.png'
 import { poppins, revalia } from '@/styles/font'
 // import { useRouter } from 'next/dist/client/router'
 
@@ -68,6 +68,27 @@ const authServiceProviderSignup: React.FC<FormState> = () => {
                 }));
             }
         }
+
+        if (name === 'confirmPassword') {
+            if (value !== formData.password) {
+                setFormData((prevData) => ({
+                    ...prevData,
+                    error: 'Password should match',
+                }));
+            } else {
+                // Clear the error message if the confirm password matches the password
+                setFormData((prevData) => ({
+                    ...prevData,
+                    error: '',
+                }));
+            }
+        }
+
+        // Update the form data with the new password or confirm password value
+        setFormData((prevData) => ({
+            ...prevData,
+            [name]: value,
+        }));
     };
 
     const isAllFieldsFilled = () => {
@@ -84,13 +105,7 @@ const authServiceProviderSignup: React.FC<FormState> = () => {
 
     const onSubmit = async (event: any) => {
         event.preventDefault();
-        if (formData.password !== formData.confirmPassword) {
-            setFormData((prevData) => ({
-                ...prevData,
-                error: 'Password should match',
-            }));
-            return;
-        }
+
 
         const formattedPhoneNumber = formData.phoneNumber.startsWith("+61") ? formData.phoneNumber : "08" + formData.phoneNumber;
 
@@ -134,171 +149,168 @@ const authServiceProviderSignup: React.FC<FormState> = () => {
 
 
     return (
-        <div className={`flex h-screen overflow-y-hidden justify-between w-full overflow-x-hidden  ${poppins.className}`}>
-            <div className={`overflow-y-auto w-2/3 py-3 px-10 `}>
-                <div className={`mt-[-20px]`}>
-                    <Image src={logo} width={162} height={162} alt='' />
-                </div>
-                <div className={`flex justify-center items-center flex-col mt-[-45px]`}>
-                    <div className={`text-center`}>
-                        <h3 className={`text-lg font-bold my-3`}>Create your account </h3>
-                        <h6 className={`text-[16px] font-normal my-3`}>Let’s get started with your service provider account</h6>
+        <div className={` h-screen  justify-between w-full overflow-x-hidden  ${poppins.className}`}>
+            <div className={`w-full p-10 flex drop-shadow-md bg-white h-[80px]`}>
+                <Link href='/' className={`flex space-x-3 items-center`}>
+                    <Image src={logoImg} width={61} height={55} alt='' className={`mt-[-10px]`} />
+                    <h4 className={`text-lg font-extrabold `}>TaskHub</h4>
+                </Link>
+            </div>
+
+            <div className={`flex justify-center mt-10 items-center flex-col`}>
+                <div className={` p-3 space-y-5 text-center mb-2`}>
+                    <div className={`text-lg font-bold w-full  `}>
+                        <h1 >Create your your Service provider account</h1>
                     </div>
 
-                    <div className='mb-10'>
-                        <form action="" onSubmit={onSubmit}>
-                            <div className={`space-y-4 mb-10`}>
-                                <div className={`flex space-x-10`}>
-                                    <div className={`flex flex-col`}>
-                                        <label htmlFor="firstName" className={`font-extrabold text-[16px]  my-3`}>
-                                            First Name <span className={`text-red`}>*</span>
-                                        </label>
-                                        <input type="text" placeholder='First name' id='firstName' name='firstName' className={` border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl`} value={formData.firstName} onChange={handleChange} required
+                    <div className={`flex justify-around font-[600] w-[300px]  mx-auto`}>
+                        <h5>Already have an account?</h5>
+                        <Link href='/auth/authLogin' className={`text-purpleBase hover:text-[17px] `}>Log in</Link>
+                    </div>
+                </div>
 
-                                        />
-                                    </div>
-
-                                    <div className={`flex flex-col`}>
-                                        <label htmlFor="lastName" className={`font-bold text-[16px]  my-3`}>
-                                            Last Name <span className={`text-red`}>*</span>
-                                        </label>
-                                        <input type="text" placeholder='Last name' id='lastName' name='lastName' className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl`} value={formData.lastName} onChange={handleChange} required
-                                        />
-                                    </div>
-                                </div>
-
+                <div className='mb-10  w-[500px]'>
+                    <form action="" onSubmit={onSubmit}>
+                        <div className={`space-y-4 mb-10`}>
+                            <div className={`flex space-x-10`}>
                                 <div className={`flex flex-col`}>
-                                    <label htmlFor="address" className={`font-bold text-[16px] my-3`}>
-                                        Address <span className={`text-red`}>*</span>
+                                    <label htmlFor="firstName" className={`font-extrabold text-[16px]  my-3`}>
+                                        First Name <span className={`text-red10`}>*</span>
                                     </label>
-                                    <input type="text" id='address' name='address' placeholder='Enter your address' className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl w-full`} value={formData.address} onChange={handleChange} required
+                                    <input type="text" placeholder='First name' id='firstName' name='firstName' className={` border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl`} value={formData.firstName} onChange={handleChange} required
+
                                     />
                                 </div>
 
                                 <div className={`flex flex-col`}>
-                                    <label htmlFor="phoneNumber" className={`font-bold text-[16px] my-3`}>
-                                        Phone Number <span className={`text-red`}>*</span>
+                                    <label htmlFor="lastName" className={`font-bold text-[16px]  my-3`}>
+                                        Last Name <span className={`text-red10`}>*</span>
                                     </label>
-                                    <div className={`flex items-center justify-around`}>
-                                        <h4 className={`border-medium border-[1px] text-base text-black font-bold p-3 rounded-xl`}>AU 08</h4>
-                                        <input type="text" placeholder='Enter phone number' name='phoneNumber' id='phoneNumber' className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl w-5/6`} value={formData.phoneNumber} onChange={handleChange} required maxLength={8} minLength={8}
-                                        />
-                                    </div>
-                                </div>
-
-                                <div className={`flex flex-col`}>
-                                    <label htmlFor="email" className={`font-bold text-[16px] my-3`}>
-                                        Email <span className={`text-red`}>*</span>
-                                    </label>
-                                    <input type="email" placeholder='Enter your email-address' id='email' name='email' className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl w-full`} value={formData.email} onChange={handleChange} required
+                                    <input type="text" placeholder='Last name' id='lastName' name='lastName' className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl`} value={formData.lastName} onChange={handleChange} required
                                     />
                                 </div>
+                            </div>
 
-                                <div className={`flex flex-col`}>
-                                    <label htmlFor="password" className={`font-bold text-[16px] my-3`}>
-                                        Password <span className={`text-red`}>*</span>
-                                    </label>
-                                    <div className={`relative`}>
-                                        <input type={showPassword ? 'text' : 'password'} id='password' name='password' placeholder='Enter your password' className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl w-full`} value={formData.password} onChange={handleChange} required maxLength={15}
-                                        />
-                                        <button
-                                            type="button"
-                                            onClick={togglePasswordVisibility}
-                                            className="absolute inset-y-0 right-0 pr-3 flex items-center focus:outline-none"
-                                        >
-                                            {showPassword ? (
-                                                <AiOutlineEye className="h-5 w-5 text-black" />
-                                            ) : (
-                                                <AiOutlineEyeInvisible className="h-5 w-5 text-black" />
-                                            )}
-                                        </button>
-                                    </div>
+                            <div className={`flex flex-col`}>
+                                <label htmlFor="address" className={`font-bold text-[16px] my-3`}>
+                                    Address <span className={`text-red10`}>*</span>
+                                </label>
+                                <input type="text" id='address' name='address' placeholder='Enter your address' className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl w-full`} value={formData.address} onChange={handleChange} required
+                                />
+                            </div>
 
-                                </div>
-                                <div className={`text-red p-2 w-[300px] my-0 py-0 text-base`}>
-                                    <p >{formData.error}</p>
-
-                                </div>
-
-                                <div className={`flex flex-col`}>
-                                    <label htmlFor="confirmPassword" className={`font-bold text-[16px] my-3`}>
-                                        Confirm your Password <span className={`text-red`}>*</span>
-                                    </label>
-                                    <div className={`relative`}>
-                                        <input type={showConfirmPassword ? 'text' : 'password'} id='confirmPassword' name='confirmPassword' placeholder='Enter your password' className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl w-full`} value={formData.confirmPassword} onChange={handleChange} required maxLength={15}
-                                        />
-                                        <button
-                                            type="button"
-                                            onClick={toggleConfirmPasswordVisibility}
-                                            className="absolute inset-y-0 right-0 pr-3 flex items-center focus:outline-none"
-                                        >
-                                            {showConfirmPassword ? (
-                                                <AiOutlineEye className="h-5 w-5 text-black" />
-                                            ) : (
-                                                <AiOutlineEyeInvisible className="h-5 w-5 text-black" />
-                                            )}
-                                        </button>
-                                    </div>
-
-                                </div>
-                                <div className={`flex flex-col`}>
-                                    <label htmlFor="identification" className={`font-bold text-[16px] my-3`}>
-                                        MEANS OF IDENTIFICATION <span className={`text-red`}>*</span>
-                                    </label>
-                                    <select name="identification" id="identification" className={`border-medium border-[1px] text-base text-black font-bold py-3 px-3 rounded-xl w-full bg-contain`} >
-                                        <option value="none">None</option>
-                                        <option value="drivers_license">National Driver&rsquo;s License</option>
-                                        <option value="national_id">National ID</option>
-                                        <option value="voters_card">Voter&rsquo;s Card</option>
-                                        <option value="passport">International Passport</option>
-                                    </select>
-
-                                </div>
-
-                                <div className={`flex flex-col`}>
-                                    <label htmlFor="idNumber" className={`font-bold text-[16px]`}>
-                                        Valid ID NUMBER
-                                    </label>
-                                    <input type="text" placeholder='Enter the ID number' name='idNumber' id='idNumber' className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl w-full my-3`} value={formData.idNumber} onChange={handleChange} required
+                            <div className={`flex flex-col`}>
+                                <label htmlFor="phoneNumber" className={`font-bold text-[16px] my-3`}>
+                                    Phone Number <span className={`text-red10`}>*</span>
+                                </label>
+                                <div className={`flex items-center justify-around`}>
+                                    <h4 className={`border-medium border-[1px] text-base text-black font-bold p-3 rounded-xl`}>AU 08</h4>
+                                    <input type="text" placeholder='Enter phone number' name='phoneNumber' id='phoneNumber' className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl w-5/6`} value={formData.phoneNumber} onChange={handleChange} required maxLength={8} minLength={8}
                                     />
-
                                 </div>
+                            </div>
 
+                            <div className={`flex flex-col`}>
+                                <label htmlFor="email" className={`font-bold text-[16px] my-3`}>
+                                    Email <span className={`text-red10`}>*</span>
+                                </label>
+                                <input type="email" placeholder='Enter your email-address' id='email' name='email' className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl w-full`} value={formData.email} onChange={handleChange} required
+                                />
+                            </div>
 
-                                <div className={`space-x-2`}>
-                                    <input onChange={handleChange} type="checkbox" name="agreement" id="agreement" required />
-                                    <label htmlFor="agreement" className={`font-bold text-base`}>I agree to  all <Link href='/termsAndConditions' className={`text-purple text-base hover:underline`}>Terms of service </Link> and <Link href='/termsAndConditions' className={`text-purple text-base hover:underline `}> Privacy</Link></label>
+                            <div className={`flex flex-col`}>
+                                <label htmlFor="password" className={`font-bold text-[16px] my-3`}>
+                                    Password <span className={`text-red10`}>*</span>
+                                </label>
+                                <div className={`relative`}>
+                                    <input type={showPassword ? 'text' : 'password'} id='password' name='password' placeholder='Enter your password' className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl w-full`} value={formData.password} onChange={handleChange} required maxLength={15}
+                                    />
+                                    <button
+                                        type="button"
+                                        onClick={togglePasswordVisibility}
+                                        className="absolute inset-y-0 right-0 pr-3 flex items-center focus:outline-none"
+                                    >
+                                        {showPassword ? (
+                                            <AiOutlineEye className="h-5 w-5 text-black" />
+                                        ) : (
+                                            <AiOutlineEyeInvisible className="h-5 w-5 text-black" />
+                                        )}
+                                    </button>
                                 </div>
 
                             </div>
+                            <div className={`text-red10 p-2  my-0 py-0 text-[10px]`}>
+                                <p >{formData.error}</p>
 
-                            <div className={`flex justify-center items-center`}>
-                                <button
-                                    type="submit"
-                                    className={`w-5/6 bg-purple text-white py-2 px-4 rounded-md hover:bg-purpleLight  ${isAllFieldsFilled() ? '' : 'cursor-not-allowed opacity-50'}`}
-                                    disabled={!isAllFieldsFilled()}
-                                >
-                                    Sign Up
-                                </button>
                             </div>
-                        </form>
-                        <div className={`flex justify-evenly my-5`}>
-                            <h5>Already have an account?</h5>
-                            <Link href='/auth/authLogin' className={`text-purple hover:text-[17px] underline`}>log in</Link>
+
+                            <div className={`flex flex-col`}>
+                                <label htmlFor="confirmPassword" className={`font-bold text-[16px] my-3`}>
+                                    Confirm your Password <span className={`text-red10`}>*</span>
+                                </label>
+                                <div className={`relative`}>
+                                    <input type={showConfirmPassword ? 'text' : 'password'} id='confirmPassword' name='confirmPassword' placeholder='Enter your password' className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl w-full`} value={formData.confirmPassword} onChange={handleChange} required maxLength={15}
+                                    />
+                                    <button
+                                        type="button"
+                                        onClick={toggleConfirmPasswordVisibility}
+                                        className="absolute inset-y-0 right-0 pr-3 flex items-center focus:outline-none"
+                                    >
+                                        {showConfirmPassword ? (
+                                            <AiOutlineEye className="h-5 w-5 text-black" />
+                                        ) : (
+                                            <AiOutlineEyeInvisible className="h-5 w-5 text-black" />
+                                        )}
+                                    </button>
+                                </div>
+
+                            </div>
+                            <div className={`flex flex-col`}>
+                                <label htmlFor="identification" className={`font-bold text-[16px] my-3`}>
+                                    MEANS OF IDENTIFICATION <span className={`text-red10`}>*</span>
+                                </label>
+                                <select name="identification" id="identification" className={`border-medium border-[1px] text-base text-black font-bold py-3 px-3 rounded-xl w-full bg-contain`} >
+                                    <option value="none">None</option>
+                                    <option value="drivers_license">National Driver&rsquo;s License</option>
+                                    <option value="national_id">National ID</option>
+                                    <option value="voters_card">Voter&rsquo;s Card</option>
+                                    <option value="passport">International Passport</option>
+                                </select>
+
+                            </div>
+
+                            <div className={`flex flex-col`}>
+                                <label htmlFor="idNumber" className={`font-bold text-[16px]`}>
+                                    Valid ID NUMBER
+                                </label>
+                                <input type="text" placeholder='Enter the ID number' name='idNumber' id='idNumber' className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl w-full my-3`} value={formData.idNumber} onChange={handleChange} required
+                                />
+
+                            </div>
+
+
+                            <div className={`space-x-2`}>
+                                <input onChange={handleChange} type="checkbox" name="agreement" id="agreement" required />
+                                <label htmlFor="agreement" className={`font-bold text-base`}>I agree to  all <Link href='/termsAndConditions' className={`text-purple text-base hover:underline`}>Terms of service </Link> and <Link href='/termsAndConditions' className={`text-purple text-base hover:underline `}> Privacy</Link></label>
+                            </div>
+
                         </div>
-                    </div>
-                </div>
 
-            </div>
-            <div className={`w-1/3 bg-signupBg flex items-center justify-center`}>
-                <div className="flex flex-col text-center text-white  ">
-                    <h1 className={`font-bold text-xl w-[300px]`}><span className={`text-purple text-xl font-extrabold`}>Service Provider&rsquo;s</span><br />Sign up page</h1>
-                    <div className={`flex justify-center  items-center pt-10`}>
-                        <BackButton btnLink='/auth' btnValue='Go back' />
-                    </div>
+                        <div className={`flex justify-center items-center`}>
+                            <button
+                                type="submit"
+                                className={`w-full bg-purpleBase text-white py-2 px-4 rounded-md hover:bg-purple5  ${isAllFieldsFilled() ? '' : 'cursor-not-allowed opacity-50'}`}
+                                disabled={!isAllFieldsFilled()}
+                            >
+                                Create Account
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
+
         </div>
+
     )
 }
 

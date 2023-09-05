@@ -4,7 +4,7 @@ import AuthLayout from '../../../components/authLayout/AuthLayout'
 
 const index = () => {
     return (
-        <div className={`bg-signupBg `}>
+        <div className={`bg-white `}>
             <AuthLayout />
 
         </div>

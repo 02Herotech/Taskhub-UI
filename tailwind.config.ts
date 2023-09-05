@@ -84,6 +84,8 @@ const config: Config = {
       red7: '#941211',
       red8: '#770B12',
       red9: '#620613',
+      red10: '#e33e38',
+
 
       //grey variants
       grey1: '#F2F5F9',
@@ -103,7 +105,6 @@ const config: Config = {
       // dark: '#323232',
       // yellow: '#f6dc41',
       // orange: '#ff8b00',
-      // red: '#e33e38',
       // blue: '#1ba2e8',
       // blueLight: '1891D0',
       // green: '#41d33e',
