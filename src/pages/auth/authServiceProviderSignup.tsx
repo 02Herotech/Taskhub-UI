@@ -1,15 +1,17 @@
+/* eslint-disable react/no-unescaped-entities */
 /* eslint-disable react-hooks/rules-of-hooks */
 import React, { useState, useRef, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import logo from '../../../public/logo.png'
 import { montsearrat } from '@/styles/font'
-import { useRouter } from 'next/dist/client/router'
+// import { useRouter } from 'next/dist/client/router'
 
 
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai'
 import { BackButton } from '../../../components/buttons/Button'
-import { signup } from '../../../network/auth'
+import { serviceProviderSignup } from '../../../network/auth'
+import axios from 'axios'
 
 interface FormState {
     firstName: string;
@@ -21,19 +23,10 @@ interface FormState {
     confirmPassword: string;
     agreement: boolean;
     error: string;
+    idNUmber: string;
 }
 
-const authSignup: React.FC<FormState> = () => {
-    const router = useRouter();
-    const { q } = router.query;
-    const isLogged = useRef(false);
-
-    useEffect(() => {
-        if (!isLogged.current) {
-            console.log(q);
-            isLogged.current = true;
-        }
-    }, [q]);
+const authServiceProviderSignup: React.FC<FormState> = () => {
 
     const [formData, setFormData] = useState({
         firstName: '',
@@ -45,6 +38,7 @@ const authSignup: React.FC<FormState> = () => {
         confirmPassword: '',
         agreement: false,
         error: '',
+        idNumber: '',
     });
 
     const [showPassword, setShowPassword] = useState(false);
@@ -58,10 +52,26 @@ const authSignup: React.FC<FormState> = () => {
             [name]: value,
 
         }));
+
+        if (name === 'password') {
+            const passwordPattern = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+            if (value && !passwordPattern.test(value)) {
+                setFormData((prevData) => ({
+                    ...prevData,
+                    error: 'Password should be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one special character, and one number.',
+                }));
+            } else {
+                // Clear the error message if the password matches the pattern or is empty
+                setFormData((prevData) => ({
+                    ...prevData,
+                    error: '',
+                }));
+            }
+        }
     };
 
     const isAllFieldsFilled = () => {
-        const requiredFields: (keyof FormState)[] = ['firstName', 'lastName', 'address', 'phoneNumber', 'email', 'password', 'confirmPassword',];
+        const requiredFields: (keyof typeof formData)[] = ['firstName', 'lastName', 'address', 'phoneNumber', 'email', 'password', 'confirmPassword', 'idNumber'];
         return requiredFields.every(field => formData[field] !== '') && formData.agreement;
     }
 
@@ -72,40 +82,41 @@ const authSignup: React.FC<FormState> = () => {
         setShowConfirmPassword(!showConfirmPassword);
     };
 
-    const onSubmit = async (event: { preventDefault: () => void }) => {
+    const onSubmit = async (event: any) => {
         event.preventDefault();
         if (formData.password !== formData.confirmPassword) {
             setFormData((prevData) => ({
                 ...prevData,
-                error: 'Password should be same',
+                error: 'Password should match',
             }));
             return;
         }
 
-        const queryString = Array.isArray(q) ? q[0] : q; // Convert to string if it's an array
+        const formattedPhoneNumber = formData.phoneNumber.startsWith("+61") ? formData.phoneNumber : "+61" + formData.phoneNumber;
 
-        if (!queryString) {
-            console.error('Invalid q value');
-            return;
-        }
 
         try {
-            const res = await signup({
+            const user = {
                 request: {
                     firstName: formData.firstName,
                     lastName: formData.lastName,
-                    // address: formData.address,
-                    phoneNumber: formData.phoneNumber,
+                    phoneNumber: formattedPhoneNumber, // Use the formatted phone number here
                     emailAddress: formData.email,
-                    password: formData.password
-                }
-            }, queryString);
+                    password: formData.password,
+                },
+                idNumber: formData.idNumber,
+            }
 
-            console.log(res);
+            const res = await serviceProviderSignup(user);
+
+            console.log('Signup response:', res);
         } catch (error) {
-            console.error('Signup error:', error);
+            console.log('Signup error:', error);
         }
+
+
     }
+
 
 
     return (
@@ -156,7 +167,7 @@ const authSignup: React.FC<FormState> = () => {
                                     </label>
                                     <div className={`flex items-center space-x-4`}>
                                         <h4 className={`border-medium border-[1px] text-base text-black font-bold p-3 rounded-xl`}>AU +61</h4>
-                                        <input type="text" placeholder='Enter phone number' name='phoneNumber' id='phoneNumber' className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl`} value={formData.phoneNumber} onChange={handleChange} required maxLength={10} minLength={10}
+                                        <input type="text" placeholder='Enter phone number' name='phoneNumber' id='phoneNumber' className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl`} value={formData.phoneNumber} onChange={handleChange} required maxLength={9} minLength={9}
                                         />
                                     </div>
                                 </div>
@@ -190,6 +201,10 @@ const authSignup: React.FC<FormState> = () => {
                                     </div>
 
                                 </div>
+                                <div className={`text-red p-2 w-[300px] my-0 py-0 text-base`}>
+                                    <p >{formData.error}</p>
+
+                                </div>
 
                                 <div className={`flex flex-col`}>
                                     <label htmlFor="confirmPassword" className={`font-bold text-[16px] my-3`}>
@@ -210,13 +225,35 @@ const authSignup: React.FC<FormState> = () => {
                                             )}
                                         </button>
                                     </div>
-                                    <p className={`text-red p-2`}>{formData.error}</p>
+
+                                </div>
+                                <div className={`flex flex-col`}>
+                                    <label htmlFor="identification" className={`font-bold text-[16px] my-3`}>
+                                        MEANS OF IDENTIFICATION <span className={`text-red`}>*</span>
+                                    </label>
+                                    <select name="identification" id="identification" className={`border-medium border-[1px] text-base text-black font-bold py-3 px-3 rounded-xl w-2/3 bg-contain`} >
+                                        <option value="none">None</option>
+                                        <option value="drivers_license">National Driver&rsquo;s License</option>
+                                        <option value="national_id">National ID</option>
+                                        <option value="voters_card">Voter&rsquo;s Card</option>
+                                        <option value="passport">International Passport</option>
+                                    </select>
 
                                 </div>
 
+                                <div className={`flex flex-col`}>
+                                    <label htmlFor="idNumber" className={`font-bold text-[16px]`}>
+                                        Valid ID NUMBER
+                                    </label>
+                                    <input type="text" placeholder='Enter the ID number' name='idNumber' id='idNumber' className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl w-2/3 my-3`} value={formData.idNumber} onChange={handleChange} required
+                                    />
+
+                                </div>
+
+
                                 <div className={`space-x-2`}>
                                     <input onChange={handleChange} type="checkbox" name="agreement" id="agreement" required />
-                                    <label htmlFor="agreement" className={`font-bold text-base my-3`}>I agree to  all <Link href='/termsAndConditions' className={`text-purple text-base hover:underline`}>Terms of service </Link> and <Link href='/termsAndConditions' className={`text-purple text-base hover:underline`}> Privacy</Link></label>
+                                    <label htmlFor="agreement" className={`font-bold text-base`}>I agree to  all <Link href='/termsAndConditions' className={`text-purple text-base hover:underline`}>Terms of service </Link> and <Link href='/termsAndConditions' className={`text-purple text-base hover:underline `}> Privacy</Link></label>
                                 </div>
 
                             </div>
@@ -251,4 +288,4 @@ const authSignup: React.FC<FormState> = () => {
     )
 }
 
-export default authSignup
+export default authServiceProviderSignup

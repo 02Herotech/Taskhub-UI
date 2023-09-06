@@ -8,22 +8,17 @@ export const login = async (
 };
 
 
-export const signup = async (
-    payload: any,
-    q: string
+export const customerSignup = async (
+    payload: any
 ): Promise<BaseResponse<any>> => {
-    let endpoint = '';
+    const endpoint = Endpoints.CUSTOMER_SIGNUP;
+    return API.post<any, any>(endpoint, payload);
+};
 
-    if (q === 'customer') {
-        endpoint = Endpoints.CUSTOMER_SIGNUP;
-    } else if (q === 'serviceProvider') {
-        endpoint = Endpoints.SERVICE_PROVIDER_SIGNUP;
-    } else {
-        // Handle default case or error
-        console.error('Invalid q value');
-        return Promise.reject('Invalid q value');
-    }
-
+export const serviceProviderSignup = async (
+    payload: any
+): Promise<BaseResponse<any>> => {
+    const endpoint = Endpoints.SERVICE_PROVIDER_SIGNUP;
     return API.post<any, any>(endpoint, payload);
 };
 
