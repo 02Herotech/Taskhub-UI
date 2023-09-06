@@ -91,12 +91,14 @@ const authSignup: React.FC<FormState> = () => {
 
         try {
             const res = await signup({
-                firstName: formData.firstName,
-                lastName: formData.lastName,
-                address: formData.address,
-                phoneNumber: formData.phoneNumber,
-                emailAddress: formData.email,
-                password: formData.password
+                request: {
+                    firstName: formData.firstName,
+                    lastName: formData.lastName,
+                    // address: formData.address,
+                    phoneNumber: formData.phoneNumber,
+                    emailAddress: formData.email,
+                    password: formData.password
+                }
             }, queryString);
 
             console.log(res);
@@ -104,9 +106,6 @@ const authSignup: React.FC<FormState> = () => {
             console.error('Signup error:', error);
         }
     }
-
-
-
 
 
     return (
