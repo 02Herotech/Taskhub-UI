@@ -24,17 +24,46 @@
     }
   }
 
-  .customerInfo{
+  .nameAndVerification {
     display: flex;
     align-items: center;
     font-size: 1.5rem;
-  }
-  p{
-    margin-right: 10px;
-    font-weight: bold;
+    margin-bottom: 10px;
+
+    p {
+      margin-right: 10px;
+      font-weight: bold;
+    }
+
+    .verificationLogo {
+      color: #FE9B07;
+    }
   }
 
-  .verificationLogo{
-    color: #FE9B07;
+  .location{
+    display: flex;
+    align-items: center;
+
+    .locationLogo{
+      margin-right: 10px;
+    }
+  }
+}
+
+.searchDiv{
+  display: flex;
+  align-items: center;
+  margin-left: 50px;
+  border: 1px solid #D9D9D9;
+;
+  border-radius: 8px;
+  padding: 10px;
+
+  input{
+    width: 500px;
+  }
+
+  .searchLogo{
+    margin: 0 10px 0 20px;
   }
 }

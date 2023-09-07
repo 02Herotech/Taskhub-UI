@@ -4,6 +4,7 @@ import customer from "../../../../public/dashboardAssets/portrait.jpg";
 import styles from "../customer/styles.module.scss"
 import Image from 'next/image';
 import {MdVerified} from "react-icons/md";
+import {GrLocation, GrSearch} from "react-icons/gr";
 
 interface IProps {
 
@@ -19,8 +20,18 @@ function Index(props: IProps) {
                             <Image src={customer} className={styles.customerImage} alt="customer-image"/>
                         </div>
                         <div className={styles.customerInfo}>
-                            <p>Dotun A.</p>
-                            <MdVerified className={styles.verificationLogo}/>
+                            <div className={styles.nameAndVerification}>
+                                <p>Dotun A.</p>
+                                <MdVerified className={styles.verificationLogo}/>
+                            </div>
+                            <div className={styles.location}>
+                                <GrLocation className={styles.locationLogo}/>
+                                <p>Sydney, Australia</p>
+                            </div>
+                        </div>
+                        <div className={styles.searchDiv}>
+                            <GrSearch className={styles.searchLogo}/>
+                            <input type="text" className={styles.searchInput} placeholder="Search"/>
                         </div>
                     </div>
                 </div>
