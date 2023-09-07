@@ -1,3 +1,40 @@
-.customerImage{
+.mainContainer{
+  padding: 40px 20px 60px 80px;
+}
+.customerDetails {
+  display: flex;
+  align-items: center;
 
+  .imageDiv {
+    width: 210px;
+    height: 210px;
+    border-radius: 50%;
+    border: 2px solid #FE9B07;
+    margin-right: 30px;
+  ;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .customerImage {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+  }
+
+  .customerInfo{
+    display: flex;
+    align-items: center;
+    font-size: 1.5rem;
+  }
+  p{
+    margin-right: 10px;
+    font-weight: bold;
+  }
+
+  .verificationLogo{
+    color: #FE9B07;
+  }
 }
