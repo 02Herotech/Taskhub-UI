@@ -41,24 +41,42 @@ export const SearchButton: React.FC<SearchButtonProps> = ({ btnPlaceholder1, btn
     };
 
     return (
-        <div className={`flex flex-row mr-12 cursor-pointer items-center mt-[-30px]`}>
-            <div className={`my-4 px-3 justify-center bg-purpleBase flex  h-[60px] items-center`}>
-                <div className={`flex text-purple items-center justify-center w-[30px] text-md`}>
-                    <FaMapMarkerAlt />
+        <div className={`flex justify-center  cursor-pointer items-center `}>
+
+            <div className=' flex  flex-col py-2 px-3 space-y-5  justify-center '>
+                <div className={`flex space-x-4 p-2 items-center`}>
+                    <h3 className={`text-base font-bold`}>Find any service in</h3>
+                    <div className={`flex justify-between items-center p-2 w-[150px]  bg-black   h-[50px]`}>
+                        <div className={` text-white text-sm `}>
+                            <h4 ><FaMapMarkerAlt /></h4>
+                        </div>
+                        <div className={` text-white text-base `}>
+                            All Australia
+                        </div>
+                    </div>
                 </div>
-                {/* First Input */}
-                <div className='mr-3 flex items-center justify-center'>
-                    <input
-                        type="text"
-                        value={searchValues.input1}
-                        onChange={(e) => handleInputChange('input1', e.target.value)}
-                        placeholder={btnPlaceholder1}
-                        className={`bg-grey text-black outline-none rounded-xl p-2 w-full h-[40px]`}
-                    />
+                <div className={`flex justify-center  `} >
+                    <div className={`flex justify-center  items-center mr-[-3rem] `}>
+                        <input
+                            type="text"
+                            value={searchValues.input1}
+                            onChange={(e) => handleInputChange('input1', e.target.value)}
+                            placeholder={btnPlaceholder1}
+                            className={`bg-grey1 text-black  outline-none rounded-xl p-5 border-2 border-black w-[400px] h-[50px]`}
+                        />
+                    </div>
+                    <div
+                        onClick={handleSearchClick}
+                        className={`flex text-black items-center my-auto justify-center  w-[40px] h-[35px] text-sm`}
+                    >
+                        <FaSearch />
+                    </div>
                 </div>
 
-                {/* Second Input */}
-                {/* <div className='mr-3'>
+            </div>
+
+            {/* Second Input */}
+            {/* <div className='mr-3'>
                     <input
                         type="text"
                         value={searchValues.input2}
@@ -68,14 +86,8 @@ export const SearchButton: React.FC<SearchButtonProps> = ({ btnPlaceholder1, btn
                     />
                 </div> */}
 
-                {/* Search Button */}
-                <div
-                    onClick={handleSearchClick}
-                    className={`flex text-white items-center justify-center bg-purple hover:bg-purpleLight w-[40px] h-[35px] text-sm`}
-                >
-                    <FaSearch />
-                </div>
-            </div>
+            {/* Search Button */}
+
         </div>
     );
 };

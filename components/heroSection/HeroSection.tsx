@@ -16,7 +16,7 @@ const HeroSection = () => {
         <div className={` w-full relative ${revalia.className} p-5  my-[100px] bg-white px-20 py-10`}>
             <div className={`flex flex-col justify-around text-black`}>
                 <div className={`flex flex-col`}>
-                    <h1 className={`text-xl mt-[8rem] mb-5 font-[400] w-[375px]`}>
+                    <h1 className={`text-xl mt-[3rem] mb-5 font-[400] w-[375px]`}>
                         GET QUICK <br />AND <span className={`text-purpleBase`}> EFFICIENT </span>SERVICE
                     </h1>
 
@@ -27,11 +27,11 @@ const HeroSection = () => {
                     </p>
                 </div>
 
-                <div className={`flex justify-center items-center w-[600px] h-[120px] border-2 mt-10`}>
-                    <div className={`flex justify-center items-center`}>
+                <div className={`flex justify-around items-center w-[650px] h-[200px]  mt-10`}>
+                    <div className={`flex justify-center mt-[70px] items-center`}>
                         <Link href='/auth/'>
                             <Button btnValue='Get Started'
-                                className='h-[55px] w-[180px] border-none text-white bg-purpleBase'
+                                className='h-[65px] w-[180px] border-none text-white bg-purpleBase'
                             />
                         </Link>
                     </div>
