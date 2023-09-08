@@ -113,7 +113,7 @@ const authLogin: React.FC<FormState> = () => {
                         <div className={`flex justify-center items-center`}>
                             <button
                                 type="submit"
-                                className={`w-4/6 bg-purpleBase text-white py-2 px-4 rounded-md hover:bg-purple5 text-sm ${isAllFieldsFilled() ? '' : 'cursor-not-allowed opacity-50'}`}
+                                className={`w-full bg-purpleBase text-white py-2 px-4 rounded-md hover:bg-purple5 text-sm ${isAllFieldsFilled() ? '' : 'cursor-not-allowed opacity-50'}`}
                                 disabled={!isAllFieldsFilled()}
                             >
                                 Log In

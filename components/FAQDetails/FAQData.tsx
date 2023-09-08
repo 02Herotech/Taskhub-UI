@@ -3,6 +3,8 @@ import React, { useState } from 'react'
 
 import faqImg from '../../public/faqImg.png'
 import Image from 'next/image'
+import { poppins, revalia } from '@/styles/font'
+import { SlArrowDown, SlArrowUp } from 'react-icons/sl'
 
 export interface FAQProps {
     question: string,
@@ -70,22 +72,29 @@ export const FAQlayout: React.FC<FAQProps> = ({ question, answer, className }) =
         setIsOpen(!isOpen);
     };
 
-    return (
-        <div className=" min-h-[50px] my-0 ">
-            <div className="flex  items-center cursor-pointer w-full">
-                <h3 className={`w-[320px]  mb-2 font-extrabold `}>
-                    {question}
 
-                </h3>
-                <span
-                    className={`flex transition-transform transform justify-items-end  ${isOpen ? 'rotate-0 justify-end' : '-rotate-180'}`}
+    return (
+        <div className=" min-h-[50px] flex flex-col  justify-center  my-0 ">
+            <div className="flex  items-center  justify-between cursor-pointer w-full">
+                <div className={` font-extrabold text-[20px]`}>
+                    <h3 >
+                        {question}
+
+                    </h3>
+                </div>
+
+                <div
+                    className={`transition-transform transform text-lg bg-black text-white rounded-2xl p-2 hover:bg-grey4  ${isOpen ? 'rotate-0 justify-end' : '-rotate-0'}`}
                     onClick={toggleOpen}
                 >
-                    {isOpen ? <>&#x2212;</> : <>&#x2B;</>}
-                </span>
+                    {isOpen ? <><SlArrowUp /></> : <><SlArrowDown /></>}
+                </div>
 
             </div>
-            {isOpen && <p className={`my-2 px-2 font-normal ${className}`}>{answer}</p>}
+            <div className={`flex  items-center w-[500px]`}>
+                {isOpen && <p className={`my-2 text-[13px] font-normal ${className} flex`}>{answer}</p>}
+            </div>
+
         </div>
 
     )
@@ -93,27 +102,28 @@ export const FAQlayout: React.FC<FAQProps> = ({ question, answer, className }) =
 
 export const FAQLandingPage: React.FC = () => {
     return (
-        <div className={`flex justify-around  py-[120px] px-[60px] bg-purpleLight text-white`}>
-            <div className={`flex flex-col mx-10 justify-center`}>
-                <div className={`my-3`}>
-                    <h1 className={`text-xl font-bold w-[545px]`}>
-                        Frequently Asked Questions (FAQs)
-                    </h1>
-                    <p className={`w-[470px] font-normal mt-10 mb-[60px] text-base`}>
-                        "Discover answers to common queries and gain valuable
-                        insights through our comprehensive FAQs section.
-                        Empower your understanding today!"
-                    </p>
-                </div>
-
-                <div>
-                    <Image src={faqImg} width={416} height={541} alt='' />
-                </div>
+        <div className={`flex justify-center items-center flex-col  pt-[50px] pb-[150px] px-[60px] bg-purpleBase text-white mb ${revalia.className}`}>
+            <div className={`my-2 text-center`}>
+                <h1 className={`text-xl font-[100] `}>
+                    Frequently Asked Questions (FAQs)
+                </h1>
+                <p className={` w-[1000px] font-normal mt-10 mb-[60px] text-base`}>
+                    These section provides answers to common questions that visitors might have about the website, its products, services, policies, or any other relevant topics.
+                </p>
             </div>
 
-            <div className={`w-[355px] flex justify-around flex-col font-normal text-base`}>
+
+
+            <div className={` flex justify-around w-[700px] bg-[#FECD83] p-3 flex-col font-normal ${poppins.className}  space-y-2`}>
                 {FAQData.map((item, id) => (
-                    <FAQlayout key={id} question={item.question} answer={item.answer} id={0} className={`w-[350px]`} />
+                    <div key={id} className={`bg-white flex justify-center  p-2 text-black min-h-[40px]`}>
+                        <div className={`w-[600px]  px-3`}>
+                            <FAQlayout question={item.question} answer={item.answer} id={0} className={``} />
+                        </div>
+
+
+                    </div>
+
                 ))}
             </div>
         </div>

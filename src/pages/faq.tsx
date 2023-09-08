@@ -5,6 +5,7 @@ import { FAQData } from '../../components/FAQDetails/FAQData'
 import { poppins, revalia } from '@/styles/font'
 
 import Nav from '../../components/nav/Nav'
+import Footer from '../../components/footer/Footer'
 
 const Faq: React.FC<FAQProps> = () => {
 
@@ -17,6 +18,7 @@ const Faq: React.FC<FAQProps> = () => {
                     <FAQlayout key={id} question={item.question} answer={item.answer} id={0} />
                 ))}
             </div>
+            <Footer />
         </div>
     );
 }

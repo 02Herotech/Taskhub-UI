@@ -8,25 +8,26 @@ import homepageStyles from '../styles/homepage.module.css'
 import Nav from '../../components/nav/Nav'
 import Footer from '../../components/footer/Footer'
 import ServicesLayout from '../../components/services/ServicesLayout'
+import ServiceProviderLayout from '../../components/serviceProvider/ServiceProviderLayout'
 
 
-import trusted from '../../public/Trusted_.svg'
 import paypal from '../../public/paypal.svg'
 import mastercard from '../../public/mastercard.svg'
 import google from '../../public/Google.svg'
-import visa from '../../public/card-visa.svg'
+import visa from '../../public/visa.svg'
 import { FAQLandingPage } from '../../components/FAQDetails/FAQData'
-import Newsletter from '../../components/newsletter/Newsletter'
 import { poppins, revalia } from '@/styles/font'
 import HeroSection from '../../components/heroSection/HeroSection'
 const automative = require('../../public/automative.png') as StaticImageData;
+const fedex = require('../../public/fedex.png') as StaticImageData;
 
 
 
 
 
 
-export default function Home() {
+
+const Home = () => {
   return (
     <div>
       <Head>
@@ -41,16 +42,10 @@ export default function Home() {
 
         </div>
 
-        <div className={`bg-[#FFFCFC]`}>
-          <ServicesLayout id={0} category={''} categoryImage={automative} services={[]} description={''} />
-        </div>
+        <ServicesLayout id={0} category={''} categoryImage={automative} services={[]} description={''} />
 
-        <div className={` bg-grey w-full mt-[100px]`}>
-          <div className='flex justify-center items-center space-x-12 p-2 cursor-pointer'>
-            <div>
-              <Image src={trusted} width={60} height={18} alt='' />
-            </div>
-
+        <div className={` bg-purpleBase w-full `}>
+          <div className='flex justify-center items-center h-[120px] space-x-12 p-2 cursor-pointer'>
             <div>
               <Image src={google} width={90} height={30} alt='' />
             </div>
@@ -69,10 +64,9 @@ export default function Home() {
           </div>
 
         </div>
+        <ServiceProviderLayout id={0} providerName={''} providerImage={fedex} rating={0} description={''} />
 
         <FAQLandingPage />
-
-        <Newsletter />
 
         <Footer />
 
@@ -81,3 +75,4 @@ export default function Home() {
     </div>
   )
 }
+export default Home

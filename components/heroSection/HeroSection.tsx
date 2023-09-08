@@ -16,45 +16,33 @@ const HeroSection = () => {
 
 
     return (
-        <div className={` w-full relative ${revalia.className} p-5 h-screen mt-[100px] bg-white px-20 py-10 `}>
-            <div className="flex justify-between flex-col">
-                <div className={`flex flex-col justify-around text-black mb-[-50px]`}>
-                    <h1 className={`text-xl mt-[8rem] mb-5 font-[400] w-[375px]`}>
-                        GET QUICK <br />AND <span className={`text-purpleBase`}> EFFICIENT </span>SERVICE
-                    </h1>
+        <div className={` w-full relative ${revalia.className} p-5 h-screen mt-[100px] bg-white px-20 py-10`}>
+            <div className={`flex flex-col justify-around text-black`}>
+                <h1 className={`text-xl mt-[8rem] mb-5 font-[400] w-[375px]`}>
+                    GET QUICK <br />AND <span className={`text-purpleBase`}> EFFICIENT </span>SERVICE
+                </h1>
 
-                    <p className={`text-base w-[600px] font-[100]`}>
-                        Our user-friendly platform ensures a seamless
-                        experience, allowing you to effortlessly find, connect,
-                        and engage with the perfect service professionals.
-                    </p>
-                    <div className={`flex justify-around herosection mt-10`}>
-                        <div className={``}>
-                            <Link href='/auth/'>
-                                <Button btnValue='Get Started'
-                                    className='h-[55px] w-[90px] border-none text-white bg-purpleBase'
-                                />
-                            </Link>
-                        </div>
-                        <div className={``}>
-                            <SearchButton
-                                btnPlaceholder1='By Location'
+                <p className={`text-base w-[600px] font-[100]`}>
+                    Our user-friendly platform ensures a seamless
+                    experience, allowing you to effortlessly find, connect,
+                    and engage with the perfect service professionals.
+                </p>
+                <div className={`flex justify-around herosection mt-10`}>
+                    <div className={``}>
+                        <Link href='/auth/'>
+                            <Button btnValue='Get Started'
+                                className='h-[55px] w-[90px] border-none text-white bg-purpleBase'
                             />
-                        </div>
-
-
+                        </Link>
                     </div>
-
+                    <div className={``}>
+                        <SearchButton
+                            btnPlaceholder1='By Location'
+                        />
+                    </div>
                 </div>
-
             </div>
-
-            <div className={`w-[1176px] h-[1176px] `} >
-
-            </div>
-
         </div>
-
     )
 }
 

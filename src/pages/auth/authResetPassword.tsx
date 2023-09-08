@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import { poppins, revalia } from '@/styles/font'
 import Link from 'next/link'
 import Image from 'next/image'
+import Router from 'next/router'
 import logoImg from '../../../public/logo.png'
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai'
 import { BackButton } from '../../../components/buttons/Button'
@@ -78,9 +79,13 @@ const authResetPassword: React.FC<FormState> = () => {
                 error: 'Password should be same',
             }));
             return;
+        } else {
+            Router.push('/auth/authLogin')
         }
-
     }
+
+
+
 
 
 

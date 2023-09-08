@@ -24,7 +24,7 @@ const authResetPassword = () => {
 
     const isAllFieldsFilled = () => {
         const requiredField = ['email'];
-        return requiredField.every(field => email !== '');
+        return requiredField.every(() => email !== '');
     }
 
 
@@ -56,27 +56,25 @@ const authResetPassword = () => {
                         Enter the email address you signed up with below and we'll send you a link to help reset your password.
                     </h2>
                 </div>
-                <div className='p-2 w-[400px]'>
-                    <form action="" onSubmit={onSubmit} className={`space-y-5 `}>
-                        <div className={`flex flex-col mx-auto `}>
-                            <label htmlFor="email" className={`font-bold text-[16px] my-3`}>
-                                Email <span className={`text-red10`}>*</span>
-                            </label>
-                            <input type="email" placeholder='Enter your email-address' id='email' name='email' className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl w-full`} value={email} onChange={handleEmailChange} required
-                            />
-                        </div>
+                <form action="" onSubmit={onSubmit} className={`space-y-5 p-2 w-[400px]`}>
+                    <div className={`flex flex-col mx-auto `}>
+                        <label htmlFor="email" className={`font-bold text-[16px] my-3`}>
+                            Email <span className={`text-red10`}>*</span>
+                        </label>
+                        <input type="email" placeholder='Enter your email-address' id='email' name='email' className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl w-full`} value={email} onChange={handleEmailChange} required
+                        />
+                    </div>
 
-                        <div className={`flex justify-center items-centerw-[400px] text-sm`}>
-                            <button
-                                type="submit"
-                                className={`w-full bg-purpleBase text-white py-2 px-4 rounded-md hover:bg-purple5 ${isAllFieldsFilled() ? '' : 'cursor-not-allowed opacity-50'}`}
-                                disabled={!isAllFieldsFilled()}
-                            >
-                                Send reset link
-                            </button>
-                        </div>
-                    </form>
-                </div>
+                    <div className={`flex justify-center items-centerw-[400px] text-sm`}>
+                        <button
+                            type="submit"
+                            className={`w-full bg-purpleBase text-white py-2 px-4 rounded-md hover:bg-purple5 ${isAllFieldsFilled() ? '' : 'cursor-not-allowed opacity-50'}`}
+                            disabled={!isAllFieldsFilled()}
+                        >
+                            Send reset link
+                        </button>
+                    </div>
+                </form>
                 <div className={`flex justify-around font-bold space-x-1 mt-5 text-base`}>
                     <Link href='/auth/authLogin' className={`text-purpleBase hover:text-[16px] hover:underline`}>Back to log in page.</Link>
                 </div>

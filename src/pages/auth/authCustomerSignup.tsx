@@ -265,7 +265,7 @@ const authCustomerSignup: React.FC<FormState> = () => {
 
                             <div className={`space-x-2`}>
                                 <input onChange={handleChange} type="checkbox" name="agreement" id="agreement" required />
-                                <label htmlFor="agreement" className={`font-bold text-base`}>I agree to  all <Link href='/termsAndConditions' className={`text-purple text-base hover:underline`}>Terms of service </Link> and <Link href='/termsAndConditions' className={`text-purple text-base hover:underline `}> Privacy</Link></label>
+                                <label htmlFor="agreement" className={`font-bold text-base`}>I agree to  all <Link href='/termsAndConditions' className={`text-purpleBase text-base hover:underline`}>Terms of service </Link> and <Link href='/privacy' className={`text-purpleBase text-base hover:underline `}> Privacy</Link></label>
                             </div>
 
                         </div>
