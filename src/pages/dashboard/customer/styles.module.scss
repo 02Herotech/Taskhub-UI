@@ -61,9 +61,21 @@
 
   input{
     width: 500px;
+    outline: none;
   }
 
   .searchLogo{
     margin: 0 10px 0 20px;
+  }
+}
+
+.topButtonDiv{
+  margin-top: 20px;
+
+  .editBtn, .accountBtn{
+    margin-right: 20px;
+    border: 1px solid #D9D9D9;
+    border-radius: 8px;
+    padding: 10px 30px;
   }
 }

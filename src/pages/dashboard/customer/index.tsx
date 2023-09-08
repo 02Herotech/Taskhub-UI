@@ -5,7 +5,8 @@ import styles from "../customer/styles.module.scss"
 import Image from 'next/image';
 import {MdVerified} from "react-icons/md";
 import {GrLocation, GrSearch} from "react-icons/gr";
-
+import Card from "../../../../components/card/Card";
+import Picture1 from "../../../../public/customerAssets/close-up-collection-make-up-beauty-products.jpg"
 interface IProps {
 
 }
@@ -34,6 +35,23 @@ function Index(props: IProps) {
                             <input type="text" className={styles.searchInput} placeholder="Search"/>
                         </div>
                     </div>
+                </div>
+                <div className={styles.topButtonDiv}>
+                    <button className={styles.editBtn}>
+                        Edit Profile
+                    </button>
+                    <button className={styles.accountBtn}>
+                        Switch Account
+                    </button>
+                </div>
+
+                <div>
+                    <Card
+                        image={Picture1}
+                        description={<p>I Provide Painting Services for House, Offices and Shops</p>}
+                        address={<p>No 102, 02 Arena , Sydney Flat A, New South Wales.</p>}
+                        count={3}
+                    />
                 </div>
             </div>
         </DashboardLayout>

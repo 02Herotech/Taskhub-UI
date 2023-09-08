@@ -11,6 +11,8 @@ import {FiLogOut} from "react-icons/fi";
 import Image from 'next/image';
 import portrait from "./../../public/dashboardAssets/portrait.jpg";
 import taskHub from "./../../public/dashboardAssets/TASK.png"
+import {GoPulse} from "react-icons/go";
+import {TfiWallet} from "react-icons/tfi";
 
 interface IProps {
     children: ReactNode
@@ -55,6 +57,12 @@ function DashboardLayout(props: IProps) {
                                 </button>
                                 <button className={styles.sidebarButton}>
                                     <IoClipboardOutline size={20}/> Post a Request
+                                </button>
+                                <button className={styles.sidebarButton}>
+                                    <TfiWallet size={20}/> Bookings
+                                </button>
+                                <button className={styles.sidebarButton}>
+                                    <GoPulse size={20}/> Market Place
                                 </button>
                                 <button className={styles.sidebarButton}>
                                     <CgBox size={20}/> Billing and Payments
