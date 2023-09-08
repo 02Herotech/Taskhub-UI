@@ -23,10 +23,10 @@ const ServiceProviderLayout: React.FC<ServicesProviderDetailsProps> = () => {
         shuffleProviders();
 
         // Set up interval to shuffle every 5 seconds
-        // const shuffleInterval = setInterval(shuffleProviders, 5000);
+        const shuffleInterval = setInterval(shuffleProviders, 5000);
 
         // Clear the interval when the component unmounts
-        // return () => clearInterval(shuffleInterval);
+        return () => clearInterval(shuffleInterval);
     }, []);
 
     return (

@@ -35,7 +35,7 @@ const ServicesLayout: React.FC<ServicesDetailsProps> = ({ id }) => {
 
 
     return (
-        <div className={`flex justify-center flex-col space-y-6 px-20 py-10 `}>
+        <div className={`flex justify-centeri flex-col space-y-6 px-20 py-10 `}>
             <div className={`w-[200px] h-[65px] my-6 mx-20  text-black  font-bold flex-col flex justify-center items-center `}>
                 <h3 className={`${revalia.className} text-2xl`}>SERVICE CATEGORIES</h3>
                 <h4 className={` ml-[-65px] text-sm w-[250px]`} >Showing {startIndex + 1} - {endIndex} of {maxId} results</h4>
@@ -51,9 +51,9 @@ const ServicesLayout: React.FC<ServicesDetailsProps> = ({ id }) => {
                     </button>
                 </div>
 
-                <div className={`flex flex-wrap`}>
+                <div className={`flex flex-wrap items-center justify-center`}>
                     {displayedCategories.map((category) => (
-                        <div className={`p-6 w-1/3 my-5 ${serviceStyles['hover-scale']}`} key={category.id}>
+                        <div className={`p-6 w-1/3 my-5 flex justify-center ${serviceStyles['hover-scale']}`} key={category.id}>
                             <ServiceDetailsLayout key={category.id} {...category} />
                         </div>
                     ))}
