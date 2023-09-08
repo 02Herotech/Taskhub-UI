@@ -76,7 +76,7 @@ export const ServiceProviderDetailsLayout: React.FC<ServicesProviderDetailsProps
         return stars;
     };
     return (
-        <div className={`bg-[white] border-[0.5px] flex rounded-md justify-center w-[665px] h-[170px] drop-shadow-md`}>
+        <div className={`bg-[white] border-[0.5px] border-grey3 flex rounded-md justify-center w-[665px] h-[170px] drop-shadow-md`}>
             <Link href='#'>
                 <div className={`flex w-[650px] h-[170px] items-center bg-[#F5EDED] rounded-[5px] p-5 mt-[-10px] justify-between`}>
 

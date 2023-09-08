@@ -8,6 +8,8 @@ import Link from 'next/link';
 interface SearchButtonProps {
     btnPlaceholder1: string;
     btnPlaceholder2?: string;
+    className?: string
+
 }
 
 interface ButtonProps {
@@ -20,7 +22,7 @@ interface BackBtnProps {
     btnLink: string
 }
 
-export const SearchButton: React.FC<SearchButtonProps> = ({ btnPlaceholder1, btnPlaceholder2 }) => {
+export const SearchButton: React.FC<SearchButtonProps> = ({ btnPlaceholder1, btnPlaceholder2, className }) => {
     const [searchValues, setSearchValues] = useState({
         input1: '',
         input2: '',
@@ -40,12 +42,12 @@ export const SearchButton: React.FC<SearchButtonProps> = ({ btnPlaceholder1, btn
 
     return (
         <div className={`flex flex-row mr-12 cursor-pointer items-center mt-[-30px]`}>
-            <div className={`my-4 px-3 self-stretch bg-white flex p-1.5 h-[60px] items-center`}>
+            <div className={`my-4 px-3 justify-center bg-purpleBase flex  h-[60px] items-center`}>
                 <div className={`flex text-purple items-center justify-center w-[30px] text-md`}>
                     <FaMapMarkerAlt />
                 </div>
                 {/* First Input */}
-                <div className='mr-3'>
+                <div className='mr-3 flex items-center justify-center'>
                     <input
                         type="text"
                         value={searchValues.input1}
@@ -56,7 +58,7 @@ export const SearchButton: React.FC<SearchButtonProps> = ({ btnPlaceholder1, btn
                 </div>
 
                 {/* Second Input */}
-                <div className='mr-3'>
+                {/* <div className='mr-3'>
                     <input
                         type="text"
                         value={searchValues.input2}
@@ -64,7 +66,7 @@ export const SearchButton: React.FC<SearchButtonProps> = ({ btnPlaceholder1, btn
                         placeholder={btnPlaceholder2}
                         className={`bg-grey text-black outline-none rounded-xl p-2 w-full h-[40px]`}
                     />
-                </div>
+                </div> */}
 
                 {/* Search Button */}
                 <div

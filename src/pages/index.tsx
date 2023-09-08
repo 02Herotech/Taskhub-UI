@@ -41,7 +41,7 @@ const Home = () => {
         <ServicesLayout id={0} category={''} categoryImage={automative} services={[]} description={''} />
 
         <div className={` bg-purpleBase w-full `}>
-          <div className='flex justify-center items-center h-[120px] space-x-12 p-2 cursor-pointer'>
+          <div className='flex justify-center items-center h-[120px] space-x-[120px] p-2 cursor-pointer'>
             <div>
               <Image src={google} width={90} height={30} alt='' />
             </div>
