@@ -11,7 +11,7 @@ import {FiLogOut} from "react-icons/fi";
 import Image from 'next/image';
 import portrait from "./../../public/dashboardAssets/portrait.jpg";
 import taskHub from "./../../public/dashboardAssets/TASK.png"
-import {GoPulse} from "react-icons/go";
+import {GoGear, GoPulse} from "react-icons/go";
 import {TfiWallet} from "react-icons/tfi";
 
 interface IProps {
@@ -42,7 +42,7 @@ function DashboardLayout(props: IProps) {
                             <p className={styles.role}>Customer</p>
                         </div>
                         <Image src={portrait} alt="User Portrait" className={styles.userImage}/>
-                        <RiArrowDropDownLine className={styles.dropdown}/>
+                        <GoGear className={styles.gear}/>
                     </div>
                 </div>
                 <div className={styles.sidebarDiv}>

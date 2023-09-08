@@ -10,13 +10,11 @@ const poppins = Poppins({
   weight: "400"
 })
 
-const montserrat = Montserrat({subsets: ["latin"]})
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <Layout>
       <main className={poppins.className}>
         <Component {...pageProps} />
-
       </main>
     </Layout>
   )
