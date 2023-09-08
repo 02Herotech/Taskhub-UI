@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 
 import faqImg from '../../public/faqImg.png'
 import Image from 'next/image'
-import { poppins, revalia } from '@/styles/font'
+import { revalia } from '@/styles/font'
 import { SlArrowDown, SlArrowUp } from 'react-icons/sl'
 
 export interface FAQProps {
@@ -102,19 +102,19 @@ export const FAQlayout: React.FC<FAQProps> = ({ question, answer, className }) =
 
 export const FAQLandingPage: React.FC = () => {
     return (
-        <div className={`flex justify-center items-center flex-col  pt-[50px] pb-[150px] px-[60px] bg-purpleBase text-white mb ${revalia.className}`}>
-            <div className={`my-2 text-center`}>
-                <h1 className={`text-xl font-[100] `}>
+        <div className={`flex justify-center items-center flex-col  pt-[50px] pb-[150px] px-[60px] bg-purpleBase text-white  `}>
+            <div className={`my-2 flex flex-col items-center text-center`}>
+                <h1 className={`text-xl font-[100] ${revalia.className}`}>
                     Frequently Asked Questions (FAQs)
                 </h1>
-                <p className={` w-[1000px] font-normal mt-10 mb-[60px] text-base`}>
+                <p className={` w-[650px]  font-normal mt-10 mb-[60px] text-base`}>
                     These section provides answers to common questions that visitors might have about the website, its products, services, policies, or any other relevant topics.
                 </p>
             </div>
 
 
 
-            <div className={` flex justify-around w-[700px] bg-[#FECD83] p-3 flex-col font-normal ${poppins.className}  space-y-2`}>
+            <div className={` flex justify-around w-[700px] bg-[#FECD83] p-3 flex-col font-normal space-y-2`}>
                 {FAQData.map((item, id) => (
                     <div key={id} className={`bg-white flex justify-center  p-2 text-black min-h-[40px]`}>
                         <div className={`w-[600px]  px-3`}>

@@ -1,7 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { AiOutlineStar } from 'react-icons/ai'
+import { AiFillStar, AiOutlineStar } from 'react-icons/ai'
 
 import { StaticImageData } from 'next/image'
 const o2hero = require('../../public/02hero.png') as StaticImageData;
@@ -63,20 +63,36 @@ export const ServiceProviderDetails: ServicesProviderDetailsProps[] = [
 ]
 
 export const ServiceProviderDetailsLayout: React.FC<ServicesProviderDetailsProps> = ({ providerName, providerImage, description, rating }) => {
+
+    const renderRatingStars = (rating: number) => {
+        const stars = [];
+        for (let i = 1; i <= 5; i++) {
+            if (i <= rating) {
+                stars.push(<AiFillStar className={`text-[#FE9B07]`} key={i} />);
+            } else {
+                stars.push(<AiOutlineStar key={i} />);
+            }
+        }
+        return stars;
+    };
     return (
-        <div>
-            <div>
-                <Link href='#'>
-                    <Image src={providerImage} width={130} height={110} alt='' />
-                </Link>
-            </div>
+        <div className={`bg-[white] border-[0.5px] flex rounded-md justify-center w-[665px] h-[170px] drop-shadow-md`}>
+            <Link href='#'>
+                <div className={`flex w-[650px] h-[170px] items-center bg-[#F5EDED] rounded-[5px] p-5 mt-[-10px] justify-between`}>
 
-            <div>
-                <h3>{providerName}</h3>
-                <p>{description}</p>
-                <div><AiOutlineStar />{rating}</div>
-            </div>
+                    <div className={`w-[100px] flex items-center h-[110px]`}>
+                        <Image src={providerImage} width={100} height={110} alt='' />
+                    </div>
 
+                    <div className={`w-[500px] h-[120px] px-2 space-y-3 flex flex-col`}>
+                        <h3 className={`font-bold text-sm`}>{providerName}</h3>
+                        <p className={`text-[12px]`}>{description}</p>
+                        <div className={`flex `}>
+                            {renderRatingStars(rating)}
+                        </div>
+                    </div>
+                </div>
+            </Link>
         </div>
     )
 }

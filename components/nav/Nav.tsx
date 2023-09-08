@@ -4,7 +4,6 @@ import { useRouter } from 'next/router';
 import Image from 'next/image'
 import logoImg from '../../public/logo.png'
 import { Button } from '../buttons/Button';
-import { poppins, revalia } from '@/styles/font'
 
 import { SlArrowDown } from 'react-icons/sl'
 
@@ -14,7 +13,7 @@ const Nav = () => {
     return router.pathname === linkPath;
   };
   return (
-    <div className={`p-1 flex items-center justify-around h-[100px] drop-shadow-md fixed z-50 w-full bg-white mt-[-100px] ${poppins.className} font-extrabold`}>
+    <div className={`p-1 flex items-center justify-around h-[100px] drop-shadow-md fixed z-50 w-full bg-white mt-[-100px]  font-extrabold`}>
       <div>
         <Link href='/' className={`flex space-x-3 items-center`}>
           <Image src={logoImg} width={61} height={55} alt='' className={`mt-[-10px]`} />

@@ -6,7 +6,7 @@ import { ServicesDetails } from './ServicesDetiails';
 import serviceStyles from './serviceLayout.module.css';
 import { ServicesDetailsProps } from './ServicesDetiails';
 import { endianness } from 'os';
-import { poppins, revalia } from '@/styles/font'
+import { revalia } from '@/styles/font'
 import { maxId } from './ServicesDetiails';
 
 
@@ -38,7 +38,7 @@ const ServicesLayout: React.FC<ServicesDetailsProps> = ({ id }) => {
         <div className={`flex justify-center flex-col space-y-6 px-20 py-10 `}>
             <div className={`w-[200px] h-[65px] my-6 mx-20  text-black  font-bold flex-col flex justify-center items-center `}>
                 <h3 className={`${revalia.className} text-2xl`}>SERVICE CATEGORIES</h3>
-                <h4 className={`${poppins.className} ml-[-65px] text-sm w-[250px]`} >Showing {startIndex + 1} - {endIndex} of {maxId} results</h4>
+                <h4 className={` ml-[-65px] text-sm w-[250px]`} >Showing {startIndex + 1} - {endIndex} of {maxId} results</h4>
             </div>
             <div className={`flex justify-center py-6 items-center`}>
                 <div>

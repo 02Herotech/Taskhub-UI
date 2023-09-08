@@ -16,7 +16,7 @@ import mastercard from '../../public/mastercard.svg'
 import google from '../../public/Google.svg'
 import visa from '../../public/visa.svg'
 import { FAQLandingPage } from '../../components/FAQDetails/FAQData'
-import { poppins, revalia } from '@/styles/font'
+// import { poppins, revalia } from '@/styles/font'
 import HeroSection from '../../components/heroSection/HeroSection'
 const automative = require('../../public/automative.png') as StaticImageData;
 const fedex = require('../../public/fedex.png') as StaticImageData;
@@ -34,7 +34,7 @@ const Home = () => {
         <title>TaskHUB  | HomePage </title>
       </Head>
       <main
-        className={`min-h-screen ${poppins.className}`}>
+        className={`min-h-screen `}>
         <Nav />
 
         <div className={`bg-white`}>

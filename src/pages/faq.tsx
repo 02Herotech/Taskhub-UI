@@ -2,7 +2,6 @@ import React from 'react'
 import { FAQlayout } from '../../components/FAQDetails/FAQData'
 import { FAQProps } from '../../components/FAQDetails/FAQData'
 import { FAQData } from '../../components/FAQDetails/FAQData'
-import { poppins, revalia } from '@/styles/font'
 
 import Nav from '../../components/nav/Nav'
 import Footer from '../../components/footer/Footer'
@@ -10,7 +9,7 @@ import Footer from '../../components/footer/Footer'
 const Faq: React.FC<FAQProps> = () => {
 
     return (
-        <div className={`min-h-screen ${poppins.className}`}>
+        <div className={`min-h-screen `}>
             <Nav />
             <div className="container mx-auto px-4 py-8 mt-[100px]  text-black">
                 <h1 className="text-3xl font-extrabold mb-6">Frequently Asked Questions</h1>

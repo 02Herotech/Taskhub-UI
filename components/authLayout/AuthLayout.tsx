@@ -3,13 +3,12 @@ import Link from 'next/link'
 import Image from 'next/image'
 import logoImg from '../../public/logo.png'
 import { BackButton, Button } from '../../components/buttons/Button'
-import { poppins, revalia } from '@/styles/font'
 
 
 
 const AuthLayout = () => {
     return (
-        <div className={` w-full ${poppins.className} text-black`}>
+        <div className={` w-full  text-black`}>
             <div className={`w-full p-10 flex drop-shadow-md bg-white h-[80px]`}>
                 <Link href='/' className={`flex space-x-3 items-center`}>
                     <Image src={logoImg} width={61} height={55} alt='' className={`mt-[-10px]`} />

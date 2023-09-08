@@ -2,13 +2,12 @@ import { BackButton } from '../../components/buttons/Button'
 import Footer from '../../components/footer/Footer'
 import Nav from '../../components/nav/Nav'
 import { TermsAndConditions } from '../../components/termsAndPrivacy/TermsAndPrivacy'
-import { poppins, revalia } from '@/styles/font'
 
 
 
 const terms = () => {
     return (
-        <div className={`min-h-screen ${poppins.className}`}>
+        <div className={`min-h-screen`}>
             <Nav />
 
             <div className='mt-[100px]'>

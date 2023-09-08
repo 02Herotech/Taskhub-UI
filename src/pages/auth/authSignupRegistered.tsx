@@ -1,5 +1,4 @@
 import React from 'react'
-import { poppins, revalia } from '@/styles/font'
 import Link from 'next/link'
 import logoImg from '../../../public/logo.png'
 import success from '../../../public/success.svg'
@@ -7,7 +6,7 @@ import Image from 'next/image'
 
 const authSignupRegistered = () => {
     return (
-        <div className={`m-auto ${poppins.className}`}>
+        <div className={`m-auto`}>
             <div className={`w-full p-10 flex drop-shadow-md bg-white h-[80px]`}>
                 <Link href='/' className={`flex space-x-3 items-center`}>
                     <Image src={logoImg} width={61} height={55} alt='' className={`mt-[-10px]`} />

@@ -3,7 +3,6 @@ import React, { useState, useRef, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import logo from '../../../public/logo.png'
-import { poppins, revalia } from '@/styles/font'
 // import { useRouter } from 'next/dist/client/router'
 
 
@@ -144,7 +143,7 @@ const authCustomerSignup: React.FC<FormState> = () => {
 
 
     return (
-        <div className={` h-screen w-full overflow-x-hidden  ${poppins.className}`}>
+        <div className={` h-screen w-full overflow-x-hidden`}>
             <div className={`w-full p-10 flex drop-shadow-md bg-white h-[80px]`}>
                 <Link href='/' className={`flex space-x-3 items-center`}>
                     <Image src={logoImg} width={61} height={55} alt='' className={`mt-[-10px]`} />

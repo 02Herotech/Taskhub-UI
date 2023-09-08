@@ -177,33 +177,36 @@ export const maxId = Math.max(...ServicesDetails.map(item => item.id));
 
 export const ServiceDetailsLayout: React.FC<ServicesDetailsProps> = ({ categoryImage, description, services }) => {
     return (
-        <div className={`w-[230px] h-[200px] mt-10 p-8 space-y-2 relative flex flex-col justify-center items-center bg-purpleBase`}>
-            <div className='absolute w-[200px] h-[200px] top-[-2rem]'>
-                <Link href='#'>
-                    <Image src={categoryImage} width={250} height={200} alt='' />
-                </Link>
-            </div>
-            <div className='absolute bottom-[10px] space-y-1 text-left'>
-                <h3 className={` px-5 text-white  text-[15px] font-bold `}>{description}</h3>
-                <p className={` px-5 text-white   text-[8px] font-extralight `}>
-                    {services.map((service, index) => {
-                        if (index < 5) {
-                            return (
-                                <span key={index}>
-                                    {service}
-                                    {index < 4 && ', '}
-                                </span>
-                            );
-                        } else if (index === 5) {
-                            return (
-                                <span key={index}>
-                                    , etc
-                                </span>
-                            );
-                        }
-                    })}
-                </p>
-            </div>
+        <div>
+            <Link href='#'>
+                <div className={`w-[230px] h-[200px] mt-10 p-8 space-y-2 relative flex flex-col justify-center items-center bg-purpleBase`}>
+                    <div className='absolute w-[200px] h-[200px] top-[-2rem]'>
+                        <Image src={categoryImage} width={250} height={200} alt='' />
+                    </div>
+                    <div className='absolute bottom-[10px] space-y-1 text-left'>
+                        <h3 className={` px-5 text-white  text-[15px] font-bold `}>{description}</h3>
+                        <p className={` px-5 text-white   text-[8px] font-extralight `}>
+                            {services.map((service, index) => {
+                                if (index < 5) {
+                                    return (
+                                        <span key={index}>
+                                            {service}
+                                            {index < 4 && ', '}
+                                        </span>
+                                    );
+                                } else if (index === 5) {
+                                    return (
+                                        <span key={index}>
+                                            , etc
+                                        </span>
+                                    );
+                                }
+                            })}
+                        </p>
+                    </div>
+                </div>
+            </Link>
         </div>
+
     )
 }

@@ -1,7 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable react-hooks/rules-of-hooks */
 import React, { useState } from 'react'
-import { poppins, revalia } from '@/styles/font'
 import Link from 'next/link'
 import Image from 'next/image'
 import logo from '../../../public/logo.png'
@@ -57,7 +56,7 @@ const authLogin: React.FC<FormState> = () => {
 
 
     return (
-        <div className={` w-full ${poppins.className} text-black`}>
+        <div className={` w-full  text-black`}>
             <div className={`w-full p-10 flex drop-shadow-md bg-white h-[80px]`}>
                 <Link href='/' className={`flex space-x-3 items-center`}>
                     <Image src={logo} width={61} height={55} alt='' className={`mt-[-10px]`} />

@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { FaSearch, FaMapMarkerAlt } from 'react-icons/fa';
 import { BsArrowLeftCircle } from 'react-icons/bs'
 import Link from 'next/link';
-import { poppins } from '@/styles/font'
 
 
 

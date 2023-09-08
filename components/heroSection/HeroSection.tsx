@@ -4,7 +4,7 @@ import serviceProvChatImg from '../../public/hero-chat-img.png'
 import { SearchButton } from '../buttons/Button'
 import { Button } from '../buttons/Button'
 import Link from 'next/link'
-import { poppins, revalia } from '@/styles/font'
+import { revalia } from '@/styles/font'
 import Nav from '../nav/Nav'
 import { gsap } from 'gsap'
 
