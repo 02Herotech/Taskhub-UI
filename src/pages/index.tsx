@@ -23,10 +23,6 @@ const fedex = require('../../public/fedex.png') as StaticImageData;
 
 
 
-
-
-
-
 const Home = () => {
   return (
     <div>
