@@ -1,44 +1,62 @@
 import React from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
+import logoImg from '../../public/logo.png'
 import { BackButton, Button } from '../../components/buttons/Button'
-import { montsearrat } from '@/styles/font'
 
 
 
 const AuthLayout = () => {
     return (
-        <div className={`p-20 flex items-center justify-center w-full ${montsearrat.className}`}>
-            <div className={`px-20  flex justify-center items-center m-auto flex-col  `}>
-                <div className={`text-white text-2xl text-center font-extrabold w-[500px] my-10`}>
-                    <h1>CHOOSE YOUR <br />SIGN-UP <br /> METHOD</h1>
-                </div>
-                <div className={`space-y-5 text-white font-bold`}>
-                    <div>
-                        <Link href='/auth/authCustomerSignup'>
-                            <Button btnValue='CUSTOMER'
-                                className='h-[60px] w-[250px] border-transparent text-base'
-                            />
-                        </Link>
+        <div className={` w-full  text-black`}>
+            <div className={`w-full p-10 flex drop-shadow-md bg-white h-[80px]`}>
+                <Link href='/' className={`flex space-x-3 items-center`}>
+                    <Image src={logoImg} width={61} height={55} alt='' className={`mt-[-10px]`} />
+                    <h4 className={`text-lg font-extrabold `}>TaskHub</h4>
+                </Link>
+            </div>
+            <div className={`p-20 flex items-center justify-center w-full my-auto `}>
+                <div className={`px-20  flex justify-center items-center m-auto flex-col  `}>
+                    <div className={`w-[600px] p-3 space-y-5 text-center mb-10`}>
+                        <div className={`  text-[36px] font-bold `}>
+                            <h1 className={` `}>Create your TaskHub account</h1>
+                        </div>
+
+                        <div className={`flex justify-around font-[600] w-[300px]  mx-auto`}>
+                            <h5>Already have an account?</h5>
+                            <Link href='/auth/authLogin' className={`text-purpleBase hover:text-[17px] `}>Log in</Link>
+                        </div>
                     </div>
 
-                    <div>
-                        <Link href='/auth/authServiceProviderSignup'>
-                            <Button btnValue='SERVICE PROVIDER'
-                                className='h-[55px] w-[250px] bg-transparent  border-purple text-base'
+                    <div className={`space-y-5  text-black `}>
+                        <div className={`flex space-x-4 font-light`}>
+                            <div>
+                                <Link href='/auth/authCustomerSignup'>
+                                    <Button btnValue='CUSTOMER'
+                                        className='h-[60px] w-[200px]  text-base bg-white hover:text-white'
+                                    />
+                                </Link>
+                            </div>
+
+                            <div>
+                                <Link href='/auth/authServiceProviderSignup'>
+                                    <Button btnValue='SERVICE PROVIDER'
+                                        className='h-[60px] w-[200px] bg-white hover:text-white  text-base'
+                                    />
+                                </Link>
+                            </div>
+                        </div>
+                        <div className={`flex justify-center items-center`} >
+                            <BackButton
+                                btnLink='/'
+                                btnValue='Go Home'
                             />
-                        </Link>
-                    </div>
-                    <BackButton
-                        btnLink='/'
-                        btnValue='Go Home'
-                    />
-
-                    <div>
-
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
+
     )
 }
 

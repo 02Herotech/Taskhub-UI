@@ -7,7 +7,7 @@ import Link from 'next/link';
 
 interface SearchButtonProps {
     btnPlaceholder1: string;
-    btnPlaceholder2: string;
+    btnPlaceholder2?: string;
 }
 
 interface ButtonProps {
@@ -81,11 +81,11 @@ export const SearchButton: React.FC<SearchButtonProps> = ({ btnPlaceholder1, btn
 
 export const Button: React.FC<ButtonProps> = ({ btnValue, className }) => {
     return (
-        <div className={`self-stretch m-1`}>
+        <div className={` m-1`}>
             <input
                 type="button"
                 value={btnValue}
-                className={` text-[15px] rounded-[8px] cursor-pointer bg-purple border-[1px] hover:bg-purpleLight py-1 px-2 w-full text-center justify-center items-center ${className} `}
+                className={` text-[15px] rounded-[8px] cursor-pointer bg-purpleBase border-[1px] hover:bg-purple5 py-1 px-2 text-center justify-center items-center ${className} `}
             />
         </div>
     )
@@ -94,7 +94,7 @@ export const Button: React.FC<ButtonProps> = ({ btnValue, className }) => {
 
 export const BackButton: React.FC<BackBtnProps> = ({ btnValue, btnLink }) => {
     return (
-        <div className={`flex justify-center items-center font-bold cursor-pointer pt-10 hover:text-[20px]`}>
+        <div className={`flex justify-center items-center font-bold cursor-pointer pt-10 hover:text-[20px] w-[200px]`}>
             <BsArrowLeftCircle className={`text-md mr-2`} />
             <Link href={`${btnLink}`} className={`text-center  hover:underline p-1 flex`}>{btnValue}</Link>
         </div >

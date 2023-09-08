@@ -1,7 +1,10 @@
-import { Montserrat } from "next/font/google";
+import { Revalia } from "next/font/google";
 
-export const montsearrat = Montserrat({
-    variable: "--Montserrat",
+
+
+export const revalia = Revalia({
+    variable: "--Revalia",
     subsets: ["latin"],
-    display: "swap"
+    display: "swap",
+    weight: "400"
 })

@@ -2,46 +2,88 @@
 import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import logo from '../../public/footerLogo.png'
+import logoImg from '../../public/logo.png'
+import Newsletter from '../newsletter/Newsletter'
 
 const Footer = () => {
     return (
-        <div className={`w-full h-[450px] flex flex-col p-[100px] items-center justify-around bg-ash text-white`}>
-            <div className={`w-[900px] flex  py-[2px] justify-evenly`}>
-                <div className={`px-5`}>
-                    <div className={`flex items-center ml-[-35px]`}>
-                        <Image src={logo} width={100} height={100} alt='' />
-                        <h3 className={`ml-[-20px] mt-[10px]`}>TaskHUB</h3>
+        <div className={`w-full h-[500px] flex flex-col  justify-around bg-white text-black`}>
+            <div className={` flex px-3 justify-evenly`}>
+                <div className={` font-extrabold space-y-8`}>
+                    <div className={`  w-[170px]`}>
+                        <Link href='/' className={`flex space-x-3 items-center`}>
+                            <Image src={logoImg} width={52} height={47} alt='' />
+                            <h4 className={`text-[22px] mt-[4px] font-extrabold`}>TaskHub</h4>
+                        </Link>
                     </div>
-                    <div className={`w-[320px] text-[12px] mt-[-20px]`}>
+                    <div className={`w-[300px] text-[12px] pl-[5px]`}>
                         <h5>
                             From home maintenance to professional consultations,
                             creative solutions to skilled experts, we've curated a vast
                             network of top-tier service providers.
                         </h5>
                     </div>
+
+                    <div >
+                        <Newsletter />
+                    </div>
+
+                    <div className={`text-base font-bold pt-12`}>
+                        <h2> &copy; 2023 TaskHub. All Rights Reserved.</h2>
+                    </div>
+                </div>
+                <div className={`flex flex-col space-y-2 mt-2`}>
+                    <h3 className={`mb-8 font-extrabold text-sm`}>Company</h3>
+                    <ul className={`space-y-3 `}>
+                        <li >
+                            <Link href='/about' className={`hover:text-medium hover:text-grey4`}> About Us </Link>
+                        </li>
+                        <li>
+                            <Link href='/#' className={`hover:text-medium hover:text-grey4`}> Companies </Link>
+
+                        </li>
+                        <li>
+                            <Link href='/#' className={`hover:text-medium hover:text-grey4`}> Pricing</Link>
+                        </li>
+
+                    </ul>
                 </div>
 
-                <div className={`flex flex-col px-10 py-10 space-y-2 `}>
-                    <Link href='/support' className={`hover:text-medium`}> Support </Link>
+                <div className={`flex flex-col space-y-2 mt-2`}>
+                    <h3 className={`mb-8 font-extrabold text-sm`}>Services</h3>
+                    <ul className={`space-y-3 `}>
+                        <li className={`hover:text-grey4`}>Automotive Services</li>
+                        <li className={`hover:text-grey4`}>Health & Fitness</li>
+                        <li className={`hover:text-grey4`}>Real Estate Services</li>
+                        <li className={`hover:text-grey4`}>Delivery & Logistics</li>
+                        <li className={`hover:text-grey4`}>Art & Creativity</li>
+                        <li className={`hover:text-grey4`}>Travel & Adventure</li>
+                        <li className={`hover:text-grey4`}>Childcare & Babysitting</li>
+                        <li className={`hover:text-grey4`}>Education & Tutoring</li>
+                    </ul>
 
-                    <Link href='/help' className={`hover:text-medium`}> Help </Link>
                 </div>
 
-                <div className={`flex flex-col py-10 space-y-2`}>
-                    <Link href='/support' className={`hover:text-medium`}> FAQs </Link>
-                    <Link href='/about' className={`hover:text-medium`}> About Us </Link>
-                    <Link href='/termsAndConditions' className={`hover:text-medium`}> Terms </Link>
-                    <Link href='/privacy' className={`hover:text-medium`}> Privacy </Link>
-                </div>
+                <div className={`flex flex-col space-y-2 mt-2`}>
+                    <h3 className={`mb-8 font-extrabold text-sm`}>Others</h3>
 
+                    <ul className={`space-y-3`}>
+                        <li>
+                            <Link href='/faq' className={`hover:text-medium hover:text-grey4`}> FAQs </Link>
+                        </li>
+                        <li>
+                            <Link href='/about' className={`hover:text-medium hover:text-grey4`}>Contack Us </Link>
+                        </li>
+                        <li>
+                            <Link href='/termsAndConditions' className={`hover:text-medium hover:text-grey4`}> Terms and Conditions</Link>
+                        </li>
+                        <li>
+                            <Link href='/privacy' className={`hover:text-medium hover:text-grey4`}> Privacy </Link>
+                        </li>
+                    </ul>
+                </div>
             </div>
-            <span className={`w-[550px] mb-5 border-b-white border-b-[1px] flex justify-center`}></span>
-
-            <div className={`py-5 text-base`}>
-                <h2> &copy; 2023 TaskHUB, all rights reserved</h2>
-            </div>
-        </div>
+        </div >
     )
 }
 
