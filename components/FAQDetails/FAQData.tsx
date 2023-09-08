@@ -135,7 +135,7 @@ export const FAQLandingPage: React.FC = () => {
                     <Link href='/faq'>
                         <Button
                             btnValue='See more'
-                            className=' border-[1px] w-[150px] h-[55px]  px-4 border-purpleBase   text-white font-extralight text-base hover:bg-yellow4 bg-[#de9831]'
+                            className=' border-[1px] w-[150px] h-[55px]  px-4 border-purpleBase   text-white font-extralight text-base hover:bg-yellow4 bg-yellow6'
                         />
                     </Link>
                 </div>
