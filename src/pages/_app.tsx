@@ -15,7 +15,6 @@ export default function App({ Component, pageProps }: AppProps) {
     <Layout>
       <main className={poppins.className}>
         <Component {...pageProps} />
-
       </main>
     </Layout>
   )

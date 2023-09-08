@@ -54,21 +54,21 @@ function Index() {
                 <div className={styles.cardsDiv}>
                     <Card
                         image={Picture1}
-                        description={<p>I Provide Painting Services for House, Offices and Shops</p>}
-                        address={<p>No 102, 02 Arena , Sydney Flat A, New South Wales.</p>}
+                        description={"I Provide Painting Services for House, Offices and Shops"}
+                        address={"No 102, 02 Arena , Sydney Flat A, New South Wales."}
                         count={3}
                     />
                     <Card
                         image={Picture2}
-                        description={<p>I Provide Painting Services for House, Offices and Shops</p>}
-                        address={<p>No 102, 02 Arena , Sydney Flat A, New South Wales.</p>}
+                        description={"I Provide Painting Services for House, Offices and Shops"}
+                        address={"No 102, 02 Arena , Sydney Flat A, New South Wales."}
                         count={1}
                     />
                     <Card
                         image={Picture1}
-                        description={<p>I Provide Painting Services for House, Offices and Shops</p>}
-                        address={<p>No 102, 02 Arena , Sydney Flat A, New South Wales.</p>}
-                        count={3}
+                        description={"I Provide Painting Services for House, Offices and Shops"}
+                        address={"No 102, 02 Arena , Sydney Flat A, New South Wales."}
+                        count={5}
                     />
                 </div>
             </div>

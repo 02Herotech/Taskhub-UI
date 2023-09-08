@@ -6,16 +6,14 @@ import { FaLocationDot } from "react-icons/fa6";
 
 interface IProps {
     image: any;
-    description: JSX.Element;
-    address: JSX.Element;
+    description: string;
+    address: string;
     count: number;
 }
 
 function Card(props: IProps) {
-    // Ensure that the count does not exceed 5
     const starCount = Math.min(props.count, 5);
 
-    // Create an array of stars based on the count
     const stars = Array.from({ length: 5 }, (_, index) => (
         <span key={index} className={index < starCount ? styles.filledStar : styles.unfilledStar}>
       {index < starCount ? <BsStarFill /> : <BsStar />}
