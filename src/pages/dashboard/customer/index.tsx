@@ -6,7 +6,8 @@ import Image from 'next/image';
 import {MdVerified} from "react-icons/md";
 import {GrLocation, GrSearch} from "react-icons/gr";
 import Card from "../../../../components/card/Card";
-import Picture1 from "../../../../public/customerAssets/close-up-collection-make-up-beauty-products.jpg"
+import Picture1 from "../../../../public/customerAssets/close-up-collection-make-up-beauty-products.jpg";
+import Picture2 from "../../../../public/customerAssets/vintage-sewing-machine-with-thread-measuring-tape.jpg";
 interface IProps {
 
 }
@@ -45,12 +46,60 @@ function Index(props: IProps) {
                     </button>
                 </div>
 
-                <div>
+                <div className={styles.cardsDiv}>
                     <Card
                         image={Picture1}
                         description={<p>I Provide Painting Services for House, Offices and Shops</p>}
                         address={<p>No 102, 02 Arena , Sydney Flat A, New South Wales.</p>}
                         count={3}
+                    />
+                    <Card
+                        image={Picture2}
+                        description={<p>I Provide Painting Services for House, Offices and Shops</p>}
+                        address={<p>No 102, 02 Arena , Sydney Flat A, New South Wales.</p>}
+                        count={1}
+                    />
+                    <Card
+                        image={Picture1}
+                        description={<p>I Provide Painting Services for House, Offices and Shops</p>}
+                        address={<p>No 102, 02 Arena , Sydney Flat A, New South Wales.</p>}
+                        count={3}
+                    />
+                    <Card
+                        image={Picture1}
+                        description={<p>I Provide Painting Services for House, Offices and Shops</p>}
+                        address={<p>No 102, 02 Arena , Sydney Flat A, New South Wales.</p>}
+                        count={3}
+                    />
+                    <Card
+                        image={Picture1}
+                        description={<p>I Provide Painting Services for House, Offices and Shops</p>}
+                        address={<p>No 102, 02 Arena , Sydney Flat A, New South Wales.</p>}
+                        count={3}
+                    />
+                    <Card
+                        image={Picture2}
+                        description={<p>I Provide Painting Services for House, Offices and Shops</p>}
+                        address={<p>No 102, 02 Arena , Sydney Flat A, New South Wales.</p>}
+                        count={3}
+                    />
+                    <Card
+                        image={Picture2}
+                        description={<p>I Provide Painting Services for House, Offices and Shops</p>}
+                        address={<p>No 102, 02 Arena , Sydney Flat A, New South Wales.</p>}
+                        count={5}
+                    />
+                    <Card
+                        image={Picture1}
+                        description={<p>I Provide Painting Services for House, Offices and Shops</p>}
+                        address={<p>No 102, 02 Arena , Sydney Flat A, New South Wales.</p>}
+                        count={3}
+                    />
+                    <Card
+                        image={Picture1}
+                        description={<p>I Provide Painting Services for House, Offices and Shops</p>}
+                        address={<p>No 102, 02 Arena , Sydney Flat A, New South Wales.</p>}
+                        count={2}
                     />
                 </div>
             </div>

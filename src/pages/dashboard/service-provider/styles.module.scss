@@ -1,3 +1,44 @@
 .main{
+  padding: 40px 20px 60px 80px;
+}
 
+.provider {
+  display: flex;
+  align-items: flex-start;
+}
+
+.imageDiv {
+  width: 215px;
+  height: 215px;
+  border-radius: 50%;
+  border: 2px solid #FE9B07;
+  margin-right: 30px;;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.providerImage {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.searchDiv {
+  display: flex;
+  align-items: center;
+  margin-left: 100px;
+  border: 1px solid #D9D9D9;;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.searchInput {
+  width: 500px;
+  outline: none;
+}
+
+.searchLogo {
+  margin: 0 10px 0 20px;
 }
