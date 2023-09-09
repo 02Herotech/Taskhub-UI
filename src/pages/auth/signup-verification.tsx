@@ -19,7 +19,7 @@ const signupVerification = () => {
                 </div>
                 <h1 className={`font-bold`}>CONGRATULATIONS!</h1>
                 <p className={`w-[492px] text-center`}>Your email has been verified successfully. <br />Please Kindly proceed to</p>
-                <Link href='/auth/login' target='_blank' className={`text-purpleBase  underline hover:text-md`}>Log in</Link >
+                <Link href='/auth/login' className={`text-purpleBase  underline hover:text-md`}>Log in</Link >
             </div>
         </div>
     )
