@@ -142,14 +142,14 @@ const authCustomerSignup: React.FC<FormState> = () => {
 
     return (
         <div className={` h-screen w-full overflow-x-hidden`}>
-            <div className={`w-full p-10 flex drop-shadow-md bg-white h-[80px]`}>
+            <div className={`p-10 flex h-[100px] drop-shadow-md fixed z-[9999] w-full bg-white   font-extrabold`}>
                 <Link href='/' className={`flex space-x-3 items-center`}>
                     <Image src={logoImg} width={61} height={55} alt='' className={`mt-[-10px]`} />
                     <h4 className={`text-lg font-extrabold `}>TaskHub</h4>
                 </Link>
             </div>
 
-            <div className={`flex justify-center mt-10 items-center flex-col `}>
+            <div className={`flex justify-center mt-[120px] items-center flex-col `}>
 
                 <div className={` p-3 space-y-5 text-center mb-2`}>
                     <div className={`text-lg font-bold w-full  `}>
@@ -165,7 +165,7 @@ const authCustomerSignup: React.FC<FormState> = () => {
                 <div className='mb-10 w-[500px]'>
                     <form action="" onSubmit={onSubmit}>
                         <div className={`space-y-4 mb-10`}>
-                            <div className={`flex space-x-10`}>
+                            <div className={`flex justify-between`}>
                                 <div className={`flex flex-col`}>
                                     <label htmlFor="firstName" className={`font-extrabold text-[16px]  my-3`}>
                                         First Name <span className={`text-red10`}>*</span>
