@@ -6,7 +6,7 @@ const instance = axios.create({
 
 const localStorage = typeof window !== 'undefined' ? window.localStorage : null;
 
-instance.defaults.headers.common = { 'Authorization': `Bearer ${localStorage?.getItem("user_token") ?? null}` }
+instance.defaults.headers.common = { 'Authorization': `Bearer ${localStorage?.getItem("user_token") ?? null}`, 'Content-Type': 'application/json', 'Accept': 'application/json' }
 
 // const userToken = typeof window !== 'undefined' ? localStorage.getItem("user_token") : null;
 

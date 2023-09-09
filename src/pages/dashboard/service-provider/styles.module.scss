@@ -1,0 +1,143 @@
+.main {
+  padding: 40px 20px 60px 80px;
+}
+
+.provider {
+  display: flex;
+  align-items: flex-start;
+}
+
+.imageDiv {
+  width: 215px;
+  height: 215px;
+  border-radius: 50%;
+  border: 2px solid #FE9B07;
+  margin-right: 30px;;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.providerImage {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.searchDiv {
+  display: flex;
+  align-items: center;
+  margin-left: 100px;
+  border: 1px solid #D9D9D9;;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.searchInput {
+  width: 500px;
+  outline: none;
+}
+
+.searchLogo {
+  margin: 0 10px 0 20px;
+}
+
+.providerImage {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.providerInfo {
+  display: flex;
+  align-items: flex-start;
+}
+
+.nameAndVerification {
+  display: flex;
+  align-items: center;
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+
+  p {
+    margin-right: 10px;
+    font-weight: bold;
+  }
+}
+
+.locationAndAvailability {
+  margin-top: 50px;
+}
+
+.verificationLogo {
+  color: #FE9B07;
+}
+
+.location {
+  display: flex;
+  align-items: center;
+}
+
+.locationLogo {
+  margin-right: 10px;
+}
+
+.topButtonDiv {
+  margin-top: 20px;
+  margin-left: 70px;
+
+  .editBtn, .accountBtn {
+    margin-right: 20px;
+    border: 1px solid #D9D9D9;
+    color: #969696;
+    border-radius: 8px;
+    padding: 10px 30px;
+
+    &:hover{
+      background-color: #D9D9D9;
+    }
+  }
+
+
+}
+
+.availabilityDiv {
+  margin-top: 10px;
+}
+
+.aText {
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.onDiv {
+  background-color: #D9D9D9;
+  width: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 18px;
+  padding: 3px;
+
+  p {
+    font-size: 0.6rem;
+    font-weight: bold;
+  }
+}
+
+.on {
+  background-color: #0f0;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  margin-left: 4px;
+}
+
+.cardsDiv {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-top: 60px;
+}
