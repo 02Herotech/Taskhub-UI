@@ -22,7 +22,7 @@ const resetPasswordConfirmation = () => {
                     <Image src={thumbsUp} width={157} height={157} alt='' />
                 </div>
                 <h1 className={`font-bold text-xl`}>Password Saved</h1>
-                <Link href='/auth/authLogin' target='_self' className={`text-white bg-purpleBase hover:bg-purple5 p-4 rounded-xl`}>Proceed to Log in</Link >
+                <Link href='/auth/login' target='_self' className={`text-white bg-purpleBase hover:bg-purple5 p-4 rounded-xl`}>Proceed to Log in</Link >
             </div>
         </div>
 

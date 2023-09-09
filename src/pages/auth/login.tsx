@@ -105,7 +105,7 @@ const login: React.FC<FormState> = () => {
                         </div>
                         <div className={`flex justify-around font-[600] w-[300px] text-base mx-auto`}>
                             <h5>Forgot your Password?</h5>
-                            <Link href='/auth/authForgetPassword' className={`text-purpleBase hover:text-[16px] `}>Reset here</Link>
+                            <Link href='/auth/forget-password' className={`text-purpleBase hover:text-[16px] `}>Reset here</Link>
                         </div>
 
                         <div className={`flex justify-center items-center`}>

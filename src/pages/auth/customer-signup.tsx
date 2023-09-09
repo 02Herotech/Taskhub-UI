@@ -171,7 +171,7 @@ const customerSignup: React.FC<FormState> = () => {
 
                     <div className={`flex justify-around font-[600] w-[300px]  mx-auto`}>
                         <h5>Already have an account?</h5>
-                        <Link href='/auth/authLogin' className={`text-purpleBase hover:text-[17px] `}>Log in</Link>
+                        <Link href='/auth/login' className={`text-purpleBase hover:text-[17px] `}>Log in</Link>
                     </div>
                 </div>
 
