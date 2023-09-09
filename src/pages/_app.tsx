@@ -14,8 +14,10 @@ const poppins = Poppins({
   weight: "400",
 });
 
-export default function App({ Component, pageProps:  {session, ...pageProps} }: AppProps) {
-
+export default function App({
+  Component,
+  pageProps: { session, ...pageProps },
+}: AppProps) {
   return (
     <SessionProvider session={session}>
       <Provider store={store}>

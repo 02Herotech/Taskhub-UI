@@ -10,7 +10,7 @@ import { BackButton } from '../../../components/buttons/Button'
 
 
 
-const authResetPassword = () => {
+const forgetPassword = () => {
     const [email, setEmail] = useState('')
 
 
@@ -82,5 +82,5 @@ const authResetPassword = () => {
     )
 }
 
-export default authResetPassword
+export default forgetPassword
 

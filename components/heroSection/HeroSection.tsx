@@ -47,7 +47,7 @@ const HeroSection = () => {
                     </div>
                 </div>
             </div>
-            <div className={`w-1/2  h-[500px] flex  flex-wrap items-center justify-center space-x-[45px] space-y-2`}>
+            <div className={`w-[500px]  h-[500px] flex  flex-wrap items-center justify-center space-x-[45px] space-y-2`}>
                 <div className={`w-[130px] h-[130px] flex items-center`}>
                     <Image src={heroImage1} width={130} height={130} alt='' />
                 </div>

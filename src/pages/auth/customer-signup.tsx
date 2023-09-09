@@ -8,8 +8,6 @@ import logo from "../../../public/logo.png";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import logoImg from "../../../public/logo.png";
 import { BackButton } from "../../../components/buttons/Button";
-import { customerSignup } from "../../../network/auth";
-import axios from "axios";
 import { useSignUpMutation } from "@/redux/features/auth/api";
 
 interface FormState {
@@ -24,7 +22,7 @@ interface FormState {
   error: string;
 }
 
-const authCustomerSignup: React.FC<FormState> = () => {
+const customerSignup: React.FC<FormState> = () => {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -86,6 +84,16 @@ const authCustomerSignup: React.FC<FormState> = () => {
       [name]: value,
     }));
   };
+  const handlePhoneNumberKeyDown = (e: any) => {
+    // Check if the pressed key is a number (0-9) or Backspace/Delete key
+    const isNumericKey = /^[0-9]$/.test(e.key);
+    const isBackspaceOrDelete = ["Backspace", "Delete"].includes(e.key);
+
+    // If the pressed key is not numeric and not Backspace/Delete, prevent the input
+    if (!isNumericKey && !isBackspaceOrDelete) {
+      e.preventDefault();
+    }
+  };
 
   const isAllFieldsFilled = () => {
     const requiredFields: (keyof FormState)[] = [
@@ -110,25 +118,23 @@ const authCustomerSignup: React.FC<FormState> = () => {
     setShowConfirmPassword(!showConfirmPassword);
   };
 
-  const [signUpApi, { data, error, isLoading }] = useSignUpMutation();
+  const [signUpApiCall, { data, isLoading }] = useSignUpMutation();
 
   useEffect(() => {
     if (data) {
-      alert(data.data);
+      console.log("data", data);
+
+      // router.push("/auth/authLogin");
     }
-    if (error) {
-      console.log(error);
-    }
-  }, [data, error]);
+  }, [data]);
 
   const onSubmit = async (event: any) => {
     event.preventDefault();
 
     const formattedPhoneNumber = formData.phoneNumber.startsWith("+61")
       ? formData.phoneNumber
-      : "08" + formData.phoneNumber;
-
-    const user = {
+      : "+61" + formData.phoneNumber;
+    const body = {
       firstName: formData.firstName,
       lastName: formData.lastName,
       phoneNumber: formattedPhoneNumber, // Use the formatted phone number here
@@ -136,46 +142,14 @@ const authCustomerSignup: React.FC<FormState> = () => {
       password: formData.password,
     };
 
-    signUpApi(user);
-
-    // try {
-    //   const user = {
-    //     request: {
-    //       firstName: formData.firstName,
-    //       lastName: formData.lastName,
-    //       phoneNumber: formattedPhoneNumber, // Use the formatted phone number here
-    //       emailAddress: formData.email,
-    //       password: formData.password,
-    //     },
-    //   };
-
-    //   const payload = {
-    //     request: {
-    //       firstName: formData.firstName,
-    //       lastName: formData.lastName,
-    //       phoneNumber: formattedPhoneNumber, // Use the formatted phone number here
-    //       emailAddress: formData.email,
-    //       password: formData.password,
-    //     },
-    //   };
-
-    //   // const res = await customerSignup(user);
-    //   // @ts-ignore
-    //   const res = await fetch(
-    //     "https://service-rppp.onrender.com/api/v1/customer/sign-up",
-    //     { method: "POST", body: JSON.stringify(payload) }
-    //   );
-
-    //   const data = await res.json();
-    //   console.log("Signup data:", data);
-    // } catch (error) {
-    //   console.log("Signup error:", error);
-    // }
+    signUpApiCall(body);
   };
 
   return (
     <div className={` h-screen w-full overflow-x-hidden`}>
-      <div className={`w-full p-10 flex drop-shadow-md bg-white h-[80px]`}>
+      <div
+        className={`p-10 flex h-[100px] drop-shadow-md fixed z-[9999] w-full bg-white   font-extrabold`}
+      >
         <Link href="/" className={`flex space-x-3 items-center`}>
           <Image
             src={logoImg}
@@ -188,7 +162,7 @@ const authCustomerSignup: React.FC<FormState> = () => {
         </Link>
       </div>
 
-      <div className={`flex justify-center mt-10 items-center flex-col `}>
+      <div className={`flex justify-center mt-[120px] items-center flex-col `}>
         <div className={` p-3 space-y-5 text-center mb-2`}>
           <div className={`text-lg font-bold w-full  `}>
             <h1>Create your your Customer account</h1>
@@ -208,8 +182,8 @@ const authCustomerSignup: React.FC<FormState> = () => {
         <div className="mb-10 w-[500px]">
           <form action="" onSubmit={onSubmit}>
             <div className={`space-y-4 mb-10`}>
-              <div className={`flex space-x-10`}>
-                <div className={`flex flex-col`}>
+              <div className={`flex justify-between`}>
+                <div className={`flex flex-col basis-[48%]`}>
                   <label
                     htmlFor="firstName"
                     className={`font-extrabold text-[16px]  my-3`}
@@ -228,7 +202,7 @@ const authCustomerSignup: React.FC<FormState> = () => {
                   />
                 </div>
 
-                <div className={`flex flex-col`}>
+                <div className={`flex flex-col basis-[48%]`}>
                   <label
                     htmlFor="lastName"
                     className={`font-bold text-[16px]  my-3`}
@@ -278,7 +252,7 @@ const authCustomerSignup: React.FC<FormState> = () => {
                   <h4
                     className={`border-medium border-[1px] text-base text-black font-bold p-3 rounded-xl`}
                   >
-                    AU 08
+                    AU +61
                   </h4>
                   <input
                     type="text"
@@ -288,9 +262,10 @@ const authCustomerSignup: React.FC<FormState> = () => {
                     className={`border-medium border-[1px] text-base text-black font-bold py-3 px-10 tracking-[0.3rem] rounded-xl  w-5/6`}
                     value={formData.phoneNumber}
                     onChange={handleChange}
+                    onKeyDown={handlePhoneNumberKeyDown}
                     required
-                    maxLength={8}
-                    minLength={8}
+                    maxLength={9}
+                    minLength={9}
                   />
                 </div>
               </div>
@@ -426,4 +401,4 @@ const authCustomerSignup: React.FC<FormState> = () => {
   );
 };
 
-export default authCustomerSignup;
+export default customerSignup;
