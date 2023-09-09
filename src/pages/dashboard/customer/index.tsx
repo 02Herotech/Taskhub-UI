@@ -51,7 +51,7 @@ function Index(props: IProps) {
                         image={Picture1}
                         description={"I Provide Painting Services for House, Offices and Shops"}
                         address={"No 102, 02 Arena , Sydney Flat A, New South Wales."}
-                        count={3}
+                        count={5}
                     />
                     <Card
                         image={Picture1}
