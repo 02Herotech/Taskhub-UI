@@ -1,15 +1,15 @@
-/* eslint-disable react/no-unescaped-entities */
 /* eslint-disable react-hooks/rules-of-hooks */
 import React, { useState, useRef, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import logoImg from '../../../public/logo.png'
+import logo from '../../../public/logo.png'
 // import { useRouter } from 'next/dist/client/router'
 
 
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai'
+import logoImg from '../../../public/logo.png'
 import { BackButton } from '../../../components/buttons/Button'
-import { serviceProviderSignup } from '../../../network/auth'
+// import { customerSignup } from '../../../network/auth'
 import axios from 'axios'
 
 interface FormState {
@@ -22,10 +22,9 @@ interface FormState {
     confirmPassword: string;
     agreement: boolean;
     error: string;
-    idNUmber: string;
 }
 
-const authServiceProviderSignup: React.FC<FormState> = () => {
+const customerSignup: React.FC<FormState> = () => {
 
     const [formData, setFormData] = useState({
         firstName: '',
@@ -37,7 +36,6 @@ const authServiceProviderSignup: React.FC<FormState> = () => {
         confirmPassword: '',
         agreement: false,
         error: '',
-        idNumber: '',
     });
 
     const [showPassword, setShowPassword] = useState(false);
@@ -89,9 +87,22 @@ const authServiceProviderSignup: React.FC<FormState> = () => {
             [name]: value,
         }));
     };
+    const handlePhoneNumberKeyDown = (e: any) => {
+        // Check if the pressed key is a number (0-9) or Backspace/Delete key
+        const isNumericKey = /^[0-9]$/.test(e.key);
+        const isBackspaceOrDelete = ['Backspace', 'Delete'].includes(e.key);
+
+        // If the pressed key is not numeric and not Backspace/Delete, prevent the input
+        if (!isNumericKey && !isBackspaceOrDelete) {
+            e.preventDefault();
+
+        }
+    };
+
+
 
     const isAllFieldsFilled = () => {
-        const requiredFields: (keyof typeof formData)[] = ['firstName', 'lastName', 'address', 'phoneNumber', 'email', 'password', 'confirmPassword', 'idNumber'];
+        const requiredFields: (keyof FormState)[] = ['firstName', 'lastName', 'address', 'phoneNumber', 'email', 'password', 'confirmPassword',];
         return requiredFields.every(field => formData[field] !== '') && formData.agreement;
     }
 
@@ -117,8 +128,7 @@ const authServiceProviderSignup: React.FC<FormState> = () => {
                     phoneNumber: formattedPhoneNumber, // Use the formatted phone number here
                     emailAddress: formData.email,
                     password: formData.password,
-                },
-                idNumber: formData.idNumber,
+                }
             }
 
             const payload = {
@@ -127,39 +137,36 @@ const authServiceProviderSignup: React.FC<FormState> = () => {
                 phoneNumber: formattedPhoneNumber, // Use the formatted phone number here
                 emailAddress: formData.email,
                 password: formData.password,
-                idNumber: formData.idNumber,
-
-
             }
 
-            // const res = await serviceProviderSignup(user);
+            // const res = await customerSignup(user);
+            // @ts-ignore
+            const res = await fetch('https://service-rppp.onrender.com/api/v1/customer/sign-up', { method: 'POST', body: JSON.stringify(payload) })
 
-            console.log('Signup payload:', payload);
-            const res = await fetch('https://service-rppp.onrender.com/api/v1/service_provider/sign-up', { method: 'POST', body: JSON.stringify(payload) })
-
-            console.log('Signup response:', res);
+            const data = await res.json();
+            console.log('Signup data:', data);
         } catch (error) {
+
             console.log('Signup error:', error);
         }
-
-
     }
 
 
 
     return (
-        <div className={` h-screen  justify-between w-full overflow-x-hidden`}>
-            <div className={`w-full p-10 flex drop-shadow-md bg-white h-[80px]`}>
+        <div className={` h-screen w-full overflow-x-hidden`}>
+            <div className={`p-10 flex h-[100px] drop-shadow-md fixed z-[9999] w-full bg-white   font-extrabold`}>
                 <Link href='/' className={`flex space-x-3 items-center`}>
                     <Image src={logoImg} width={61} height={55} alt='' className={`mt-[-10px]`} />
                     <h4 className={`text-lg font-extrabold `}>TaskHub</h4>
                 </Link>
             </div>
 
-            <div className={`flex justify-center mt-10 items-center flex-col`}>
+            <div className={`flex justify-center mt-[120px] items-center flex-col `}>
+
                 <div className={` p-3 space-y-5 text-center mb-2`}>
                     <div className={`text-lg font-bold w-full  `}>
-                        <h1 >Create your your Service provider account</h1>
+                        <h1 >Create your your Customer account</h1>
                     </div>
 
                     <div className={`flex justify-around font-[600] w-[300px]  mx-auto`}>
@@ -168,11 +175,11 @@ const authServiceProviderSignup: React.FC<FormState> = () => {
                     </div>
                 </div>
 
-                <div className='mb-10  w-[500px]'>
+                <div className='mb-10 w-[500px]'>
                     <form action="" onSubmit={onSubmit}>
                         <div className={`space-y-4 mb-10`}>
-                            <div className={`flex space-x-10`}>
-                                <div className={`flex flex-col`}>
+                            <div className={`flex justify-between`}>
+                                <div className={`flex flex-col basis-[48%]`}>
                                     <label htmlFor="firstName" className={`font-extrabold text-[16px]  my-3`}>
                                         First Name <span className={`text-red10`}>*</span>
                                     </label>
@@ -181,7 +188,7 @@ const authServiceProviderSignup: React.FC<FormState> = () => {
                                     />
                                 </div>
 
-                                <div className={`flex flex-col`}>
+                                <div className={`flex flex-col basis-[48%]`}>
                                     <label htmlFor="lastName" className={`font-bold text-[16px]  my-3`}>
                                         Last Name <span className={`text-red10`}>*</span>
                                     </label>
@@ -204,7 +211,7 @@ const authServiceProviderSignup: React.FC<FormState> = () => {
                                 </label>
                                 <div className={`flex items-center justify-around`}>
                                     <h4 className={`border-medium border-[1px] text-base text-black font-bold p-3 rounded-xl`}>AU +61</h4>
-                                    <input type="text" placeholder='Enter phone number' name='phoneNumber' id='phoneNumber' className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl w-5/6`} value={formData.phoneNumber} onChange={handleChange} required maxLength={9} minLength={9}
+                                    <input type="text" placeholder='Enter phone number' name='phoneNumber' id='phoneNumber' className={`border-medium border-[1px] text-base text-black font-bold py-3 px-10 tracking-[0.3rem] rounded-xl  w-5/6`} value={formData.phoneNumber} onChange={handleChange} onKeyDown={handlePhoneNumberKeyDown} required maxLength={9} minLength={9}
                                     />
                                 </div>
                             </div>
@@ -238,7 +245,7 @@ const authServiceProviderSignup: React.FC<FormState> = () => {
                                 </div>
 
                             </div>
-                            <div className={`text-red10 p-2  my-0 py-0 text-[10px]`}>
+                            <div className={`text-red10 p-2 my-0 py-0 text-[10px]`}>
                                 <p >{formData.error}</p>
 
                             </div>
@@ -264,28 +271,6 @@ const authServiceProviderSignup: React.FC<FormState> = () => {
                                 </div>
 
                             </div>
-                            <div className={`flex flex-col`}>
-                                <label htmlFor="identification" className={`font-bold text-[16px] my-3`}>
-                                    MEANS OF IDENTIFICATION <span className={`text-red10`}>*</span>
-                                </label>
-                                <select name="identification" id="identification" className={`border-medium border-[1px] text-base text-black font-bold py-3 px-3 rounded-xl w-full bg-contain`} >
-                                    <option value="none">None</option>
-                                    <option value="drivers_license">National Driver&rsquo;s License</option>
-                                    <option value="national_id">National ID</option>
-                                    <option value="voters_card">Voter&rsquo;s Card</option>
-                                    <option value="passport">International Passport</option>
-                                </select>
-
-                            </div>
-
-                            <div className={`flex flex-col`}>
-                                <label htmlFor="idNumber" className={`font-bold text-[16px]`}>
-                                    Valid ID NUMBER
-                                </label>
-                                <input type="text" placeholder='Enter the ID number' name='idNumber' id='idNumber' className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl w-full my-3`} value={formData.idNumber} onChange={handleChange} required
-                                />
-
-                            </div>
 
 
                             <div className={`space-x-2`}>
@@ -305,6 +290,7 @@ const authServiceProviderSignup: React.FC<FormState> = () => {
                             </button>
                         </div>
                     </form>
+
                 </div>
             </div>
 
@@ -313,4 +299,4 @@ const authServiceProviderSignup: React.FC<FormState> = () => {
     )
 }
 
-export default authServiceProviderSignup
+export default customerSignup

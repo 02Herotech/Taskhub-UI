@@ -16,7 +16,7 @@ interface FormState {
 
 
 
-const authResetPassword: React.FC<FormState> = () => {
+const resetPassword: React.FC<FormState> = () => {
     const [formData, setFormData] = useState({
         newPassword: '',
         confirmNewPassword: '',
@@ -169,5 +169,5 @@ const authResetPassword: React.FC<FormState> = () => {
     )
 }
 
-export default authResetPassword
+export default resetPassword
 
