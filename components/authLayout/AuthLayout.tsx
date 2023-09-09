@@ -31,7 +31,7 @@ const AuthLayout = () => {
                     <div className={`space-y-5  text-black `}>
                         <div className={`flex space-x-4 font-light`}>
                             <div>
-                                <Link href='/auth/authCustomerSignup'>
+                                <Link href='/auth/customer-signup'>
                                     <Button btnValue='CUSTOMER'
                                         className='h-[60px] w-[200px]  text-base bg-white hover:text-white'
                                     />
@@ -39,7 +39,7 @@ const AuthLayout = () => {
                             </div>
 
                             <div>
-                                <Link href='/auth/authServiceProviderSignup'>
+                                <Link href='/auth/service-provider-signup'>
                                     <Button btnValue='SERVICE PROVIDER'
                                         className='h-[60px] w-[200px] bg-white hover:text-white  text-base'
                                     />

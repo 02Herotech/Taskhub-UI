@@ -9,7 +9,7 @@ import logo from '../../../public/logo.png'
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai'
 import logoImg from '../../../public/logo.png'
 import { BackButton } from '../../../components/buttons/Button'
-import { customerSignup } from '../../../network/auth'
+// import { customerSignup } from '../../../network/auth'
 import axios from 'axios'
 
 interface FormState {
@@ -24,7 +24,7 @@ interface FormState {
     error: string;
 }
 
-const authCustomerSignup: React.FC<FormState> = () => {
+const customerSignup: React.FC<FormState> = () => {
 
     const [formData, setFormData] = useState({
         firstName: '',
@@ -87,6 +87,19 @@ const authCustomerSignup: React.FC<FormState> = () => {
             [name]: value,
         }));
     };
+    const handlePhoneNumberKeyDown = (e: any) => {
+        // Check if the pressed key is a number (0-9) or Backspace/Delete key
+        const isNumericKey = /^[0-9]$/.test(e.key);
+        const isBackspaceOrDelete = ['Backspace', 'Delete'].includes(e.key);
+
+        // If the pressed key is not numeric and not Backspace/Delete, prevent the input
+        if (!isNumericKey && !isBackspaceOrDelete) {
+            e.preventDefault();
+
+        }
+    };
+
+
 
     const isAllFieldsFilled = () => {
         const requiredFields: (keyof FormState)[] = ['firstName', 'lastName', 'address', 'phoneNumber', 'email', 'password', 'confirmPassword',];
@@ -166,7 +179,7 @@ const authCustomerSignup: React.FC<FormState> = () => {
                     <form action="" onSubmit={onSubmit}>
                         <div className={`space-y-4 mb-10`}>
                             <div className={`flex justify-between`}>
-                                <div className={`flex flex-col`}>
+                                <div className={`flex flex-col basis-[48%]`}>
                                     <label htmlFor="firstName" className={`font-extrabold text-[16px]  my-3`}>
                                         First Name <span className={`text-red10`}>*</span>
                                     </label>
@@ -175,7 +188,7 @@ const authCustomerSignup: React.FC<FormState> = () => {
                                     />
                                 </div>
 
-                                <div className={`flex flex-col`}>
+                                <div className={`flex flex-col basis-[48%]`}>
                                     <label htmlFor="lastName" className={`font-bold text-[16px]  my-3`}>
                                         Last Name <span className={`text-red10`}>*</span>
                                     </label>
@@ -198,7 +211,7 @@ const authCustomerSignup: React.FC<FormState> = () => {
                                 </label>
                                 <div className={`flex items-center justify-around`}>
                                     <h4 className={`border-medium border-[1px] text-base text-black font-bold p-3 rounded-xl`}>AU +61</h4>
-                                    <input type="text" placeholder='Enter phone number' name='phoneNumber' id='phoneNumber' className={`border-medium border-[1px] text-base text-black font-bold py-3 px-10 tracking-[0.3rem] rounded-xl  w-5/6`} value={formData.phoneNumber} onChange={handleChange} required maxLength={9} minLength={9}
+                                    <input type="text" placeholder='Enter phone number' name='phoneNumber' id='phoneNumber' className={`border-medium border-[1px] text-base text-black font-bold py-3 px-10 tracking-[0.3rem] rounded-xl  w-5/6`} value={formData.phoneNumber} onChange={handleChange} onKeyDown={handlePhoneNumberKeyDown} required maxLength={9} minLength={9}
                                     />
                                 </div>
                             </div>
@@ -286,4 +299,4 @@ const authCustomerSignup: React.FC<FormState> = () => {
     )
 }
 
-export default authCustomerSignup
+export default customerSignup

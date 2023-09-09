@@ -4,7 +4,7 @@ import logoImg from '../../../public/logo.png'
 import success from '../../../public/success.svg'
 import Image from 'next/image'
 
-const authSignupRegistered = () => {
+const signupVerification = () => {
     return (
         <div className={`m-auto`}>
             <div className={`w-full p-10 flex drop-shadow-md bg-white h-[80px]`}>
@@ -25,4 +25,4 @@ const authSignupRegistered = () => {
     )
 }
 
-export default authSignupRegistered 
+export default signupVerification

@@ -15,7 +15,7 @@ interface FormState {
 }
 
 
-const authLogin: React.FC<FormState> = () => {
+const login: React.FC<FormState> = () => {
     const [formData, setFormData] = useState({
         email: '',
         password: '',
@@ -124,5 +124,5 @@ const authLogin: React.FC<FormState> = () => {
     )
 }
 
-export default authLogin
+export default login
 
