@@ -104,7 +104,7 @@ const authCustomerSignup: React.FC<FormState> = () => {
         event.preventDefault();
 
 
-        const formattedPhoneNumber = formData.phoneNumber.startsWith("+61") ? formData.phoneNumber : "08" + formData.phoneNumber;
+        const formattedPhoneNumber = formData.phoneNumber.startsWith("+61") ? formData.phoneNumber : "+61" + formData.phoneNumber;
 
 
         try {
@@ -119,13 +119,11 @@ const authCustomerSignup: React.FC<FormState> = () => {
             }
 
             const payload = {
-                request: {
-                    firstName: formData.firstName,
-                    lastName: formData.lastName,
-                    phoneNumber: formattedPhoneNumber, // Use the formatted phone number here
-                    emailAddress: formData.email,
-                    password: formData.password,
-                }
+                firstName: formData.firstName,
+                lastName: formData.lastName,
+                phoneNumber: formattedPhoneNumber, // Use the formatted phone number here
+                emailAddress: formData.email,
+                password: formData.password,
             }
 
             // const res = await customerSignup(user);
@@ -199,8 +197,8 @@ const authCustomerSignup: React.FC<FormState> = () => {
                                     Phone Number <span className={`text-red10`}>*</span>
                                 </label>
                                 <div className={`flex items-center justify-around`}>
-                                    <h4 className={`border-medium border-[1px] text-base text-black font-bold p-3 rounded-xl`}>AU 08</h4>
-                                    <input type="text" placeholder='Enter phone number' name='phoneNumber' id='phoneNumber' className={`border-medium border-[1px] text-base text-black font-bold py-3 px-10 tracking-[0.3rem] rounded-xl  w-5/6`} value={formData.phoneNumber} onChange={handleChange} required maxLength={8} minLength={8}
+                                    <h4 className={`border-medium border-[1px] text-base text-black font-bold p-3 rounded-xl`}>AU +61</h4>
+                                    <input type="text" placeholder='Enter phone number' name='phoneNumber' id='phoneNumber' className={`border-medium border-[1px] text-base text-black font-bold py-3 px-10 tracking-[0.3rem] rounded-xl  w-5/6`} value={formData.phoneNumber} onChange={handleChange} required maxLength={9} minLength={9}
                                     />
                                 </div>
                             </div>

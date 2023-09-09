@@ -8,14 +8,14 @@ import { BackButton, Button } from '../../components/buttons/Button'
 
 const AuthLayout = () => {
     return (
-        <div className={` w-full  text-black`}>
-            <div className={`w-full p-10 flex drop-shadow-md bg-white h-[80px]`}>
+        <div className={` w-full    text-black`}>
+            <div className={`p-10 flex h-[100px] drop-shadow-md fixed z-[9999] w-full bg-white   font-extrabold`}>
                 <Link href='/' className={`flex space-x-3 items-center`}>
                     <Image src={logoImg} width={61} height={55} alt='' className={`mt-[-10px]`} />
                     <h4 className={`text-lg font-extrabold `}>TaskHub</h4>
                 </Link>
             </div>
-            <div className={`p-20 flex items-center justify-center w-full my-auto `}>
+            <div className={` flex items-center min-h-screen justify-center w-full my-auto `}>
                 <div className={`px-20  flex justify-center items-center m-auto flex-col  `}>
                     <div className={`w-[600px] p-3 space-y-5 text-center mb-10`}>
                         <div className={`  text-[36px] font-bold `}>
