@@ -23,6 +23,9 @@ function DashboardLayout(props: IProps) {
     return (
         <>
             <div className={styles.dashboardLayout}>
+
+                {/*Top Bar*/}
+
                 <div className={styles.topBar}>
                     <div className={styles.topLogo}>
                         <Image src={taskHub} className={styles.firstLogo} alt="task-hub"/>
@@ -45,6 +48,9 @@ function DashboardLayout(props: IProps) {
                         <GoGear className={styles.gear}/>
                     </div>
                 </div>
+
+                {/*sidebar*/}
+
                 <div className={styles.sidebarDiv}>
                     <div className={styles.sideBar}>
                         <div>
@@ -80,6 +86,9 @@ function DashboardLayout(props: IProps) {
                     </div>
                     <div className={styles.content}>{props.children}</div>
                 </div>
+
+                {/*Footer*/}
+
                 <div className={styles.footer}>
                     <div className={styles.footerColumn1}>
                         <div className={styles.secondLogo}>

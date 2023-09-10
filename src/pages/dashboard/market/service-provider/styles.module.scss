@@ -1,0 +1,62 @@
+.mainDiv{
+  margin: 20px 40px;
+  width: 75vw;
+}
+.topDiv{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-right: 40px;
+  margin-bottom: 40px;
+
+  h2{
+    font-size: 2rem;
+    border-radius: 8px;
+    border: 1px solid #969696;
+    padding: 5px 10px;
+  }
+}
+.providerDiv{
+  display: flex;
+}
+
+.jobs{
+  border: 1px solid #969696;
+  border-radius: 12px;
+  padding: 24px 32px;
+
+  h2{
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+}
+
+.jobDiv{
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid #969696;
+  padding: 20px;
+}
+
+.jobComponent{
+  width: 720px;
+  text-align: justify;
+
+  h3{
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+  }
+
+  >p:first-of-type{
+    margin-bottom: 15px;
+    color: #969696;
+  }
+
+  >p{
+    margin-bottom: 15px;
+  }
+}
+
+.heart{
+  font-size: 1.5rem;
+}
