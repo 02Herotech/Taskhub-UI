@@ -49,7 +49,7 @@ const Nav = () => {
             className='w-[95px] px-3 bg-purpleBase text-white  text-base font-extralight h-[45px] hover:bg-purple5'
           />
         </Link>
-        <Link href='/auth/authLogin'>
+        <Link href='/auth/login'>
           <Button
             btnValue='Log in'
             className='bg-white border-[1px] w-[95px] h-[45px]  px-4 border-purpleBase text-black  hover:text-white font-extralight text-base hover:bg-purple5'
