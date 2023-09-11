@@ -15,7 +15,7 @@ interface FormState {
   error: string;
 }
 
-const authLogin: React.FC<FormState> = () => {
+const login: React.FC<FormState> = () => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -111,23 +111,14 @@ const authLogin: React.FC<FormState> = () => {
               />
             </div>
 
+
+
             <div className={`flex flex-col`}>
-              <label
-                htmlFor="password"
-                className={`font-bold text-[16px] px-2 my-1`}
-              >
+              <label htmlFor="password" className={`font-bold text-[16px] px-2 my-1`}>
                 Password <span className={`text-red10`}>*</span>
               </label>
               <div className={`relative`}>
-                <input
-                  type={showPassword ? "text" : "password"}
-                  id="password"
-                  name="password"
-                  placeholder="Enter your password"
-                  className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl w-full`}
-                  value={formData.password}
-                  onChange={handleChange}
-                  required
+                <input type={showPassword ? 'text' : 'password'} id='password' name='password' placeholder='Enter your password' className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl w-full`} value={formData.password} onChange={handleChange} required
                 />
                 <button
                   type="button"
@@ -142,24 +133,15 @@ const authLogin: React.FC<FormState> = () => {
                 </button>
               </div>
             </div>
-            <div
-              className={`flex justify-around font-[600] w-[300px] text-base mx-auto`}
-            >
+            <div className={`flex justify-around font-[600] w-[300px] text-base mx-auto`}>
               <h5>Forgot your Password?</h5>
-              <Link
-                href="/auth/authForgetPassword"
-                className={`text-purpleBase hover:text-[16px] `}
-              >
-                Reset here
-              </Link>
+              <Link href='/auth/forget-password' className={`text-purpleBase hover:text-[16px] `}>Reset here</Link>
             </div>
 
             <div className={`flex justify-center items-center`}>
               <button
                 type="submit"
-                className={`w-full bg-purpleBase text-white py-2 px-4 rounded-md hover:bg-purple5 text-sm ${
-                  isAllFieldsFilled() ? "" : "cursor-not-allowed opacity-50"
-                }`}
+                className={`w-full bg-purpleBase text-white py-2 px-4 rounded-md hover:bg-purple5 text-sm ${isAllFieldsFilled() ? '' : 'cursor-not-allowed opacity-50'}`}
                 disabled={!isAllFieldsFilled()}
               >
                 Log In
@@ -167,9 +149,10 @@ const authLogin: React.FC<FormState> = () => {
             </div>
           </form>
         </div>
-      </div>
-    </div>
-  );
-};
+      </div >
+    </div >
+  )
+}
 
-export default authLogin;
+export default login
+

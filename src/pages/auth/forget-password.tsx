@@ -75,7 +75,7 @@ const forgetPassword = () => {
                     </div>
                 </form>
                 <div className={`flex justify-around font-bold space-x-1 mt-5 text-base`}>
-                    <Link href='/auth/authLogin' className={`text-purpleBase hover:text-[16px] hover:underline`}>Back to log in page.</Link>
+                    <Link href='/auth/login' className={`text-purpleBase hover:text-[16px] hover:underline`}>Back to log in page.</Link>
                 </div>
             </div >
         </div >
