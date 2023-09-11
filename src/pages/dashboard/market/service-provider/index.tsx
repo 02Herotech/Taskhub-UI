@@ -54,10 +54,10 @@ function Index(props: IProps) {
                                 </div>
                                 <div className={styles.availabilityDiv}>
                                     <p className={styles.aText}>Availability</p>
-                                    <div className={styles.onDiv}>
+                                    <button className={styles.onDiv}>
                                         <p>ON</p>
                                         <div className={styles.on}></div>
-                                    </div>
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -90,7 +90,7 @@ function Index(props: IProps) {
                         <BsHeart className={style.heart}/>
                     </div>
                 </div>
-                <button style={{"right": "0"}}>View More...</button>
+                <button className={style.viewMore}>View More...</button>
             </div>
         </DashboardLayout>
     );
