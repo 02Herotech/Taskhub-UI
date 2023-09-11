@@ -1,0 +1,55 @@
+.postRequest {
+  border: 1px solid #969696;
+  padding: 10px 20px;
+  font-size: 2rem;
+  max-width: 300px; /* Set a maximum width */
+  margin: 50px
+}
+
+
+.formContainer {
+  padding: 20px;
+  margin-left: 100px;
+}
+
+
+
+.formGroup {
+  margin-bottom: 20px;
+}
+
+
+.input,
+.textarea,
+.select {
+  width: 400px;
+  height: 50px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.textarea {
+  height: 100px;
+}
+
+.error {
+  color: #ff0000;
+  font-size: 14px;
+  margin-top: 4px;
+}
+
+.submitButton {
+  background-color: #34A853;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.submitButton:hover {
+  background-color: #69fd91;
+}
