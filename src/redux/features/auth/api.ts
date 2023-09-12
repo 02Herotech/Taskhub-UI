@@ -7,10 +7,13 @@ export const authApi = createApi({
   reducerPath: "authApi",
   baseQuery: noAuthFetchBase,
   endpoints: (builder) => ({
-    signUp: builder.mutation({
+    CustomerSignUp: builder.mutation({
       query: (body) => POST("customer/sign-up", body),
+    }),
+    ServiceProviderSignUp: builder.mutation({
+      query: (body) => POST("service_provider/sign-up", body),
     }),
   }),
 });
 
-export const { useSignUpMutation } = authApi;
+export const { useCustomerSignUpMutation, useServiceProviderSignUpMutation } = authApi;

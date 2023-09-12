@@ -8,7 +8,8 @@ import logo from "../../../public/logo.png";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import logoImg from "../../../public/logo.png";
 import { BackButton } from "../../../components/buttons/Button";
-import { useSignUpMutation } from "@/redux/features/auth/api";
+import { useCustomerSignUpMutation } from "@/redux/features/auth/api";
+import router from "next/router";
 
 interface FormState {
     firstName: string;
@@ -35,8 +36,26 @@ const customerSignup: React.FC<FormState> = () => {
         error: "",
     });
 
+    // Function to reset form fields
+    const resetForm = () => {
+        setFormData({
+            firstName: "",
+            lastName: "",
+            address: "",
+            phoneNumber: "",
+            email: "",
+            password: "",
+            confirmPassword: "",
+            agreement: false,
+            error: "",
+        });
+    };
+
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [signupError, setSignupError] = useState<string | null>(null);
+
 
     const handleChange = (e: any) => {
         const { name, value } = e.target;
@@ -118,18 +137,25 @@ const customerSignup: React.FC<FormState> = () => {
         setShowConfirmPassword(!showConfirmPassword);
     };
 
-    const [signUpApiCall, { data, isLoading }] = useSignUpMutation();
+    const [signUpApiCall, { data, isLoading }] = useCustomerSignUpMutation();
 
     useEffect(() => {
         if (data) {
             console.log("data", data);
 
-            // router.push("/auth/authLogin");
+            router.push("/auth/signup-confirmation");
         }
     }, [data]);
 
     const onSubmit = async (event: any) => {
         event.preventDefault();
+
+        if (isLoading) {
+            // Prevent submission if an API call is already in progress
+            return;
+        }
+
+        setIsSubmitting(true); // Set submitting status to true
 
         const formattedPhoneNumber = formData.phoneNumber.startsWith("+61")
             ? formData.phoneNumber
@@ -137,12 +163,36 @@ const customerSignup: React.FC<FormState> = () => {
         const body = {
             firstName: formData.firstName,
             lastName: formData.lastName,
-            phoneNumber: formattedPhoneNumber, // Use the formatted phone number here
+            phoneNumber: formattedPhoneNumber,
             emailAddress: formData.email,
             password: formData.password,
         };
 
-        signUpApiCall(body);
+        signUpApiCall(body)
+            .unwrap() // Unwrap the result to handle possible errors
+            .then(() => {
+                setIsSubmitting(false); // Reset submitting status
+                resetForm(); // Reset form fields after successful submission
+
+                // Clear the error message after 5 seconds
+                setTimeout(() => {
+                    setSignupError(null);
+                }, 5000);
+            })
+            .catch((error) => {
+                setIsSubmitting(false); // Reset submitting status on error
+                console.error("Error submitting:", error);
+
+                // Set the error message in the state
+                setSignupError("Registration was unsuccessful. Please try again.");
+
+                // Clear the error message after 5 seconds
+                setTimeout(() => {
+                    setSignupError(null);
+                }, 5000);
+
+                resetForm();
+            });
     };
 
     return (
@@ -388,15 +438,21 @@ const customerSignup: React.FC<FormState> = () => {
                                 type="submit"
                                 className={`w-full bg-purpleBase text-white py-2 px-4 rounded-md hover:bg-purple5  ${isAllFieldsFilled() ? "" : "cursor-not-allowed opacity-50"
                                     }`}
-                                disabled={!isAllFieldsFilled()}
+                                disabled={!isAllFieldsFilled() || isLoading}
                             >
-                                Create Account
+                                {isLoading ? "Creating..." : "Create Account"}
                             </button>
+
                         </div>
+                        {signupError && (
+                            <div className="text-red10 mt-4 text-center mb-2">
+                                {signupError}
+                            </div>
+                        )}
                     </form>
                 </div>
-            </div>
-        </div>
+            </div >
+        </div >
     );
 };
 
