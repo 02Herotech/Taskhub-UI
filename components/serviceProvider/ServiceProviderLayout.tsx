@@ -9,6 +9,8 @@ import { ServiceProviderDetailsLayout } from './ServiceProviderDetails'
 import { ServicesProviderDetailsProps } from './ServiceProviderDetails'
 import { ServiceProviderDetails } from './ServiceProviderDetails'
 import Link from 'next/link';
+import Image from 'next/image';
+import lines from '../../public/line.png'
 
 
 const ServiceProviderLayout: React.FC<ServicesProviderDetailsProps> = () => {
@@ -38,16 +40,23 @@ const ServiceProviderLayout: React.FC<ServicesProviderDetailsProps> = () => {
                 <h3 className={`${revalia.className} text-2xl`}>FEATURED SERVICE PROVIDERS</h3>
 
             </div>
-            <div className={`ml-20 space-y-20`}>
-                <div className={`flex flex-col py-4  mt-[150px] border-r-4 border-[#FE9B07] w-[900px] `}>
-                    {featuredProviders.map((provider) => (
-                        <div className={`p-3 `} key={provider.id}>
-                            <ServiceProviderDetailsLayout key={provider.id} {...provider} />
-                        </div>
-                    ))}
+            <div className={`ml-20 `}>
+                <div className={`flex`}>
+                    <div className={`flex flex-col py-4  mt-[150px]  border-[#FE9B07] w-[900px] `}>
+                        {featuredProviders.map((provider) => (
+                            <div className={`p-3 `} key={provider.id}>
+                                <ServiceProviderDetailsLayout key={provider.id} {...provider} />
+                            </div>
+                        ))}
+                    </div>
+
+                    <div className='mt-[100px] '>
+                        <Image src={lines} alt='' />
+                    </div>
                 </div>
 
-                <div>
+
+                <div className='mt-[-70px] ml-3 '>
                     <Link href='#'>
                         <Button
                             btnValue='See more'

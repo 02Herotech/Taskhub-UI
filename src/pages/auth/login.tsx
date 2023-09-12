@@ -8,6 +8,7 @@ import logo from "../../../public/logo.png";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { BackButton } from "../../../components/buttons/Button";
 import { useSession } from "next-auth/react";
+import router from "next/router";
 interface FormState {
   email: string;
   password: string;
@@ -50,12 +51,14 @@ const login: React.FC<FormState> = () => {
       redirect: false,
       email: formData.email,
       password: formData.password,
-      callbackUrl: "/",
+      callbackUrl: "/dashboard/customer",
     });
     console.log("result", result);
     console.log("session", session);
     if (result && result.ok) {
       alert("Login Successful");
+      // router.push("/dashboard/customer");
+
     } else {
       alert("Login Failed");
     }

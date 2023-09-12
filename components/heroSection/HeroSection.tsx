@@ -13,7 +13,11 @@ import heroImage4 from '../../public/heroImage4.png'
 
 
 const HeroSection = () => {
+    useEffect(() => {
+        // Animate the element with class "search" using GSAP
+        // gsap.from(".search", { duration: 1.5, opacity: 10, scale: 0.3, ease: "back" });
 
+    }, []); // The empty dependency array ensures this effect runs once on component mount
 
     return (
         <div className={` w-full flex justify-between  ${revalia.className} p-5 space-x-24  my-[100px] bg-gradient-to-r from-[#F8E9FE] via-[#FFFFFF] to-[#F5DDFD] px-20 py-10`}>
@@ -31,7 +35,7 @@ const HeroSection = () => {
                         </p>
                     </div>
 
-                    <div className={`flex justify-around items-center w-[650px] h-[200px]  mt-10`}>
+                    <div className={`flex justify-around search items-center w-[650px] h-[200px]  mt-10`}>
                         <div className={`flex justify-center mt-[70px] items-center`}>
                             <Link href='/auth/'>
                                 <Button btnValue='Get Started'
