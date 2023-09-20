@@ -1,0 +1,31 @@
+/* herosection.module.css */
+@keyframes moveUpAndChangeColor {
+    0% {
+        transform: translateY(0);
+        color: #381F8C;
+        /* Initial color for the first word */
+    }
+
+    50% {
+        transform: translateY(-20px);
+        /* Move up */
+        color: #9c8fc6;
+        /* Intermediate color for the second word */
+    }
+
+    100% {
+        transform: translateY(0);
+        color: #d7d2e8;
+        /* Final color for the third word */
+    }
+}
+
+/* Apply the animation to the span elements */
+.textAnimation {
+    animation-name: moveUpAndChangeColor;
+    animation-duration: 2s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    transition: color 0.5s ease;
+    /* Smoothly change the color */
+}

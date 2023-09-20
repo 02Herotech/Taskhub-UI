@@ -75,7 +75,7 @@ class API {
             return { error: "unknown-error", message: "Something went wrong" };
         return result.data;
     };
-
+    
     static delete = async <T>(endpoint: string): Promise<BaseResponse<T>> => {
         const result = await instance.delete<SuccessResponse<T> | ErrorResponse>(
             endpoint

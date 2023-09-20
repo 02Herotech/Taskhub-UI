@@ -5,6 +5,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import logoImg from '../../../public/logo.png'
 // import { useRouter } from 'next/dist/client/router'
+import { useServiceProviderSignUpMutation } from "@/redux/features/auth/api";
 
 
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai'
@@ -42,6 +43,7 @@ const serviceProviderSignup: React.FC<FormState> = () => {
 
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
 
 
     const handleChange = (e: any) => {
@@ -116,48 +118,81 @@ const serviceProviderSignup: React.FC<FormState> = () => {
         setShowConfirmPassword(!showConfirmPassword);
     };
 
+    const [signUpApiCall, { data: signUpData, isLoading: isSignUpLoading }] = useServiceProviderSignUpMutation();
+
+    // const onSubmit = async (event: any) => {
+    //     event.preventDefault();
+    //
+    //
+    //     const formattedPhoneNumber = formData.phoneNumber.startsWith("+61") ? formData.phoneNumber : "+61" + formData.phoneNumber;
+    //
+    //
+    //     try {
+    //         const user = {
+    //             request: {
+    //                 firstName: formData.firstName,
+    //                 lastName: formData.lastName,
+    //                 phoneNumber: formattedPhoneNumber, // Use the formatted phone number here
+    //                 emailAddress: formData.email,
+    //                 password: formData.password,
+    //             },
+    //             idNumber: formData.idNumber,
+    //         }
+    //
+    //         // const payload = {
+    //         //     firstName: formData.firstName,
+    //         //     lastName: formData.lastName,
+    //         //     phoneNumber: formattedPhoneNumber, // Use the formatted phone number here
+    //         //     emailAddress: formData.email,
+    //         //     password: formData.password,
+    //         //     idNumber: formData.idNumber,
+    //         //
+    //         //
+    //         // }
+    //
+    //         const res = await serviceProviderSignup(user);
+    //
+    //         console.log('Signup payload:', payload);
+    //         // const res = await fetch('https://service-rppp.onrender.com/api/v1/service_provider/sign-up', { method: 'POST', body: JSON.stringify(payload) })
+    //
+    //         console.log('Signup response:', res);
+    //     } catch (error) {
+    //         console.log('Signup error:', error);
+    //     }
+
+
+    // }
+
     const onSubmit = async (event: any) => {
         event.preventDefault();
+        console.log("Button Triggered")
 
-
-        const formattedPhoneNumber = formData.phoneNumber.startsWith("+61") ? formData.phoneNumber : "+61" + formData.phoneNumber;
-
+        const formattedPhoneNumber = formData.phoneNumber.startsWith("+61")
+            ? formData.phoneNumber
+            : "+61" + formData.phoneNumber;
 
         try {
-            const user = {
-                request: {
+            const user =
+                {
                     firstName: formData.firstName,
                     lastName: formData.lastName,
-                    phoneNumber: formattedPhoneNumber, // Use the formatted phone number here
+                    phoneNumber: formattedPhoneNumber,
                     emailAddress: formData.email,
                     password: formData.password,
-                },
-                idNumber: formData.idNumber,
-            }
+                    idNumber: formData.idNumber,
+                }
 
-            const payload = {
-                firstName: formData.firstName,
-                lastName: formData.lastName,
-                phoneNumber: formattedPhoneNumber, // Use the formatted phone number here
-                emailAddress: formData.email,
-                password: formData.password,
-                idNumber: formData.idNumber,
-
-
-            }
-
-            // const res = await serviceProviderSignup(user);
-
-            console.log('Signup payload:', payload);
-            const res = await fetch('https://service-rppp.onrender.com/api/v1/service_provider/sign-up', { method: 'POST', body: JSON.stringify(payload) })
+            const res = await signUpApiCall(user).unwrap();
 
             console.log('Signup response:', res);
+
+            // Handle successful response here
         } catch (error) {
             console.log('Signup error:', error);
+
+            // Handle error here
         }
-
-
-    }
+    };
 
 
 
@@ -178,7 +213,7 @@ const serviceProviderSignup: React.FC<FormState> = () => {
 
                     <div className={`flex justify-around font-[600] w-[300px]  mx-auto`}>
                         <h5>Already have an account?</h5>
-                        <Link href='/auth/authLogin' className={`text-purpleBase hover:text-[17px] `}>Log in</Link>
+                        <Link href='/auth/login' className={`text-purpleBase hover:text-[17px] `}>Log in</Link>
                     </div>
                 </div>
 
