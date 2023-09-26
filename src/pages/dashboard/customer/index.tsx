@@ -5,7 +5,7 @@ import styles from "../customer/styles.module.scss"
 import Image from 'next/image';
 import {MdVerified} from "react-icons/md";
 import {GrLocation, GrSearch} from "react-icons/gr";
-import Card from "../../../../components/card/Card";
+import Card from "../../../../components/card2/Card";
 import Picture1 from "../../../../public/customerAssets/close-up-collection-make-up-beauty-products.jpg";
 import Picture2 from "../../../../public/customerAssets/vintage-sewing-machine-with-thread-measuring-tape.jpg";
 interface IProps {

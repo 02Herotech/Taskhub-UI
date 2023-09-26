@@ -142,7 +142,6 @@ const customerSignup: React.FC<FormState> = () => {
     useEffect(() => {
         if (data) {
             console.log("data", data);
-
             router.push("/auth/signup-confirmation");
         }
     }, [data]);
