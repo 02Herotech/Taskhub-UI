@@ -14,18 +14,21 @@ interface IProps {
 
 const Job = () => {
     return (
-        <div className={style.jobComponent}>
-            <h3><u>A Catering Service Wanted: Prepare a 100 People Meal Birthday</u></h3>
-            <p>Fixed-price - Est. Budget: $125 - Posted 18 hours ago</p>
-            <p>
-                Seeking exceptional catering for my upcoming birthday bash!
-                I need delicious food, impeccable service, and options for all dietary preferences.
-                Let&#39;s make it a memorable feast. Please send me your catering proposals.
-            </p>
-            <div className={styles.location}>
-                <GrLocation className={styles.locationLogo}/>
-                <p>TASMAIA, AUSTRALIA</p>
-            </div>
+        // <div className={style.jobComponent}>
+        //     <h3><u>A Catering Service Wanted: Prepare a 100 People Meal Birthday</u></h3>
+        //     <p>Fixed-price - Est. Budget: $125 - Posted 18 hours ago</p>
+        //     <p>
+        //         Seeking exceptional catering for my upcoming birthday bash!
+        //         I need delicious food, impeccable service, and options for all dietary preferences.
+        //         Let&#39;s make it a memorable feast. Please send me your catering proposals.
+        //     </p>
+        //     <div className={styles.location}>
+        //         <GrLocation className={styles.locationLogo}/>
+        //         <p>TASMAIA, AUSTRALIA</p>
+        //     </div>
+        // </div>
+        <div>
+
         </div>
     )
 }

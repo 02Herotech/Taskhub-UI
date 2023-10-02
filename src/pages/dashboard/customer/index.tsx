@@ -49,58 +49,41 @@ function Index(props: IProps) {
                 <div className={styles.cardsDiv}>
                     <Card
                         image={Picture1}
-                        description={"I Provide Painting Services for House, Offices and Shops"}
-                        address={"No 102, 02 Arena , Sydney Flat A, New South Wales."}
-                        count={5}
+                        title={"HEADIE’S Clean Agent"}
+                        pay={55}
+                        stars={3}
                     />
                     <Card
                         image={Picture1}
-                        description={"I Provide Painting Services for House, Offices and Shops"}
-                        address={"No 102, 02 Arena , Sydney Flat A, New South Wales."}
-                        count={3}
+                        title={"ELECTRICAL SERVICE CONSULT"}
+                        pay={35}
+                        stars={3}
                     />
                     <Card
                         image={Picture1}
-                        description={"I Provide Painting Services for House, Offices and Shops"}
-                        address={"No 102, 02 Arena , Sydney Flat A, New South Wales."}
-                        count={4}
+                        title={"HEADIE’S Clean Agent"}
+                        pay={55}
+                        stars={3}
                     />
                     <Card
                         image={Picture1}
-                        description={"I Provide Painting Services for House, Offices and Shops"}
-                        address={"No 102, 02 Arena , Sydney Flat A, New South Wales."}
-                        count={1}
-                    />
-                    <Card
-                        image={Picture2}
-                        description={"I Provide Painting Services for House, Offices and Shops"}
-                        address={"No 102, 02 Arena , Sydney Flat A, New South Wales."}
-                        count={5}
+                        title={"ELECTRICAL SERVICE CONSULT"}
+                        pay={35}
+                        stars={3}
                     />
                     <Card
                         image={Picture1}
-                        description={"I Provide Painting Services for House, Offices and Shops"}
-                        address={"No 102, 02 Arena , Sydney Flat A, New South Wales."}
-                        count={3}
-                    />
-                    <Card
-                        image={Picture2}
-                        description={"I Provide Painting Services for House, Offices and Shops"}
-                        address={"No 102, 02 Arena , Sydney Flat A, New South Wales."}
-                        count={2}
+                        title={"HEADIE’S Clean Agent"}
+                        pay={55}
+                        stars={3}
                     />
                     <Card
                         image={Picture1}
-                        description={"I Provide Painting Services for House, Offices and Shops"}
-                        address={"No 102, 02 Arena , Sydney Flat A, New South Wales."}
-                        count={3}
+                        title={"ELECTRICAL SERVICE CONSULT"}
+                        pay={35}
+                        stars={3}
                     />
-                    <Card
-                        image={Picture2}
-                        description={"I Provide Painting Services for House, Offices and Shops"}
-                        address={"No 102, 02 Arena , Sydney Flat A, New South Wales."}
-                        count={4}
-                    />
+
                 </div>
             </div>
         </DashboardLayout>

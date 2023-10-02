@@ -57,8 +57,7 @@ const login: React.FC<FormState> = () => {
     console.log("session", session);
     if (result && result.ok) {
       alert("Login Successful");
-
-      await router.push("/dashboard/customer");
+      router.push("/dashboard/customer");
     } else {
       alert("Login Failed");
     }

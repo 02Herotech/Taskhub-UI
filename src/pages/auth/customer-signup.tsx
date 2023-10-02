@@ -447,6 +447,7 @@ const customerSignup: React.FC<FormState> = () => {
                         </div>
                         {signupError && (
                             <div className="text-red10 mt-4 text-center mb-2">
+                                {/*{alert(signupError)}*/}
                                 {signupError}
                             </div>
                         )}
