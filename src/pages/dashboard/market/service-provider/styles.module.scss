@@ -1,67 +1,148 @@
-.mainDiv{
+.mainDiv {
   margin: 20px 40px;
   width: 75vw;
 }
-.topDiv{
+
+.topDiv {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding-right: 40px;
   margin-bottom: 40px;
 
-  h2{
+  h2 {
     font-size: 2rem;
     border-radius: 8px;
     border: 1px solid #969696;
     padding: 5px 10px;
   }
 }
-.providerDiv{
+
+.providerDiv {
   display: flex;
 }
 
-.jobs{
-  border: 1px solid #969696;
-  border-radius: 12px;
-  padding: 24px 32px;
+.jobs {
+  //border: 1px solid #969696;
+  //border-radius: 12px;
+  //padding: 24px 32px;
 
-  h2{
+  h2 {
     font-size: 2rem;
     margin-bottom: 20px;
   }
 }
 
-.jobDiv{
+.jobsDiv {
   display: flex;
   justify-content: space-between;
-  border: 1px solid #969696;
   padding: 20px;
 }
 
-.jobComponent{
-  width: 700px;
-  text-align: justify;
-
-  h3{
-    font-size: 1.3rem;
-    margin-bottom: 15px;
-  }
-
-  >p:first-of-type{
-    margin-bottom: 15px;
-    color: #969696;
-  }
-
-  >p{
-    margin-bottom: 15px;
-  }
+.postedJobDiv {
+  flex: 2
 }
 
-.heart{
+.postedJob {
+  border: 1px solid #969696;
+  padding: 20px;
+  width: 100%;
+}
+
+.selectedJob {
+  flex: 1;
+  margin-left: 40px;
+}
+
+.selectedJob > p:first-of-type {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+//.jobComponent {
+//  width: 700px;
+//  text-align: justify;
+//
+//  h3 {
+//    font-size: 1.3rem;
+//    margin-bottom: 15px;
+//  }
+//
+//  > p:first-of-type {
+//    margin-bottom: 15px;
+//    color: #969696;
+//  }
+//
+//  > p {
+//    margin-bottom: 15px;
+//  }
+//}
+
+.heading {
+
+}
+
+.jobPrice {
+  color: rgba(254, 155, 7, 1);
+  margin-bottom: 10px;
+}
+
+.heart {
   font-size: 1.5rem;
 }
 
-.viewMore{
+.locationLogo {
+  font-size: 1.7rem;
+  margin-right: 10px;
+}
+
+.customerImage {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.openBtn {
+  background-color: rgba(20, 120, 47, 1);
+  border-radius: 12px;
+  color: #fff;
+  padding: 10px 16px;
+  margin-right: 10px;
+}
+
+.description {
+  width: 280px;
+}
+
+.postedBy {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.postedBy > button{
+  background-color: rgba(20, 120, 47, 1);
+  border-radius: 12px;
+  color: #fff;
+  padding: 10px 16px;
+  margin-left: 40px;
+}
+
+.postedBy > div > p:first-of-type {
+  font-weight: bold;
+}
+
+.postedBy > div > p:nth-child(2) {
+  color: rgba(254, 155, 7, 1)
+}
+
+.doneWithin{
+  margin: 20px 0;
+}
+
+.viewMore {
   width: 120vw;
   margin-top: 30px;
   right: 0;

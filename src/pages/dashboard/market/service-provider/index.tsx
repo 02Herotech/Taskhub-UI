@@ -28,7 +28,25 @@ const Job = () => {
         //     </div>
         // </div>
         <div>
-
+            <div className="flex justify-between items-center"
+                // className={style.heading}
+            >
+                <p>A catering service wanted: Prepare a 100 People Meal Birthday</p>
+                <BsHeart className={style.heart}/>
+            </div>
+            <div className="flex justify-between items-center mt-[15px]">
+                <div>
+                    <p className={style.jobPrice}>Fixed-price - Est. Budget: $125 - Posted 18 hours ago</p>
+                    <div className="flex items-center">
+                        <GrLocation className={style.locationLogo}/>
+                        <p className={style.location}>TASMAIA, AUSTRALIA</p>
+                    </div>
+                </div>
+                <div className="flex items-center">
+                    <button className={style.openBtn}>Open</button>
+                    <Image src={provider} alt="customer-image" className={style.customerImage}/>
+                </div>
+            </div>
         </div>
     )
 }
@@ -38,7 +56,7 @@ function Index(props: IProps) {
         <DashboardLayout>
             <div className={style.mainDiv}>
                 <div className={style.topDiv}>
-                    <h2>MARKET PLACE</h2>
+                    <h2>VIEW JOBS</h2>
                     <div className={style.providerDiv}>
                         <div className={styles.provider}>
                             <div className={styles.imageDiv}>
@@ -68,32 +86,52 @@ function Index(props: IProps) {
                 </div>
                 <div className={style.jobs}>
                     <h2>Jobs you Might Like</h2>
-                    <div className={style.jobDiv}>
-                        <div>
-                            <Job/>
+                    <div className={style.jobsDiv}>
+                        <div className={style.postedJobDiv}>
+                            <div className={style.postedJob}>
+                                <Job/>
+                            </div>
                         </div>
-                        <BsHeart className={style.heart}/>
-                    </div>
-                    <div className={style.jobDiv}>
-                        <div>
-                            <Job/>
+
+                        <div className={style.selectedJob}>
+                            <p>A Catering Service Wanted</p>
+                            <div>
+                                <div className={style.postedBy}>
+                                    <div>
+                                        <p>POSTED BY:</p>
+                                        <p>karl Agnes</p>
+                                    </div>
+                                    <button>Open</button>
+                                </div>
+
+                                <div className={style.price}>
+                                    <p>Fixed price -</p>
+                                    <p>Estimated budget: $125 - </p>
+                                    <p>Posted 18 hours ago</p>
+                                </div>
+
+                                <div className={style.doneWithin}>
+                                    <p>TO BE DONE:</p>
+                                    <p>Within 3 days</p>
+                                </div>
+
+                                <div className={style.description}>
+                                    <p>JOB DESCRIPTION:</p>
+                                    <p>
+                                        Seeking an experienced Catering Service Provider on Taskhub to deliver
+                                        exceptional culinary experiences for events.
+                                        Must excel in menu planning, food preparation, presentation, and customer
+                                        service.
+                                        Ensure seamless event catering, exceeding client expectations.
+                                    </p>
+                                </div>
+                            </div>
                         </div>
-                        <BsHeart className={style.heart}/>
                     </div>
-                    <div className={style.jobDiv}>
-                        <div>
-                            <Job/>
-                        </div>
-                        <BsHeart className={style.heart}/>
-                    </div>
-                    <div className={style.jobDiv}>
-                        <div>
-                            <Job/>
-                        </div>
-                        <BsHeart className={style.heart}/>
-                    </div>
+
+
+                    <button className={style.viewMore}>View More...</button>
                 </div>
-                <button className={style.viewMore}>View More...</button>
             </div>
         </DashboardLayout>
     );

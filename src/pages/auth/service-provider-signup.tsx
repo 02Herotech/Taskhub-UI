@@ -232,7 +232,7 @@ const serviceProviderSignup: React.FC<FormState> = () => {
 
     return (
         <div className={` h-screen  justify-between w-full overflow-x-hidden`}>
-            <div className={`p-10 flex h-[100px] drop-shadow-md fixed z-[9999] w-full bg-white   font-extrabold`}>
+            <div className={`p-10 flex h-[100px] drop-shadow-md fixed z-[9999] w-full bg-white font-extrabold`}>
                 <Link href='/' className={`flex space-x-3 items-center`}>
                     <Image src={logoImg} width={61} height={55} alt='' className={`mt-[-10px]`} />
                     <h4 className={`text-lg font-extrabold `}>TaskHub</h4>
