@@ -3,7 +3,16 @@ import {useFormik} from "formik";
 import DashboardLayout from "../../../../components/dashboardLayout";
 import styles from "./styles.module.scss";
 
-function Index() {
+interface IProps {
+
+}
+
+function countWords(text: string) {
+    const words = text.split(/\s+/); // Split the text by spaces
+    return words.length;
+}
+
+function Index(props: IProps) {
 
     const initialValues = {
         title: "",
@@ -15,7 +24,11 @@ function Index() {
 
     const validationSchema = Yup.object().shape({
         title: Yup.string().required("Title is required"),
-        description: Yup.string().required("Description is required"),
+        description: Yup.string()
+            .required("Description is required")
+            .test("wordCount", "Description must not exceed 50 words", (value) => {
+                return countWords(value) <= 50;
+            }),
         category: Yup.string().required("Category is required"),
         address: Yup.string().required("Address is required"),
         budget: Yup.number()
@@ -38,7 +51,7 @@ function Index() {
             <div>
                 <h2 className={styles.postRequest}>Post a Request</h2>
                 <div className={styles.formContainer}>
-
+                    <p>Job Details</p>
                     <form onSubmit={formik.handleSubmit}>
                         <div className={styles.formGroup}>
                             <input
@@ -57,15 +70,15 @@ function Index() {
                         </div>
 
                         <div className={styles.formGroup}>
-                        <textarea
-                            id="description"
-                            name="description"
-                            placeholder="Job Description"
-                            onChange={formik.handleChange}
-                            onBlur={formik.handleBlur}
-                            value={formik.values.description}
-                            className={styles.textarea}
-                        />
+                              <textarea
+                                  id="description"
+                                  name="description"
+                                  placeholder="Job Description"
+                                  onChange={formik.handleChange}
+                                  onBlur={formik.handleBlur}
+                                  value={formik.values.description}
+                                  className={styles.textarea}
+                              />
                             {formik.touched.description && formik.errors.description ? (
                                 <div className={styles.error}>{formik.errors.description}</div>
                             ) : null}

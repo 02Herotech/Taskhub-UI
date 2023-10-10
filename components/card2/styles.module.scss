@@ -1,0 +1,72 @@
+.card{
+  border: 1px solid black;
+  padding: 10px 40px;
+}
+.imageDiv {
+  width: 370px;
+  height: 312px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.cardImage {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.title{
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+
+.starsDiv {
+  display: flex;
+  font-size: 1.5rem;
+  margin-top: 10px;
+}
+
+.filledStar {
+  color: #FE9B07;
+}
+
+.unfilledStar {
+  color: #969696;
+}
+
+.pay{
+  color: rgba(56, 31, 140, 1);
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 15px 0;
+}
+
+.bookBtn{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #000;
+  padding: 8px 10px;
+  font-weight: bold;
+}
+
+.board{
+  font-size: 2rem;
+}
+
+.bookDiv{
+  display: flex;
+  align-items: center;
+}
+
+.stack{
+  font-size: 2rem;
+}
+
+.stackDiv{
+  border: 1px solid #000;
+  padding: 8px 10px;
+  margin-left: 10px;
+}

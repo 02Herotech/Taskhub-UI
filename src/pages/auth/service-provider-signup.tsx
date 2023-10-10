@@ -5,6 +5,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import logoImg from '../../../public/logo.png'
 // import { useRouter } from 'next/dist/client/router'
+import { useServiceProviderSignUpMutation } from "@/redux/features/auth/api";
 
 
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai'
@@ -42,6 +43,9 @@ const serviceProviderSignup: React.FC<FormState> = () => {
 
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [signUpError, setSignUpError] = useState<string | null>(null);
+
 
 
     const handleChange = (e: any) => {
@@ -105,7 +109,7 @@ const serviceProviderSignup: React.FC<FormState> = () => {
 
 
     const isAllFieldsFilled = () => {
-        const requiredFields: (keyof typeof formData)[] = ['firstName', 'lastName', 'address', 'phoneNumber', 'email', 'password', 'confirmPassword', 'idNumber'];
+        const requiredFields: (keyof typeof formData)[] = ['firstName', 'lastName', 'address', 'phoneNumber', 'email', 'password', 'confirmPassword'];
         return requiredFields.every(field => formData[field] !== '') && formData.agreement;
     }
 
@@ -116,54 +120,119 @@ const serviceProviderSignup: React.FC<FormState> = () => {
         setShowConfirmPassword(!showConfirmPassword);
     };
 
+    const [signUpApiCall, { data: signUpData, isLoading: isSignUpLoading }] = useServiceProviderSignUpMutation();
+
+    // const onSubmit = async (event: any) => {
+    //     event.preventDefault();
+    //
+    //
+    //     const formattedPhoneNumber = formData.phoneNumber.startsWith("+61") ? formData.phoneNumber : "+61" + formData.phoneNumber;
+    //
+    //
+    //     try {
+    //         const user = {
+    //             request: {
+    //                 firstName: formData.firstName,
+    //                 lastName: formData.lastName,
+    //                 phoneNumber: formattedPhoneNumber, // Use the formatted phone number here
+    //                 emailAddress: formData.email,
+    //                 password: formData.password,
+    //             },
+    //             idNumber: formData.idNumber,
+    //         }
+    //
+    //         // const payload = {
+    //         //     firstName: formData.firstName,
+    //         //     lastName: formData.lastName,
+    //         //     phoneNumber: formattedPhoneNumber, // Use the formatted phone number here
+    //         //     emailAddress: formData.email,
+    //         //     password: formData.password,
+    //         //     idNumber: formData.idNumber,
+    //         //
+    //         //
+    //         // }
+    //
+    //         const res = await serviceProviderSignup(user);
+    //
+    //         console.log('Signup payload:', payload);
+    //         // const res = await fetch('https://service-rppp.onrender.com/api/v1/service_provider/sign-up', { method: 'POST', body: JSON.stringify(payload) })
+    //
+    //         console.log('Signup response:', res);
+    //     } catch (error) {
+    //         console.log('Signup error:', error);
+    //     }
+
+
+    // }
+
     const onSubmit = async (event: any) => {
         event.preventDefault();
+        console.log("Button Triggered")
 
-
-        const formattedPhoneNumber = formData.phoneNumber.startsWith("+61") ? formData.phoneNumber : "+61" + formData.phoneNumber;
-
-
-        try {
-            const user = {
-                request: {
-                    firstName: formData.firstName,
-                    lastName: formData.lastName,
-                    phoneNumber: formattedPhoneNumber, // Use the formatted phone number here
-                    emailAddress: formData.email,
-                    password: formData.password,
-                },
-                idNumber: formData.idNumber,
-            }
-
-            const payload = {
-                firstName: formData.firstName,
-                lastName: formData.lastName,
-                phoneNumber: formattedPhoneNumber, // Use the formatted phone number here
-                emailAddress: formData.email,
-                password: formData.password,
-                idNumber: formData.idNumber,
-
-
-            }
-
-            // const res = await serviceProviderSignup(user);
-
-            console.log('Signup payload:', payload);
-            const res = await fetch('https://service-rppp.onrender.com/api/v1/service_provider/sign-up', { method: 'POST', body: JSON.stringify(payload) })
-
-            console.log('Signup response:', res);
-        } catch (error) {
-            console.log('Signup error:', error);
+        if (isSignUpLoading){
+            return;
         }
 
+        setIsSubmitting(true);
 
-    }
+        const formattedPhoneNumber = formData.phoneNumber.startsWith("+61")
+            ? formData.phoneNumber
+            : "+61" + formData.phoneNumber;
+
+        try {
+            const user =
+                {
+                    firstName: formData.firstName,
+                    lastName: formData.lastName,
+                    phoneNumber: formattedPhoneNumber,
+                    emailAddress: formData.email,
+                    password: formData.password,
+                    idNumber: formData.idNumber,
+                }
+
+            // const res = await signUpApiCall(user).unwrap();
+            //
+            // console.log('Signup response:', res);
+            // Handle successful response here
+
+
+            signUpApiCall(user)
+                .unwrap() // Unwrap the result to handle possible errors
+                .then(() => {
+                    setIsSubmitting(false); // Reset submitting status
+
+                    // Clear the error message after 5 seconds
+                    setTimeout(() => {
+                        setSignUpError(null);
+                    }, 5000);
+                })
+                .catch((error) => {
+                    setIsSubmitting(false); // Reset submitting status on error
+                    console.error("Error submitting:", error);
+
+                    // Set the error message in the state
+                    setSignUpError("Registration was unsuccessful. Please try again.");
+
+                    // Clear the error message after 5 seconds
+                    setTimeout(() => {
+                        setSignUpError(null);
+                    }, 5000);
+
+
+                });
+
+        } catch (error) {
+            console.log('Signup error:', error);
+
+            // Handle error here
+        }
+    };
 
 
 
     return (
         <div className={` h-screen  justify-between w-full overflow-x-hidden`}>
-            <div className={`p-10 flex h-[100px] drop-shadow-md fixed z-[9999] w-full bg-white   font-extrabold`}>
+            <div className={`p-10 flex h-[100px] drop-shadow-md fixed z-[9999] w-full bg-white font-extrabold`}>
                 <Link href='/' className={`flex space-x-3 items-center`}>
                     <Image src={logoImg} width={61} height={55} alt='' className={`mt-[-10px]`} />
                     <h4 className={`text-lg font-extrabold `}>TaskHub</h4>
@@ -296,7 +365,7 @@ const serviceProviderSignup: React.FC<FormState> = () => {
                                 <label htmlFor="idNumber" className={`font-bold text-[16px]`}>
                                     Valid ID NUMBER
                                 </label>
-                                <input type="text" placeholder='Enter the ID number' name='idNumber' id='idNumber' className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl w-full my-3`} value={formData.idNumber} onChange={handleChange} required
+                                <input type="text" placeholder='Enter the ID number' name='idNumber' id='idNumber' className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl w-full my-3`} value={formData.idNumber} onChange={handleChange}
                                 />
 
                             </div>
@@ -313,11 +382,16 @@ const serviceProviderSignup: React.FC<FormState> = () => {
                             <button
                                 type="submit"
                                 className={`w-full bg-purpleBase text-white py-2 px-4 rounded-md hover:bg-purple5  ${isAllFieldsFilled() ? '' : 'cursor-not-allowed opacity-50'}`}
-                                disabled={!isAllFieldsFilled()}
+                                disabled={!isAllFieldsFilled() || isSignUpLoading}
                             >
-                                Create Account
+                                {isSignUpLoading ? "Creating..." : "Create Account"}
                             </button>
                         </div>
+                        {signUpError && (
+                            <div className="text-red10 mt-4 text-center mb-2">
+                                {signUpError}
+                            </div>
+                        )}
                     </form>
                 </div>
             </div>

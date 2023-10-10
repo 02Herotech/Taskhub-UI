@@ -5,11 +5,19 @@ import Link from 'next/link'
 import { StaticImageData } from 'next/image'
 
 const automative = require('../../public/automative.png') as StaticImageData;
-const cleaning = require('../../public/cleaning.png') as StaticImageData;
+const events = require('../../public/events.png') as StaticImageData;
 const fashion = require('../../public/fashion.png') as StaticImageData;
-const laundry = require('../../public/laundry.png') as StaticImageData;
-const repairs = require('../../public/repairs.png') as StaticImageData;
+const maintenance = require('../../public/maintenance.png') as StaticImageData;
+const electronics = require('../../public/electronics.png') as StaticImageData;
 const garden = require('../../public/garden.png') as StaticImageData;
+const education = require('../../public/education.png') as StaticImageData;
+const travels = require('../../public/travels.png') as StaticImageData;
+const childcare = require('../../public/childcare.png') as StaticImageData;
+const logistics = require('../../public/logistics.png') as StaticImageData;
+const realEstate = require('../../public/realEstate.png') as StaticImageData;
+
+
+
 
 
 export interface ServicesDetailsProps {
@@ -24,7 +32,7 @@ export const ServicesDetails: ServicesDetailsProps[] = [
     {
         id: 1,
         category: 'Home Services & Maintenance',
-        categoryImage: laundry,
+        categoryImage: maintenance,
         services: [
             'CLeaning', 'plumbing', 'Electrician',
             'Carpentry', 'Pest Control', 'Landscaping',
@@ -51,7 +59,7 @@ export const ServicesDetails: ServicesDetailsProps[] = [
     {
         id: 3,
         category: 'Events & Entertainment',
-        categoryImage: cleaning,
+        categoryImage: events,
         services: [
             'Event Planning', 'Photography & Videography', 'DJ Services',
             'Catering', 'Live Performers(Musicians, Magicians, etc.)',
@@ -64,7 +72,7 @@ export const ServicesDetails: ServicesDetailsProps[] = [
     {
         id: 4,
         category: 'Education & Tutoring',
-        categoryImage: repairs,
+        categoryImage: education,
         services: [
             'Academic Tutoring', 'Music Lessons', 'Language Lessons',
             'Art Classes', 'Computer Lessons', 'Driving Lessons', 'Test Prep',
@@ -78,7 +86,7 @@ export const ServicesDetails: ServicesDetailsProps[] = [
         categoryImage: automative,
         services: [
             'Legal Services', 'Financial Planning', 'IT Support & Consulting',
-            'Marketing & Deisign', 'Writing & Editing',
+            'Marketing & Design', 'Writing & Editing',
         ],
         description: 'Professional Services',
     },
@@ -110,18 +118,18 @@ export const ServicesDetails: ServicesDetailsProps[] = [
     {
         id: 8,
         category: 'Technology & Electronics',
-        categoryImage: repairs,
+        categoryImage: electronics,
         services: [
             'Computer Repair', 'Phone Repair', 'TV Repair',
             'Graphic Design', 'Web Design', 'Web Development', 'App Development',
         ],
-        description: 'Technology',
+        description: 'Electronics',
     },
 
     {
         id: 9,
         category: 'Real Estate & Property Management',
-        categoryImage: automative,
+        categoryImage: realEstate,
         services: [
             'Real Estate Agent', 'Property Management', 'Home Inspection',
         ],
@@ -131,7 +139,7 @@ export const ServicesDetails: ServicesDetailsProps[] = [
     {
         id: 10,
         category: 'Delivery & Logistics',
-        categoryImage: automative,
+        categoryImage: logistics,
         services: [
             'Food Delivery', 'Grocery Delivery', 'Package Delivery',
             'Moving Services', 'Furniture Assembly', 'Storage',
@@ -153,7 +161,7 @@ export const ServicesDetails: ServicesDetailsProps[] = [
     {
         id: 12,
         category: 'Childcare & Babysitting',
-        categoryImage: automative,
+        categoryImage: childcare,
         services: [
             'Babysitting', 'Nanny Services', 'Childcare', 'Daycare',
         ],
@@ -163,7 +171,7 @@ export const ServicesDetails: ServicesDetailsProps[] = [
     {
         id: 13,
         category: 'Travel & Adventure',
-        categoryImage: garden,
+        categoryImage: travels,
         services: [
             'Travel Planning', 'Tour Guide', 'Travel Agent', 'Adventure Tours & Excursions',
         ],

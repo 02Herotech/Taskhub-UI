@@ -68,7 +68,7 @@ function DashboardLayout(props: IProps) {
                                     <TfiWallet size={20}/> Bookings
                                 </button>
                                 <button className={styles.sidebarButton}>
-                                    <GoPulse size={20}/> Market Place
+                                    <GoPulse size={20}/> View Jobs
                                 </button>
                                 <button className={styles.sidebarButton}>
                                     <CgBox size={20}/> Billing and Payments
