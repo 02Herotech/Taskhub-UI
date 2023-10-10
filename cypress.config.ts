@@ -5,7 +5,7 @@ export default {
     },
   },
 };
-type functionType = (/* Specify the parameter and return types for 'on' */ any) => any;
+type functionType = () => any;
 type ConfigType = {
   // Define the type for 'config' here
 };
