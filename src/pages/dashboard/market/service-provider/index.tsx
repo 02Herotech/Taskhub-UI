@@ -91,6 +91,14 @@ function Index(props: IProps) {
                             <div className={style.postedJob}>
                                 <Job/>
                             </div>
+                            <br/>
+                            <div className={style.postedJob}>
+                                <Job/>
+                            </div>
+                            <br/>
+                            <div className={style.postedJob}>
+                                <Job/>
+                            </div>
                         </div>
 
                         <div className={style.selectedJob}>

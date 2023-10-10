@@ -52,6 +52,8 @@
 .selectedJob {
   flex: 1;
   margin-left: 40px;
+  padding: 10px 0 10px 15px;
+  box-shadow: 0 2px 4px 2px rgba(0,0,0,0.31);
 }
 
 .selectedJob > p:first-of-type {
