@@ -5,13 +5,19 @@ import Link from 'next/link'
 import { StaticImageData } from 'next/image'
 
 const automative = require('../../public/automative.png') as StaticImageData;
-const beauty = require('../../public/beauty.png') as StaticImageData;
-const cleaning = require('../../public/cleaning.png') as StaticImageData;
+const events = require('../../public/events.png') as StaticImageData;
 const fashion = require('../../public/fashion.png') as StaticImageData;
-const fitness = require('../../public/fitness.png') as StaticImageData;
-const laundry = require('../../public/laundry.png') as StaticImageData;
-const repairs = require('../../public/repairs.png') as StaticImageData;
-const sports = require('../../public/sports.png') as StaticImageData;
+const maintenance = require('../../public/maintenance.png') as StaticImageData;
+const electronics = require('../../public/electronics.png') as StaticImageData;
+const garden = require('../../public/garden.png') as StaticImageData;
+const education = require('../../public/education.png') as StaticImageData;
+const travels = require('../../public/travels.png') as StaticImageData;
+const childcare = require('../../public/childcare.png') as StaticImageData;
+const logistics = require('../../public/logistics.png') as StaticImageData;
+const realEstate = require('../../public/realEstate.png') as StaticImageData;
+
+
+
 
 
 export interface ServicesDetailsProps {
@@ -26,7 +32,7 @@ export const ServicesDetails: ServicesDetailsProps[] = [
     {
         id: 1,
         category: 'Home Services & Maintenance',
-        categoryImage: laundry,
+        categoryImage: maintenance,
         services: [
             'CLeaning', 'plumbing', 'Electrician',
             'Carpentry', 'Pest Control', 'Landscaping',
@@ -53,7 +59,7 @@ export const ServicesDetails: ServicesDetailsProps[] = [
     {
         id: 3,
         category: 'Events & Entertainment',
-        categoryImage: cleaning,
+        categoryImage: events,
         services: [
             'Event Planning', 'Photography & Videography', 'DJ Services',
             'Catering', 'Live Performers(Musicians, Magicians, etc.)',
@@ -66,7 +72,7 @@ export const ServicesDetails: ServicesDetailsProps[] = [
     {
         id: 4,
         category: 'Education & Tutoring',
-        categoryImage: repairs,
+        categoryImage: education,
         services: [
             'Academic Tutoring', 'Music Lessons', 'Language Lessons',
             'Art Classes', 'Computer Lessons', 'Driving Lessons', 'Test Prep',
@@ -80,7 +86,7 @@ export const ServicesDetails: ServicesDetailsProps[] = [
         categoryImage: automative,
         services: [
             'Legal Services', 'Financial Planning', 'IT Support & Consulting',
-            'Marketing & Deisign', 'Writing & Editing',
+            'Marketing & Design', 'Writing & Editing',
         ],
         description: 'Professional Services',
     },
@@ -101,7 +107,7 @@ export const ServicesDetails: ServicesDetailsProps[] = [
     {
         id: 7,
         category: 'Health & Fitness',
-        categoryImage: fitness,
+        categoryImage: garden,
         services: [
             'Fitness Training', 'Holistic Healing', 'Nutrition Coaching',
             'Physical Therapy', 'Mental Health Counseling', 'Yoga & Meditation'
@@ -112,18 +118,18 @@ export const ServicesDetails: ServicesDetailsProps[] = [
     {
         id: 8,
         category: 'Technology & Electronics',
-        categoryImage: beauty,
+        categoryImage: electronics,
         services: [
             'Computer Repair', 'Phone Repair', 'TV Repair',
             'Graphic Design', 'Web Design', 'Web Development', 'App Development',
         ],
-        description: 'Technology',
+        description: 'Electronics',
     },
 
     {
         id: 9,
         category: 'Real Estate & Property Management',
-        categoryImage: automative,
+        categoryImage: realEstate,
         services: [
             'Real Estate Agent', 'Property Management', 'Home Inspection',
         ],
@@ -133,7 +139,7 @@ export const ServicesDetails: ServicesDetailsProps[] = [
     {
         id: 10,
         category: 'Delivery & Logistics',
-        categoryImage: automative,
+        categoryImage: logistics,
         services: [
             'Food Delivery', 'Grocery Delivery', 'Package Delivery',
             'Moving Services', 'Furniture Assembly', 'Storage',
@@ -155,7 +161,7 @@ export const ServicesDetails: ServicesDetailsProps[] = [
     {
         id: 12,
         category: 'Childcare & Babysitting',
-        categoryImage: automative,
+        categoryImage: childcare,
         services: [
             'Babysitting', 'Nanny Services', 'Childcare', 'Daycare',
         ],
@@ -165,7 +171,7 @@ export const ServicesDetails: ServicesDetailsProps[] = [
     {
         id: 13,
         category: 'Travel & Adventure',
-        categoryImage: sports,
+        categoryImage: travels,
         services: [
             'Travel Planning', 'Tour Guide', 'Travel Agent', 'Adventure Tours & Excursions',
         ],
@@ -174,19 +180,41 @@ export const ServicesDetails: ServicesDetailsProps[] = [
 
 ]
 
+export const maxId = Math.max(...ServicesDetails.map(item => item.id));
 
 
-export const Layout: React.FC<ServicesDetailsProps> = ({ categoryImage, description }) => {
+export const ServiceDetailsLayout: React.FC<ServicesDetailsProps> = ({ categoryImage, description, services }) => {
     return (
         <div>
-            <div>
-                <Link href='#'>
-                    <Image src={categoryImage} alt='' />
-                </Link>
-            </div>
-            <div>
-                <h3 className={`bg-purple p-2 text-white text-center text-[15px] font-bold rounded-[8px]`}>{description}</h3>
-            </div>
+            <Link href='#'>
+                <div className={`w-[230px] h-[200px] mt-10 p-8 space-y-2 relative flex flex-col justify-center items-center bg-purpleBase`}>
+                    <div className='absolute w-[200px] h-[200px] top-[-2rem]'>
+                        <Image src={categoryImage} width={250} height={200} alt='' />
+                    </div>
+                    <div className='absolute bottom-[10px] space-y-1 text-left'>
+                        <h3 className={` px-5 text-white  text-[15px] font-bold `}>{description}</h3>
+                        <p className={` px-5 text-white   text-[8px] font-extralight `}>
+                            {services.map((service, index) => {
+                                if (index < 5) {
+                                    return (
+                                        <span key={index}>
+                                            {service}
+                                            {index < 4 && ', '}
+                                        </span>
+                                    );
+                                } else if (index === 5) {
+                                    return (
+                                        <span key={index}>
+                                            , etc
+                                        </span>
+                                    );
+                                }
+                            })}
+                        </p>
+                    </div>
+                </div>
+            </Link>
         </div>
+
     )
 }

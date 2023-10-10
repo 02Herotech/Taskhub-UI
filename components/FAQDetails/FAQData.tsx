@@ -3,6 +3,10 @@ import React, { useState } from 'react'
 
 import faqImg from '../../public/faqImg.png'
 import Image from 'next/image'
+import { revalia } from '@/styles/font'
+import { SlArrowDown, SlArrowUp } from 'react-icons/sl'
+import Link from 'next/link'
+import { Button } from '../buttons/Button'
 
 export interface FAQProps {
     question: string,
@@ -13,40 +17,52 @@ export interface FAQProps {
 
 export const FAQData = [
     {
-        question: 'What is CourseConnekt?',
-        answer: 'CourseConnekt is a platform that provides a wide range of courses to students. It is a platform that connects students with the best courses available online.',
+        question: 'How does TaskHub work?',
+        answer: 'TaskHub provides an online marketplace connecting two types of members service providers and customers.The customers who need to outsource tasks and For service providers who need to earn some money.',
         id: 1
     },
 
     {
-        question: 'How do I enroll in a course?',
-        answer: 'To enroll in a course by clicking on the Apply button on the course page. You will be redirected to the course page where you can start the course.',
+        question: 'Who can create an account on TaskHub?',
+        answer: ' Our sign up process is quick and easy it takes only 90seconds. You can sign up using your google account or email.Head Homepage to get started.',
         id: 2
     },
 
     {
-        question: "What if I don't like the course?",
-        answer: "Please don't hesitate to make the decision to leave the course whenever you feel it's appropriate. Furthermore, if you're interested in pursuing another course, you're welcome to do so.",
+        question: "What information is needed for me to start?",
+        answer: "You can start using TaskHub as soon as you sign up; however there are some things you be prompted to provide when you use certain features",
         id: 3
     },
 
     {
-        question: 'For enquires and complaints, how can I contact you?',
-        answer: 'You can contact us through the Contact Us page. We will get back to you as soon as possible.',
+        question: 'Are they any rules to TaskHub?',
+        answer: 'We have a set of Community Guidelines for our Customers and service providers, that you agree to when you create an account. These guidelines have been created in line with the Terms and Conditions, and are in place to help all members have a fair, enjoyable and safe experience on the platform.',
         id: 4
     },
 
     {
-        question: 'Whats the duration of the course?',
-        answer: 'The duration of the course depends on the course you choose and how fast you complete the course but the minumum duration is 6 month.',
+        question: 'Where can I go if I need help?',
+        answer: 'We have a great range of handy articles on our Help Centre, with tones of information.',
         id: 5
     },
 
     {
-        question: ' Will I get a certificate after completing the course?',
-        answer: 'No, we do not provide any certificate after completing the course.',
+        question: ' How fast can I get paid as a service provider?',
+        answer: 'As soon as the service is completed',
         id: 6
-    }
+    },
+
+    {
+        question: 'What are the dispute regulations in place?',
+        answer: 'Visit the dispute page',
+        id: 7
+    },
+
+    {
+        question: 'Do you have a customer care number?',
+        answer: 'Do you have a customer care number?',
+        id: 8
+    },
 
 ]
 
@@ -58,51 +74,75 @@ export const FAQlayout: React.FC<FAQProps> = ({ question, answer, className }) =
         setIsOpen(!isOpen);
     };
 
+
     return (
-        <div className="py-5 min-h-[50px] my-0">
-            <div className="flex justify-between items-center cursor-pointer px-2">
-                <h3 className={`w-[320px] mb-2 font-bold`}>
-                    {question}
-                    <span
-                        className={`flex mt-[-20px] transition-transform transform justify-items-end  ${isOpen ? 'rotate-0 justify-end' : '-rotate-180'}`}
-                        onClick={toggleOpen}
-                    >
-                        {isOpen ? <>&#x2212;</> : <>&#x2B;</>}
-                    </span>
-                </h3>
+        <div className=" min-h-[70px] flex flex-col  justify-center  my-0 ">
+            <div className="flex  items-center  justify-between cursor-pointer w-full">
+                <div className={` font-extrabold text-[20px]`}>
+                    <h3 >
+                        {question}
+
+                    </h3>
+                </div>
+
+                <div
+                    className={`transition-transform transform text-lg bg-black text-white rounded-2xl p-2 hover:bg-grey4  ${isOpen ? 'rotate-0 justify-end' : '-rotate-0'}`}
+                    onClick={toggleOpen}
+                >
+                    {isOpen ? <><SlArrowUp /></> : <><SlArrowDown /></>}
+                </div>
 
             </div>
-            {isOpen && <p className={`my-2 px-2 ${className}`}>{answer}</p>}
+            <div className={`flex  items-center w-[500px]`}>
+                {isOpen && <p className={`my-2 text-[13px] font-normal ${className} flex`}>{answer}</p>}
+            </div>
+
         </div>
 
     )
 }
 
 export const FAQLandingPage: React.FC = () => {
+    const displayedFAQs = FAQData.slice(0, 4);
+
     return (
-        <div className={`flex justify-around  py-[120px] px-[60px] bg-purpleLight text-white`}>
-            <div className={`flex flex-col mx-10 justify-center`}>
-                <div className={`my-3`}>
-                    <h1 className={`text-xl font-bold w-[545px]`}>
-                        Frequently Asked Questions (FAQs)
-                    </h1>
-                    <p className={`w-[470px] font-normal mt-10 mb-[60px] text-base`}>
-                        "Discover answers to common queries and gain valuable
-                        insights through our comprehensive FAQs section.
-                        Empower your understanding today!"
-                    </p>
-                </div>
-
-                <div>
-                    <Image src={faqImg} width={416} height={541} alt='' />
-                </div>
+        <div className={`flex justify-center  flex-col  pt-[50px] pb-[150px] px-[60px] bg-purpleBase text-white  `}>
+            <div className={`my-2 flex flex-col items-center text-center`}>
+                <h1 className={`text-xl font-[100] ${revalia.className}`}>
+                    Frequently Asked Questions (FAQs)
+                </h1>
+                <p className={` w-[650px]  font-normal mt-10 mb-[60px] text-base`}>
+                    These section provides answers to common questions that visitors might have about the website, its products, services, policies, or any other relevant topics.
+                </p>
             </div>
 
-            <div className={`w-[355px] flex justify-around flex-col font-normal text-base`}>
-                {FAQData.map((item, id) => (
-                    <FAQlayout key={id} question={item.question} answer={item.answer} id={0} className={`w-[350px]`} />
-                ))}
+
+            <div className={`flex s flex-col  justify-center`}>
+                <div className={`flex items-center flex-col  justify-center`}>
+                    <div className={` flex justify-around w-[700px]  bg-[#FECD83] p-3 flex-col font-normal space-y-5 `}>
+                        {displayedFAQs.map((item, id) => (
+                            <div key={id} className={`bg-white flex rounded-lg justify-center p-2 text-black `}>
+                                <div className={`w-[600px] px-3`}>
+                                    <FAQlayout question={item.question} answer={item.answer} id={0} />
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
+
+                <div className={` flex p-3 ml-[250px] mt-10 font-normal  `}>
+                    <Link href='/faq'>
+                        <Button
+                            btnValue='See more'
+                            className=' border-[1px] w-[150px] h-[55px]  px-4 border-purpleBase   text-white font-extralight text-base hover:bg-yellow4 bg-yellow6'
+                        />
+                    </Link>
+                </div>
+
             </div>
+
+
         </div>
     )
 }
