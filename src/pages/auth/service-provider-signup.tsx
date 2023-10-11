@@ -12,6 +12,7 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai'
 import { BackButton } from '../../../components/buttons/Button'
 // import { serviceProviderSignup } from '../../../network/auth'
 import axios from 'axios'
+import router from "next/router";
 
 interface FormState {
     firstName: string;
@@ -165,6 +166,13 @@ const serviceProviderSignup: React.FC<FormState> = () => {
 
     // }
 
+    useEffect(() => {
+        if (signUpData) {
+            console.log("data", signUpData);
+            router.push("/auth/signup-confirmation");
+        }
+    }, [signUpData]);
+
     const onSubmit = async (event: any) => {
         event.preventDefault();
         console.log("Button Triggered")
@@ -197,9 +205,9 @@ const serviceProviderSignup: React.FC<FormState> = () => {
 
 
             signUpApiCall(user)
-                .unwrap() // Unwrap the result to handle possible errors
+                .unwrap()
                 .then(() => {
-                    setIsSubmitting(false); // Reset submitting status
+                    setIsSubmitting(false);
 
                     // Clear the error message after 5 seconds
                     setTimeout(() => {
@@ -207,7 +215,7 @@ const serviceProviderSignup: React.FC<FormState> = () => {
                     }, 5000);
                 })
                 .catch((error) => {
-                    setIsSubmitting(false); // Reset submitting status on error
+                    setIsSubmitting(false);
                     console.error("Error submitting:", error);
 
                     // Set the error message in the state
@@ -217,8 +225,6 @@ const serviceProviderSignup: React.FC<FormState> = () => {
                     setTimeout(() => {
                         setSignUpError(null);
                     }, 5000);
-
-
                 });
 
         } catch (error) {
@@ -369,7 +375,6 @@ const serviceProviderSignup: React.FC<FormState> = () => {
                                 />
 
                             </div>
-
 
                             <div className={`space-x-2`}>
                                 <input onChange={handleChange} type="checkbox" name="agreement" id="agreement" required />
