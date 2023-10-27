@@ -33,9 +33,8 @@ const Home = () => {
         className={`min-h-screen `}>
         <Nav />
 
-        <div className={`bg-white`}>
+        <div>
           <HeroSection />
-
         </div>
 
         <ServicesLayout id={0} category={''} categoryImage={automative} services={[]} description={''} />
@@ -60,6 +59,7 @@ const Home = () => {
           </div>
 
         </div>
+
         <ServiceProviderLayout id={0} providerName={''} providerImage={fedex} rating={0} description={''} />
 
         <FAQLandingPage />

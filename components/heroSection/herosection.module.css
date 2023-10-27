@@ -89,17 +89,15 @@
     100% {transform: scale(0.6);}
 }
 
-.firstImageAnimation {
+/* .firstImageAnimation {
     animation: firstImageRotation, decreaseImageScale;
     animation-duration: 3s;
     animation-timing-function: ease-in-out;
     animation-iteration-count: infinite;
     animation-direction: alternate;
-    animation-fill-mode: both;
-    /* animation-delay: 3s; */
-}
+} */
 
-@keyframes firstImageRotation {
+/* @keyframes firstImageRotation {
   from {opacity: 50%;}
   to {opacity: 100%;}
-}
+} */

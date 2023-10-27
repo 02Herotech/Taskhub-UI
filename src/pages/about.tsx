@@ -21,7 +21,7 @@ const about = () => {
     return (
         <div className={`min-h-screen`}>
             <Nav/>
-            <div className=" mt-[100px]  text-black">
+            <div className=" text-black py-10">
                 <div
                     className={`bg-gradient-to-r from-[#F8E9FE] via-[#FFFFFF] to-[#F5DDFD] flex justify-around pt-20`}
                 >

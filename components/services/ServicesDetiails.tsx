@@ -168,16 +168,6 @@ export const ServicesDetails: ServicesDetailsProps[] = [
         description: 'Childcare',
     },
 
-    {
-        id: 13,
-        category: 'Travel & Adventure',
-        categoryImage: travels,
-        services: [
-            'Travel Planning', 'Tour Guide', 'Travel Agent', 'Adventure Tours & Excursions',
-        ],
-        description: 'Travels',
-    },
-
 ]
 
 export const maxId = Math.max(...ServicesDetails.map(item => item.id));

@@ -106,43 +106,43 @@ export const FAQLandingPage: React.FC = () => {
     const displayedFAQs = FAQData.slice(0, 4);
 
     return (
-        <div className={`flex justify-center  flex-col  pt-[50px] pb-[150px] px-[60px] bg-purpleBase text-white  `}>
-            <div className={`my-2 flex flex-col items-center text-center`}>
-                <h1 className={`text-xl font-[100] ${revalia.className}`}>
-                    Frequently Asked Questions (FAQs)
-                </h1>
-                <p className={` w-[650px]  font-normal mt-10 mb-[60px] text-base`}>
-                    These section provides answers to common questions that visitors might have about the website, its products, services, policies, or any other relevant topics.
-                </p>
-            </div>
+        <div className={`w-full  bg-purpleBase py-[150px] px-[60px]`}>
+            <div className={`flex justify-center  flex-col text-white max-w-7xl mx-auto`}>
+                <div className={`my-2 flex flex-col items-center text-center`}>
+                    <h1 className={`text-xl font-[100] ${revalia.className}`}>
+                        Frequently Asked Questions (FAQs)
+                    </h1>
+                    <p className={` w-[650px]  font-normal mt-10 mb-[60px] text-base`}>
+                        These section provides answers to common questions that visitors might have about the website, its products, services, policies, or any other relevant topics.
+                    </p>
+                </div>
 
 
-            <div className={`flex s flex-col  justify-center`}>
-                <div className={`flex items-center flex-col  justify-center`}>
-                    <div className={` flex justify-around w-[700px]  bg-[#FECD83] p-3 flex-col font-normal space-y-5 `}>
-                        {displayedFAQs.map((item, id) => (
-                            <div key={id} className={`bg-white flex rounded-lg justify-center p-2 text-black `}>
-                                <div className={`w-[600px] px-3`}>
-                                    <FAQlayout question={item.question} answer={item.answer} id={0} />
+                <div className={`flex flex-col  justify-center`}>
+                    <div className={`flex items-center flex-col  justify-center`}>
+                        <div className={`flex justify-around w-[700px]  bg-[#FECD83] p-3 flex-col font-normal space-y-5`}>
+                            {displayedFAQs.map((item, id) => (
+                                <div key={id} className={`bg-white flex rounded-lg justify-center p-2 text-black `}>
+                                    <div className={`w-[600px] px-3`}>
+                                        <FAQlayout question={item.question} answer={item.answer} id={0} />
+                                    </div>
                                 </div>
-                            </div>
-                        ))}
+                            ))}
+                        </div>
                     </div>
+
+
+                    <div className={` flex p-3 ml-[250px] mt-10 font-normal  `}>
+                        <Link href='/faq'>
+                            <Button
+                                btnValue='See more'
+                                className=' border-[1px] w-[150px] h-[55px]  px-4 border-purpleBase   text-white font-extralight text-base hover:bg-yellow4 bg-yellow6'
+                            />
+                        </Link>
+                    </div>
+
                 </div>
-
-
-                <div className={` flex p-3 ml-[250px] mt-10 font-normal  `}>
-                    <Link href='/faq'>
-                        <Button
-                            btnValue='See more'
-                            className=' border-[1px] w-[150px] h-[55px]  px-4 border-purpleBase   text-white font-extralight text-base hover:bg-yellow4 bg-yellow6'
-                        />
-                    </Link>
-                </div>
-
             </div>
-
-
         </div>
-    )
+    )   
 }

@@ -35,7 +35,7 @@ const ServicesLayout: React.FC<ServicesDetailsProps> = ({ id }) => {
 
 
     return (
-        <div className={`flex justify-centeri flex-col space-y-6 px-20 py-10 `}>
+        <div className={`flex justify-center flex-col space-y-6 px-20 py-10 max-w-7xl mx-auto`}>
             <div className={`w-[200px] h-[65px] my-6 mx-20  text-black  font-bold flex-col flex justify-center items-center `}>
                 <h3 className={`${revalia.className} text-2xl`}>SERVICE CATEGORIES</h3>
                 <h4 className={` ml-[-65px] text-sm w-[250px]`} >Showing {startIndex + 1} - {endIndex} of {maxId} results</h4>
