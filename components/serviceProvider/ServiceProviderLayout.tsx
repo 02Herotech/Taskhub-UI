@@ -35,14 +35,13 @@ const ServiceProviderLayout: React.FC<ServicesProviderDetailsProps> = () => {
     }, []);
 
     return (
-        <div className={`flex overflow-hidden relative justify-center flex-col  px-20 py-[100px] pb-[150px] max-w-7xl mx-auto`}>
-            <div className={`w-[600px] h-[65px] my-6 mx-5  text-black  font-bold flex-col flex justify-center items-center `}>
-                <h3 className={`${revalia.className} text-2xl`}>FEATURED SERVICE PROVIDERS</h3>
-
+        <div className={`flex overflow-hidden relative justify-center flex-col  px-20 py-[110px] pb-[150px] max-w-7xl mx-auto`}>
+            <div className={`w-[600px] h-[65px] font-bold flex-col flex justify-center items-center `}>
+                <h3 className={`${revalia.className} text-xl`}>FEATURED SERVICE PROVIDERS</h3>
             </div>
             <div className={`ml-20 `}>
                 <div className={`flex`}>
-                    <div className={`flex flex-col py-4  mt-[150px]  border-[#FE9B07] w-[900px] `}>
+                    <div className={`flex flex-col py-4  mt-[100px]  border-[#FE9B07] w-[900px] `}>
                         {featuredProviders.map((provider) => (
                             <div className={`p-3 `} key={provider.id}>
                                 <ServiceProviderDetailsLayout key={provider.id} {...provider} />

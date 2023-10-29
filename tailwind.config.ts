@@ -21,7 +21,7 @@ const config: Config = {
       md: '20px',
       lg: '24px',
       xl: '32px',
-      '2xl': '40px',
+      xxl: '40px',
     },
     colors: {
       black: '#000000',
@@ -34,6 +34,7 @@ const config: Config = {
       purple4: '#7a6ab2',
       purple5: '#59449f',
       purpleBase: '#381F8C',
+      purpleHover: '#25135f',
       purple6: '#2F1A75',
       purple7: '#25155D',
       purple8: '#1C1046',

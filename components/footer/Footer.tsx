@@ -37,14 +37,14 @@ const Footer = () => {
                         <h3 className={`mb-8 font-extrabold text-sm`}>Company</h3>
                         <ul className={`space-y-3 `}>
                             <li >
-                                <Link href='/about' className={`hover:text-medium hover:text-grey4`}> About Us </Link>
+                                <Link href='/about' className={`text-[14px] hover:text-grey4`}>About Us</Link>
                             </li>
                             <li>
-                                <Link href='/#' className={`hover:text-medium hover:text-grey4`}> Companies </Link>
+                                <Link href='/#' className={`text-[14px] hover:text-grey4`}>Companies</Link>
 
                             </li>
                             <li>
-                                <Link href='/#' className={`hover:text-medium hover:text-grey4`}> Pricing</Link>
+                                <Link href='/#' className={`text-[14px] hover:text-grey4`}>Pricing</Link>
                             </li>
 
                         </ul>
@@ -53,14 +53,30 @@ const Footer = () => {
                     <div className={`flex flex-col space-y-2 mt-2`}>
                         <h3 className={`mb-8 font-extrabold text-sm`}>Services</h3>
                         <ul className={`space-y-3 `}>
-                            <li className={`hover:text-grey4`}>Automotive Services</li>
-                            <li className={`hover:text-grey4`}>Health & Fitness</li>
-                            <li className={`hover:text-grey4`}>Real Estate Services</li>
-                            <li className={`hover:text-grey4`}>Delivery & Logistics</li>
-                            <li className={`hover:text-grey4`}>Art & Creativity</li>
-                            <li className={`hover:text-grey4`}>Travel & Adventure</li>
-                            <li className={`hover:text-grey4`}>Childcare & Babysitting</li>
-                            <li className={`hover:text-grey4`}>Education & Tutoring</li>
+                            <li>
+                                <Link href='/#' className={`text-[14px] hover:text-grey4`}>Automotive Services</Link>
+                            </li>
+                            <li>
+                                <Link href='/#' className={`text-[14px] hover:text-grey4`}>Health & Fitness</Link>
+                            </li>
+                            <li>
+                                <Link href='/#' className={`text-[14px] hover:text-grey4`}>Real Estate Services</Link>
+                            </li>
+                            <li>
+                                <Link href='/#' className={`text-[14px] hover:text-grey4`}>Delivery & Logistics</Link>
+                            </li>
+                            <li>
+                                <Link href='/#' className={`text-[14px] hover:text-grey4`}>Art & Creativity</Link>
+                            </li>
+                            <li>
+                                <Link href='/#' className={`text-[14px] hover:text-grey4`}>Travel & Adventure</Link>
+                            </li>
+                            <li>
+                                <Link href='/#' className={`text-[14px] hover:text-grey4`}>Childcare & Babysitting</Link>
+                            </li>
+                            <li>
+                                <Link href='/#' className={`text-[14px] hover:text-grey4`}>Education & Tutoring</Link>
+                            </li>
                         </ul>
 
                     </div>
@@ -70,16 +86,16 @@ const Footer = () => {
 
                         <ul className={`space-y-3`}>
                             <li>
-                                <Link href='/faq' className={`hover:text-medium hover:text-grey4`}> FAQs </Link>
+                                <Link href='/faq' className={`text-[14px] hover:text-grey4`}> FAQs </Link>
                             </li>
                             <li>
-                                <Link href='/about' className={`hover:text-medium hover:text-grey4`}>Contack Us </Link>
+                                <Link href='#' className={`text-[14px] hover:text-grey4`}>Contact Us </Link>
                             </li>
                             <li>
-                                <Link href='/termsAndConditions' className={`hover:text-medium hover:text-grey4`}> Terms and Conditions</Link>
+                                <Link href='/termsAndConditions' className={`text-[14px] hover:text-grey4`}> Terms and Conditions</Link>
                             </li>
                             <li>
-                                <Link href='/privacy' className={`hover:text-medium hover:text-grey4`}> Privacy </Link>
+                                <Link href='/privacy' className={`text-[14px] hover:text-grey4`}> Privacy </Link>
                             </li>
                         </ul>
                     </div>

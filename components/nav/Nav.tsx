@@ -14,7 +14,7 @@ const Nav = () => {
   };
   return (
     <div className={`drop-shadow-md fixed z-50 w-full bg-white`}>
-      <div className={`px-2 py-3 flex items-center justify-around font-extrabold max-w-7xl mx-auto`}>
+      <div className={`px-2 py-3 flex items-center justify-between font-extrabold max-w-7xl mx-auto`}>
         <div>
           <Link href='/' className={`flex space-x-3 items-center`}>
             <Image src={logoImg} width={50} height={40} alt='' className={`mt-[-10px]`} />
@@ -35,10 +35,10 @@ const Nav = () => {
           <Link href="/faq" className={`hover:text-purpleBase text-[13px] ${isLinkActive("/faq") ? "text-purpleBase" : ""}`} >
             FAQs
           </Link>
-          <div>   <Link href="/help" className={`hover:text-purpleBase text-[13px] ${isLinkActive("/help") ? "text-purpleBase" : ""}`} >
-            Contact Us
+          <div>   
+            <Link href="/help" className={`hover:text-purpleBase text-[13px] ${isLinkActive("/help") ? "text-purpleBase" : ""}`} >
+            Contact Us <SlArrowDown className={`inline-block text-[10px]`} />
           </Link>
-            <SlArrowDown className={`inline-block ml-1 text-[10px]`} />
           </div>
 
         </div>

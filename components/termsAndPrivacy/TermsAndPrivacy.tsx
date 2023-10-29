@@ -1,42 +1,74 @@
 import React from 'react'
+import { revalia } from '@/styles/font'
+
+import styles from './styles.module.css'
 
 export const TermsAndConditions = () => {
     return (
-        <div className={`bg-white text-left text-black pt-5 pb-10 px-20`}>
-            <h3 className='text-lg text-center'>TERMS AND CONDITIONS</h3>
-            <div className='text-base'>
-                {`Here are our terms and conditions. Country Specific Terms in Appendix B shall also apply to this Agreement. Please contact us here if you have any other questions. Thanks for connecting.
-                The TaskHub terms & conditions (updated date) outline TaskHub and Your obligations and responsibilities on the TaskHub Platform. In this update to our Terms and Conditions, TaskHub has updated information related to Fees.
-                User Agreement: www.taskhub.com
-                TaskHub operates an online platform allowing Users to connect through the TaskHub Platform with other Users who provide Services.
-                Please read these terms and all Policies including the Community Guidelines and Privacy Policy carefully before using the TaskHub Platform. These Policies are incorporated into this Agreement by reference.
-                All defined terms in this Agreement have the meaning given to them in the TaskHub Glossary.
-                1. SCOPE OF TASKHUB SERVICES
-                Basic Principles
-                1.1 TaskHub provides the TaskHub Platform to enable Posters to publish Posted Tasks.
-                1.2 Service Providers may make an Offer in response to a Posted service. Some parts of Offer details may be made publicly available, including to internet users who are not Users.
-                1.3 A Poster may revoke or modify a Posted Task at any time before he/she accepts an Offer. TaskHub reserves the right to cancel all Offers on a Posted Task made prior to the modification.
-                1.4 If a Poster accepts an Offer on the TaskHub Platform, a Task Contract is created between the service and the Poster.
-                1.5 Upon creation of a Task Contract, the Poster must pay the Agreed Price into the Payment Account.
-                1.6 Upon creation of the Task Contract, TaskHub has rendered TaskHub Services and the Service Fee is due and payable.
-                1.7 Once the Task Contract is created, the Tasker and Poster may vary the Task Contract on the TaskHub Platform. The Poster and Tasker are encouraged to use TaskHub’s private messaging system to amend or vary the Task Contract (including the Agreed Price) or to otherwise communicate.
-                1.8 Once the Services are complete, the Tasker must provide notice of that on the TaskHub Platform.
-                1.9 Once the Services are complete, the Poster must provide notice of that on the TaskHub Platform.
-                1.10 Once the Posted Task has been completed and the Poster confirms the Services are completed, or if TaskHub is satisfied with the Services have been completed, the Tasker Funds will be released by TaskHub from the Payment Account to the Tasker. However, this process does not apply to the payment of Recurring Services which is addressed in clause 1.20 below.
-                1.11 After the Task Contract is completed, the parties are encouraged to review and provide feedback of the Services on the TaskHub Platform.
-                Search Assist
-                1.12 TaskHub may also provide a Search Assist feature enabling Posters to submit an Offer for Services.
-                1.13 An Offer submitted by a Poster using Search Assist may be notified to other Users and such Users may elect to make an Instant Claim of it.
-                1.14 When using Search Assist a Task Contract is created when a Tasker makes an Instant Claim (and in the case of Recurring Services a Task Contract is created for the first Occurrence only). For Recurring Services, the next Task Contract is created upon completion of the previous Occurrence.
-                1.15 A Poster may revoke or modify its Offer in using Search Assist, including for Recurring Services, at any time before a Tasker makes an Instant Claim. TaskHub reserves the right to cancel all Posted Tasks made prior to the revocation or modification.
-                Listing
-                1.16 TaskHub may also provide a service provider Listing feature enabling the service provider to publish Offers for Services.
-                1.17 TaskHub may publish Tasker Listings from time to time in its absolute discretion.
-                1.18 A Poster may request to book a service provider Listing by clicking on the Request Booking button and completing the booking request. The service provider may then make an offer to perform the Task. When using service provider Listing, a Task Contract is created when the Poster accepts the offer made by the Tasker.
-                1.19 A service provider may revoke or modify its Tasker Listing at any time before a Poster accepts a service provider’s offer.
-                Recurring Service
-                1.20 For Recurring Services and subject to clause 1.21, once the Occurrence has been completed and the Tasker confirms the Occurrence is completed (or if TaskHub is satisfied the Occurrence is completed) then the Tasker Funds for that Occurrence will automatically be released by TaskHub from the Payment Account to the Tasker.
-                1.21 The Poster may elect to pause automatic payment of Tasker Funds for an Occurrence within 24 hours from when the Tasker confirms the Occurrence is completed. If the Poster pauses such automatic payment in accordance with this clause, then the Tasker Funds will not be released by TaskHub from the Payment Account to the Tasker until the Poster also confirms that the Occurrence is completed.
+        <div className={`text-justify pb-20 pt-36 px-20 max-w-7xl mx-auto`}>
+            <h3 className={`text-xl text-center my-5 ${revalia.className}`}>TERMS AND CONDITIONS</h3>
+            <p className='font-extrabold text-center text-[16px] my-4'>THIS AGREEMENT INCLUDES A CLASS ACTION WAIVEVR AND REQUIRES <br /> THE USE OF ARTBITRATION ON AN INDIVIDUAL BASIS TO SOLVE 
+            <br /> DISPUTES, RATHER THAN JURY TRIALS</p>
+
+                <div className='text-base px-20'>
+                <p>Here are our terms and conditions. Country Specific Terms in Appendix B shall also apply to this Agreement. 
+                    Please contact us here if you have any other questions. Thanks for connecting.</p>
+                
+                <p className='my-5'>The TaskHub terms & conditions (updated date) outline TaskHub and Your obligations and
+                     responsibilities on the TaskHub Platform. In this update to our Terms and Conditions, TaskHub has updated information related to Fees.</p>
+                
+                <p>User Agreement: www.taskhub.com</p>
+
+                <p className='my-5'>TaskHub operates an online platform allowing Users to connect through the TaskHub Platform with other Users who provide Services.</p>
+
+                <p>Please read these terms and all Policies including the Community Guidelines and Privacy Policy carefully before using the TaskHub Platform. 
+                    These Policies are incorporated into this Agreement by reference.</p>
+                
+                <p className='my-5'>All defined terms in this Agreement have the meaning given to them in the TaskHub Glossary.</p>
+                
+                <p className='font-extrabold'>1. SCOPE OF TASKHUB SERVICES</p>
+                
+                <p className='my-2 ml-4'>Basic Principles</p>
+
+                <ul className='ml-4'>
+                    <li className='my-2'>1.1 TaskHub provides the TaskHub Platform to enable Posters to publish Posted Tasks.</li>
+                    <li>1.2 Service Providers may make an Offer in response to a Posted service. Some parts of Offer details may be made publicly available, including to internet users who are not Users.</li>
+                    <li className='my-2'>1.3 A Poster may revoke or modify a Posted Task at any time before he/she accepts an Offer. TaskHub reserves the right to cancel all Offers on a Posted Task made prior to the modification.</li>
+                    <li>1.4 If a Poster accepts an Offer on the TaskHub Platform, a Task Contract is created between the service and the Poster.</li>
+                    <li className='my-2'>1.5 Upon creation of a Task Contract, the Poster must pay the Agreed Price into the Payment Account.</li>
+                    <li>1.6 Upon creation of the Task Contract, TaskHub has rendered TaskHub Services and the Service Fee is due and payable.</li>
+                    <li className='my-2'>1.7 Once the Task Contract is created, the Tasker and Poster may vary the Task Contract on the TaskHub Platform. The Poster and Tasker are encouraged to use TaskHub’s private messaging system to amend or vary the Task Contract (including the Agreed Price) or to otherwise communicate.</li>
+                    <li>1.8 Once the Services are complete, the Tasker must provide notice of that on the TaskHub Platform.</li>
+                    <li className='my-2'>1.9 Once the Services are complete, the Poster must provide notice of that on the TaskHub Platform.</li>
+                    <li>1.10 Once the Posted Task has been completed and the Poster confirms the Services are completed, or if TaskHub is satisfied with the Services have been completed, the Tasker Funds will be released by TaskHub from the Payment Account to the Tasker. However, this process does not apply to the payment of Recurring Services which is addressed in clause 1.20 below.</li>
+                    <li className='my-2'>1.11 After the Task Contract is completed, the parties are encouraged to review and provide feedback of the Services on the TaskHub Platform.</li>
+                </ul>
+
+                <p className='my-2 ml-4'>Search Assist</p>
+
+                <ul className='ml-4'>
+                    <li className='my-2'>1.12 TaskHub may also provide a Search Assist feature enabling Posters to submit an Offer for Services.</li>
+                    <li>1.13 An Offer submitted by a Poster using Search Assist may be notified to other Users and such Users may elect to make an Instant Claim of it.</li>
+                    <li className='my-2'>1.14 When using Search Assist a Task Contract is created when a Tasker makes an Instant Claim (and in the case of Recurring Services a Task Contract is created for the first Occurrence only). For Recurring Services, the next Task Contract is created upon completion of the previous Occurrence.</li>
+                    <li>1.15 A Poster may revoke or modify its Offer in using Search Assist, including for Recurring Services, at any time before a Tasker makes an Instant Claim. TaskHub reserves the right to cancel all Posted Tasks made prior to the revocation or modification.</li>
+                </ul>
+
+                <p className='my-2 ml-4'>Listing</p>
+
+                <ul className='ml-4'>
+                    <li className='my-2'>1.16 TaskHub may also provide a service provider Listing feature enabling the service provider to publish Offers for Services.</li>
+                    <li>1.17 TaskHub may publish Tasker Listings from time to time in its absolute discretion.</li>
+                    <li className='my-2'>1.18 A Poster may request to book a service provider Listing by clicking on the Request Booking button and completing the booking request. The service provider may then make an offer to perform the Task. When using service provider Listing, a Task Contract is created when the Poster accepts the offer made by the Tasker.</li>
+                    <li>1.19 A service provider may revoke or modify its Tasker Listing at any time before a Poster accepts a service provider’s offer.</li>
+                </ul>
+
+                <p className='my-2 ml-4'>Recurring Service</p>
+
+                <ul className='ml-4'>
+                     <li className='my-2'>1.20 For Recurring Services and subject to clause 1.21, once the Occurrence has been completed and the Tasker confirms the Occurrence is completed (or if TaskHub is satisfied the Occurrence is completed) then the Tasker Funds for that Occurrence will automatically be released by TaskHub from the Payment Account to the Tasker.</li>
+                     <li>1.21 The Poster may elect to pause automatic payment of Tasker Funds for an Occurrence within 24 hours from when the Tasker confirms the Occurrence is completed. If the Poster pauses such automatic payment in accordance with this clause, then the Tasker Funds will not be released by TaskHub from the Payment Account to the Tasker until the Poster also confirms that the Occurrence is completed.</li>
+                </ul>
+
                 2. TASKHUB'S ROLE AND OBLIGATIONS
                 2.1 TaskHub provides the TaskHub Platform only, enabling Users to publish and make Offers on Posted Tasks or publish Offers for Services or make Instant Claims of Tasker Listings.
                 2.2 TaskHub only permits individuals over 18 years of age to become Users.
@@ -258,7 +290,7 @@ export const TermsAndConditions = () => {
                 "Third Party Service" means the promotions and links to services offered by third parties as may be featured on the TaskHub Platform from time to time.
                 "User" or "You" means the person who has signed up to use the TaskHub Platform, whether as the Customer, Poster, Tasker, or otherwise.
                 "Verification Icons" means the icons available to be displayed on a User's profile and any such posts on the TaskHub Platform to confirm details such as a User's qualification, license, certificate or other skill.
-                Revised May 2022 copyright TaskHub.`}
+                Revised May 2022 copyright TaskHub.
             </div>
 
         </div>

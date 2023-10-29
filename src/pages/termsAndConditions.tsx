@@ -9,8 +9,7 @@ const terms = () => {
     return (
         <div className={`min-h-screen`}>
             <Nav />
-
-            <div className='mt-[100px]'>
+            <div>
                 <TermsAndConditions />
                 <BackButton btnLink='/auth/authSignup' btnValue='Go back' />
             </div>
