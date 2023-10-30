@@ -12,7 +12,7 @@ import camera from '../../public/camera.png'
 import laptop from '../../public/laptop.png'
 import welder from '../../public/welder.png'
 import lashes from '../../public/lashes.png'
-import tools from '../../public/tool.png'
+import tools from '../../public/tools.png'
 import brush from '../../public/brush.png'
 // import { IoCheckmarkDoneCircleOutline } from 'react-icons/io'
 import { AiOutlineCheckCircle } from "react-icons/ai";
