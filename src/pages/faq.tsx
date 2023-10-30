@@ -4,6 +4,9 @@ import { FAQProps } from '../../components/FAQDetails/FAQData';
 import { FAQData } from '../../components/FAQDetails/FAQData';
 import {revalia} from "@/styles/font";
 import Image from 'next/image';
+import { AiOutlineCheckCircle } from "react-icons/ai";
+import styles from './faq.module.css'
+
 
 
 import Nav from '../../components/nav/Nav'
@@ -14,8 +17,7 @@ import welder from '../../public/welder.png'
 import lashes from '../../public/lashes.png'
 import tools from '../../public/tools.png'
 import brush from '../../public/brush.png'
-// import { IoCheckmarkDoneCircleOutline } from 'react-icons/io'
-import { AiOutlineCheckCircle } from "react-icons/ai";
+
 
 
 
@@ -78,17 +80,17 @@ const Faq: React.FC<FAQProps> = () => {
                 </div>
             </div>
 
-            <div className='max-w-7xl mx-auto px-20 mt-32 mb-48 '>
+            <div className='max-w-7xl mx-auto px-20 mt-32 mb-32 '>
                 <h1 className={`${revalia.className} text-xl font-extrabold`}>Still have questions?</h1>
             
                     {submitted ?    
-                        <div className='flex flex-col items-center h-[150px] place-content-center mt-24 transition ease-in-out delay-[3s]'>
-                            <span className={`text-[10em] text-purple7`}><AiOutlineCheckCircle /></span>
-                            <p className={`text-md mt-5`}>Thank you for contacting us. We will reach out to you soon</p>
+                        <div className={`flex flex-col items-center h-[150px] place-content-center mt-24 transition ease-in-out delay-[3s] ${styles.animation}`}>
+                            <span className={`text-[5em] text-purple7`}><AiOutlineCheckCircle /></span>
+                            <p className={`text-xs mt-5`}>Thank you for contacting us. We will reach out to you soon</p>
                         </div> : 
                     
                         <form className='ml-[10em] h-[450px]' onSubmit={hanldeSubmit}>
-                            <div className='flex flex-col my-10'>
+                            <div className={`flex flex-col my-10`}>
                                 <label>Email</label>
                                 <input type="email" value={email} 
                                 onChange={(e) => setEmail(e.target.value)}

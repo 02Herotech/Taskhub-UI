@@ -69,7 +69,7 @@ export const TermsAndConditions = () => {
                      <li>1.21 The Poster may elect to pause automatic payment of Tasker Funds for an Occurrence within 24 hours from when the Tasker confirms the Occurrence is completed. If the Poster pauses such automatic payment in accordance with this clause, then the Tasker Funds will not be released by TaskHub from the Payment Account to the Tasker until the Poster also confirms that the Occurrence is completed.</li>
                 </ul>
 
-                2. TASKHUB'S ROLE AND OBLIGATIONS
+                <p>2. TASKHUB'S ROLE AND OBLIGATIONS</p>
                 2.1 TaskHub provides the TaskHub Platform only, enabling Users to publish and make Offers on Posted Tasks or publish Offers for Services or make Instant Claims of Tasker Listings.
                 2.2 TaskHub only permits individuals over 18 years of age to become Users.
                 2.3 Users must be natural people but can specify within their account description that they represent a business entity.

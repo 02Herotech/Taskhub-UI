@@ -4,7 +4,6 @@ import { Button } from '../buttons/Button'
 import Link from 'next/link'
 import { revalia } from '@/styles/font'
 import Image from 'next/image'
-// import { gsap } from 'gsap'
 import styles from './herosection.module.css'
 
 import heroImage1 from '../../public/heroImage1.png'

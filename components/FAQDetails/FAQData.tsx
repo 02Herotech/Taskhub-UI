@@ -142,7 +142,7 @@ export const FAQLandingPage: React.FC = () => {
                     </div>
 
 
-                    <div className={`ml-[250px] p-3 mt-10 font-normal  `}>
+                    <div className={`ml-[250px] p-3 mt-10 font-normal `}>
                         <Link href='/faq'>
                             <Button
                                 btnValue='See more'
