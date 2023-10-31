@@ -19,17 +19,17 @@ export default function App({
                             }: AppProps) {
     return (
         
-        // <SessionProvider session={session}>
-        //     <Provider store={store}>
-        //         <Layout>
-        //                 <Component {...pageProps} />
-        //         </Layout>
-        //     </Provider>
-        // </SessionProvider>
+        <SessionProvider session={session}>
+            <Provider store={store}>
+                <Layout>
+                        <Component {...pageProps} />
+                </Layout>
+            </Provider>
+        </SessionProvider>
 
-        <Layout>
-            <Component {...pageProps} />
-        </Layout>
+        // <Layout>
+        //     <Component {...pageProps} />
+        // </Layout>
 
     );
 }
