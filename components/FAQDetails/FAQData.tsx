@@ -1,8 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
 import React, { useState } from 'react'
 
-import faqImg from '../../public/faqImg.png'
-import Image from 'next/image'
 import { revalia } from '@/styles/font'
 import { SlArrowDown, SlArrowUp } from 'react-icons/sl'
 import Link from 'next/link'
@@ -139,17 +137,20 @@ export const FAQLandingPage: React.FC = () => {
                                 </div>
                             ))}
                         </div>
+                    
+                        <div className={`p-3 mt-10 font-normal `}>
+                            <Link href='/faq'>
+                                <Button
+                                    btnValue='See more'
+                                    className=' border-[1px] w-[150px] h-[55px]  px-4 border-purpleBase   text-white font-extralight text-base hover:bg-yellow4 bg-yellow6'
+                                />
+                            </Link>
+                        </div>
+
                     </div>
 
 
-                    <div className={`ml-[250px] p-3 mt-10 font-normal `}>
-                        <Link href='/faq'>
-                            <Button
-                                btnValue='See more'
-                                className=' border-[1px] w-[150px] h-[55px]  px-4 border-purpleBase   text-white font-extralight text-base hover:bg-yellow4 bg-yellow6'
-                            />
-                        </Link>
-                    </div>
+                   
 
                 </div>
             </div>

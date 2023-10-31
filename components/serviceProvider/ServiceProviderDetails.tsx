@@ -8,8 +8,6 @@ const o2hero = require('../../public/02hero.png') as StaticImageData;
 const fedex = require('../../public/fedex.png') as StaticImageData;
 
 
-
-
 export interface ServicesProviderDetailsProps {
     id: number,
     providerName: string,
@@ -29,7 +27,7 @@ export const ServiceProviderDetails: ServicesProviderDetailsProps[] = [
     {
         id: 2,
         providerName: 'FedEX Delivery Company',
-        providerImage: fedex,
+        providerImage:  fedex,
         rating: 3,
         description: `We are a dynamic training provider and software development company passionate about streamlining organizations' operations and helping individuals acquire skills & knowledge required for career advancement.`
     }, {

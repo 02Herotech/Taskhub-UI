@@ -57,16 +57,16 @@ const HeroSection = () => {
 
                 < div className={`w-[800px]  h-[600px] flex  flex-wrap items-center justify-between space-y-2 ${styles.allImages}`}>
                     <div className={`w-[160px] flex items-center ${styles.imageAnimation2}`}>
-                        <Image src={heroImage1} w-full alt='' />
+                        <Image src={heroImage1} width={160} alt='' />
                     </div>
                     <div className={`w-[250px] flex items-center ${styles.imageAnimation1}`}>
-                        <Image src={heroImage2} w-full alt='' />
+                        <Image src={heroImage2} width={250} alt='' />
                     </div>
                     <div className={`w-[250px] flex items-center ${styles.imageAnimation1}`}>
-                        <Image src={heroImage3}  w-full alt='' />
+                        <Image src={heroImage3}  width={250} alt='' />
                     </div>
                     <div className={`w-[160px] flex items-center ${styles.imageAnimation2}`}>
-                        <Image src={heroImage4} w-full alt='' />
+                        <Image src={heroImage4} width={160}alt='' />
                     </div>
                 </div>
             </div>

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { StaticImageData } from 'next/image'
 import { revalia } from '@/styles/font'
 import { Button } from '../buttons/Button';
 

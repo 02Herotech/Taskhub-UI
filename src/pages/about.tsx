@@ -5,6 +5,8 @@ import Link from "next/link";
 import {Button} from "../../components/buttons/Button";
 import {revalia} from "@/styles/font";
 import Image from "next/image";
+import Head from "next/head";
+
 import aboutUs from "../../public/about.png";
 import mission from "../../public/mission.png";
 import values from "../../public/values.png";
@@ -19,20 +21,22 @@ import Dev6 from "../../public/devs/Sekai2.jpeg";
 
 const about = () => {
     return (
-        <div className={`min-h-screen`}>
-            <Nav/>
-            <div className={`py-10`}>
+        <div>
+            <Head>
+                <title>TaskHub | About Us</title>
+            </Head>
+            <div className={`min-h-screen`}>
                 <div className={`bg-gradient-to-r from-[#F8E9FE] via-[#FFFFFF] to-[#F5DDFD]`}>
                     <div className={`max-w-7xl mx-auto flex justify-between py-20 px-20`}>
                         <div className={` w-[500px] h-[450px] space-y-10`}>
                             <h1 className={`${revalia.className} font-extrabold text-xl `}>
                                 ABOUT TASKHUB
                             </h1>
-                            <h2 className={`${revalia.className} text-[28px] w-[450px] `}>
+                            <h2 className={`${revalia.className} text-[28px] w-[450px]`}>
                                 We make the business life easy and safe
                             </h2>
                             <p className={`w-[430px] font-[500] text-justify text-base`}>
-                            Excellent customer service, top-notch service providers, and easy-to-use technology. That's our recipe for brewing you a stress-free life.
+                            Excellent customer service, top-notch service providers, and easy-to-use technology. That is our recipe for brewing you a stress-free life.
                             </p>
                             <div>
                                 <Link href="/auth/">
@@ -43,9 +47,9 @@ const about = () => {
                                 </Link>
                             </div>
                         </div>
-                        <div className={`w-[300px] relative mt-[100px] h-[450px] flex items-center bg-purpleBase`}>
-                            <div className="w-[300px] flex h-[320px] absolute left-[-9.5rem] top-20">
-                                <Image src={aboutUs} alt="" w-full h-full/>
+                        <div className={`w-[250px] relative mt-[100px] h-[400px] flex items-center bg-purpleBase`}>
+                            <div className="w-[250px] flex h-[270px] absolute left-[-9.5rem] top-20">
+                                <Image src={aboutUs} alt="" width={250} height={270}/>
                             </div>
                         </div>
                     </div>
@@ -271,7 +275,6 @@ const about = () => {
                     </div>
                 </div>
             </div>
-            <Footer/>
         </div>
     );
 };

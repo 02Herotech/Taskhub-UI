@@ -18,14 +18,18 @@ export default function App({
                                 pageProps: {session, ...pageProps},
                             }: AppProps) {
     return (
-        <SessionProvider session={session}>
-            <Provider store={store}>
-                <Layout>
-                    <main className={poppins.className}>
-                        <Component {...pageProps} />
-                    </main>
-                </Layout>
-            </Provider>
-        </SessionProvider>
+        
+        // <SessionProvider session={session}>
+        //     <Provider store={store}>
+        //         <Layout>
+        //                 <Component {...pageProps} />
+        //         </Layout>
+        //     </Provider>
+        // </SessionProvider>
+
+        <Layout>
+            <Component {...pageProps} />
+        </Layout>
+
     );
 }
