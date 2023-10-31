@@ -1,31 +1,103 @@
-/* herosection.module.css */
-@keyframes moveUpAndChangeColor {
-    0% {
-        transform: translateY(0);
-        color: #381F8C;
-        /* Initial color for the first word */
-    }
 
-    50% {
-        transform: translateY(-20px);
-        /* Move up */
-        color: #9c8fc6;
-        /* Intermediate color for the second word */
-    }
 
-    100% {
-        transform: translateY(0);
-        color: #d7d2e8;
-        /* Final color for the third word */
-    }
+/* Get Started Section Animation  */
+
+.getStartedAnimation {
+    animation: increaseContainerScale;
+    animation-duration: 1.9s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: initial;
+    animation-direction: alternate;
+    /* animation-delay: 1s; */
 }
 
-/* Apply the animation to the span elements */
-.textAnimation {
-    animation-name: moveUpAndChangeColor;
-    animation-duration: 2s;
+@keyframes increaseContainerScale {
+    from {transform:scale(.7);
+        transform-origin: left top;
+    };
+    to {transform: scale(1);};
+}
+
+/* Hero Images Container Animation  */ 
+
+.allImages {
+    animation: imageContainer;
+    animation-duration: 1.5s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: initial;
+    animation-direction: alternate;
+}
+
+@keyframes imageContainer {
+    from {transform: scale(0.2);
+        transform-origin: left top;
+    }
+    to {transform: scale(1)}
+}
+
+
+/* First Image Rotation */
+
+/* .rotate{
+    animation: imageRotation;
+    animation-duration: 1.5s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: initial;
+    animation-direction: alternate;
+}
+
+@keyframes imageContainer {
+    from {transform: rotateX('45deg');}
+    to {transform: rotateX('0deg');}
+} */
+
+
+
+
+/* Images Aninmation  */
+
+/* Fist Animation  */
+
+.imageAnimation1 {
+    animation-name: increaseImageScale;
+    animation-duration: 3s;
     animation-timing-function: ease-in-out;
     animation-iteration-count: infinite;
-    transition: color 0.5s ease;
-    /* Smoothly change the color */
+    animation-direction: alternate;
 }
+
+@keyframes increaseImageScale {
+    0%{transform: scale(1);
+    transform-origin: right top;
+    }
+    100% {transform: scale(1.3);}
+}
+
+/* Second Animation  */
+
+.imageAnimation2 {
+    animation: decreaseImageScale;
+    animation-duration: 3s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    /* animation-delay: 3s; */
+}
+
+@keyframes decreaseImageScale {
+    0% {transform: scale(1);}
+    100% {transform: scale(0.6);}
+}
+
+/* .firstImageAnimation {
+    animation: firstImageRotation, decreaseImageScale;
+    animation-duration: 3s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+} */
+
+/* @keyframes firstImageRotation {
+  from {opacity: 50%;}
+  to {opacity: 100%;}
+} */

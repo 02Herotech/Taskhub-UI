@@ -1,0 +1,21 @@
+.contact {
+    padding: 8px;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.contact:hover {
+    color: purple;
+}
+
+.contactDetails {
+    display: none;
+}
+
+.contact:hover .contactDetails {
+    display: block;
+    /* position: absolute; */
+    margin-top: 20px;
+    margin-left: -10px;
+    padding: 20px;
+}

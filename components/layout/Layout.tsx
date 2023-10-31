@@ -1,11 +1,13 @@
 import React from "react";
+import Nav from '../nav/Nav'
+import Footer from "../footer/Footer";
 
 const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
-    <div
-      className={`flex min-h-[100vh] flex-col justify-stretch items-stretch`}
-    >
-      <main className={`grow`}>{children}</main>
+    <div>
+     <Nav />
+      {children}
+      <Footer />
     </div>
   );
 };

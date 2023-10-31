@@ -4,9 +4,6 @@ import Link from 'next/link'
 import { StaticImageData } from 'next/image'
 import Head from 'next/head'
 
-import homepageStyles from '../styles/homepage.module.css'
-import Nav from '../../components/nav/Nav'
-import Footer from '../../components/footer/Footer'
 import ServicesLayout from '../../components/services/ServicesLayout'
 import ServiceProviderLayout from '../../components/serviceProvider/ServiceProviderLayout'
 
@@ -16,7 +13,6 @@ import mastercard from '../../public/mastercard.svg'
 import google from '../../public/Google.svg'
 import visa from '../../public/visa.svg'
 import { FAQLandingPage } from '../../components/FAQDetails/FAQData'
-// import { poppins, revalia } from '@/styles/font'
 import HeroSection from '../../components/heroSection/HeroSection'
 const automative = require('../../public/automative.png') as StaticImageData;
 const fedex = require('../../public/fedex.png') as StaticImageData;
@@ -27,15 +23,14 @@ const Home = () => {
   return (
     <div>
       <Head>
-        <title>TaskHUB  | HomePage </title>
+        <title>TaskHub | HomePage</title>
       </Head>
+      
       <main
         className={`min-h-screen `}>
-        <Nav />
 
-        <div className={`bg-white`}>
+        <div>
           <HeroSection />
-
         </div>
 
         <ServicesLayout id={0} category={''} categoryImage={automative} services={[]} description={''} />
@@ -60,12 +55,10 @@ const Home = () => {
           </div>
 
         </div>
+
         <ServiceProviderLayout id={0} providerName={''} providerImage={fedex} rating={0} description={''} />
 
         <FAQLandingPage />
-
-        <Footer />
-
 
       </main >
     </div>
