@@ -6,7 +6,7 @@ import styles from './styles.module.css'
 export const TermsAndConditions = () => {
     return (
         <div className={`text-justify pb-20 pt-36 px-20 max-w-7xl mx-auto`}>
-            {/* <h3 className={`text-xl text-center my-5 ${revalia.className}`}>TERMS AND CONDITIONS</h3>
+            <h3 className={`text-xl text-center my-5 ${revalia.className}`}>TERMS AND CONDITIONS</h3>
             <p className='font-extrabold text-center text-[16px] my-4'>THIS AGREEMENT INCLUDES A CLASS ACTION WAIVEVR AND REQUIRES <br /> THE USE OF ARTBITRATION ON AN INDIVIDUAL BASIS TO SOLVE 
             <br /> DISPUTES, RATHER THAN JURY TRIALS</p>
 
@@ -383,9 +383,8 @@ export const TermsAndConditions = () => {
                 "User" or "You" means the person who has signed up to use the TaskHub Platform, whether as the Customer, Poster, Tasker, or otherwise.
                 "Verification Icons" means the icons available to be displayed on a User's profile and any such posts on the TaskHub Platform to confirm details such as a User's qualification, license, certificate or other skill.
                 Revised May 2022 copyright TaskHub.
-            </div> */}
+            </div>
 
-                <p>Terms and Conidtion</p>
         </div>
     )
 }
