@@ -75,19 +75,6 @@ export const SearchButton: React.FC<SearchButtonProps> = ({ btnPlaceholder1, btn
 
             </div>
 
-            {/* Second Input */}
-            {/* <div className='mr-3'>
-                    <input
-                        type="text"
-                        value={searchValues.input2}
-                        onChange={(e) => handleInputChange('input2', e.target.value)}
-                        placeholder={btnPlaceholder2}
-                        className={`bg-grey text-black outline-none rounded-xl p-2 w-full h-[40px]`}
-                    />
-                </div> */}
-
-            {/* Search Button */}
-
         </div>
     );
 };

@@ -26,7 +26,7 @@ const about = () => {
                 <title>TaskHub | About Us</title>
             </Head>
             <div className={`min-h-screen`}>
-                <div className={`bg-gradient-to-r from-[#F8E9FE] via-[#FFFFFF] to-[#F5DDFD]`}>
+                <div className={`bg-gradient-to-r from-[#F8E9FE] via-[#FFFFFF] to-[#F5DDFD] pt-20`}>
                     <div className={`max-w-7xl mx-auto flex justify-between py-20 px-20`}>
                         <div className={` w-[500px] h-[450px] space-y-10`}>
                             <h1 className={`${revalia.className} font-extrabold text-xl `}>

@@ -96,14 +96,14 @@ const Faq: React.FC<FAQProps> = () => {
                                 <label>Email</label>
                                 <input type="email" value={email} 
                                 onChange={(e) => setEmail(e.target.value)}
-                                placeholder='example@abc.com' className='mt-6 w-[40em] p-3 border-grey4 border-2 rounded-md text-grey4 text-[13px]'/>
+                                placeholder='example@abc.com' className='mt-6 w-[40em] p-3 border-grey4 border-2 rounded-md text-grey6 text-[13px]'/>
                             </div>
 
                             <div className='flex flex-col'>
                                 <label>Message</label>
                                 <textarea name="message" placeholder='Type here...' value={message}
                                 onChange={(e) => setMessage(e.target.value)}
-                                className='resize-none mt-6 w-[40em] h-72 p-3 border-grey4 border-2 rounded-md text-grey4 text-[13px]' />
+                                className='resize-none mt-6 w-[40em] h-72 p-3 border-grey4 border-2 rounded-md text-grey6 text-[13px]' />
                             </div>
 
                             <button type='submit' className={`p-3 bg-purpleBase text-white  text-[13px] font-extralight hover:bg-purple7 rounded-md my-10 disabled:opacity-50`}

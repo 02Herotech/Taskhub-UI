@@ -25,10 +25,10 @@ const HeroSection = () => {
                 <div className={`flex flex-col justify-around w-1/2 text-black`}>
                     <div className={`flex flex-col`}>
                         <h1 className={`text-xl mt-[3rem] mb-5 font-[400] w-[375px] ${revalia.className}`}>
-                            GET QUICK <br />AND <span className={`text-purpleBase`}> EFFICIENT </span>SERVICE
+                            GET QUICK<br />AND<span className={`text-purpleBase`}> EFFICIENT </span>SERVICE
                         </h1>
 
-                        <p className={`text-base text-justify w-[400px] font-[100]`}>
+                        <p className={`text-base text-justify w-[380px] font-[100]`}>
                             Our user-friendly platform ensures a seamless
                             experience, allowing you to effortlessly find, connect,
                             and engage with the perfect service professionals.
