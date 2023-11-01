@@ -1,7 +1,6 @@
 import React from 'react'
-import Nav from '../../components/nav/Nav'
-import Footer from '../../components/footer/Footer'
 import Head from 'next/head'
+import ServiceSlider from '../../components/serviceSlider/ServiceSlider'
 
 
 const services = () => {
@@ -10,14 +9,12 @@ const services = () => {
             <Head>
                 <title>TaskHub | Services</title>
             </Head>
-            <div className={`min-h-screen`}>
-                <div className="container mx-auto px-4 py-8 text-black">
-                    <h1 className="text-3xl font-extrabold mb-6">Services</h1>
-
-                </div>
+            <div className={`min-h-screen py-20`}>
+                <ServiceSlider />
+                
             </div>
         </div>
     )
 }
 
-export default services
+export default services;
