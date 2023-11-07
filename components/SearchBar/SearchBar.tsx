@@ -26,7 +26,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({ btnPlaceholder1, btnPlaceh
         setErase(!erase)
     };
     
-    console.log('Erase:', erase);
+    // console.log('Erase:', erase);
 
     const emptySearch = () => {
         setSearchValues('')

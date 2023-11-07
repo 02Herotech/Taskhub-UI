@@ -10,6 +10,10 @@ import logoImg from "../../../public/logo.png";
 import { BackButton } from "../../../components/buttons/Button";
 import { useCustomerSignUpMutation } from "@/redux/features/auth/api";
 import router from "next/router";
+import flag from '../../../public/flag.jpg';
+import { BsArrowLeftCircle } from 'react-icons/bs'
+
+
 
 interface FormState {
     firstName: string;
@@ -20,7 +24,8 @@ interface FormState {
     password: string;
     confirmPassword: string;
     agreement: boolean;
-    error: string;
+    error1: string;
+    error2: string;
 }
 
 const customerSignup: React.FC<FormState> = () => {
@@ -33,7 +38,8 @@ const customerSignup: React.FC<FormState> = () => {
         password: "",
         confirmPassword: "",
         agreement: false,
-        error: "",
+        error1: "",
+        error2: "",
     });
 
     // Function to reset form fields
@@ -47,7 +53,8 @@ const customerSignup: React.FC<FormState> = () => {
             password: "",
             confirmPassword: "",
             agreement: false,
-            error: "",
+            error1: "",
+            error2: "",
         });
     };
 
@@ -70,14 +77,14 @@ const customerSignup: React.FC<FormState> = () => {
             if (value && !passwordPattern.test(value)) {
                 setFormData((prevData) => ({
                     ...prevData,
-                    error:
-                        "Password should be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one special character, and one number.",
+                    error1:
+                        "Must be min. of 8 characters and contain at least one uppercase letter, one special character and one number",
                 }));
             } else {
                 // Clear the error message if the password matches the pattern or is empty
                 setFormData((prevData) => ({
                     ...prevData,
-                    error: "",
+                    error1: "",
                 }));
             }
         }
@@ -86,13 +93,13 @@ const customerSignup: React.FC<FormState> = () => {
             if (value !== formData.password) {
                 setFormData((prevData) => ({
                     ...prevData,
-                    error: "Password should match",
+                    error2: "Password should match",
                 }));
             } else {
                 // Clear the error message if the confirm password matches the password
                 setFormData((prevData) => ({
                     ...prevData,
-                    error: "",
+                    error2: "",
                 }));
             }
         }
@@ -118,7 +125,7 @@ const customerSignup: React.FC<FormState> = () => {
         const requiredFields: (keyof FormState)[] = [
             "firstName",
             "lastName",
-            "address",
+            // "address",
             "phoneNumber",
             "email",
             "password",
@@ -159,6 +166,7 @@ const customerSignup: React.FC<FormState> = () => {
         const formattedPhoneNumber = formData.phoneNumber.startsWith("+61")
             ? formData.phoneNumber
             : "+61" + formData.phoneNumber;
+
         const body = {
             firstName: formData.firstName,
             lastName: formData.lastName,
@@ -197,40 +205,32 @@ const customerSignup: React.FC<FormState> = () => {
     };
 
     return (
-        <div className={` h-screen w-full overflow-x-hidden`}>
-            <div
-                className={`p-10 flex h-[100px] drop-shadow-md fixed z-[9999] w-full bg-white   font-extrabold`}
-            >
-                <Link href="/" className={`flex space-x-3 items-center`}>
-                    <Image
-                        src={logoImg}
-                        width={61}
-                        height={55}
-                        alt=""
-                        className={`mt-[-10px]`}
-                    />
-                    <h4 className={`text-lg font-extrabold `}>TaskHub</h4>
-                </Link>
+        <div className={` w-full overflow-x-hidden`}>
+            
+            <div className={`p-5 flex h-[80px] drop-shadow-md fixed z-50 w-full bg-white font-extrabold justify-center`}>
+                <div className='w-[80em]'>
+                    <Link href='/' className={`flex space-x-3 items-center`}>
+                        <Image src={logoImg} width={50} height={40} alt='' className={`mt-[-10px]`} />
+                        <h4 className={`text-sm font-extrabold `}>TaskHub</h4>
+                    </Link>
+                </div>
             </div>
 
-            <div className={`flex justify-center mt-[120px] items-center flex-col `}>
+     
+            <div className={`flex justify-center mt-[120px] items-center flex-col min-h-screen mb-16`}>
+
                 <div className={` p-3 space-y-5 text-center mb-2`}>
-                    <div className={`text-lg font-bold w-full  `}>
-                        <h1>Create your your Customer account</h1>
+                    <div className={`text-lg font-extrabold w-full  `}>
+                        <h1 >Create your TaskHub Customer account</h1>
                     </div>
 
-                    <div className={`flex justify-around font-[600] w-[300px]  mx-auto`}>
+                    <div className={`flex justify-around items-center font-[600] w-[300px]  mx-auto`}>
                         <h5>Already have an account?</h5>
-                        <Link
-                            href="/auth/login"
-                            className={`text-purpleBase hover:text-[17px] `}
-                        >
-                            Log in
-                        </Link>
+                        <Link href='/auth/login' className={`text-purpleBase flex justify-center items-center hover:text-[17px] w-[70px] h-[30px]`}>Log in</Link>
                     </div>
                 </div>
 
-                <div className="mb-10 w-[500px]">
+                <div className="mb-10 w-[500px] mt-10">
                     <form action="" onSubmit={onSubmit}>
                         <div className={`space-y-4 mb-10`}>
                             <div className={`flex justify-between`}>
@@ -273,7 +273,7 @@ const customerSignup: React.FC<FormState> = () => {
                                 </div>
                             </div>
 
-                            <div className={`flex flex-col`}>
+                            {/* <div className={`flex flex-col`}>
                                 <label
                                     htmlFor="address"
                                     className={`font-bold text-[16px] my-3`}
@@ -290,33 +290,15 @@ const customerSignup: React.FC<FormState> = () => {
                                     onChange={handleChange}
                                     required
                                 />
-                            </div>
+                            </div> */}
 
                             <div className={`flex flex-col`}>
-                                <label
-                                    htmlFor="phoneNumber"
-                                    className={`font-bold text-[16px] my-3`}
-                                >
+                                <label htmlFor="phoneNumber" className={`font-bold text-[16px] my-3`}>
                                     Phone Number <span className={`text-red10`}>*</span>
                                 </label>
                                 <div className={`flex items-center justify-around`}>
-                                    <h4
-                                        className={`border-medium border-[1px] text-base text-black font-bold p-3 rounded-xl`}
-                                    >
-                                        AU +61
-                                    </h4>
-                                    <input
-                                        type="text"
-                                        placeholder="Enter phone number"
-                                        name="phoneNumber"
-                                        id="phoneNumber"
-                                        className={`border-medium border-[1px] text-base text-black font-bold py-3 px-10 tracking-[0.3rem] rounded-xl  w-5/6`}
-                                        value={formData.phoneNumber}
-                                        onChange={handleChange}
-                                        onKeyDown={handlePhoneNumberKeyDown}
-                                        required
-                                        maxLength={9}
-                                        minLength={9}
+                                    <h4 className={`flex border-medium border-[1px] text-base text-black font-bold px-5 py-3 rounded-xl`}><Image src={flag} width={30} alt='AUS Flag' className='mr-1'/>+61</h4>
+                                    <input type="tel" placeholder='Enter phone number' name='phoneNumber' id='phoneNumber' className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl w-[78%]`} value={formData.phoneNumber} onChange={handleChange} onKeyDown={handlePhoneNumberKeyDown} required maxLength={9} minLength={9}
                                     />
                                 </div>
                             </div>
@@ -338,23 +320,12 @@ const customerSignup: React.FC<FormState> = () => {
                             </div>
 
                             <div className={`flex flex-col`}>
-                                <label
-                                    htmlFor="password"
-                                    className={`font-bold text-[16px] my-3`}
-                                >
+                                <label htmlFor="password" className={`font-bold text-[16px] my-3 flex  items-center w-[500px] h-[30px] `}>
                                     Password <span className={`text-red10`}>*</span>
+                                    <p className={`text-red10 p-2  my-0 py-0 text-[10px]`}>{formData.error1}</p>
                                 </label>
                                 <div className={`relative`}>
-                                    <input
-                                        type={showPassword ? "text" : "password"}
-                                        id="password"
-                                        name="password"
-                                        placeholder="Enter your password"
-                                        className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl w-full`}
-                                        value={formData.password}
-                                        onChange={handleChange}
-                                        required
-                                        maxLength={15}
+                                    <input type={showPassword ? 'text' : 'password'} id='password' name='password' placeholder='Enter your password' className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl w-full`} value={formData.password} onChange={handleChange} required maxLength={15}
                                     />
                                     <button
                                         type="button"
@@ -369,28 +340,15 @@ const customerSignup: React.FC<FormState> = () => {
                                     </button>
                                 </div>
                             </div>
-                            <div className={`text-red10 p-2 my-0 py-0 text-[10px]`}>
-                                <p>{formData.error}</p>
-                            </div>
+
 
                             <div className={`flex flex-col`}>
-                                <label
-                                    htmlFor="confirmPassword"
-                                    className={`font-bold text-[16px] my-3`}
-                                >
-                                    Confirm your Password <span className={`text-red10`}>*</span>
+                                <label htmlFor="password" className={`font-bold text-[16px] my-3 flex  items-center w-[500px] h-[30px] `}>
+                                    Confirm Password <span className={`text-red10`}>*</span>
+                                    <p className={`text-red10 p-2  my-0 py-0 text-[10px]`}>{formData.error2}</p>
                                 </label>
                                 <div className={`relative`}>
-                                    <input
-                                        type={showConfirmPassword ? "text" : "password"}
-                                        id="confirmPassword"
-                                        name="confirmPassword"
-                                        placeholder="Enter your password"
-                                        className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl w-full`}
-                                        value={formData.confirmPassword}
-                                        onChange={handleChange}
-                                        required
-                                        maxLength={15}
+                                    <input type={showConfirmPassword ? 'text' : 'password'} id='confirmPassword' name='confirmPassword' placeholder='Enter your password' className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl w-full`} value={formData.confirmPassword} onChange={handleChange} required maxLength={15}
                                     />
                                     <button
                                         type="button"
@@ -406,39 +364,18 @@ const customerSignup: React.FC<FormState> = () => {
                                 </div>
                             </div>
 
-                            <div className={`space-x-2`}>
-                                <input
-                                    onChange={handleChange}
-                                    type="checkbox"
-                                    name="agreement"
-                                    id="agreement"
-                                    required
-                                />
-                                <label htmlFor="agreement" className={`font-bold text-base`}>
-                                    I agree to all{" "}
-                                    <Link
-                                        href="/termsAndConditions"
-                                        className={`text-purpleBase text-base hover:underline`}
-                                    >
-                                        Terms of service{" "}
-                                    </Link>{" "}
-                                    and{" "}
-                                    <Link
-                                        href="/privacy"
-                                        className={`text-purpleBase text-base hover:underline `}
-                                    >
-                                        {" "}
-                                        Privacy
-                                    </Link>
-                                </label>
+                            <div className={`space-x-2 flex`}>
+                                <input onChange={handleChange} type="checkbox" name="agreement" id="agreement" required />
+                                <label htmlFor="agreement" className={`font-bold text-[12px]`}>I agree to  all 
+                                <Link href='/termsAndConditions' className={`text-purpleBase hover:underline`}>Terms of service </Link> and 
+                                <Link href='/privacy' className={`text-purpleBase hover:underline `}> Privacy</Link></label>
                             </div>
                         </div>
 
                         <div className={`flex justify-center items-center`}>
                             <button
                                 type="submit"
-                                className={`w-full bg-purpleBase text-white py-2 px-4 rounded-md hover:bg-purple5  ${isAllFieldsFilled() ? "" : "cursor-not-allowed opacity-50"
-                                    }`}
+                                className={`w-full bg-purpleBase text-white py-2 px-4 rounded-md hover:bg-purple5  ${isAllFieldsFilled() ? "" : "opacity-50"}`}
                                 disabled={!isAllFieldsFilled() || isLoading}
                             >
                                 {isLoading ? "Creating..." : "Create Account"}
@@ -452,6 +389,12 @@ const customerSignup: React.FC<FormState> = () => {
                             </div>
                         )}
                     </form>
+                </div>
+
+                <div className={`flex justify-center items-center h-[35px] w-[150px]`} >
+                    <Link href='/' className='text-base font-extrabold hover:scale-110'>
+                        <button className='flex justify-center items-center'><span className='mr-1'><BsArrowLeftCircle /></span>Back Home</button>
+                    </Link>
                 </div>
             </div >
         </div >

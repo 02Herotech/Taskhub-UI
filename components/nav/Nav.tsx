@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import Image from 'next/image'
 import logoImg from '../../public/logo.png'
 import { Button } from '../buttons/Button';
-
+import { poppins } from '@/styles/font'
 
 import { SlArrowDown, SlArrowUp } from 'react-icons/sl'
 // import styles from './Nav.module.css'
@@ -24,7 +24,7 @@ const [isOpen, setIsOpen] = useState(false);
   return (
 
     <div className='flex flex-col'>
-      <div className={`drop-shadow-md z-50 w-full bg-white fixed top-0`}>
+      <div className={`drop-shadow-md z-50 w-full bg-white fixed top-0 ${poppins.className}`}>
         
         <div className={`max-w-7xl mx-auto px-8 py-3 flex items-center justify-between font-extrabold`}>
           <div>
@@ -34,17 +34,17 @@ const [isOpen, setIsOpen] = useState(false);
             </Link>
           </div>
 
-          <div className="flex space-x-12 items-center text-sm">
-            <Link href="/" className={`p-2 hover:text-purpleBase text-[13px] ${isLinkActive("/") && "text-purpleBase"}`} >
+          <div className={`flex space-x-12 items-center text-[15px]`}>
+            <Link href="/" className={`p-2 hover:text-purpleBase ${isLinkActive("/") && "text-purpleBase"}`} >
               Home
             </Link>
-            <Link href='/about' className={`p-2 hover:text-purpleBase text-[13px] ${isLinkActive("/about") && "text-purpleBase"}`}  >
+            <Link href='/about' className={`p-2 hover:text-purpleBase ${isLinkActive("/about") && "text-purpleBase"}`}  >
               About Us
             </Link>
-            <Link href="/services" className={`p-2 hover:text-purpleBase text-[13px] ${isLinkActive("/services") && "text-purpleBase"}`} >
+            <Link href="/services" className={`p-2 hover:text-purpleBase ${isLinkActive("/services") && "text-purpleBase"}`} >
               Services
             </Link>
-            <Link href="/faq" className={`p-2 hover:text-purpleBase text-[13px] ${isLinkActive("/faq") && "text-purpleBase"}`} >
+            <Link href="/faq" className={`p-2 hover:text-purpleBase ${isLinkActive("/faq") && "text-purpleBase"}`} >
               FAQs
             </Link>
 

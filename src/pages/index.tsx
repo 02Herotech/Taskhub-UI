@@ -14,6 +14,8 @@ import google from '../../public/Google.svg'
 import visa from '../../public/visa.svg'
 import { FAQLandingPage } from '../../components/FAQDetails/FAQData'
 import HeroSection from '../../components/heroSection/HeroSection'
+import Nav from '../../components/nav/Nav'
+import Footer from '../../components/footer/Footer'
 const automative = require('../../public/automative.png') as StaticImageData;
 const fedex = require('../../public/fedex.png') as StaticImageData;
 
@@ -26,6 +28,8 @@ const Home = () => {
         <title>TaskHub | HomePage</title>
       </Head>
       
+      <Nav />
+
       <main
         className={`min-h-screen `}>
 
@@ -61,6 +65,8 @@ const Home = () => {
         <FAQLandingPage />
 
       </main >
+
+      <Footer />
     </div>
   )
 }
