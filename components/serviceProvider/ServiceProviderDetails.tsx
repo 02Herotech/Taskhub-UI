@@ -53,9 +53,9 @@ export const ServiceProviderDetails: ServicesProviderDetailsProps[] = [
     },
     {
         id: 6,
-        providerName: 'FedEX Delivery Company',
+        providerName: 'CY Company',
         providerImage: fedex,
-        rating: 4,
+        rating: 2,
         description: `We are a dynamic training provider and software development company passionate about streamlining organizations' operations and helping individuals acquire skills & knowledge required for career advancement.`
     }
 ]
@@ -73,6 +73,7 @@ export const ServiceProviderDetailsLayout: React.FC<ServicesProviderDetailsProps
         }
         return stars;
     };
+
     return (
         <div className={`bg-[white] border-[0.5px] border-grey3 flex rounded-md justify-center w-[665px] h-[170px] drop-shadow-md`}>
             <Link href='#'>
