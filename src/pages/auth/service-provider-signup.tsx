@@ -19,7 +19,7 @@ import flag from '../../../public/flag.jpg'
 interface FormState {
     firstName: string;
     lastName: string;
-    address: string;
+    // address: string;
     phoneNumber: string;
     email: string;
     password: string;
@@ -35,7 +35,7 @@ const serviceProviderSignup: React.FC<FormState> = () => {
     const [formData, setFormData] = useState({
         firstName: '',
         lastName: '',
-        address: '',
+        // address: '',
         phoneNumber: '',
         email: '',
         password: '',
