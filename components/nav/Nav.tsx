@@ -17,6 +17,10 @@ const Nav = () => {
 
 const [isOpen, setIsOpen] = useState(false);
 
+const contactClick = () => {
+  setIsOpen(!isOpen)
+}
+
 // const contactRef = useRef;
 
 
@@ -47,15 +51,24 @@ const [isOpen, setIsOpen] = useState(false);
             <Link href="/faq" className={`p-2 hover:text-purpleBase ${isLinkActive("/faq") && "text-purpleBase"}`} >
               FAQs
             </Link>
-
-            <div className={`flex cursor-pointer`}
-            // ref={contactRef}
-            onClick={() => setIsOpen(!isOpen)}>
-              <p className={`flex p-2 hover:text-purpleBase text-[13px]`}>
-              Contact Us
-              <span className='text-[10px] ml-1 mt-1'>{isOpen ? <SlArrowDown /> : <SlArrowUp /> }</span></p>
-            </div>
             
+            <div className=' flex relative cursor-pointer' onClick={contactClick}>
+              <ul>
+                <li  className={`flex hover:text-purpleBase`}>Contact Us<span className='text-[10px] ml-1 mt-1.5 group'>{isOpen ? <SlArrowDown /> : <SlArrowUp /> }</span>
+
+                  { !isOpen ? '' :
+                  <div className='absolute top-16 ml-[-10px] bg-[#ead8d8] w-[250px] text-[13px] py-2 px-4'>
+                    <ul className='hover:'>
+                      <li>Email: privacy@taskhub.com.au</li>
+                      <li>Phone: +6145000000</li>
+                    </ul>
+                  </div>
+                  }
+
+                </li>
+              </ul>
+            </div>
+
           </div>
 
             

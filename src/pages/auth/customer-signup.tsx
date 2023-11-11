@@ -181,19 +181,21 @@ const customerSignup: React.FC<FormState> = () => {
             .unwrap() // Unwrap the result to handle possible errors
             .then(() => {
                 setIsSubmitting(false); // Reset submitting status
-                resetForm(); // Reset form fields after successful submission
+                // resetForm(); // Reset form fields after successful submission
 
                 // Clear the error message after 5 seconds
                 setTimeout(() => {
                     setSignupError(null);
-                }, 5000);
+                }, 8000);
             })
+            
             .catch((error) => {
-                setIsSubmitting(false); // Reset submitting status on error
+                // Reset submitting status on error
+                setIsSubmitting(false); 
                 console.error("Error submitting:", error);
-
+                
                 // Set the error message in the state
-                setSignupError("Registration was unsuccessful. Please try again.");
+                setSignupError(error.data.message);
 
                 // Clear the error message after 5 seconds
                 setTimeout(() => {
@@ -367,7 +369,7 @@ const customerSignup: React.FC<FormState> = () => {
                             <div className={`space-x-2 flex`}>
                                 <input onChange={handleChange} type="checkbox" name="agreement" id="agreement" required />
                                 <label htmlFor="agreement" className={`font-bold text-[12px]`}>I agree to  all 
-                                <Link href='/termsAndConditions' className={`text-purpleBase hover:underline`}>Terms of service </Link> and 
+                                <Link href='/termsAndConditions' className={`text-purpleBase hover:underline`}> Terms of service </Link> and 
                                 <Link href='/privacy' className={`text-purpleBase hover:underline `}> Privacy</Link></label>
                             </div>
                         </div>

@@ -134,7 +134,7 @@ const serviceProviderSignup: React.FC<FormState> = () => {
 
     const onSubmit = async (event: any) => {
         event.preventDefault();
-        console.log("Button Triggered")
+        // console.log("Button Triggered")
 
         if (isSignUpLoading){
             return;
@@ -166,14 +166,19 @@ const serviceProviderSignup: React.FC<FormState> = () => {
                     // Clear the error message after 5 seconds
                     setTimeout(() => {
                         setSignUpError(null);
-                    }, 5000);
+                    }, 8000);
                 })
+
+                // .catch((error) => console.error('rejected', error));
+                // .then (res.message)
                 .catch((error) => {
                     setIsSubmitting(false);
+
                     console.error("Error submitting:", error);
+                                      
 
                     // Set the error message in the state
-                    setSignUpError("Registration was unsuccessful. Please try again.");
+                    setSignUpError(error.data.message);
 
                     // Clear the error message after 5 seconds
                     setTimeout(() => {
