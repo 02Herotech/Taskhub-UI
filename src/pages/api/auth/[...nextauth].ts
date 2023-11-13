@@ -32,7 +32,8 @@ export default NextAuth({
           throw new Error("invalid credentials")
         }
         return { id: '1234', name: "cy baby", email: 'jsjj@gmail.com'}
-      // try {
+      
+      //   try {
         
       //   const response = await axios.post(baseUrl + "customer/login", {
       //     emailAddress: email,
@@ -75,34 +76,3 @@ export default NextAuth({
 });
 
 
-
-
-
-    // const authOptions: NextAuthOptions {
-    //   session: {
-    //     strategy: 'jwt',
-    //   },
-    //   providers : [
-    //     CredentialsProvider({
-    //       type: 'credentials',
-    //       credentials: {
-    //         email: {
-    //           label: "Email", type: "email", placeholder: "abc@gmail.com"
-    //         },
-    //         password: {
-    //           label: "Password", type: "Password"
-    //         }
-    //       },
-    //      async authorize(credentials, req){
-    //         const {email, password} = credentials as {
-    //           email: string;
-    //           password: string;
-    //         };
-    //       }
-    //     })
-    //   ]
-    
-    
-    // }
-     
-    // export default NextAuth(authOptions);

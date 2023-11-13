@@ -80,16 +80,16 @@ export const CategoryDetails: CategoryDetailsProps[] = [
     },
 ]
 
-export const CategoryDetailsStars: React.FC<CategoryDetailsProps> = ({ CategoryDescription, CategoryDetailsImage, rating }) => {
+// export const CategoryDetailsStars: React.FC<CategoryDetailsProps> = ({ CategoryDescription, CategoryDetailsImage, rating }) => {
 
-    const renderRatingStars = (rating: number) => {
-        const stars = [];
-        for (let i = 1; i <= 5; i++) {
-            if (i <= rating) {
-                stars.push(<AiFillStar className={`text-[#FE9B07]`} key={i} />);
-            } else {
-                stars.push(<AiOutlineStar key={i} />);
-            }
-        }
-        return stars;
-    };
+//     const renderRatingStars = (rating: number) => {
+//         const stars = [];
+//         for (let i = 1; i <= 5; i++) {
+//             if (i <= rating) {
+//                 stars.push(<AiFillStar className={`text-[#FE9B07]`} key={i} />);
+//             } else {
+//                 stars.push(<AiOutlineStar key={i} />);
+//             }
+//         }
+//         return stars;
+//     };
