@@ -19,6 +19,7 @@ const AuthLayout = () => {
                     </Link>
                 </div>
             </div>
+
             <div className={`flex  mt-10 items-center min-h-screen justify-center w-full my-auto `}>
                 <div className={`px-20  flex justify-center items-center m-auto flex-col`}>
                     <div className={`w-[600px] p-3 space-y-5 text-center mb-10`}>
@@ -28,7 +29,7 @@ const AuthLayout = () => {
 
                         <div className={`flex justify-around items-center font-[600] w-[280px] h-[50px] mx-auto`}>
                             <h5>Already have an account?</h5>
-                            <Link href='/auth/authLogin' className={`text-purpleBase hover:text-[17px] w-[60px] h-[30px] flex justify-center items-center`}>Log in</Link>
+                            <Link href='/auth/login' className={`text-purpleBase hover:text-[17px] w-[60px] h-[30px] flex justify-center items-center`}>Log in</Link>
                         </div>
                     </div>
 

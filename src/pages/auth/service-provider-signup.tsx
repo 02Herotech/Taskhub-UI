@@ -206,15 +206,15 @@ const serviceProviderSignup: React.FC<FormState> = () => {
                 </div>
             </div>
 
-            <div className={`flex justify-center mt-[120px] items-center flex-col`}>
+            <div className={`flex justify-center min-h-screen mt-[120px] items-center flex-col`}>
                 <div className={` p-3 space-y-5 text-center mb-2`}>
                     <div className={`text-lg font-extrabold w-full  `}>
                         <h1 >Create your TaskHub Service Provider account</h1>
                     </div>
 
-                    <div className={`flex justify-around items-center font-[600] w-[300px]  mx-auto`}>
+                    <div className={`flex justify-center items-center font-[600] w-[300px]  mx-auto`}>
                         <h5>Already have an account?</h5>
-                        <Link href='/auth/login' className={`text-purpleBase flex justify-center items-center hover:text-[17px] w-[70px] h-[30px]`}>Log in</Link>
+                        <Link href='/auth/login' className={`text-purpleBase flex justify-center items-center hover:text-[17px] w-[60px] h-[30px] ml-1`}>Log in</Link>
                     </div>
                 </div>
 
