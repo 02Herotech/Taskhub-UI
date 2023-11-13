@@ -6,6 +6,7 @@ import {Button} from "../../components/buttons/Button";
 import {revalia} from "@/styles/font";
 import Image from "next/image";
 import Head from "next/head";
+import { poppins } from '@/styles/font'
 
 import aboutUs from "../../public/about.png";
 import mission from "../../public/mission.png";
@@ -25,11 +26,14 @@ const about = () => {
             <Head>
                 <title>TaskHub | About Us</title>
             </Head>
-            <div className={`min-h-screen`}>
-                <div className={`bg-gradient-to-r from-[#F8E9FE] via-[#FFFFFF] to-[#F5DDFD]`}>
+
+            <Nav />
+
+            <main className={`min-h-screen ${poppins.className}`}>
+                <div className={`bg-gradient-to-r from-[#F8E9FE] via-[#FFFFFF] to-[#F5DDFD] pt-20`}>
                     <div className={`max-w-7xl mx-auto flex justify-between py-20 px-20`}>
                         <div className={` w-[500px] h-[450px] space-y-10`}>
-                            <h1 className={`${revalia.className} font-extrabold text-xl `}>
+                            <h1 className={`${revalia.className} font-extrabold text-xxl `}>
                                 ABOUT TASKHUB
                             </h1>
                             <h2 className={`${revalia.className} text-[28px] w-[450px]`}>
@@ -274,7 +278,10 @@ const about = () => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </main>
+
+            <Footer />
+
         </div>
     );
 };

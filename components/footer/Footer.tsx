@@ -4,12 +4,20 @@ import Image from 'next/image'
 import Link from 'next/link'
 import logoImg from '../../public/logo.png'
 import Newsletter from '../newsletter/Newsletter'
+import { poppins } from '@/styles/font'
+
+
+// import paypal from '../../public/paypal.svg'
+// import mastercard from '../../public/mastercard.svg'
+// import google from '../../public/Google.svg'
+// import visa from '../../public/visa.svg'
 
 const Footer = () => {
     return (
-        <div className={`w-full h-[500px]  bg-white py-[100px]`}>
-            <div className={`flex flex-col  justify-around text-black max-w-7xl mx-auto`}>
-                <div className={` flex px-3 justify-evenly`}>
+        <div className={`bg-[#f5eced] w-full pt-[100px] pb-[50px] ${poppins.className}`}>
+            <div className={`flex flex-col justify-around text-black max-w-7xl mx-auto`}>
+
+                <div className={` flex px-3 justify-evenly mb-10`}>
                     <div className={` font-extrabold space-y-8`}>
                         <div className={`  w-[170px]`}>
                             <Link href='/' className={`flex space-x-3 items-center`}>
@@ -17,7 +25,7 @@ const Footer = () => {
                                 <h4 className={`text-[22px] mt-[4px] font-extrabold`}>TaskHub</h4>
                             </Link>
                         </div>
-                        <div className={`w-[300px] text-[12px] pl-[5px]`}>
+                        <div className={`w-[300px] text-[12px] pl-[5px] text-justify`}>
                             <h5>
                                 From home maintenance to professional consultations,
                                 creative solutions to skilled experts, we've curated a vast
@@ -81,7 +89,7 @@ const Footer = () => {
 
                     </div>
 
-                    <div className={`flex flex-col space-y-2 mt-2`}>
+                    <div className={`flex flex-col space-y-2`}>
                         <h3 className={`mb-8 font-extrabold text-sm`}>Others</h3>
 
                         <ul className={`space-y-3`}>

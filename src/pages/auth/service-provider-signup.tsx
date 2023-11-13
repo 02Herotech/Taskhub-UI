@@ -8,22 +8,25 @@ import logoImg from '../../../public/logo.png'
 import { useServiceProviderSignUpMutation } from "@/redux/features/auth/api";
 
 
+import { BsArrowLeftCircle } from 'react-icons/bs'
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai'
 import { BackButton } from '../../../components/buttons/Button'
 // import { serviceProviderSignup } from '../../../network/auth'
-import axios from 'axios'
+// import axios from 'axios'
 import router from "next/router";
+import flag from '../../../public/flag.jpg'
 
 interface FormState {
     firstName: string;
     lastName: string;
-    address: string;
+    // address: string;
     phoneNumber: string;
     email: string;
     password: string;
     confirmPassword: string;
     agreement: boolean;
-    error: string;
+    error1: string;
+    error2: string;
     idNUmber: string;
 }
 
@@ -32,13 +35,14 @@ const serviceProviderSignup: React.FC<FormState> = () => {
     const [formData, setFormData] = useState({
         firstName: '',
         lastName: '',
-        address: '',
+        // address: '',
         phoneNumber: '',
         email: '',
         password: '',
         confirmPassword: '',
         agreement: false,
-        error: '',
+        error1: '',
+        error2: '',
         idNumber: '',
     });
 
@@ -62,13 +66,13 @@ const serviceProviderSignup: React.FC<FormState> = () => {
             if (value && !passwordPattern.test(value)) {
                 setFormData((prevData) => ({
                     ...prevData,
-                    error: 'Password should be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one special character, and one number.',
+                    error1: 'Must be min. of 8 characters and contain at least one uppercase letter, one special character and one number',
                 }));
             } else {
                 // Clear the error message if the password matches the pattern or is empty
                 setFormData((prevData) => ({
                     ...prevData,
-                    error: '',
+                    error1: '',
                 }));
             }
         }
@@ -77,13 +81,13 @@ const serviceProviderSignup: React.FC<FormState> = () => {
             if (value !== formData.password) {
                 setFormData((prevData) => ({
                     ...prevData,
-                    error: 'Password should match',
+                    error2: 'Password should match',
                 }));
             } else {
                 // Clear the error message if the confirm password matches the password
                 setFormData((prevData) => ({
                     ...prevData,
-                    error: '',
+                    error2: '',
                 }));
             }
         }
@@ -103,14 +107,12 @@ const serviceProviderSignup: React.FC<FormState> = () => {
         // If the pressed key is not numeric and not Backspace/Delete, prevent the input
         if (!isNumericKey && !isBackspaceOrDelete) {
             e.preventDefault();
-
         }
     };
 
 
-
     const isAllFieldsFilled = () => {
-        const requiredFields: (keyof typeof formData)[] = ['firstName', 'lastName', 'address', 'phoneNumber', 'email', 'password', 'confirmPassword'];
+        const requiredFields: (keyof typeof formData)[] = ['firstName', 'lastName', 'phoneNumber', 'email', 'password', 'confirmPassword'];
         return requiredFields.every(field => formData[field] !== '') && formData.agreement;
     }
 
@@ -123,49 +125,6 @@ const serviceProviderSignup: React.FC<FormState> = () => {
 
     const [signUpApiCall, { data: signUpData, isLoading: isSignUpLoading }] = useServiceProviderSignUpMutation();
 
-    // const onSubmit = async (event: any) => {
-    //     event.preventDefault();
-    //
-    //
-    //     const formattedPhoneNumber = formData.phoneNumber.startsWith("+61") ? formData.phoneNumber : "+61" + formData.phoneNumber;
-    //
-    //
-    //     try {
-    //         const user = {
-    //             request: {
-    //                 firstName: formData.firstName,
-    //                 lastName: formData.lastName,
-    //                 phoneNumber: formattedPhoneNumber, // Use the formatted phone number here
-    //                 emailAddress: formData.email,
-    //                 password: formData.password,
-    //             },
-    //             idNumber: formData.idNumber,
-    //         }
-    //
-    //         // const payload = {
-    //         //     firstName: formData.firstName,
-    //         //     lastName: formData.lastName,
-    //         //     phoneNumber: formattedPhoneNumber, // Use the formatted phone number here
-    //         //     emailAddress: formData.email,
-    //         //     password: formData.password,
-    //         //     idNumber: formData.idNumber,
-    //         //
-    //         //
-    //         // }
-    //
-    //         const res = await serviceProviderSignup(user);
-    //
-    //         console.log('Signup payload:', payload);
-    //         // const res = await fetch('https://service-rppp.onrender.com/api/v1/service_provider/sign-up', { method: 'POST', body: JSON.stringify(payload) })
-    //
-    //         console.log('Signup response:', res);
-    //     } catch (error) {
-    //         console.log('Signup error:', error);
-    //     }
-
-
-    // }
-
     useEffect(() => {
         if (signUpData) {
             console.log("data", signUpData);
@@ -175,7 +134,7 @@ const serviceProviderSignup: React.FC<FormState> = () => {
 
     const onSubmit = async (event: any) => {
         event.preventDefault();
-        console.log("Button Triggered")
+        // console.log("Button Triggered")
 
         if (isSignUpLoading){
             return;
@@ -198,11 +157,6 @@ const serviceProviderSignup: React.FC<FormState> = () => {
                     idNumber: formData.idNumber,
                 }
 
-            // const res = await signUpApiCall(user).unwrap();
-            //
-            // console.log('Signup response:', res);
-            // Handle successful response here
-
 
             signUpApiCall(user)
                 .unwrap()
@@ -212,14 +166,19 @@ const serviceProviderSignup: React.FC<FormState> = () => {
                     // Clear the error message after 5 seconds
                     setTimeout(() => {
                         setSignUpError(null);
-                    }, 5000);
+                    }, 8000);
                 })
+
+                // .catch((error) => console.error('rejected', error));
+                // .then (res.message)
                 .catch((error) => {
                     setIsSubmitting(false);
+
                     console.error("Error submitting:", error);
+                                      
 
                     // Set the error message in the state
-                    setSignUpError("Registration was unsuccessful. Please try again.");
+                    setSignUpError(error.data.message);
 
                     // Clear the error message after 5 seconds
                     setTimeout(() => {
@@ -237,27 +196,29 @@ const serviceProviderSignup: React.FC<FormState> = () => {
 
 
     return (
-        <div className={` h-screen  justify-between w-full overflow-x-hidden`}>
-            <div className={`p-10 flex h-[100px] drop-shadow-md fixed z-[9999] w-full bg-white font-extrabold`}>
-                <Link href='/' className={`flex space-x-3 items-center`}>
-                    <Image src={logoImg} width={61} height={55} alt='' className={`mt-[-10px]`} />
-                    <h4 className={`text-lg font-extrabold `}>TaskHub</h4>
-                </Link>
+        <div className={` justify-between w-full overflow-x-hidden mb-16`}>
+            <div className={`p-5 flex h-[80px] drop-shadow-md fixed z-50 w-full bg-white font-extrabold justify-center`}>
+                <div className='w-[80em]'>
+                    <Link href='/' className={`flex space-x-3 items-center`}>
+                        <Image src={logoImg} width={50} height={40} alt='' className={`mt-[-10px]`} />
+                        <h4 className={`text-sm font-extrabold `}>TaskHub</h4>
+                    </Link>
+                </div>
             </div>
 
-            <div className={`flex justify-center mt-[120px] items-center flex-col`}>
+            <div className={`flex justify-center min-h-screen mt-[120px] items-center flex-col`}>
                 <div className={` p-3 space-y-5 text-center mb-2`}>
-                    <div className={`text-lg font-bold w-full  `}>
-                        <h1 >Create your your Service provider account</h1>
+                    <div className={`text-lg font-extrabold w-full  `}>
+                        <h1 >Create your TaskHub Service Provider account</h1>
                     </div>
 
-                    <div className={`flex justify-around font-[600] w-[300px]  mx-auto`}>
+                    <div className={`flex justify-center items-center font-[600] w-[300px]  mx-auto`}>
                         <h5>Already have an account?</h5>
-                        <Link href='/auth/login' className={`text-purpleBase hover:text-[17px] `}>Log in</Link>
+                        <Link href='/auth/login' className={`text-purpleBase flex justify-center items-center hover:text-[17px] w-[60px] h-[30px] ml-1`}>Log in</Link>
                     </div>
                 </div>
 
-                <div className='mb-10  w-[500px]'>
+                <div className='mb-10 mt-7 w-[500px]'>
                     <form action="" onSubmit={onSubmit}>
                         <div className={`space-y-4 mb-10`}>
                             <div className={`flex justify-between`}>
@@ -266,7 +227,6 @@ const serviceProviderSignup: React.FC<FormState> = () => {
                                         First Name <span className={`text-red10`}>*</span>
                                     </label>
                                     <input type="text" placeholder='First name' id='firstName' name='firstName' className={` border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl`} value={formData.firstName} onChange={handleChange} required
-
                                     />
                                 </div>
 
@@ -279,21 +239,21 @@ const serviceProviderSignup: React.FC<FormState> = () => {
                                 </div>
                             </div>
 
-                            <div className={`flex flex-col`}>
+                            {/* <div className={`flex flex-col`}>
                                 <label htmlFor="address" className={`font-bold text-[16px] my-3`}>
                                     Address <span className={`text-red10`}>*</span>
                                 </label>
                                 <input type="text" id='address' name='address' placeholder='Enter your address' className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl w-full`} value={formData.address} onChange={handleChange} required
                                 />
-                            </div>
+                            </div> */}
 
                             <div className={`flex flex-col`}>
                                 <label htmlFor="phoneNumber" className={`font-bold text-[16px] my-3`}>
                                     Phone Number <span className={`text-red10`}>*</span>
                                 </label>
                                 <div className={`flex items-center justify-around`}>
-                                    <h4 className={`border-medium border-[1px] text-base text-black font-bold p-3 rounded-xl`}>AU +61</h4>
-                                    <input type="tel" placeholder='Enter phone number' name='phoneNumber' id='phoneNumber' className={`border-medium border-[1px] text-base text-black font-bold py-3 px-10 tracking-[0.3rem] rounded-xl w-5/6`} value={formData.phoneNumber} onChange={handleChange} onKeyDown={handlePhoneNumberKeyDown} required maxLength={9} minLength={9}
+                                    <h4 className={`flex border-medium border-[1px] text-base text-black font-bold px-5 py-3 rounded-xl`}><Image src={flag} width={30} alt='AUS Flag' className='mr-1'/>+61</h4>
+                                    <input type="tel" placeholder='Enter phone number' name='phoneNumber' id='phoneNumber' className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl w-[78%]`} value={formData.phoneNumber} onChange={handleChange} onKeyDown={handlePhoneNumberKeyDown} required maxLength={9} minLength={9}
                                     />
                                 </div>
                             </div>
@@ -307,8 +267,9 @@ const serviceProviderSignup: React.FC<FormState> = () => {
                             </div>
 
                             <div className={`flex flex-col`}>
-                                <label htmlFor="password" className={`font-bold text-[16px] my-3`}>
+                                <label htmlFor="password" className={`font-bold text-[16px] my-3 flex  items-center w-[500px] h-[30px] `}>
                                     Password <span className={`text-red10`}>*</span>
+                                    <p className={`text-red10 p-2  my-0 py-0 text-[10px]`}>{formData.error1}</p>
                                 </label>
                                 <div className={`relative`}>
                                     <input type={showPassword ? 'text' : 'password'} id='password' name='password' placeholder='Enter your password' className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl w-full`} value={formData.password} onChange={handleChange} required maxLength={15}
@@ -327,14 +288,11 @@ const serviceProviderSignup: React.FC<FormState> = () => {
                                 </div>
 
                             </div>
-                            <div className={`text-red10 p-2  my-0 py-0 text-[10px]`}>
-                                <p >{formData.error}</p>
-
-                            </div>
 
                             <div className={`flex flex-col`}>
-                                <label htmlFor="confirmPassword" className={`font-bold text-[16px] my-3`}>
-                                    Confirm your Password <span className={`text-red10`}>*</span>
+                                <label htmlFor="password" className={`font-bold text-[16px] my-3 flex  items-center w-[500px] h-[30px] `}>
+                                    Confirm Password <span className={`text-red10`}>*</span>
+                                    <p className={`text-red10 p-2  my-0 py-0 text-[10px]`}>{formData.error2}</p>
                                 </label>
                                 <div className={`relative`}>
                                     <input type={showConfirmPassword ? 'text' : 'password'} id='confirmPassword' name='confirmPassword' placeholder='Enter your password' className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl w-full`} value={formData.confirmPassword} onChange={handleChange} required maxLength={15}
@@ -351,12 +309,10 @@ const serviceProviderSignup: React.FC<FormState> = () => {
                                         )}
                                     </button>
                                 </div>
-
                             </div>
+
                             <div className={`flex flex-col`}>
-                                <label htmlFor="identification" className={`font-bold text-[16px] my-3`}>
-                                    MEANS OF IDENTIFICATION <span className={`text-red10`}>*</span>
-                                </label>
+                                <label htmlFor="identification" className={`font-bold text-[16px] my-3`}>MEANS OF IDENTIFICATION</label>
                                 <select name="identification" id="identification" className={`border-medium border-[1px] text-base text-black font-bold py-3 px-3 rounded-xl w-full bg-contain`} >
                                     <option value="none">None</option>
                                     <option value="drivers_license">National Driver&rsquo;s License</option>
@@ -376,9 +332,9 @@ const serviceProviderSignup: React.FC<FormState> = () => {
 
                             </div>
 
-                            <div className={`space-x-2`}>
+                            <div className={`space-x-2 flex items-center`}>
                                 <input onChange={handleChange} type="checkbox" name="agreement" id="agreement" required />
-                                <label htmlFor="agreement" className={`font-bold text-base`}>I agree to  all <Link href='/termsAndConditions' className={`text-purpleBase text-base hover:underline`}>Terms of service </Link> and <Link href='/privacy' className={`text-purpleBase text-base hover:underline `}> Privacy</Link></label>
+                                <label htmlFor="agreement" className={`font-bold text-[12px]`}>I agree to  all <Link href='/termsAndConditions' className={`text-purpleBase hover:underline`}>Terms of service </Link> and <Link href='/privacy' className={`text-purpleBase hover:underline `}> Privacy</Link></label>
                             </div>
 
                         </div>
@@ -386,7 +342,7 @@ const serviceProviderSignup: React.FC<FormState> = () => {
                         <div className={`flex justify-center items-center`}>
                             <button
                                 type="submit"
-                                className={`w-full bg-purpleBase text-white py-2 px-4 rounded-md hover:bg-purple5  ${isAllFieldsFilled() ? '' : 'cursor-not-allowed opacity-50'}`}
+                                className={`w-full bg-purpleBase text-white py-2 px-4 rounded-md hover:bg-purple5  ${isAllFieldsFilled() ? '' : 'opacity-50'}`}
                                 disabled={!isAllFieldsFilled() || isSignUpLoading}
                             >
                                 {isSignUpLoading ? "Creating..." : "Create Account"}
@@ -399,7 +355,14 @@ const serviceProviderSignup: React.FC<FormState> = () => {
                         )}
                     </form>
                 </div>
+
+                <div className={`flex justify-center items-center h-[35px] w-[150px]`} >
+                    <Link href='/' className='text-base font-extrabold hover:scale-110'>
+                        <button className='flex justify-center items-center'><span className='mr-1'><BsArrowLeftCircle /></span>Back Home</button>
+                    </Link>
+                </div>
             </div>
+
 
         </div>
 

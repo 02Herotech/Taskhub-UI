@@ -6,6 +6,8 @@ import {revalia} from "@/styles/font";
 import Image from 'next/image';
 import { AiOutlineCheckCircle } from "react-icons/ai";
 import styles from '../styles/faq.module.css'
+import { poppins } from '@/styles/font'
+
 
 
 
@@ -16,6 +18,9 @@ import lashes from '../../public/lashes.png'
 import tools from '../../public/tools.png'
 import brush from '../../public/brush.png'
 import Head from 'next/head';
+import Nav from '../../components/nav/Nav';
+import NewFooter from '../../components/NewFooter/NewFooter';
+
 
 
 
@@ -48,7 +53,10 @@ const Faq: React.FC<FAQProps> = () => {
             <Head>
                 <title>TaskHub | FAQ</title>
             </Head>
-            <div className={`min-h-screen `}>
+
+            <Nav />
+
+            <main className={`min-h-screen ${poppins.className}`}>
                 <div className={`bg-gradient-to-r from-[#F8E9FE] via-[#FFFFFF] to-[#F5DDFD]`}>
                     <div className="max-w-7xl mx-auto p-20">
                         <div className={`ml-24 mb-8`}>
@@ -82,7 +90,7 @@ const Faq: React.FC<FAQProps> = () => {
                     </div>
                 </div>
 
-                <div className='max-w-7xl mx-auto px-20 mt-32 mb-32 '>
+                <div className='max-w-7xl mx-auto px-20 mt-32 mb-[15em] '>
                     <h1 className={`${revalia.className} text-xl font-extrabold`}>Still have questions?</h1>
                 
                     {submitted ?    
@@ -96,14 +104,14 @@ const Faq: React.FC<FAQProps> = () => {
                                 <label>Email</label>
                                 <input type="email" value={email} 
                                 onChange={(e) => setEmail(e.target.value)}
-                                placeholder='example@abc.com' className='mt-6 w-[40em] p-3 border-grey4 border-2 rounded-md text-grey4 text-[13px]'/>
+                                placeholder='example@abc.com' className='mt-6 w-[40em] p-3 border-grey4 border-2 rounded-md text-black text-[13px]'/>
                             </div>
 
                             <div className='flex flex-col'>
                                 <label>Message</label>
                                 <textarea name="message" placeholder='Type here...' value={message}
                                 onChange={(e) => setMessage(e.target.value)}
-                                className='resize-none mt-6 w-[40em] h-72 p-3 border-grey4 border-2 rounded-md text-grey4 text-[13px]' />
+                                className='resize-none mt-6 w-[40em] h-72 p-3 border-grey4 border-2 rounded-md text-black text-[13px]' />
                             </div>
 
                             <button type='submit' className={`p-3 bg-purpleBase text-white  text-[13px] font-extralight hover:bg-purple7 rounded-md my-10 disabled:opacity-50`}
@@ -112,7 +120,10 @@ const Faq: React.FC<FAQProps> = () => {
                         </form>
                     }
                 </div>
-            </div>
+            </main>
+
+            <NewFooter />
+
         </div>
     );
 }

@@ -9,23 +9,27 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { BackButton } from "../../../components/buttons/Button";
 import { useSession } from "next-auth/react";
 import router from "next/router";
+
+
 interface FormState {
   email: string;
   password: string;
-  rememberMe: boolean;
-  error: string;
+  // rememberMe: boolean;
+  // error: string;
 }
 
 const login: React.FC<FormState> = () => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
-    rememberMe: false,
-    error: "",
+    // rememberMe: false,
+    // error: "",
   });
-  const [showPassword, setShowPassword] = useState(false);
 
-  const { data: session } = useSession();
+  const [showPassword, setShowPassword] = useState(false);
+  // const [isloading, setIsloading] = useState(false);
+
+  const {data: session } = useSession();
 
   const handleChange = (e: any) => {
     const { name, value } = e.target;
@@ -47,51 +51,53 @@ const login: React.FC<FormState> = () => {
   const onSubmit = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
     console.log("formdata", formData);
+    // setIsloading(!isloading)
+
     const result = await signIn("credentials", {
       redirect: false,
       email: formData.email,
       password: formData.password,
-      callbackUrl: "/dashboard/customer",
+      callbackUrl: "/about",
     });
+
+    // ../../../components/authLayout/AuthLayout
+
     console.log("result", result);
     console.log("session", session);
-    if (result && result.ok) {
-      alert("Login Successful");
-      router.push("/dashboard/customer");
-    } else {
-      alert("Login Failed");
-    }
+
+    // if (result && result.ok) {
+    //   alert("Login Successful");
+    //   router.push("/dashboard/customer");
+    // } else {
+    //   alert("Login Failed");
+    // }
   };
 
   return (
-    <div className={` w-full  text-black`}>
-      <div className={`w-full p-10 flex drop-shadow-md bg-white h-[80px]`}>
-        <Link href="/" className={`flex space-x-3 items-center`}>
-          <Image
-            src={logo}
-            width={61}
-            height={55}
-            alt=""
-            className={`mt-[-10px]`}
-          />
-          <h4 className={`text-lg font-extrabold `}>TaskHub</h4>
-        </Link>
-      </div>
-      <div
-        className={` flex font-bold h-full flex-col m-auto py-12  justify-center items-center `}
-      >
-        <div className={` p-3 space-y-5 text-center mb-2`}>
-          <div className={`text-[30px] font-bold w-full  `}>
-            <h1 className={``}>Login into your TaskHub account</h1>
-          </div>
-
-          <div className={`flex justify-around font-[600] w-[300px]  mx-auto`}>
-            <h5>Don't have an account?</h5>
-            <Link href="/auth" className={`text-purpleBase hover:text-[17px] `}>
-              Create one
+    <div className={` w-full`}>
+      <div className={`p-5 flex h-[80px] drop-shadow-md fixed z-50 w-full bg-white font-extrabold justify-center`}>
+        <div className='w-[80em]'>
+            <Link href='/' className={`flex space-x-3 items-center`}>
+                <Image src={logo} width={50} height={40} alt='' className={`mt-[-10px]`} />
+                <h4 className={`text-sm font-extrabold `}>TaskHub</h4>
             </Link>
-          </div>
         </div>
+      </div>
+
+
+      <div className={` flex font-bold min-h-screen flex-col m-auto pt-16 justify-center items-center `}>
+        <div className={` p-3 space-y-5 text-center mb-2`}>
+            <div className={`text-lg font-extrabold w-full  `}>
+              <h1>Login into your TaskHub account</h1>
+            </div>
+
+            <div className={`flex justify-center items-center font-[600] w-[330px]  mx-auto`}>
+              <h5>Don't have an account?</h5>
+              <Link href='/auth' className={`text-purpleBase flex justify-center items-center hover:text-[17px] w-[100px] h-[30px] ml-1`}>Create one</Link>
+            </div>
+        </div>
+
+
         <div className="w-[450px]">
           <form action="" onSubmit={onSubmit} className={`space-y-5  p-5`}>
             <div className={`flex flex-col `}>
@@ -135,18 +141,19 @@ const login: React.FC<FormState> = () => {
                 </button>
               </div>
             </div>
-            <div className={`flex justify-around font-[600] w-[300px] text-base mx-auto`}>
+
+            <div className={`flex justify-center items-center font-[600] w-[300px] text-[13px] mx-auto`}>
               <h5>Forgot your Password?</h5>
-              <Link href='/auth/forget-password' className={`text-purpleBase hover:text-[16px] `}>Reset here</Link>
+              <Link href='/auth/forget-password' className={`text-purpleBase flex justify-center items-center hover:text-[14px] w-[80px] h-[25px] ml-1`}>Reset here</Link>
             </div>
 
             <div className={`flex justify-center items-center`}>
               <button
                 type="submit"
-                className={`w-full bg-purpleBase text-white py-2 px-4 rounded-md hover:bg-purple5 text-sm ${isAllFieldsFilled() ? '' : 'cursor-not-allowed opacity-50'}`}
+                className={`w-full bg-purpleBase text-white py-2 px-4 rounded-md hover:bg-purple7 text-sm ${isAllFieldsFilled() ? '' : 'opacity-50'}`}
                 disabled={!isAllFieldsFilled()}
               >
-                Log In
+                Log in
               </button>
             </div>
           </form>
