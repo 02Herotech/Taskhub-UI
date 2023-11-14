@@ -78,7 +78,7 @@ const VerifyTokenPage = () => {
   useEffect(() => {
     const { t, e } = router.query;
 
-    if (!token) {
+    if (!{ t, e }) {
       setIsLoading(false);
       setIsValidToken(false);
       return;
