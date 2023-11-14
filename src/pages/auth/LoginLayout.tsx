@@ -1,8 +1,9 @@
 import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import logoImg from '../../public/logo.png'
-import { Button } from '../../components/buttons/Button'
+// import logoImg from '../../public/logo.png'
+import logoImg from "../../../public/logo.png"
+import { Button } from '../../../components/buttons/Button'
 import { BsArrowLeftCircle } from 'react-icons/bs'
 
 
@@ -20,23 +21,23 @@ const AuthLayout = () => {
                 </div>
             </div>
 
-            <div className={`flex  mt-10 items-center min-h-screen justify-center w-full my-auto `}>
+            <div className={`flex pt-10 items-center min-h-screen justify-center w-full my-auto `}>
                 <div className={`px-20  flex justify-center items-center m-auto flex-col`}>
                     <div className={`w-[600px] p-3 space-y-5 text-center mb-10`}>
                         <div className={`  text-[36px] font-bold `}>
-                            <h1 className={` `}>Create your TaskHub account</h1>
+                            <h1 className={` `}>Login to your Taskhub Account</h1>
                         </div>
 
-                        <div className={`flex justify-around items-center font-[600] w-[280px] h-[50px] mx-auto`}>
-                            <h5>Already have an account?</h5>
-                            <Link href='/auth/LoginLayout' className={`text-purpleBase hover:text-[17px] w-[60px] h-[30px] flex justify-center items-center`}>Log in</Link>
+                        <div className={`flex justify-around items-center font-[600] w-[320px] h-[50px] mx-auto`}>
+                            <h5>Don't have an account?</h5>
+                            <Link href='/auth' className={`text-purpleBase hover:text-[17px] w-[100px] h-[30px] flex justify-center items-center`}>Create one</Link>
                         </div>
                     </div>
 
                     <div className={`space-y-5  text-black flex flex-col justify-center items-center`}>
                         <div className={`flex space-x-4 font-light mb-10`}>
                             <div>
-                                <Link href='/auth/customer-signup'>
+                                <Link href='/auth/CustomerLogin'>
                                     <Button btnValue='CUSTOMER'
                                         className='h-[60px] w-[200px]  text-base bg-white hover:text-white'
                                     />
@@ -44,7 +45,7 @@ const AuthLayout = () => {
                             </div>
 
                             <div>
-                                <Link href='/auth/service-provider-signup'>
+                                <Link href='/auth/ServiceProviderLogin'>
                                     <Button btnValue='SERVICE PROVIDER'
                                         className='h-[60px] w-[200px] bg-white hover:text-white  text-base'
                                     />

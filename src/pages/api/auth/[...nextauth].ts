@@ -11,7 +11,7 @@ export default NextAuth({
     strategy: "jwt",
   },
   pages: {
-    signIn: "/auth/login",
+    signIn: "/auth/CustomerLogin",
   },
   providers: [
     CredentialsProvider({ 
@@ -28,33 +28,33 @@ export default NextAuth({
           password: string;
         };
 
-        if (email !== "cyprusakanni@gmail.com" || password !== "Ibiayo@1205"){
-          throw new Error("invalid credentials")
-        }
-        return { id: '1234', name: "cy baby", email: 'jsjj@gmail.com'}
+        // if (email !== "cyprusakanni@gmail.com" || password !== "Ibiayo@1205"){
+        //   throw new Error("invalid credentials")
+        // }
+        // return { id: '1234', name: "cy baby", email: 'jsjj@gmail.com'}
       
-      //   try {
+        try {
         
-      //   const response = await axios.post(baseUrl + "customer/login", {
-      //     emailAddress: email,
-      //     password,
-      //   });
+        const response = await axios.post(baseUrl + "customer/login", {
+          emailAddress: email,
+          password,
+        });
 
-      //   const { data, status } = response;
+        const { data, status } = response;
 
-      //   if (status === 200) {
-      //     return {
-      //       ...data,
-      //       jwtToken: data.token,
-      //     };
-      //   } else {
-      //     console.log("Unexpected status error: ", status);
-      //     return null
-      //   }
-      // } catch (error) {
-      //   console.error("Request error: ", error);
-      //   return null
-      // }
+        if (status === 200) {
+          return {
+            ...data,
+            jwtToken: data.token,
+          };
+        } else {
+          console.log("Unexpected status error: ", status);
+          return null
+        }
+      } catch (error) {
+        console.error("Request error: ", error);
+        return null
+      }
       
       },
     }),
