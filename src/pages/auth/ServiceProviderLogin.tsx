@@ -10,6 +10,9 @@ import { BackButton } from "../../../components/buttons/Button";
 import { useSession } from "next-auth/react";
 import router from "next/router";
 
+import { BsArrowLeftCircle } from 'react-icons/bs'
+
+
 
 interface FormState {
   email: string;
@@ -88,7 +91,7 @@ const login: React.FC<FormState> = () => {
       <div className={` flex font-bold min-h-screen flex-col m-auto pt-16 justify-center items-center `}>
         <div className={` p-3 space-y-5 text-center mb-2`}>
             <div className={`text-lg font-extrabold w-full  `}>
-              <h1>Login into your TaskHub account</h1>
+              <h1>Login into your TaskHub Service Provider account</h1>
             </div>
 
             <div className={`flex justify-center items-center font-[600] w-[330px]  mx-auto`}>
@@ -158,7 +161,16 @@ const login: React.FC<FormState> = () => {
             </div>
           </form>
         </div>
+
+      <div className={`flex justify-center items-center h-[35px] w-[150px]`} >
+        <Link href='/' className='text-base font-extrabold hover:scale-110'>
+            <button className='flex justify-center items-center'><span className='mr-1'><BsArrowLeftCircle /></span>Back Home</button>
+        </Link>
+      </div>
+
       </div >
+
+      
     </div >
   )
 }

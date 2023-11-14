@@ -13,7 +13,7 @@ import { BiSolidQuoteAltLeft } from 'react-icons/bi'
 
 
 
-const services = () => {
+const Services = () => {
 
     // const catgeories = {Gardening, khskks, jgsjsjjsd}
 
@@ -85,4 +85,4 @@ const services = () => {
     )
 }
 
-export default services;
+export default Services;

@@ -21,8 +21,8 @@ const signupConfirmation = () => {
                 <div className={`w-[166px] h-[166px]`}>
                     <Image src={welcome} width={166} height={166} alt='' />
                 </div>
-                <p>Before we get started, Please Kindly confirm email sent to you.</p>
-                <Link href='https://mail.google.com/mail/u/0/#inbox' target='_blank' className={`text-purpleBase  underline hover:text-md`}>Link to my mail</Link >
+                <p>Before we get started, please use the link in the mail sent to you to verify you email</p>
+                {/* <Link href='https://mail.google.com/mail/u/0/#inbox' target='_blank' className={`text-purpleBase  underline hover:text-md`}>Link to my mail</Link > */}
 
             </div>
         </div>
