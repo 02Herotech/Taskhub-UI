@@ -1,4 +1,4 @@
-
+"use client"
 
 // import { useRouter } from 'next/router';
 // import { useEffect, useState } from 'react';
@@ -77,82 +77,134 @@
 
 
 
-"use client"
+// "use client"
 
 
-import axios from "axios";
-import { useState, useEffect } from "react";
+// import axios from "axios";
+// import { useState, useEffect } from "react";
 
-const VerifyEmail = () => {
-  const [t, setT] = useState<string>("");
-  const [e, setE] = useState<string>("");
-  const [tAndE, setTAndE] = useState<string>("");
+// const VerifyEmail = () => {
+//   const [t, setT] = useState<string>("");
+//   const [e, setE] = useState<string>("");
+//   const [tAndE, setTAndE] = useState<string>("");
 
-  const [verified, setVerified] = useState(false);
-  const [error, setError] = useState(false);
-  const [loading, setLoading] = useState(false);
+//   const [verified, setVerified] = useState(false);
+//   const [error, setError] = useState(false);
+//   const [loading, setLoading] = useState(false);
 
-  const verifyUserEmail = async () => {
+//   const verifyUserEmail = async () => {
    
-    try {
-      setLoading(true);
-      await axios.post("https://service-rppp.onrender.com/api/v1/user/verify", {t}, {e});
-      setVerified(true);
-    } catch (error) {
-      setError(true);
-      console.error("Error verifying email:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
+//     try {
+//       setLoading(true);
+//       await axios.post("https://service-rppp.onrender.com/api/v1/user/verify", {t}, {e});
+//       setVerified(true);
+//     } catch (error) {
+//       setError(true);
+//       console.error("Error verifying email:", error);
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
  
 
   
-  useEffect(() => {
-    const urlParams = window.location.search.split("?")[1];
-      setTAndE(urlParams)
+//   useEffect(() => {
+//     const urlParams = window.location.search.split("?")[1];
+//       setTAndE(urlParams)
 
-    if (urlParams) {
-      const urlTokenAndHashedEmail = urlParams.split("&");
+//     if (urlParams) {
+//       const urlTokenAndHashedEmail = urlParams.split("&");
       
-      if (urlTokenAndHashedEmail.length > 0) {
-        const urlToken = urlTokenAndHashedEmail[0].split("=")[1];
-        const urlHashedEmail = urlTokenAndHashedEmail[1].split("=")[1];
-        setT(urlToken || "");
-        setE(urlHashedEmail || "");
+//       if (urlTokenAndHashedEmail.length > 0) {
+//         const urlToken = urlTokenAndHashedEmail[0].split("=")[1];
+//         const urlHashedEmail = urlTokenAndHashedEmail[1].split("=")[1];
+//         setT(urlToken || "");
+//         setE(urlHashedEmail || "");
 
-      }
-    }
+//       }
+//     }
 
-  }, []);
+//   }, []);
 
 
 
+
+//   useEffect(() => {
+//     if (t.length > 0 && e.length > 0) {
+//       verifyUserEmail();
+//     }
+//   }, [t, e]);
+
+//   return (
+//     <div>
+
+//       <p>Activation Page</p>
+
+//     <div className="text-grey5 my-10">
+//       <p><span className="text-black">Token and Email: </span>{tAndE}</p>
+//       <p><span className="text-black">Token: </span>{t}</p>
+//       <p><span className="text-black">Hashed email: </span>{e}</p>
+//     </div>
+//       {loading && <div>Loading...</div>}
+//       {verified && (
+//         <div className="text-green5">
+//           Email Verified. Proceed to login <a href="/auth/LoginLayout">Login</a>
+//         </div>
+//       )}
+//       {error && <div className="text-red5">Error verifying email. Please try again later.</div>}
+//     </div>  
+//   );
+// };
+
+// export default VerifyEmail;
+
+
+import { useEffect, useState} from "react";
+import { useRouter } from "next/router";
+import axios from "axios";
+
+const VerifyEmail = () => {
+
+    // const [isLoading, setIsLoading] = useState(true);
+    const [isValidToken, setIsValidToken] = useState(false);
+
+  const router = useRouter();
+  const { t, e } = router.query;
 
   useEffect(() => {
-    if (t.length > 0 && e.length > 0) {
-      verifyUserEmail();
+    const verifyEmail = async () => {
+      try {
+        // Make a POST request to your backend verification API
+        const response = await axios.post("https://service-rppp.onrender.com/api/v1/user/verify", {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify ({ t, e })
+          })
+        console.log(response.data); // Handle success (e.g., show a success message)
+        setIsValidToken(true)
+      } catch (error: any) {
+        console.error("Error verifying email:", error.response.data);
+        setIsValidToken(false)
+      }
+    };
+
+
+
+    if (t && e) {
+      verifyEmail();
     }
   }, [t, e]);
 
   return (
     <div>
+      <p>Verify Email</p>
+      { isValidToken ? 
+        <div>Verified</div> : <div>Not verified</div>
+      }
 
-      <p>Activation Page</p>
-
-    <div className="text-grey5 my-10">
-      <p><span className="text-black">Token and Email: </span>{tAndE}</p>
-      <p><span className="text-black">Token: </span>{t}</p>
-      <p><span className="text-black">Hashed email: </span>{e}</p>
     </div>
-      {loading && <div>Loading...</div>}
-      {verified && (
-        <div className="text-green5">
-          Email Verified. Proceed to login <a href="/auth/LoginLayout">Login</a>
-        </div>
-      )}
-      {error && <div className="text-red5">Error verifying email. Please try again later.</div>}
-    </div>  
   );
 };
 
