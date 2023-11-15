@@ -1,211 +1,91 @@
+
 "use client"
 
-// import { useRouter } from 'next/router';
-// import { useEffect, useState } from 'react';
 
-// const VerifyTokenPage = () => {
-//   const router = useRouter();
-//   const [isLoading, setIsLoading] = useState(true);
-//   const [isValidToken, setIsValidToken] = useState(false);
+import axios from "axios";
+import { useState, useEffect } from "react";
+import Image from 'next/image'
+import Link from 'next/link'
 
-//   useEffect(() => {
-//     const { t, e } = router.query;
-//     console.log({t, e});
-    
-
-//     if (!{ t, e }) {
-//       setIsLoading(false);
-//       setIsValidToken(false);
-//       return;
-//     }
-
-//     const checkTokenValidity = async () => {
-//       try {
-//         const response = await fetch('https://service-rppp.onrender.com/api/v1/user/verify', {
-//           method: 'POST',
-//           headers: {
-//             'Content-Type': 'application/json',
-//           },
-//           body: JSON.stringify({ t, e }), // Send token directly, assuming it's a string
-//         });
-
-//         // if (!response.ok) {
-//         //     const errorData = await response.json();
-//         //     console.error('Error:', response.status, errorData);
-
-//         if (response.ok) {
-//           setIsValidToken(true);
-//         } else {
-//           setIsValidToken(false);
-//         }
-//       } catch (error) {
-//         setIsValidToken(false);
-//         // const errorData = await res.json();
-//         console.error('Error while validating token:', error);
-//       } finally {
-//         setIsLoading(false);
-//       }
-//     };
-
-//     checkTokenValidity();
-//   }, [router.query.token]);
-
-//   useEffect(() => {
-//     if (isValidToken) {
-//       router.push('/auth/signup-verification');
-//     }
-//   }, [isValidToken, router]);
-
-//   return (
-//     <div className="flex h-screen justify-center items-center">
-
-//     <p>Activation Page</p>
-
-//       {isLoading ? (
-//         <p>Activating...</p>
-//       ) : isValidToken ? (
-//         <p>Activation successful! Redirecting to the login page...</p>
-//       ) : (
-//         <p>Invalid token. Activation failed.</p>
-//       )}
-//     </div>
-//   );
-// };
-
-// export default VerifyTokenPage;
+import logoImg from '../../../public/logo.png'
+import loader from '../../../public/loader.svg'
+import success from '../../../public/success.svg'
+import styles from '../../styles/signupConfirmation.module.css'
 
 
+const VerifyEmail = () => {
+  const [tokenAndHashedEmail, setTokenAndHashedEmail] = useState<string>("");
 
+  const [verified, setVerified] = useState(false);
+  const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-// "use client"
-
-
-// import axios from "axios";
-// import { useState, useEffect } from "react";
-
-// const VerifyEmail = () => {
-//   const [t, setT] = useState<string>("");
-//   const [e, setE] = useState<string>("");
-//   const [tAndE, setTAndE] = useState<string>("");
-
-//   const [verified, setVerified] = useState(false);
-//   const [error, setError] = useState(false);
-//   const [loading, setLoading] = useState(false);
-
-//   const verifyUserEmail = async () => {
+  const verifyUserEmail = async () => {
    
-//     try {
-//       setLoading(true);
-//       await axios.post("https://service-rppp.onrender.com/api/v1/user/verify", {t}, {e});
-//       setVerified(true);
-//     } catch (error) {
-//       setError(true);
-//       console.error("Error verifying email:", error);
-//     } finally {
-//       setLoading(false);
-//     }
-//   };
+    try {
+      setLoading(true);
+      await axios.post(`https://service-rppp.onrender.com/api/v1/user/verify?${tokenAndHashedEmail}`);
+      setVerified(true);
+    } catch (error) {
+      setError(true);
+      console.error("Error verifying email:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
  
 
   
-//   useEffect(() => {
-//     const urlParams = window.location.search.split("?")[1];
-//       setTAndE(urlParams)
+  useEffect(() => {
+    const urlParams = window.location.search.split("?")[1];
+    setTokenAndHashedEmail(urlParams)
 
-//     if (urlParams) {
-//       const urlTokenAndHashedEmail = urlParams.split("&");
-      
-//       if (urlTokenAndHashedEmail.length > 0) {
-//         const urlToken = urlTokenAndHashedEmail[0].split("=")[1];
-//         const urlHashedEmail = urlTokenAndHashedEmail[1].split("=")[1];
-//         setT(urlToken || "");
-//         setE(urlHashedEmail || "");
+  }, []);
 
-//       }
-//     }
-
-//   }, []);
-
-
-
-
-//   useEffect(() => {
-//     if (t.length > 0 && e.length > 0) {
-//       verifyUserEmail();
-//     }
-//   }, [t, e]);
-
-//   return (
-//     <div>
-
-//       <p>Activation Page</p>
-
-//     <div className="text-grey5 my-10">
-//       <p><span className="text-black">Token and Email: </span>{tAndE}</p>
-//       <p><span className="text-black">Token: </span>{t}</p>
-//       <p><span className="text-black">Hashed email: </span>{e}</p>
-//     </div>
-//       {loading && <div>Loading...</div>}
-//       {verified && (
-//         <div className="text-green5">
-//           Email Verified. Proceed to login <a href="/auth/LoginLayout">Login</a>
-//         </div>
-//       )}
-//       {error && <div className="text-red5">Error verifying email. Please try again later.</div>}
-//     </div>  
-//   );
-// };
-
-// export default VerifyEmail;
-
-
-import { useEffect, useState} from "react";
-import { useRouter } from "next/router";
-import axios from "axios";
-
-const VerifyEmail = () => {
-
-    // const [isLoading, setIsLoading] = useState(true);
-    const [isValidToken, setIsValidToken] = useState(false);
-
-  const router = useRouter();
-  const { t, e } = router.query;
 
   useEffect(() => {
-    const verifyEmail = async () => {
-      try {
-        // Make a POST request to your backend verification API
-        const response = await axios.post("https://service-rppp.onrender.com/api/v1/user/verify", {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify ({ t, e })
-          })
-        console.log(response.data); // Handle success (e.g., show a success message)
-        setIsValidToken(true)
-      } catch (error: any) {
-        console.error("Error verifying email:", error.response.data);
-        setIsValidToken(false)
-      }
-    };
-
-
-
-    if (t && e) {
-      verifyEmail();
+    if (tokenAndHashedEmail.length > 0) {
+      verifyUserEmail();
     }
-  }, [t, e]);
+  }, [tokenAndHashedEmail]);
 
   return (
-    <div>
-      <p>Verify Email</p>
-      { isValidToken ? 
-        <div>Verified</div> : <div>Not verified</div>
-      }
 
-    </div>
+    <div className={`m-auto`}>
+      <div className={`p-5 flex h-[80px] drop-shadow-md fixed z-50 w-full bg-white font-extrabold justify-center`}>
+          <div className='w-[80em]'>
+              <Link href='/' className={`flex space-x-3 items-center`}>
+                  <Image src={logoImg} width={50} height={40} alt='' className={`mt-[-10px]`} />
+                  <h4 className={`text-sm font-extrabold `}>TaskHub</h4>
+              </Link>
+          </div>
+      </div>
+
+      <div className={`flex h-full flex-col items-center justify-center min-h-screen pt-20`}>
+
+        {loading && 
+           <div className={`w-[100x] h-[100px]`}>
+           <Image src={loader} width={100} height={100} alt='' />
+          </div>
+        }
+            
+        {verified && (
+          <div className={`flex flex-col items-center justify-center ${styles.animation}`}>
+            <div className={`w-[166px] h-[166px]`}>
+                <Image src={success} width={166} height={166} alt='' />
+            </div>
+              <p className="text-center mt-10">Your email has been verified successfully. <br /> Kindly proceed to <a href="/auth/LoginLayout" className="text-purpleBase underline hover:text-purple7">Login</a></p>
+          </div>
+        )}
+        
+        {error && <div>Error verifying email. Please try again later</div>}
+        
+      </div>
+ </div>
+
   );
 };
 
 export default VerifyEmail;
+
+
