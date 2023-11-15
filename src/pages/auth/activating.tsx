@@ -141,7 +141,7 @@ const VerifyEmail = () => {
       <p>Activation Page</p>
 
     <div className="text-grey5 my-10">
-      <p><span className="text-black">Token and Hashed Email: </span>{tAndE}</p>
+      <p><span className="text-black">Token and Email: </span>{tAndE}</p>
       <p><span className="text-black">Token: </span>{t}</p>
       <p><span className="text-black">Hashed email: </span>{e}</p>
     </div>
