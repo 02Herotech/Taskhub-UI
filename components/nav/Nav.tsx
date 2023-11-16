@@ -80,7 +80,7 @@ const contactClick = () => {
                 className='w-[95px] px-3 border-[2px] border-purpleBase bg-purpleBase text-white  text-base font-extralight h-[45px] hover:bg-purple7'
               />
             </Link>
-            <Link href='/auth/LoginLayout'>
+            <Link href='/auth/login'>
               <Button
                 btnValue='Log in'
                 className='bg-white border-[2px] w-[95px] h-[45px]  px-4 border-purpleBase text-black  hover:text-white font-extralight text-base hover:bg-purple7'

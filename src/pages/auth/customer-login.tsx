@@ -1,16 +1,16 @@
-/* eslint-disable react/no-unescaped-entities */
-/* eslint-disable react-hooks/rules-of-hooks */
-import React, { useState } from "react";
+
+import React, { useState, useEffect } from "react";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
 import Image from "next/image";
 import logo from "../../../public/logo.png";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
-import { BackButton } from "../../../components/buttons/Button";
+// import { BackButton } from "../../../components/buttons/Button";
 import { useSession } from "next-auth/react";
 import router from "next/router";
 
 import { BsArrowLeftCircle } from 'react-icons/bs'
+import { setTimeout } from "timers/promises";
 
 
 interface FormState {
@@ -21,6 +21,11 @@ interface FormState {
 }
 
 const login: React.FC<FormState> = () => {
+  
+  const[isLoading, setIsLaoding] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState("");
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -28,8 +33,6 @@ const login: React.FC<FormState> = () => {
     // error: "",
   });
 
-  const [showPassword, setShowPassword] = useState(false);
-  // const [isloading, setIsloading] = useState(false);
 
   const {data: session } = useSession();
 
@@ -53,26 +56,24 @@ const login: React.FC<FormState> = () => {
   const onSubmit = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
     console.log("formdata", formData);
-    // setIsloading(!isloading)
+    setIsLaoding(true)
 
     const result = await signIn("credentials", {
       redirect: false,
       email: formData.email,
-      password: formData.password,
-      callbackUrl: "/about",
+      password: formData.password
     });
-
-    // ../../../components/authLayout/AuthLayout
 
     console.log("result", result);
     console.log("session", session);
 
-    // if (result && result.ok) {
-    //   alert("Login Successful");
-    //   router.push("/dashboard/customer");
-    // } else {
-    //   alert("Login Failed");
-    // }
+  
+    if (result && result.ok) {
+      router.push("/dashboard/customer");
+    } else {      
+      setError("Invalid email/password")
+      setIsLaoding(false) 
+    }
   };
 
   return (
@@ -87,8 +88,8 @@ const login: React.FC<FormState> = () => {
       </div>
 
 
-      <div className={` flex font-bold min-h-screen flex-col m-auto pt-16 justify-center items-center `}>
-        <div className={` p-3 space-y-5 text-center mb-2`}>
+      <div className={` flex font-bold min-h-screen flex-col m-auto pt-16 justify-center items-center`}>
+        <div className={` p-3 space-y-3 text-center mb-1`}>
             <div className={`text-lg font-extrabold w-full  `}>
               <h1>Login into your TaskHub Customer account</h1>
             </div>
@@ -101,7 +102,7 @@ const login: React.FC<FormState> = () => {
 
 
         <div className="w-[450px]">
-          <form action="" onSubmit={onSubmit} className={`space-y-5  p-5`}>
+          <form onSubmit={onSubmit} className={`space-y-2 p-5`}>
             <div className={`flex flex-col `}>
               <label
                 htmlFor="email"
@@ -152,12 +153,15 @@ const login: React.FC<FormState> = () => {
             <div className={`flex justify-center items-center`}>
               <button
                 type="submit"
-                className={`w-full bg-purpleBase text-white py-2 px-4 rounded-md hover:bg-purple7 text-sm ${isAllFieldsFilled() ? '' : 'opacity-50'}`}
-                disabled={!isAllFieldsFilled()}
+                className={`w-full bg-purpleBase text-white py-2 px-4 rounded-md hover:bg-purple7 text-sm disabled:opacity-50`}
+                disabled={!isAllFieldsFilled() || isLoading}
               >
-                Log in
+                {!isLoading ? "Log in" : "Logging in..."}
               </button>
             </div>
+            
+            <div className="text-red4 text-[13px] text-center h-[20px] flex items-center justify-center">{error}</div>
+
           </form>
         </div>
         
@@ -166,8 +170,6 @@ const login: React.FC<FormState> = () => {
             <button className='flex justify-center items-center'><span className='mr-1'><BsArrowLeftCircle /></span>Back Home</button>
         </Link>
       </div>
-
-
       </div >
 
       
