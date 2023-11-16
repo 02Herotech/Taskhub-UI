@@ -1,12 +1,18 @@
 import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import { useState } from "react"; 
+
 // import { Session } from "next-auth";
 
 import axios from "axios";
 import { baseUrl } from "@/redux";
 
 
+// const [postURL, setPostURl] = useState("customer/login")
+
 export default NextAuth({
+
+
   session: {
     strategy: "jwt",
   },
@@ -15,11 +21,11 @@ export default NextAuth({
   },
   providers: [
     CredentialsProvider({ 
-      name: "credentials",
+      name: "Credentials",
       id: "credentials",
       type: "credentials",
       credentials: {
-        email: { label: "Email", type: "email", placeholder: "jsmith" },
+        email: { label: "Email", type: "email" },
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
@@ -28,14 +34,10 @@ export default NextAuth({
           password: string;
         };
 
-        // if (email !== "cyprusakanni@gmail.com" || password !== "Ibiayo@1205"){
-        //   throw new Error("invalid credentials")
-        // }
-        // return { id: '1234', name: "cy baby", email: 'jsjj@gmail.com'}
-      
         try {
         
-        const response = await axios.post(baseUrl + "customer/login", {
+          
+        const response = await axios.post("https://service-rppp.onrender.com/api/v1/customer/login", {
           emailAddress: email,
           password,
         });
@@ -59,6 +61,7 @@ export default NextAuth({
       },
     }),
   ],
+  
   secret: process.env.SECRET,
   callbacks: {
     async jwt({ token, user, trigger, session }) {

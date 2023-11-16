@@ -21,7 +21,7 @@ interface FormState {
   // error: string;
 }
 
-const login: React.FC<FormState> = () => {
+const Login: React.FC<FormState> = () => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -175,5 +175,5 @@ const login: React.FC<FormState> = () => {
   )
 }
 
-export default login
+export default Login
 

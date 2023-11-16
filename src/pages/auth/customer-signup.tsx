@@ -28,7 +28,7 @@ interface FormState {
     error2: string;
 }
 
-const customerSignup: React.FC<FormState> = () => {
+const CustomerSignup: React.FC<FormState> = () => {
     const [formData, setFormData] = useState({
         firstName: "",
         lastName: "",
@@ -403,4 +403,4 @@ const customerSignup: React.FC<FormState> = () => {
     );
 };
 
-export default customerSignup;
+export default CustomerSignup;

@@ -7,7 +7,7 @@ import thumbsUp from '../../../public/thumbsUp.svg'
 
 
 
-const resetPasswordConfirmation = () => {
+const ResetPasswordConfirmation = () => {
     return (
         <div className={`m-auto `}>
             <div className={`w-full p-10 flex drop-shadow-md bg-white h-[80px]`}>
@@ -29,4 +29,4 @@ const resetPasswordConfirmation = () => {
     )
 }
 
-export default resetPasswordConfirmation
+export default ResetPasswordConfirmation

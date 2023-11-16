@@ -11,19 +11,22 @@ import { BackButton } from '../../../components/buttons/Button'
 interface FormState {
     newPassword: string;
     confirmNewPassword: string;
-    error: string;
+    error1: string;
+    error2: string;
 }
 
 
 
-const resetPassword: React.FC<FormState> = () => {
+const ResetPassword: React.FC<FormState> = () => {
     const [formData, setFormData] = useState({
         newPassword: '',
         confirmNewPassword: '',
-        error: '',
+        error1: '',
+        error2: '',
     });
     const [showNewPassword, setShowNewPassword] = useState(false)
     const [showConfirmNewPassword, setShowConfirmNewPassword] = useState(false);
+    // const [isError1, setisError1] = useState("")
 
 
 
@@ -35,22 +38,40 @@ const resetPassword: React.FC<FormState> = () => {
             [name]: value,
 
         }));
-
+        
         if (name === 'newPassword') {
             const passwordPattern = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
             if (value && !passwordPattern.test(value)) {
                 setFormData((prevData) => ({
                     ...prevData,
-                    error: 'Password should be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one special character, and one number.',
+                    error1: 'Must be min. of 8 characters and contain at least one uppercase letter, one special character and one number',
                 }));
             } else {
                 // Clear the error message if the password matches the pattern or is empty
                 setFormData((prevData) => ({
                     ...prevData,
-                    error: '',
+                    error1: '',
                 }));
             }
         }
+
+        
+        if (name === "confirmNewPassword") {
+            if (value !== formData.newPassword) {
+                setFormData((prevData) => ({
+                    ...prevData,
+                    error2: "Password should match",
+                }));
+            } else {
+                // Clear the error message if the confirm password matches the password
+                setFormData((prevData) => ({
+                    ...prevData,
+                    error2: "",
+                }));
+            }
+        }
+
+
     };
 
 
@@ -68,14 +89,12 @@ const resetPassword: React.FC<FormState> = () => {
         setShowConfirmNewPassword(!showConfirmNewPassword);
     };
 
-
-
     const onSubmit = (event: { preventDefault: () => void }) => {
         event.preventDefault();
         if (formData.newPassword !== formData.confirmNewPassword) {
             setFormData((prevData) => ({
                 ...prevData,
-                error: 'Password should be same',
+                // error: 'Password should be same',
             }));
             return;
         } else {
@@ -84,35 +103,43 @@ const resetPassword: React.FC<FormState> = () => {
     }
 
 
-
-
-
-
     return (
         <div className={`m-auto `}>
-            <div className={`w-full p-10 flex drop-shadow-md bg-white h-[80px]`}>
-                <Link href='/' className={`flex space-x-3 items-center`}>
-                    <Image src={logoImg} width={61} height={55} alt='' className={`mt-[-10px]`} />
-                    <h4 className={`text-lg font-extrabold `}>TaskHub</h4>
-                </Link>
+            <div className={`p-5 flex h-[80px] drop-shadow-md fixed z-50 w-full bg-white font-extrabold justify-center`}>
+                <div className='w-[80em]'>
+                    <Link href='/' className={`flex space-x-3 items-center`}>
+                        <Image src={logoImg} width={50} height={40} alt='' className={`mt-[-10px]`} />
+                        <h4 className={`text-sm font-extrabold `}>TaskHub</h4>
+                    </Link>
+                </div>
             </div>
 
-            <div className={` flex h-full flex-col m-auto mt-10`}>
-                <div className={` flex items-center flex-col my-5 space-y-3 mx-auto text-center px-2  w-[400px]  `}>
+            <div className={` flex min-h-screen items-center justify-center flex-col m-auto pt-10`}>
+                <div className={` flex items-center flex-col my-2 space-y-2 mx-auto text-center px-2  w-[400px]`}>
                     <h1 className={`text-xl font-extrabold`}>Password Reset</h1>
-                    <h2 className={`text-base`}>
-                        Enter your new password and  your password we be reset.
+                    <h2 className={``}>
+                        Enter new password
                     </h2>
                 </div>
 
-                <div className='p-2 w-[450px] mx-auto px-5 '>
+                <div className='py-2 w-[450px] mx-auto px-5'>
                     <form action="" onSubmit={onSubmit} className={`space-y-5 `}>
                         <div className={`flex flex-col`}>
-                            <label htmlFor="newPassword" className={`font-bold text-[16px]  my-1`}>
-                                New Password <span className={`text-red10`}>*</span>
-                            </label>
+                            <div className='flex justify-between items-end my-2'>
+                                <label htmlFor="newPassword" className={`font-bold text-[16px]`}>
+                                    New Password <span className={`text-red10`}>*</span>
+                                </label>
+
+                                <p className={`text-red10 text-[10px] w-[260px] h-[45px] text-justify`}>{formData.error1}</p>
+                            </div>
+
                             <div className={`relative`}>
-                                <input type={showNewPassword ? 'text' : 'password'} id='newPassword' name='newPassword' placeholder='Enter your password' className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl w-full`} value={formData.newPassword} onChange={handleChange} required maxLength={15}
+                                <input type={showNewPassword ? 'text' : 'password'} id='newPassword' name='newPassword' placeholder='Enter your password' 
+                                className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl w-full`} 
+                                value={formData.newPassword} 
+                                onChange={handleChange} 
+                                required 
+                                maxLength={20}
                                 />
                                 <button
                                     type="button"
@@ -129,11 +156,21 @@ const resetPassword: React.FC<FormState> = () => {
                         </div>
 
                         <div className={`flex flex-col`}>
-                            <label htmlFor="confirmNewPassword" className={`font-bold text-[16px] my-1`}>
-                                Confirm Password <span className={`text-red10`}>*</span>
-                            </label>
+
+                        
+                            <div className='flex justify-between items-end my-2'>
+                                <label htmlFor="confirmNewPassword" className={`font-bold text-[16px]`}>
+                                    Confirm Password <span className={`text-red10`}>*</span>
+                                </label>
+
+                                <p className={`text-red10 text-[10px] w-[240px] h-[20px] text-justify`}>{formData.error2}</p>
+                            </div>
                             <div className={`relative`}>
-                                <input type={showConfirmNewPassword ? 'text' : 'password'} id='confirmNewPassword' name='confirmNewPassword' placeholder='Enter your password' className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl w-full`} value={formData.confirmNewPassword} onChange={handleChange} required
+                                <input type={showConfirmNewPassword ? 'text' : 'password'} id='confirmNewPassword' name='confirmNewPassword' placeholder='Enter your password' 
+                                className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl w-full`} 
+                                value={formData.confirmNewPassword} 
+                                onChange={handleChange} 
+                                required
                                 />
                                 <button
                                     type="button"
@@ -147,16 +184,15 @@ const resetPassword: React.FC<FormState> = () => {
                                     )}
                                 </button>
                             </div>
-                            <p className={`text-red10 text-[10px] p-2`}>{formData.error}</p>
-
                         </div>
 
+                           
 
                         <div className={`flex justify-center items-center text-sm`}>
                             <button
                                 type="submit"
-                                className={`w-full bg-purpleBase text-white py-2 px-4 rounded-md hover:bg-purple5  ${isAllFieldsFilled() ? '' : 'cursor-not-allowed opacity-50'}`}
-                                disabled={!isAllFieldsFilled()}
+                                className={`w-full bg-purpleBase text-white py-2 px-4 rounded-md hover:bg-purple5  disabled:opacity-50`}
+                                disabled={!isAllFieldsFilled() || (formData.newPassword !== formData.confirmNewPassword) }
                             >
                                 Save Password
                             </button>
@@ -169,5 +205,5 @@ const resetPassword: React.FC<FormState> = () => {
     )
 }
 
-export default resetPassword
+export default ResetPassword
 
