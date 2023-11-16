@@ -30,7 +30,7 @@ interface FormState {
     idNUmber: string;
 }
 
-const serviceProviderSignup: React.FC<FormState> = () => {
+const ServiceProviderSignup: React.FC<FormState> = () => {
 
     const [formData, setFormData] = useState({
         firstName: '',
@@ -369,4 +369,4 @@ const serviceProviderSignup: React.FC<FormState> = () => {
     )
 }
 
-export default serviceProviderSignup
+export default ServiceProviderSignup

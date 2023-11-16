@@ -17,7 +17,7 @@ export default NextAuth({
     strategy: "jwt",
   },
   pages: {
-    customerSignIn: "/auth/CustomerLogin",
+    signIn: "/auth/CustomerLogin",
   },
   providers: [
     CredentialsProvider({ 

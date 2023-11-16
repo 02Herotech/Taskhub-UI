@@ -7,7 +7,7 @@ import welcome from '../../../public/welcome.svg'
 
 
 
-const signupConfirmation = () => {
+const SignupConfirmation = () => {
     return (
 
         <div className={`m-auto`}>
@@ -32,4 +32,4 @@ const signupConfirmation = () => {
     )
 }
 
-export default signupConfirmation
+export default SignupConfirmation

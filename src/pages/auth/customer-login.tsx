@@ -20,7 +20,7 @@ interface FormState {
   // error: string;
 }
 
-const login: React.FC<FormState> = () => {
+const Login: React.FC<FormState> = () => {
   
   const[isLoading, setIsLaoding] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -177,5 +177,5 @@ const login: React.FC<FormState> = () => {
   )
 }
 
-export default login
+export default Login
 
