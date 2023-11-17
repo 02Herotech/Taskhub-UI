@@ -10,7 +10,7 @@ import Link from 'next/link'
 import logoImg from '../../../public/logo.png'
 import loader from '../../../public/loader.svg'
 import success from '../../../public/success.svg'
-import styles from '../../styles/signupConfirmation.module.css'
+import styles from '../../styles/animation.module.css'
 
 
 const VerifyEmail = () => {
@@ -21,7 +21,13 @@ const VerifyEmail = () => {
   const [loading, setLoading] = useState(false);
 
   const verifyUserEmail = async () => {
-   
+    
+    useEffect(() => {
+      const urlParams = window.location.search.split("?")[1];
+      setTokenAndHashedEmail(urlParams)
+  
+    }, []);
+    
     try {
       setLoading(true);
       await axios.post(`https://service-rppp.onrender.com/api/v1/user/verify?${tokenAndHashedEmail}`);
@@ -36,11 +42,6 @@ const VerifyEmail = () => {
  
 
   
-  useEffect(() => {
-    const urlParams = window.location.search.split("?")[1];
-    setTokenAndHashedEmail(urlParams)
-
-  }, []);
 
 
   useEffect(() => {

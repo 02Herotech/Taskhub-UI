@@ -8,86 +8,94 @@ import {GrLocation, GrSearch} from "react-icons/gr";
 import Card from "../../../../components/card2/Card";
 import Picture1 from "../../../../public/customerAssets/close-up-collection-make-up-beauty-products.jpg";
 import Picture2 from "../../../../public/customerAssets/vintage-sewing-machine-with-thread-measuring-tape.jpg";
-interface IProps {
 
-}
 
-function Index(props: IProps) {
+// interface IProps {
+
+// }
+
+const CustomerDashboard = () => {
     return (
-        <DashboardLayout>
-            <div className={styles.mainContainer}>
-                <div>
-                    <div className={styles.customerDetails}>
-                        <div className={styles.imageDiv}>
-                            <Image src={customer} className={styles.customerImage} alt="customer-image"/>
-                        </div>
-                        <div className={styles.customerInfo}>
-                            <div className={styles.nameAndVerification}>
-                                <p>Dotun A.</p>
-                                <MdVerified className={styles.verificationLogo}/>
+        <div className=''>
+
+            <DashboardLayout>
+                <div className={styles.mainContainer}>
+
+                    <div>
+                        <div className={styles.customerDetails}>
+                            <div className={styles.imageDiv}>
+                                <Image src={customer} className={styles.customerImage} alt="customer-image"/>
                             </div>
-                            <div className={styles.location}>
-                                <GrLocation className={styles.locationLogo}/>
-                                <p>Sydney, Australia</p>
+                            <div className={styles.customerInfo}>
+                                <div className={styles.nameAndVerification}>
+                                    <p>Dotun A.</p>
+                                    <MdVerified className={styles.verificationLogo}/>
+                                </div>
+                                <div className={styles.location}>
+                                    <GrLocation className={styles.locationLogo}/>
+                                    <p>Sydney, Australia</p>
+                                </div>
                             </div>
-                        </div>
-                        <div className={styles.searchDiv}>
-                            <GrSearch className={styles.searchLogo}/>
-                            <input type="text" className={styles.searchInput} placeholder="Search"/>
+                            <div className={styles.searchDiv}>
+                                <GrSearch className={styles.searchLogo}/>
+                                <input type="text" className={styles.searchInput} placeholder="Search"/>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div className={styles.topButtonDiv}>
-                    <button className={styles.editBtn}>
-                        Edit Profile
-                    </button>
-                    <button className={styles.accountBtn}>
-                        Switch Account
-                    </button>
-                </div>
+                    
+                    <div className={styles.topButtonDiv}>
+                        <button className={styles.editBtn}>
+                            Edit Profile
+                        </button>
+                        <button className={styles.accountBtn}>
+                            Switch Account
+                        </button>
+                    </div>
 
-                <div className={styles.cardsDiv}>
-                    <Card
-                        image={Picture1}
-                        title={"HEADIE’S Clean Agent"}
-                        pay={55}
-                        stars={3}
-                    />
-                    <Card
-                        image={Picture1}
-                        title={"ELECTRICAL SERVICE CONSULT"}
-                        pay={35}
-                        stars={3}
-                    />
-                    <Card
-                        image={Picture1}
-                        title={"HEADIE’S Clean Agent"}
-                        pay={55}
-                        stars={3}
-                    />
-                    <Card
-                        image={Picture1}
-                        title={"ELECTRICAL SERVICE CONSULT"}
-                        pay={35}
-                        stars={3}
-                    />
-                    <Card
-                        image={Picture1}
-                        title={"HEADIE’S Clean Agent"}
-                        pay={55}
-                        stars={3}
-                    />
-                    <Card
-                        image={Picture1}
-                        title={"ELECTRICAL SERVICE CONSULT"}
-                        pay={35}
-                        stars={3}
-                    />
+                    {/* <div className={styles.cardsDiv}>
+                        <Card
+                            image={Picture1}
+                            title={"HEADIE’S Clean Agent"}
+                            pay={55}
+                            stars={3}
+                        />
+                        <Card
+                            image={Picture1}
+                            title={"ELECTRICAL SERVICE CONSULT"}
+                            pay={35}
+                            stars={3}
+                        />
+                        <Card
+                            image={Picture1}
+                            title={"HEADIE’S Clean Agent"}
+                            pay={55}
+                            stars={3}
+                        />
+                        <Card
+                            image={Picture1}
+                            title={"ELECTRICAL SERVICE CONSULT"}
+                            pay={35}
+                            stars={3}
+                        />
+                        <Card
+                            image={Picture1}
+                            title={"HEADIE’S Clean Agent"}
+                            pay={55}
+                            stars={3}
+                        />
+                        <Card
+                            image={Picture1}
+                            title={"ELECTRICAL SERVICE CONSULT"}
+                            pay={35}
+                            stars={5}
+                        />
 
+                    </div> */}
                 </div>
-            </div>
-        </DashboardLayout>
+            </DashboardLayout>
+
+        </div>
     );
 }
-
-export default Index;
+ 
+export default CustomerDashboard;

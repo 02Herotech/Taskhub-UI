@@ -1,12 +1,12 @@
 
 .animation {
-  animation: thankYou;
+  animation: anime;
   animation-iteration-count: initial;
   animation-direction: alternate;
   animation-duration: 2s;
 }
 
-@keyframes thankYou {
+@keyframes anime {
     from {opacity: 0.2;}
     to {opacity: 1;}
 }

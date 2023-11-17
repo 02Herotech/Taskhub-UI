@@ -9,7 +9,7 @@ import padlock from '../../../public/padlock.svg'
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai'
 import { BackButton } from '../../../components/buttons/Button'
 import success from '../../../public/success.svg'
-import styles from '../../styles/resetPassword.module.css'
+import styles from '../../styles/animation.module.css'
 
 
 
