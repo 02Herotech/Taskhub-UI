@@ -171,7 +171,7 @@ const ResetPassword: React.FC<FormState> = () => {
 
                             <div className={` flex items-center flex-col my-2 space-y-2 mx-auto text-center px-2  w-[400px]`}>
                                 <h1 className={`text-xl font-extrabold`}>Password Reset</h1>
-                                <h2 className={``}>
+                                <h2>
                                     Enter new password
                                 </h2>
                             </div>
