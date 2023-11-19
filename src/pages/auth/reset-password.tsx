@@ -14,6 +14,7 @@ import styles from '../../styles/animation.module.css'
 
 
 
+
 interface FormState {
     newPassword: string;
     confirmNewPassword: string;
@@ -24,16 +25,24 @@ interface FormState {
 
 
 const ResetPassword: React.FC<FormState> = () => {
+
     const [formData, setFormData] = useState({
         newPassword: '',
         confirmNewPassword: '',
         error1: '',
         error2: '',
     });
+
+
+    
+
     const [showNewPassword, setShowNewPassword] = useState(false)
     const [showConfirmNewPassword, setShowConfirmNewPassword] = useState(false);
     const [isSuccessful, setisSuccessful] = useState(false)
-    const [token, setToken] = useState("")
+    const [t, setT] = useState("")
+    const [isloading, setIsLoading] = useState(false)
+    const [errorState, setErrorState] = useState('')
+    
 
 
 
@@ -77,6 +86,8 @@ const ResetPassword: React.FC<FormState> = () => {
             }
         }
 
+        
+
 
     };
 
@@ -95,34 +106,42 @@ const ResetPassword: React.FC<FormState> = () => {
         setShowConfirmNewPassword(!showConfirmNewPassword);
     };
 
+
+    useEffect(() => {
+        const urlParams = window.location.search.split("=")[1];
+        setT(urlParams)
+    }, [])
+    
+    
     const onSubmit = async (event: { preventDefault: () => void }) => {
         event.preventDefault();
-    
-        useEffect(() => {
-            const urlParams = window.location.search.split("?")[1];
-            setToken(urlParams)
         
-          }, []);
+        console.log(t)
+        setIsLoading(true)
 
-        try {
-            const response = await axios.post(`https://service-rppp.onrender.com/api/v1/user/reset-password?${token}`);
-            console.log(response)
-        } catch (error) {
-            console.error("Password Reset Error: ", error)
-        }
+            try {
+                const password = formData.newPassword
+                console.log(password)
+                
+                const response = await axios.post(
+                    `https://service-rppp.onrender.com/api/v1/user/reset-password?t=${(t)}`, 
+                    {password});
+                console.log(response)
+
+                if (response.status = 200) {
+                    setisSuccessful(true)
+                }
+            } catch (error: any) {
+                console.error("Password Reset Error: ", error)
+                setIsLoading(false)
+                setErrorState(error.message)
+
+            }
         
-        // if (formData.newPassword !== formData.confirmNewPassword) {
-        //     setFormData((prevData) => ({
-        //         ...prevData,
-        //         // error: 'Password should be same',
-        //     }));
-        //     return;
-        // } else {
-        //     // Router.push('/auth/authLogin')
-        // }
-
+                
     }
-
+    
+    
 
     return (
         <div className={`m-auto `}>
@@ -227,19 +246,28 @@ const ResetPassword: React.FC<FormState> = () => {
                                         <button
                                             type="submit"
                                             className={`w-full bg-purpleBase text-white py-2 px-4 rounded-md hover:bg-purple5  disabled:opacity-50`}
-                                            disabled={!isAllFieldsFilled() || (formData.newPassword !== formData.confirmNewPassword) }
+                                            disabled={!isAllFieldsFilled() || (formData.newPassword !== formData.confirmNewPassword) || isloading}
+                                            // disabled={!isAllFieldsFilled() || (formData.newPassword !== formData.confirmNewPassword)}
                                         >
-                                            Reset
+                                            {!isloading ? "Reset" : "Resetting..."}
+                                            {/* Reset */}
                                         </button>
                                     </div>
 
                                 </form>
                             </div>
-                        </div>                 
+                            
+                            <div className='text-red5 mt-2 flex justify-center items-center'>{errorState}</div>
+                            
+                        </div>  
+                        
+                        
                     
-                     }                                  
+                     }   
+                                                    
                 </div >
 
+             
             
         </div >
     )

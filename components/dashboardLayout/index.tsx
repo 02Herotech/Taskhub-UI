@@ -1,6 +1,7 @@
 import React, {ReactNode} from 'react';
 import Image from 'next/image';
-
+import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 import {IoIosNotificationsOutline} from "react-icons/io";
 import {RiArrowDropDownLine} from "react-icons/ri";
@@ -24,9 +25,15 @@ interface IProps {
 
 function DashboardLayout(props: IProps) {
 
+    const router = useRouter();
+    const isLinkActive = (linkPath: string) => {
+      return router.pathname === linkPath;
+    };
+  
+
     return (
         <div className='max-w-7xl mx-auto'>
-            <div className={styles.dashboardLayout}>
+            {/* <div className={``}> */}
 
                 {/*Top Bar*/}
 
@@ -57,46 +64,46 @@ function DashboardLayout(props: IProps) {
 
                 <div className={`flex`}>
 
-                    <div className={`flex flex-col bg-purpleBase min-h-screen w-[350px] items-center`}>
+                    <div className={`flex flex-col bg-purpleBase min-h-screen w-[240px] items-center`}>
                         <div className={`flex flex-col items-start justify-between text-white py-20`}>
-                            <ul className='mb-[60px]'>
-                                <button className={`flex items-center text-[16px] gap-[20px] hover:text-[#FE9B07] mb-14`}>
-                                    <RxDashboard size={20}/> Dashboard
-                                </button>
-                                <button className={`flex items-center text-[16px] gap-[20px] hover:text-[#FE9B07] mb-14`}>
-                                    <IoPersonOutline size={20}/> Profile
-                                </button>
-                                <button className={`flex items-center text-[16px] gap-[20px] hover:text-[#FE9B07] mb-14`}>
-                                    <IoClipboardOutline size={20}/> Post a Request
-                                </button>
-                                <button className={`flex items-center text-[16px] gap-[20px] hover:text-[#FE9B07] mb-14`}>
-                                    <TfiWallet size={20}/> Bookings
-                                </button>
-                                <button className={`flex items-center text-[16px] gap-[20px] hover:text-[#FE9B07] mb-14`}>
-                                    <GoPulse size={20}/> View Jobs
-                                </button>
-                                <button className={`flex items-center text-[16px] gap-[20px] hover:text-[#FE9B07] mb-14`}>
-                                    <CgBox size={20}/> Billing and Payments
-                                </button>
-                                <button className={`flex items-center text-[16px] gap-[20px] hover:text-[#FE9B07] mb-14`}>
-                                    <FiHelpCircle size={20}/> Help and Support
-                                </button>
-                            </ul>
+                            <div className='mb-[20em] text-[14px]'>
+                                <Link  href="/dashboard/customer" className={`flex items-center gap-[20px] hover:text-[#FE9B07] mb-14 ${isLinkActive("/dashboard/customer") && "text-[#FE9B07]"}`}>
+                                    <RxDashboard size={16}/>Dashboard
+                                </Link>
+                                <Link href="/dashboard/customer/profile" className={`flex items-center gap-[20px] hover:text-[#FE9B07]  mb-14 ${isLinkActive("/dashboard/customer/profile") && "text-[#FE9B07]"}`}>
+                                    <IoPersonOutline size={16}/>Profile
+                                </Link>
+                                <Link href="/dashboard/customer/post-request" className={`flex items-center gap-[20px] hover:text-[#FE9B07] mb-14 ${isLinkActive("/dashboard/customer/post-request") && "text-[#FE9B07]"}`}>
+                                    <IoClipboardOutline size={16}/>Post a Request
+                                </Link>
+                                <Link href="/dashboard/customer/bookings" className={`flex items-center gap-[20px] hover:text-[#FE9B07] mb-14 ${isLinkActive("/dashboard/customer/bookings") && "text-[#FE9B07]"}`}>
+                                    <TfiWallet size={16}/>Bookings
+                                </Link>
+                                <Link href="/dashboard/customer/view-jobs" className={`flex items-center gap-[20px] hover:text-[#FE9B07] mb-14 ${isLinkActive("/dashboard/customer/view-jobs") && "text-[#FE9B07]"}`}>
+                                    <GoPulse size={16}/>View Jobs
+                                </Link>
+                                <Link href="/dashboard/customer/billings&payments" className={`flex items-center gap-[20px] hover:text-[#FE9B07] mb-14 ${isLinkActive("/dashboard/customer/billings&payments") && "text-[#FE9B07]"}`}>
+                                    <CgBox size={16}/> Billing and Payments
+                                </Link>
+                                <Link href="/dashboard/customer/help&support" className={`flex items-center gap-[20px] hover:text-[#FE9B07] mb-14 ${isLinkActive("/dashboard/customer/help&support") && "text-[#FE9B07]"}`}>
+                                    <FiHelpCircle size={16}/>Help and Support
+                                </Link>
+                            </div>
 
                             <button className={`flex items-center text-[16px] gap-[20px] hover:text-[#FE9B07]`}>
-                                <FiLogOut size={20}/> Logout
+                                <FiLogOut size={16}/> Logout
                             </button>
                         </div>
                     </div>
 
-                    {/* <div className={styles.content}>{props.children}</div> */}
+                    <div className={styles.content}>{props.children}</div>
                 </div>
 
                 {/*Footer*/}
 
                 <Footer />
-                
-            </div>
+
+            {/* </div> */}
         </div>
     );
 }
