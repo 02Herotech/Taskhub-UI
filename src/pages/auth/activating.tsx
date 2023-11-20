@@ -19,14 +19,15 @@ const VerifyEmail = () => {
   const [verified, setVerified] = useState(false);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
+ 
+  useEffect(() => {
+    const urlParams = window.location.search.split("?")[1];
+    setTokenAndHashedEmail(urlParams)
+
+  }, []);
 
   const verifyUserEmail = async () => {
     
-    useEffect(() => {
-      const urlParams = window.location.search.split("?")[1];
-      setTokenAndHashedEmail(urlParams)
-  
-    }, []);
     
     try {
       setLoading(true);
