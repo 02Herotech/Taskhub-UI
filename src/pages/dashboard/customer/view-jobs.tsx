@@ -14,12 +14,14 @@ import Picture2 from "../../../../public/customerAssets/vintage-sewing-machine-w
 
 // }
 
-const CustomerDashboard = () => {
+const ViewJobs = () => {
     return (
      
 
             <DashboardLayout>
-                <div className={styles.mainContainer}>
+                <p>View Jobs</p>
+                
+                {/* <div className={styles.mainContainer}>
 
                     <div>
                         <div className={styles.customerDetails}>
@@ -50,7 +52,7 @@ const CustomerDashboard = () => {
                         <button className={styles.accountBtn}>
                             Switch Account
                         </button>
-                    </div>
+                    </div> */}
 
                     {/* <div className={styles.cardsDiv}>
                         <Card
@@ -91,9 +93,9 @@ const CustomerDashboard = () => {
                         />
 
                     </div> */}
-                </div>
+                {/* </div> */}
             </DashboardLayout>
     );
 }
  
-export default CustomerDashboard;
+export default ViewJobs;

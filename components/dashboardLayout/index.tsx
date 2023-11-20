@@ -1,5 +1,8 @@
 import React, {ReactNode} from 'react';
-import styles from "./styles.module.scss";
+import Image from 'next/image';
+import { useRouter } from 'next/router';
+import Link from 'next/link';
+
 import {IoIosNotificationsOutline} from "react-icons/io";
 import {RiArrowDropDownLine} from "react-icons/ri";
 import {RxDashboard} from "react-icons/rx";
@@ -8,11 +11,13 @@ import {IoClipboardOutline} from "react-icons/io5";
 import {CgBox} from "react-icons/cg";
 import {FiHelpCircle, FiMessageCircle} from "react-icons/fi";
 import {FiLogOut} from "react-icons/fi";
-import Image from 'next/image';
-import portrait from "./../../public/dashboardAssets/portrait.jpg";
-import taskHub from "./../../public/dashboardAssets/TASK.png"
 import {GoGear, GoPulse} from "react-icons/go";
 import {TfiWallet} from "react-icons/tfi";
+
+import styles from "./styles.module.scss";
+import portrait from "./../../public/dashboardAssets/portrait.jpg";
+import taskHub from "./../../public/dashboardAssets/TASK.png"
+import Footer from '../footer/Footer'; 
 
 interface IProps {
     children: ReactNode
@@ -20,116 +25,86 @@ interface IProps {
 
 function DashboardLayout(props: IProps) {
 
+    const router = useRouter();
+    const isLinkActive = (linkPath: string) => {
+      return router.pathname === linkPath;
+    };
+  
+
     return (
-        <>
-            <div className={styles.dashboardLayout}>
+        <div className='max-w-7xl mx-auto'>
+            {/* <div className={``}> */}
 
                 {/*Top Bar*/}
 
-                <div className={styles.topBar}>
-                    <div className={styles.topLogo}>
-                        <Image src={taskHub} className={styles.firstLogo} alt="task-hub"/>
-                        <h3 className={styles.name}> TaskHUB </h3>
+                <div className={`flex justify-between px-6 py-3 border-b-[1.5px] border-grey4 z-50`}>
+                    <div className={`flex justify-center items-center`}>
+                        <Image src={taskHub} className={`mx-2`} alt="task-hub"/>
+                        <h3 className={`text-lg font-extrabold`}>TaskHub</h3>
                     </div>
-                    <div className={styles.userInfo}>
-                        <div className={styles.notificationDiv}>
-                            <IoIosNotificationsOutline className={styles.notification}/>
+                    <div className={`flex justify-around w-[300px] items-center bg-purpleBase rounded-md px-3 py-2`}>
+                        <div className={``}>
+                            <span className={`text-[20px] text-white`}><IoIosNotificationsOutline /></span>
                         </div>
-                        <div className={styles.messageDiv}>
-                            <FiMessageCircle className={styles.message}/>
-                            <span className={styles.messageCount}>5</span>
+                        <div className={`relative`}>
+                            <span className={`text-[20px] text-white`}><FiMessageCircle /></span>
+                            <span className={`absolute top-[-7px] right-[3px] bg-[#FE9B07] text-[10px] text-white rounded-[50%] px-[4px] py-[1px]`}>5</span>
                         </div>
 
-                        <div className={styles.userDetails}>
-                            <p className={styles.userName}>Dotun Atom</p>
-                            <p className={styles.role}>Customer</p>
+                        <div className={`text-white`}>
+                            <p className={`font-extrabold text-[15px]`}>Dotun Atom</p>
+                            <p className={`text-[12px]`}>Customer</p>
                         </div>
-                        <Image src={portrait} alt="User Portrait" className={styles.userImage}/>
-                        <GoGear className={styles.gear}/>
+                        <Image src={portrait} alt="User Portrait" className={`rounded-[50%] h-[40px] w-[40px] object-cover`}/>
+                        <span className={`text-[20px] text-white`}><GoGear /></span>
                     </div>
                 </div>
 
                 {/*sidebar*/}
 
-                <div className={styles.sidebarDiv}>
-                    <div className={styles.sideBar}>
-                        <div>
-                            <ol>
-                                <button className={styles.sidebarButton}>
-                                    <RxDashboard size={20}/> Dashboard
-                                </button>
-                                <button className={styles.sidebarButton}>
-                                    <IoPersonOutline size={20}/> Profile
-                                </button>
-                                <button className={styles.sidebarButton}>
-                                    <IoClipboardOutline size={20}/> Post a Request
-                                </button>
-                                <button className={styles.sidebarButton}>
-                                    <TfiWallet size={20}/> Bookings
-                                </button>
-                                <button className={styles.sidebarButton}>
-                                    <GoPulse size={20}/> View Jobs
-                                </button>
-                                <button className={styles.sidebarButton}>
-                                    <CgBox size={20}/> Billing and Payments
-                                </button>
-                                <button className={styles.sidebarButton}>
-                                    <FiHelpCircle size={20}/> Help and Support
-                                </button>
-                            </ol>
+                <div className={`flex`}>
 
+                    <div className={`flex flex-col bg-purpleBase min-h-screen w-[240px] items-center`}>
+                        <div className={`flex flex-col items-start justify-between text-white py-20`}>
+                            <div className='mb-[20em] text-[14px]'>
+                                <Link  href="/dashboard/customer" className={`flex items-center gap-[20px] hover:text-[#FE9B07] mb-14 ${isLinkActive("/dashboard/customer") && "text-[#FE9B07]"}`}>
+                                    <RxDashboard size={16}/>Dashboard
+                                </Link>
+                                <Link href="/dashboard/customer/profile" className={`flex items-center gap-[20px] hover:text-[#FE9B07]  mb-14 ${isLinkActive("/dashboard/customer/profile") && "text-[#FE9B07]"}`}>
+                                    <IoPersonOutline size={16}/>Profile
+                                </Link>
+                                <Link href="/dashboard/customer/post-request" className={`flex items-center gap-[20px] hover:text-[#FE9B07] mb-14 ${isLinkActive("/dashboard/customer/post-request") && "text-[#FE9B07]"}`}>
+                                    <IoClipboardOutline size={16}/>Post a Request
+                                </Link>
+                                <Link href="/dashboard/customer/bookings" className={`flex items-center gap-[20px] hover:text-[#FE9B07] mb-14 ${isLinkActive("/dashboard/customer/bookings") && "text-[#FE9B07]"}`}>
+                                    <TfiWallet size={16}/>Bookings
+                                </Link>
+                                <Link href="/dashboard/customer/view-jobs" className={`flex items-center gap-[20px] hover:text-[#FE9B07] mb-14 ${isLinkActive("/dashboard/customer/view-jobs") && "text-[#FE9B07]"}`}>
+                                    <GoPulse size={16}/>View Jobs
+                                </Link>
+                                <Link href="/dashboard/customer/billings&payments" className={`flex items-center gap-[20px] hover:text-[#FE9B07] mb-14 ${isLinkActive("/dashboard/customer/billings&payments") && "text-[#FE9B07]"}`}>
+                                    <CgBox size={16}/> Billing and Payments
+                                </Link>
+                                <Link href="/dashboard/customer/help&support" className={`flex items-center gap-[20px] hover:text-[#FE9B07] mb-14 ${isLinkActive("/dashboard/customer/help&support") && "text-[#FE9B07]"}`}>
+                                    <FiHelpCircle size={16}/>Help and Support
+                                </Link>
+                            </div>
+
+                            <button className={`flex items-center text-[16px] gap-[20px] hover:text-[#FE9B07]`}>
+                                <FiLogOut size={16}/> Logout
+                            </button>
                         </div>
-                        <button className={styles.logoutButton}>
-                            <FiLogOut size={20}/>
-                            Logout
-                        </button>
                     </div>
+
                     <div className={styles.content}>{props.children}</div>
                 </div>
 
                 {/*Footer*/}
 
-                <div className={styles.footer}>
-                    <div className={styles.footerColumn1}>
-                        <div className={styles.secondLogo}>
-                            <Image src={taskHub} alt="task-hub"/>
-                            <h3>TaskHub</h3>
-                        </div>
-                        <p>
-                            Online platform that connects service providers with customers who are seeking various services.
-                            The platform offers a wide range of services.
-                        </p>
-                        <p>
-                            2023 TaskHub. All Rights Reserved.
-                        </p>
-                    </div>
-                    <div className={styles.footerColumn2}>
-                        <p>Company</p>
-                        <p>About Us</p>
-                        <p>Companies</p>
-                        <p>Pricing</p>
-                    </div>
-                    <div className={styles.footerColumn3}>
-                        <p>Services</p>
-                        <p>Automotive Services</p>
-                        <p>Health & Fitness</p>
-                        <p>Real Estate Services</p>
-                        <p>Delivery & Logistics</p>
-                        <p>Art & Creativity</p>
-                        <p>Travel & Adventure</p>
-                        <p>Childcare & Babysitting</p>
-                        <p>Education & Tutoring</p>
-                    </div>
-                    <div className={styles.footerColumn4}>
-                        <p>Other</p>
-                        <p>FAQs</p>
-                        <p>Contact Us</p>
-                        <p>Terms and Conditions</p>
-                        <p>Privacy</p>
-                    </div>
-                </div>
-            </div>
-        </>
+                <Footer />
+
+            {/* </div> */}
+        </div>
     );
 }
 

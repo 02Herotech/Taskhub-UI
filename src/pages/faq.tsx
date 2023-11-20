@@ -5,7 +5,7 @@ import { FAQData } from '../../components/FAQDetails/FAQData';
 import {revalia} from "@/styles/font";
 import Image from 'next/image';
 import { AiOutlineCheckCircle } from "react-icons/ai";
-import styles from '../styles/faq.module.css'
+import styles from '../styles/animation.module.css'
 import { poppins } from '@/styles/font'
 
 
