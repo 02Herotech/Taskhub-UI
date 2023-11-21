@@ -42,21 +42,22 @@ function DashboardLayout(props: IProps) {
                         <Image src={taskHub} className={`mx-2`} alt="task-hub"/>
                         <h3 className={`text-lg font-extrabold`}>TaskHub</h3>
                     </div>
-                    <div className={`flex justify-around w-[300px] items-center bg-purpleBase rounded-md px-3 py-2`}>
+                    <div className={`flex justify-around w-[300px] items-center bg-purpleBase rounded-md px-3 py-2 text-white`}>
                         <div className={``}>
-                            <span className={`text-[20px] text-white`}><IoIosNotificationsOutline /></span>
+                            <span className={`text-[20px]`}><IoIosNotificationsOutline /></span>
                         </div>
                         <div className={`relative`}>
-                            <span className={`text-[20px] text-white`}><FiMessageCircle /></span>
+                            <span className={`text-[20px] `}><FiMessageCircle /></span>
                             <span className={`absolute top-[-7px] right-[3px] bg-[#FE9B07] text-[10px] text-white rounded-[50%] px-[4px] py-[1px]`}>5</span>
                         </div>
 
-                        <div className={`text-white`}>
+                        <div className={``}>
                             <p className={`font-extrabold text-[15px]`}>Dotun Atom</p>
                             <p className={`text-[12px]`}>Customer</p>
                         </div>
                         <Image src={portrait} alt="User Portrait" className={`rounded-[50%] h-[40px] w-[40px] object-cover`}/>
-                        <span className={`text-[20px] text-white`}><GoGear /></span>
+                        
+                        <Link href="/dashboard/customer/settings" className={`text-[20px] hover:text-[#FE9B07] ${isLinkActive("/dashboard/customer/settings") && "text-[#FE9B07]"} `}><GoGear /></Link>
                     </div>
                 </div>
 
