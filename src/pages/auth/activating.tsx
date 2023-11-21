@@ -76,7 +76,7 @@ const VerifyEmail = () => {
             <div className={`w-[166px] h-[166px]`}>
                 <Image src={success} width={166} height={166} alt='' />
             </div>
-              <p className="text-center mt-10">Your email has been verified successfully. <br /> Kindly proceed to <a href="/auth/LoginLayout" className="text-purpleBase underline hover:text-purple7">Login</a></p>
+              <p className="text-center mt-10">Your email has been verified successfully. <br /> Kindly proceed to <a href="/auth/login" className="text-purpleBase underline hover:text-purple7">Login</a></p>
           </div>
         )}
         
