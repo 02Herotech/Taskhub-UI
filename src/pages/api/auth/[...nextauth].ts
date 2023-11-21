@@ -2,7 +2,7 @@ import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { useState } from "react"; 
 
-// import { Session } from "next-auth";
+import { Session } from "next-auth";
 
 import axios from "axios";
 import { baseUrl } from "@/redux";
@@ -17,7 +17,7 @@ export default NextAuth({
     strategy: "jwt",
   },
   pages: {
-    signIn: "/auth/CustomerLogin",
+    signIn: "/auth/login",
   },
   providers: [
     CredentialsProvider({ 
@@ -28,6 +28,7 @@ export default NextAuth({
         email: { label: "Email", type: "email" },
         password: { label: "Password", type: "password" },
       },
+
       async authorize(credentials) {
         const { email, password } = credentials as {
           email: string;
@@ -36,8 +37,7 @@ export default NextAuth({
 
         try {
         
-          
-        const response = await axios.post("https://service-rppp.onrender.com/api/v1/customer/login", {
+        const response = await axios.post("https://service-rppp.onrender.com/api/v1/auth/login", {
           emailAddress: email,
           password,
         });
@@ -47,9 +47,12 @@ export default NextAuth({
         if (status === 200) {
           return {
             ...data,
-            jwtToken: data.token,
+            // jwtToken: data.token,
+            jwtt: data.token,
+
           };
         } else {
+          // throw new Error(`Unexpected status error:, ${status}`);
           console.log("Unexpected status error: ", status);
           return null
         }
@@ -72,7 +75,7 @@ export default NextAuth({
       return { ...token, ...user };
     },
     async session({ session, token, user }) {
-      session.user = token as any;
+      session.user = token;
       return session;
     },
   },
