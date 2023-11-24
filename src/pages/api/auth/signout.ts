@@ -6,7 +6,7 @@ export default async function handler(
   res: NextApiResponse
 ) {
   // Clear token in cookies
-  destroyCookie({ res }, 'next-auth.session-token', { path: '/' });
+  destroyCookie({ res }, '__Secure-next-auth.session-token', { path: '/' });
 
   // Redirect to the home page after sign-out
   res.writeHead(302, { Location: '/' });

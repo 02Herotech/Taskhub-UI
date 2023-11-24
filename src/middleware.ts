@@ -9,7 +9,7 @@ const path = request.nextUrl.pathname;
 const publicPath = path === '/auth' || path === '/auth/login'
 // const notPublicPath = path === 'dashboard/customer' || path === 'dashboard/service-provider'
 
-const token = request.cookies.get('next-auth.session-token')
+const token = request.cookies.get('__Secure-next-auth.session-token')
 
 if (!token && !publicPath){
         return NextResponse.redirect(new URL('/auth/login', request.nextUrl))
