@@ -8,6 +8,7 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { useSession } from "next-auth/react";
 import router from "next/router";
 
+import google from "../../../public/google.png"
 import { BsArrowLeftCircle } from 'react-icons/bs'
 // import { setTimeout } from "timers/promises";
 
@@ -157,6 +158,7 @@ const Login: React.FC<FormState> = () => {
                 value={formData.email}
                 onChange={handleChange}
                 required
+                autoComplete="email"
               />
             </div>
 
@@ -167,7 +169,16 @@ const Login: React.FC<FormState> = () => {
                 Password <span className={`text-red10`}>*</span>
               </label>
               <div className={`relative`}>
-                <input type={showPassword ? 'text' : 'password'} id='password' name='password' placeholder='Enter your password' className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl w-full`} value={formData.password} onChange={handleChange} required
+                <input 
+                type={showPassword ? 'text' : 'password'} 
+                id='password' 
+                name='password' 
+                placeholder='Enter your password' 
+                className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl w-full`} 
+                value={formData.password} 
+                onChange={handleChange} 
+                required
+                autoComplete="current-password"
                 />
                 <button
                   type="button"
@@ -182,10 +193,33 @@ const Login: React.FC<FormState> = () => {
                 </button>
               </div>
             </div>
+                  
+            {/* <div className={`flex text-[13px] items-center justify-start`}> */}
+            <div >
+                <label  className="flex justify-start items-center text-[13px]">
+                  <input
+                    type="checkbox"
+                    id="rememberMe"
+                    name="rememberMe"
+                    value="rememberMe"
+                    // checked={formData.userType === 'customer'}
+                    // onChange={handleChange}
+                    className="mr-2"
+                    />
+                    Remember me
+                </label>
+              </div>
 
             <div className={`flex justify-center items-center font-[600] w-[300px] text-[13px] mx-auto`}>
               <h5>Forgot your Password?</h5>
               <Link href='/auth/forget-password' className={`text-purpleBase flex justify-center items-center hover:text-[14px] w-[80px] h-[25px] ml-1`}>Reset here</Link>
+            </div>
+
+            <div className="flex text-[13px] justify-center items-center cursor-pointer">
+              <button  className="flex justify-center items-center">
+                <Image src={google} width={20} alt="Google Logo"/>
+                <p className="ml-2">Login with Google</p>
+              </button>
             </div>
 
             <div className={`flex justify-center items-center`}>
@@ -203,11 +237,12 @@ const Login: React.FC<FormState> = () => {
           </form>
         </div>
         
-        <div className={`flex justify-center items-center h-[35px] w-[150px]`} >
+        
+        {/* <div className={`flex justify-center items-center h-[35px] w-[150px]`} >
         <Link href='/' className='text-base font-extrabold hover:scale-110'>
             <button className='flex justify-center items-center'><span className='mr-1'><BsArrowLeftCircle /></span>Back Home</button>
         </Link>
-      </div>
+      </div> */}
       </div >
 
       

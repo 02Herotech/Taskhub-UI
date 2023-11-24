@@ -1,10 +1,15 @@
+"use client"
+
+
 import React, {ReactNode} from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import { signOut, useSession } from 'next-auth/react';
+import axios from "axios";
 
 import {IoIosNotificationsOutline} from "react-icons/io";
-import {RiArrowDropDownLine} from "react-icons/ri";
+// import {RiArrowDropDownLine} from "react-icons/ri";
 import {RxDashboard} from "react-icons/rx";
 import {IoPersonOutline} from "react-icons/io5";
 import {IoClipboardOutline} from "react-icons/io5";
@@ -14,7 +19,7 @@ import {FiLogOut} from "react-icons/fi";
 import {GoGear, GoPulse} from "react-icons/go";
 import {TfiWallet} from "react-icons/tfi";
 
-import styles from "./styles.module.scss";
+
 import portrait from "./../../public/dashboardAssets/portrait.jpg";
 import taskHub from "./../../public/dashboardAssets/TASK.png"
 import Footer from '../footer/Footer'; 
@@ -30,6 +35,35 @@ function DashboardLayout(props: IProps) {
       return router.pathname === linkPath;
     };
   
+    const { data: session } = useSession();
+
+    const handleLogOut = async () => {
+
+        try {
+            // Call the custom sign-out API route
+            const response = await fetch('/api/auth/signout', {
+              method: 'POST',
+            });
+        
+            if (response.ok) {
+            
+              // Redirect to the homepage
+              router.push('/auth/login');
+            } else {
+              console.error('Failed to sign out:', response.status);
+            }
+          } catch (error) {
+            console.error('Error during sign out:', error);
+          }
+
+        try {
+            const response = await axios.post('https://service-rppp.onrender.com/api/v1/auth/logout')
+            console.log("Sign Out: ", response)
+        } catch (error) {
+            console.error(error)
+        }
+
+    }
 
     return (
         <div className='max-w-7xl mx-auto'>
@@ -91,13 +125,15 @@ function DashboardLayout(props: IProps) {
                                 </Link>
                             </div>
 
-                            <button className={`flex items-center text-[16px] gap-[20px] hover:text-[#FE9B07]`}>
+                            <button className={`flex items-center text-[16px] gap-[20px] hover:text-[#FE9B07]`}
+                            onClick={handleLogOut}
+                            >
                                 <FiLogOut size={16}/> Logout
                             </button>
                         </div>
                     </div>
 
-                    <div className={styles.content}>{props.children}</div>
+                    <div>{props.children}</div>
                 </div>
 
                 {/*Footer*/}
