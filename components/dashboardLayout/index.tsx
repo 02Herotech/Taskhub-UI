@@ -47,7 +47,7 @@ function DashboardLayout(props: IProps) {
         
             if (response.ok) {
             
-              // Redirect to the homepage
+              // Redirect to the login page
               router.push('/auth/login');
             } else {
               console.error('Failed to sign out:', response.status);
