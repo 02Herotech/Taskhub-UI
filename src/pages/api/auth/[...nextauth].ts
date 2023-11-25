@@ -5,12 +5,31 @@ import { useState } from "react";
 import { Session } from "next-auth";
 import axios from "axios";
 import { baseUrl } from "@/redux";
+import { useSession } from "next-auth/react";
 
-
+type JWT = {
+  user :{
+    user: {
+        id: number;
+        stripeId: string | null;
+        firstName: string;
+        lastName: string;
+        emailAddress: string;
+        password: string;
+        phoneNumber: string;
+        address: string | null;
+        profileImage: string | null;
+        isEnabled: boolean | null;
+        accountState: string;
+        deactivatedAt: string | null;
+        registeredAt: string;
+        roles: string[];
+        appNotificationList: any[]; // You may want to replace `any[]` with a more specific type
+    }
+}
+}
 
 export default NextAuth({
-
-
   session: {
     strategy: "jwt",
   },
@@ -77,6 +96,8 @@ export default NextAuth({
       return session;
     },
   },
+
+  
 });
 
 

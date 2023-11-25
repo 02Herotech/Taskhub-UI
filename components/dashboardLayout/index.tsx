@@ -39,26 +39,17 @@ function DashboardLayout(props: IProps) {
 
     const handleLogOut = async () => {
 
-        try {
-            // Call the custom sign-out API route
-            const response = await fetch('/api/auth/signout', {
-              method: 'POST',
-            });
-        
-            if (response.ok) {
-            
-              // Redirect to the login page
-              router.push('/auth/login');
-            } else {
-              console.error('Failed to sign out:', response.status);
-            }
-          } catch (error) {
-            console.error('Error during sign out:', error);
-          }
+        signOut({
+            redirect: false
+        })
 
         try {
             const response = await axios.post('https://service-rppp.onrender.com/api/v1/auth/logout')
             console.log("Sign Out: ", response)
+
+            if(response.status == 200) {
+                router.push('/auth/login')
+            }
         } catch (error) {
             console.error(error)
         }

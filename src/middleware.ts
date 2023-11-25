@@ -6,12 +6,12 @@ export function middleware(request: NextRequest) {
 
 const path = request.nextUrl.pathname;
 
-const publicPath = path === '/auth' || path === '/auth/login'
-// const notPublicPath = path === 'dashboard/customer' || path === 'dashboard/service-provider'
+const publicPath = path === '/auth/login' || path === '/auth'
+const notPublicPath = path === '/dashboard/customer' || path === '/dashboard/service-provider'
 
-const token = request.cookies.get('__Secure-next-auth.session-token')
+const token = request.cookies.get('__Secure.next-auth.session-token')
 
-if (!token && !publicPath){
+if (!token && notPublicPath){
         return NextResponse.redirect(new URL('/auth/login', request.nextUrl))
     } 
 
@@ -24,7 +24,6 @@ if (token && publicPath){
 
 export const config = {
   matcher: [
-
     '/auth/login',
     '/auth',
     '/dashboard/customer',
