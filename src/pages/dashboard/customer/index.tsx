@@ -1,10 +1,11 @@
 import React from 'react';
-import DashboardLayout from "../../../../components/dashboardLayout";
-import customer from "../../../../public/dashboardAssets/portrait.jpg";
-import styles from "../customer/styles.module.scss"
 import Image from 'next/image';
 import {MdVerified} from "react-icons/md";
 import {GrLocation, GrSearch} from "react-icons/gr";
+import { useSession } from 'next-auth/react';
+
+import customer from "../../../../public/dashboardAssets/portrait.jpg";
+import DashboardLayout from "../../../../components/dashboardLayout";
 import Card from "../../../../components/card2/Card";
 import Picture1 from "../../../../public/customerAssets/close-up-collection-make-up-beauty-products.jpg";
 import Picture2 from "../../../../public/customerAssets/vintage-sewing-machine-with-thread-measuring-tape.jpg";
@@ -15,6 +16,15 @@ import Picture2 from "../../../../public/customerAssets/vintage-sewing-machine-w
 // }
 
 const CustomerDashboard = () => {
+
+
+    const { data: session } = useSession();
+    console.log(session)
+
+    const firstName = session?.user.user.firstName;
+    const lastName = session?.user.user.lastName;
+    const lastNameInitial = lastName?.charAt(0);
+
     return (
      
 
@@ -29,7 +39,7 @@ const CustomerDashboard = () => {
                                 </div>
                                 <div className={`flex flex-col justify-center items-start ml-5`}>
                                     <div className={`flex items-center justify-center text-[18px] font-extrabold`}>
-                                        <p>Dotun A.</p>
+                                        <p>{firstName} {lastNameInitial}.</p>
                                         <MdVerified className={`text-green4 ml-2`}/>
                                     </div>
                                     <div className={`flex text-[13px] items-center justify-center`}>
