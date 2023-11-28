@@ -5,11 +5,26 @@ import provider from "../../../../public/dashboardAssets/portrait.jpg";
 import React from "react";
 import {GrLocation, GrSearch} from "react-icons/gr";
 import {MdVerified} from "react-icons/md";
+import { useSession } from "next-auth/react";
+
+
 import Card from "../../../../components/card/Card";
 import Picture1 from "../../../../public/customerAssets/close-up-collection-make-up-beauty-products.jpg";
 import Picture2 from "../../../../public/customerAssets/vintage-sewing-machine-with-thread-measuring-tape.jpg";
 
+
+
+
 function Index() {
+
+    const { data: session } = useSession();
+    console.log(session)
+
+    const firstName = session?.user.user.firstName;
+    const lastName = session?.user.user.lastName;
+    const lastNameInitial = lastName?.charAt(0);
+
+
     return (
         <DashboardLayout>
             <div className={styles.main}>
@@ -25,7 +40,7 @@ function Index() {
                 <div className={styles.providerInfo}>
                     <div className={styles.locationAndAvailability}>
                         <div className={styles.nameAndVerification}>
-                            <p>Victor C.</p>
+                            <p>{firstName} {lastNameInitial}.</p>
                             <MdVerified className={styles.verificationLogo}/>
                         </div>
                         <div className={styles.location}>

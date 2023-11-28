@@ -7,31 +7,32 @@ import axios from "axios";
 import { baseUrl } from "@/redux";
 import { useSession } from "next-auth/react";
 
-type JWT = {
-  user :{
-    user: {
-        id: number;
-        stripeId: string | null;
-        firstName: string;
-        lastName: string;
-        emailAddress: string;
-        password: string;
-        phoneNumber: string;
-        address: string | null;
-        profileImage: string | null;
-        isEnabled: boolean | null;
-        accountState: string;
-        deactivatedAt: string | null;
-        registeredAt: string;
-        roles: string[];
-        appNotificationList: any[]; // You may want to replace `any[]` with a more specific type
-    }
-}
-}
+// type JWT = {
+//   user :{
+//     user: {
+//         id: number;
+//         stripeId: string | null;
+//         firstName: string;
+//         lastName: string;
+//         emailAddress: string;
+//         password: string;
+//         phoneNumber: string;
+//         address: string | null;
+//         profileImage: string | null;
+//         isEnabled: boolean | null;
+//         accountState: string;
+//         deactivatedAt: string | null;
+//         registeredAt: string;
+//         roles: string[];
+//         appNotificationList: any[]; // You may want to replace `any[]` with a more specific type
+//     }
+// }
+// }
 
 export default NextAuth({
   session: {
     strategy: "jwt",
+    maxAge: 60 * 24 * 60 * 60, // 60 days in seconds
   },
   pages: {
     signIn: "/auth/login",
@@ -83,6 +84,7 @@ export default NextAuth({
   ],
   
   secret: process.env.SECRET,
+
   callbacks: {
     async jwt({ token, user, trigger, session }) {
       // If there's any change to the session
@@ -92,10 +94,24 @@ export default NextAuth({
       return { ...token, ...user };
     },
     async session({ session, token, user }) {
-      session.user = token;
+      session.user = token as any;
       return session;
     },
   },
+
+  // callbacks: {
+  //   async jwt({ token, user, trigger, session }) {
+  //     // If there's any change to the session
+  //     if (trigger === "update") {
+  //       return { ...token, ...session.user };
+  //     }
+  //     return { ...token, ...user };
+  //   },
+  //   async session({ session, token, user }) {
+  //     session.user.user= token;
+  //     return session;
+  //   },
+  // },
 
 });
 

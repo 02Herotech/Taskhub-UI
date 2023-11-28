@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import { IoLockClosedOutline } from "react-icons/io5";
 import { LuUsers } from "react-icons/lu";
 
+
 import DashboardLayout from "../../../../../components/dashboardLayout";
 
 
@@ -20,20 +21,21 @@ import DashboardLayout from "../../../../../components/dashboardLayout";
 
 
 
-const Settings = () => {
+const Deactivate = () => {
 
     const router = useRouter();
     const isLinkActive = (linkPath: string) => {
       return router.pathname === linkPath;
     };
     
+    
 
     return (
         <DashboardLayout>
-            <div className={`mt-16 flex flex-col justify-center items-start w-[900px]`}>
+            <div className={`m-16 flex flex-col justify-center items-start w-[900px]`}>
                 <h1 className='text-lg font-extrabold'>Settings</h1>
-        
-                <div className={`flex justify-center items-center mt-20 ml-10 `}>
+
+                <div className={`flex justify-around items-start mt-20 w-[800px] mx-auto`}>
 
                     <div className='flex flex-col justify-center items-center bg-white shadow-lg w-[220px] py-5 text-[15px]'>
                         <div className='flex flex-col justify-center items-start'>
@@ -48,11 +50,15 @@ const Settings = () => {
                         </div>
                     </div>
 
-                </div>
+                    <div className='w-[430px] bg-white shadow-lg p-5'>
+                    Deactivate
+                    </div>
 
+                </div>
+                
             </div>
         </DashboardLayout>
     );
 }
  
-export default Settings;
+export default Deactivate;

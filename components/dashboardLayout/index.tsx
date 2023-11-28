@@ -7,6 +7,9 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { signOut, useSession } from 'next-auth/react';
 import axios from "axios";
+import { useState } from 'react';
+import { IoMdArrowDropup } from "react-icons/io";
+// import { AuthResponse } from 'next-auth';
 
 import {IoIosNotificationsOutline} from "react-icons/io";
 // import {RiArrowDropDownLine} from "react-icons/ri";
@@ -18,6 +21,7 @@ import {FiHelpCircle, FiMessageCircle} from "react-icons/fi";
 import {FiLogOut} from "react-icons/fi";
 import {GoGear, GoPulse} from "react-icons/go";
 import {TfiWallet} from "react-icons/tfi";
+// import { AuthResponse } from '../../types/next-auth';
 
 
 import portrait from "./../../public/dashboardAssets/portrait.jpg";
@@ -36,6 +40,18 @@ function DashboardLayout(props: IProps) {
     };
   
     const { data: session } = useSession();
+    console.log(session)
+
+    const firstName = session?.user.user.firstName
+    const lastName = session?.user.user.lastName
+
+
+    const [isOpen, setIsOpen] = useState(false);
+
+        const contactClick = () => {
+            setIsOpen(!isOpen)
+        }
+
 
     const handleLogOut = async () => {
 
@@ -77,12 +93,40 @@ function DashboardLayout(props: IProps) {
                         </div>
 
                         <div className={``}>
-                            <p className={`font-extrabold text-[15px]`}>Dotun Atom</p>
+                            <p className={`font-extrabold text-[15px]`}>{firstName} {lastName}</p>
                             <p className={`text-[12px]`}>Customer</p>
                         </div>
                         <Image src={portrait} alt="User Portrait" className={`rounded-[50%] h-[40px] w-[40px] object-cover`}/>
+
+                        <div className=' flex relative cursor-pointer' onClick={contactClick}>
+                            <ul>
+                                <li  className={`text-[20px] hover:text-[#FE9B07] ${isLinkActive("/dashboard/customer/settings") && "text-[#FE9B07]"} `}>
+                                    <GoGear />
+                                </li>
+
+                                { !isOpen ? '' :
+                                <div className='absolute top-[50px] ml-[-75px] w-[100px]'>
+                                    <span className='text-purpleBase flex justify-end mb-[-12px] text-[30px]'><IoMdArrowDropup /></span>
+
+                                    <ul className='hover: bg-purpleBase  py-2 px-4  text-[13px] flex flex-col items-center justify-center rounded-md'>
+
+                                        <li className='py-1 px-2 my-1 hover:text-[#FE9B07]'>
+                                            <Link href='/dashboard/customer/settings'>
+                                                Settings
+                                            </Link>
+                                        </li>
+                                        <li className='py-1 px-2 my-1 hover:text-[#FE9B07]'>
+                                            <button onClick={handleLogOut}>
+                                                Log out
+                                            </button>
+                                        </li>
+                                    </ul>
+                                </div>
+                                }
+                            </ul>
+                        </div>
                         
-                        <Link href="/dashboard/customer/settings" className={`text-[20px] hover:text-[#FE9B07] ${isLinkActive("/dashboard/customer/settings") && "text-[#FE9B07]"} `}><GoGear /></Link>
+                        {/* <Link href="/dashboard/customer/settings" className={`text-[20px] hover:text-[#FE9B07] ${isLinkActive("/dashboard/customer/settings") && "text-[#FE9B07]"} `}><GoGear /></Link> */}
                     </div>
                 </div>
 
@@ -121,10 +165,11 @@ function DashboardLayout(props: IProps) {
                             >
                                 <FiLogOut size={16}/> Logout
                             </button>
+                            
                         </div>
                     </div>
 
-                    <div>{props.children}</div>
+                    <div className='w-[900px] flex flex-col justify-start items-center mx-auto'>{props.children}</div>
                 </div>
 
                 {/*Footer*/}
