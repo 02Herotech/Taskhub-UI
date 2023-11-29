@@ -1,11 +1,9 @@
 import React from 'react';
-import Link from 'next/link';
+import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
-import { IoLockClosedOutline } from "react-icons/io5";
-import { LuUsers } from "react-icons/lu";
 import { useState } from 'react';
-import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import axios from 'axios';
+import Link from 'next/link';
 
 import DashboardLayout from "../../../../components/dashboardLayout";
 
@@ -30,6 +28,8 @@ const CompleteRegistration = () => {
         postCode: "",
         country: "Australia"   
       });
+
+      
 
       const[isLoading, setIsLaoding] = useState(false);
     //   const [showOldPassword, setShowOldPassword] = useState(false);
@@ -88,27 +88,44 @@ const CompleteRegistration = () => {
 
     // To submit formit 
 
-    // const oldPasswordValue = formData.oldPassword;
-    // const NewPasswordValue = formData.newPassword;
+    const houseNumberValue = formData.houseNumber;
+    const streetNameValue = formData.streetName;
+    const townValue = formData.town;
+    const stateValue = formData.state;
+    const postCodeValue = formData.postCode;
+    const countryValue = formData.country;
 
-    // const handleSubmit = async (e: {preventDefault: () => void}) => {
-    //     e.preventDefault()
+    const {data: session} = useSession()
+    const accessTokenValue = session?.user.accessToken;
 
-    //     // if (oldPasswordValue  !== NewPasswordValue) {
+    const handleSubmit = async (e: {preventDefault: () => void}) => {
+        e.preventDefault()
+        console.log(formData)
 
-    //         try {
-    //             const response = await axios.post ('https://service-rppp.onrender.com/api/v1/change-password/int', {oldPasswordValue}, {NewPasswordValue})
-    //             console.log(response)
-    //         } catch (error) {
-    //            console.error("Change password error: ", error);
-    //         }
+            try {
+                const response = await axios.post(
+                    `https://service-rppp.onrender.com/api/v1/customer/complete?token=${accessTokenValue}`,
+                {
+                    houseNumber: houseNumberValue,
+                    streetName: streetNameValue,
+                    town: townValue,
+                    state: stateValue,
+                    postCode: postCodeValue,
+                    country: countryValue,
+                }
+                )
+                console.log(response)
+            } catch (error) {
+               console.error("Unable to complete reg: ", error);
+            }
     
-    // }
+    }
     
 
     return (
         <DashboardLayout>
             <div className={`mt-16 flex flex-col justify-center items-start w-[900px]`}>
+         
                 <h1 className='text-lg font-extrabold'>Complete Registration</h1>
 
                 <div className={`flex justify-center items-start my-20 w-[800px] mx-auto`}>
@@ -116,7 +133,7 @@ const CompleteRegistration = () => {
                     <div className='w-[430px] bg-white shadow-lg p-5'>
 
                   
-                            <form  className={`p-5`}>
+                            <form  className={`p-5`} onSubmit={handleSubmit}>
 
                                 <div className={`flex flex-col`}>
 

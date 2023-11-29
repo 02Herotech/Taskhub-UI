@@ -41,10 +41,11 @@ function DashboardLayout(props: IProps) {
   
     const { data: session } = useSession();
     console.log(session)
+    // console.log(session?.user.accessToken)
 
     const firstName = session?.user.user.firstName
     const lastName = session?.user.user.lastName
-
+    
 
     const [isOpen, setIsOpen] = useState(false);
 
