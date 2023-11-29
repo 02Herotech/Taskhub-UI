@@ -136,10 +136,8 @@ const ChangePassword = () => {
     const handleSubmit = async (e: {preventDefault: () => void}) => {
         e.preventDefault()
 
-        // if (oldPasswordValue  !== NewPasswordValue) {
-
             try {
-                const response = await axios.post ('https://service-rppp.onrender.com/api/v1/change-password/int', {oldPasswordValue}, {NewPasswordValue})
+                const response = await axios.post('https://service-rppp.onrender.com/api/v1/change-password/int', {oldPasswordValue}, {NewPasswordValue})
                 console.log(response)
             } catch (error) {
                console.error("Change password error: ", error);
@@ -151,6 +149,7 @@ const ChangePassword = () => {
     return (
         <DashboardLayout>
             <div className={`mt-16 flex flex-col justify-center items-start w-[900px]`}>
+                
                 <h1 className='text-lg font-extrabold'>Settings</h1>
 
                 <div className={`flex justify-around items-start mt-20 w-[800px] mx-auto`}>
@@ -172,7 +171,7 @@ const ChangePassword = () => {
                         <h3 className={`font-extrabold`}>Change Password</h3>
 
                         <div className=" ">
-                            <form  className={` p-5`}>
+                            <form  className={` p-5`} onSubmit={handleSubmit}>
 
                                 <div className={`flex flex-col`}>
 

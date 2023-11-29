@@ -32,7 +32,7 @@ import { useSession } from "next-auth/react";
 export default NextAuth({
   session: {
     strategy: "jwt",
-    maxAge: 60 * 24 * 60 * 60, // 60 days in seconds
+    // maxAge: 60 * 24 * 60 * 60, // 60 days in seconds
   },
   pages: {
     signIn: "/auth/login",
