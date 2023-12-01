@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Revalia&display=swap');
 
 
 /* Get Started Section Animation  */
@@ -50,6 +51,12 @@
     from {transform: rotateX('45deg');}
     to {transform: rotateX('0deg');}
 } */
+
+
+
+.revaliaFont {
+    font-family: 'Revalia', sans-serif;
+}
 
 
 

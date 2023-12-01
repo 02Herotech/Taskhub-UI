@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import Head from 'next/head'
+
 import ServiceSlider from '../../components/serviceSlider/ServiceSlider'
 import Nav from '../../components/nav/Nav'
 import NewFooter from '../../components/NewFooter/NewFooter'
@@ -7,6 +8,7 @@ import ServiceCategoryDetails from '../../components/ServiceCategory/ServiceCate
 import { poppins } from '@/styles/font'
 import { HiMiniBars4 } from 'react-icons/hi2'
 import { BiSolidQuoteAltLeft } from 'react-icons/bi'
+
 
 
 

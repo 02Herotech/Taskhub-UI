@@ -60,7 +60,7 @@ const Faq: React.FC<FAQProps> = () => {
                 <div className={`bg-gradient-to-r from-[#F8E9FE] via-[#FFFFFF] to-[#F5DDFD]`}>
                     <div className="max-w-7xl mx-auto p-20">
                         <div className={`ml-24 mb-8`}>
-                            <h1 className={`${revalia.className} text-xl font-extrabold mt-[2.5em] mb-6`}>Frequently Asked Questions</h1>
+                            <h1 className={`${styles.revaliaFont} text-xl font-extrabold mt-[2.5em] mb-6`}>Frequently Asked Questions</h1>
                             <p className='text-xs'>Your TaskHub questions, answered</p>
                         </div>
 
@@ -91,7 +91,7 @@ const Faq: React.FC<FAQProps> = () => {
                 </div>
 
                 <div className='max-w-7xl mx-auto px-20 mt-32 mb-[15em] '>
-                    <h1 className={`${revalia.className} text-xl font-extrabold`}>Still have questions?</h1>
+                    <h1 className={`${styles.revaliaFont} text-xl font-extrabold`}>Still have questions?</h1>
                 
                     {submitted ?    
                         <div className={`flex flex-col items-center h-[150px] place-content-center mt-24 transition ease-in-out delay-[3s] ${styles.animation}`}>

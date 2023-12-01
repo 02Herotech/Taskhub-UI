@@ -18,6 +18,7 @@ import Dev3 from "../../public/devs/Dev 3.png";
 import Dev4 from "../../public/devs/Dev 4.png";
 import Dev5 from "../../public/devs/Dev 5.png";
 import Dev6 from "../../public/devs/Sekai2.jpeg";
+import styles from '../../src/styles/font.module.css'
 
 
 const about = () => {
@@ -33,10 +34,10 @@ const about = () => {
                 <div className={`bg-gradient-to-r from-[#F8E9FE] via-[#FFFFFF] to-[#F5DDFD] pt-20`}>
                     <div className={`max-w-7xl mx-auto flex justify-between py-20 px-20`}>
                         <div className={` w-[500px] h-[450px] space-y-10`}>
-                            <h1 className={`${revalia.className} font-extrabold text-xxl `}>
+                            <h1 className={`${styles.revaliaFont} font-extrabold text-xxl `}>
                                 ABOUT TASKHUB
                             </h1>
-                            <h2 className={`${revalia.className} text-[28px] w-[450px]`}>
+                            <h2 className={`${styles.revaliaFont} text-[28px] w-[450px]`}>
                                 We make the business life easy and safe
                             </h2>
                             <p className={`w-[430px] font-[500] text-justify text-base`}>
@@ -60,7 +61,7 @@ const about = () => {
                 </div>
 
                 <div className={`max-w-7xl mx-auto items-center justify-center px-20 my-20`}>
-                        <h2 className= {`${revalia.className} text-xl w-[500px] mb-20 font-medium`}>Meet our Development <br />Team</h2>
+                        <h2 className= {`${styles.revaliaFont} text-xl w-[500px] mb-20 font-medium`}>Meet our Development <br />Team</h2>
                         <div className="flex justify-center items-center">
                             <div className="grid grid-cols-3 gap-5">
                                 <div>
@@ -112,7 +113,7 @@ const about = () => {
                 <div className={`bg-gradient-to-r from-[#F8E9FE] via-[#FFFFFF] to-[#F5DDFD] space-y-10 `}>
                     <div className={`max-w-7xl mx-auto px-20 pt-[100px] pb-[17em] relative`}>
                         <div className={`mb-24`}>
-                            <h1 className={`${revalia.className} font-extrabold text-xl mb-20`}>
+                            <h1 className={`${styles.revaliaFont} font-extrabold text-xl mb-20`}>
                                 Our Mission
                             </h1>
                             <p className={`w-[850px] ml-[7rem] text-base text-justify`}>
@@ -125,7 +126,7 @@ const about = () => {
                         </div>
 
                         <div>
-                            <h1 className={`${revalia.className} font-extrabold text-xl mb-20`}>
+                            <h1 className={`${styles.revaliaFont} font-extrabold text-xl mb-20`}>
                                 Our Story
                             </h1>
                             <p className={`w-[850px] ml-[7rem] text-base text-justify`}>
@@ -144,7 +145,7 @@ const about = () => {
                 </div>
 
                 <div className={`relative px-20 pt-20 pb-[18em] max-w-7xl mx-auto items-center justify-center`}>
-                    <div className={`${revalia.className} bg-purple6 bg-opacity-60 w-[180px] h-[40px] flex items-center justify-center text-black`}>
+                    <div className={`${styles.revaliaFont} bg-purple6 bg-opacity-60 w-[180px] h-[40px] flex items-center justify-center text-black`}>
                         <h1 className="text-lg mb-10">Our Values</h1>
                     </div>
 
@@ -189,7 +190,7 @@ const about = () => {
                 <div className={`bg-gradient-to-r from-[#F8E9FE] via-[#FFFFFF] to-[#F5DDFD]`}>
                     <div className={`px-20 pt-[100px] max-w-7xl mx-auto flex flex-col`}>              
                         <div
-                            className={`${revalia.className} bg-purple6 bg-opacity-60 w-[350px] h-[40px] flex items-center justify-center text-black`}
+                            className={`${styles.revaliaFont} bg-purple6 bg-opacity-60 w-[350px] h-[40px] flex items-center justify-center text-black`}
                         >
                             <h1 className="text-lg mb-8">What Sets Us Apart</h1>
                         </div>
@@ -239,7 +240,7 @@ const about = () => {
                     </div>                
                 </div>
                 <div className={`p-20 max-w-7xl mx-auto`}>
-                    <h1 className={`${revalia.className} font-extrabold text-[26px] mb-24`}>
+                    <h1 className={`${styles.revaliaFont} font-extrabold text-[26px] mb-24`}>
                         Join Our Community
                     </h1>
                     <div className={`px-24 py-12 flex justify-center items-center bg-purpleBase text-white `}>

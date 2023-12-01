@@ -4,6 +4,7 @@ import { Poppins, Revalia } from "next/font/google";
 
 
 
+
 export const revalia = Revalia({
     variable: "--Revalia",
     subsets: ["latin"],

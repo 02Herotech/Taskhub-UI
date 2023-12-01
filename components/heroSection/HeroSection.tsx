@@ -4,12 +4,13 @@ import { Button } from '../buttons/Button'
 import Link from 'next/link'
 import { revalia } from '@/styles/font'
 import Image from 'next/image'
-import styles from './herosection.module.css'
 
+import styles from './herosection.module.css'
 import heroImage1 from '../../public/heroImage1.png'
 import heroImage2 from '../../public/heroImage2.png'
 import heroImage3 from '../../public/heroImage3.png'
 import heroImage4 from '../../public/heroImage4.png'
+// import styles from '../../src/styles/font.module.css'
 
 
 const HeroSection = () => {
@@ -24,7 +25,7 @@ const HeroSection = () => {
             <div className={`max-w-7xl flex items-center justify-between p-5 space-x-24 px-20 pt-[100px] pb-20 mx-auto`}>
                 <div className={`flex flex-col justify-around w-1/2 text-black`}>
                     <div className={`flex flex-col`}>
-                        <h1 className={`text-xl mt-[3rem] mb-5 font-[400] w-[375px] ${revalia.className}`}>
+                        <h1 className={`text-xl mt-[3rem] mb-5 font-[400] w-[375px] ${styles.revaliaFont}`}>
                             GET QUICK<br />AND<span className={`text-purpleBase`}> EFFICIENT </span>SERVICE
                         </h1>
 
