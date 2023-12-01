@@ -18,9 +18,16 @@ declare module "next-auth" {
                 emailAddress: string;
                 password: string;
                 phoneNumber: string;
-                address: string | null;
+                address: {
+                    id: string | null; 
+                    houseNumber: string | null;
+                    streetName:string | null;
+                    town: string | null;
+                    state: string | null;
+                    country: string | null;
+                }
                 profileImage: string | null;
-                isEnabled: boolean | null;
+                enabled: boolean | null;
                 accountState: string;
                 deactivatedAt: string | null;
                 registeredAt: string;

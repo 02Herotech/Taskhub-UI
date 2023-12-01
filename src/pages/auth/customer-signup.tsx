@@ -318,6 +318,7 @@ const CustomerSignup: React.FC<FormState> = () => {
                                     value={formData.email}
                                     onChange={handleChange}
                                     required
+                                    autoComplete="username"
                                 />
                             </div>
 
@@ -327,7 +328,15 @@ const CustomerSignup: React.FC<FormState> = () => {
                                     <p className={`text-red10 p-2  my-0 py-0 text-[10px]`}>{formData.error1}</p>
                                 </label>
                                 <div className={`relative`}>
-                                    <input type={showPassword ? 'text' : 'password'} id='password' name='password' placeholder='Enter your password' className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl w-full`} value={formData.password} onChange={handleChange} required maxLength={15}
+                                    <input type={showPassword ? 'text' : 'password'} 
+                                    id='password' name='password' 
+                                    placeholder='Enter your password' 
+                                    className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl w-full`} 
+                                    value={formData.password} 
+                                    onChange={handleChange} 
+                                    required 
+                                    maxLength={15}
+                                    autoComplete="new-password"
                                     />
                                     <button
                                         type="button"
@@ -350,7 +359,16 @@ const CustomerSignup: React.FC<FormState> = () => {
                                     <p className={`text-red10 p-2  my-0 py-0 text-[10px]`}>{formData.error2}</p>
                                 </label>
                                 <div className={`relative`}>
-                                    <input type={showConfirmPassword ? 'text' : 'password'} id='confirmPassword' name='confirmPassword' placeholder='Enter your password' className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl w-full`} value={formData.confirmPassword} onChange={handleChange} required maxLength={15}
+                                    <input type={showConfirmPassword ? 'text' : 'password'} 
+                                    id='confirmPassword' 
+                                    name='confirmPassword' 
+                                    placeholder='Enter your password'
+                                    className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl w-full`} 
+                                    value={formData.confirmPassword} 
+                                    onChange={handleChange} 
+                                    required 
+                                    maxLength={15}
+                                    autoComplete="new-password"
                                     />
                                     <button
                                         type="button"

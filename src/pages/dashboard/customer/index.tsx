@@ -26,15 +26,20 @@ const CustomerDashboard = () => {
     const firstName = session?.user.user.firstName;
     const lastName = session?.user.user.lastName;
     const lastNameInitial = lastName?.charAt(0);
+    const state = session?.user?.user?.address?.state
+    const country = session?.user?.user?.address?.country
 
-    const enabled = session?.user.user.isEnabled
+
+
+    const isEnabled = session?.user?.user?.enabled
+ 
 
     useEffect(() => {
-        if (enabled === null) {
+        if (isEnabled === false) {
             setCompleteReg(!completeReg)
         }
     
-    }, [enabled])
+    }, [isEnabled])
     
     
 
@@ -45,7 +50,9 @@ const CustomerDashboard = () => {
 
             <DashboardLayout>
 
-                { completeReg ? "" :
+                { completeReg ? ""
+
+                :
 
                 <div className='bg-purpleBase mt-4  text-white rounded-md flex justify-center items-center w-[900px] mx-auto py-3'>
                     <p>Before you proceed, kindly complete your registration to have full control of your account -</p>
@@ -66,12 +73,24 @@ const CustomerDashboard = () => {
                             <div className={`flex flex-col justify-center items-start ml-5`}>
                                 <div className={`flex items-center justify-center text-[18px] font-extrabold`}>
                                     <p>{firstName} {lastNameInitial}.</p>
-                                    <MdVerified className={`text-green4 ml-2`}/>
+                                
+                                    { completeReg ?
+                                        <MdVerified className={`text-green4 ml-2`}/>
+                                    :
+                                        ""
+                                    }
+
                                 </div>
+
+                                { completeReg ? 
                                 <div className={`flex text-[13px] items-center justify-center`}>
                                     <GrLocation className={`mr-1`}/>
-                                    <p>Sydney, Australia</p>
+                                    <p>{state}, {country}</p>
                                 </div>
+                                :
+                                    ""
+                                }
+
                             </div>
                         </div>
 

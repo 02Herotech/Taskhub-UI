@@ -4,8 +4,13 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 import axios from 'axios';
 import Link from 'next/link';
+import Image from 'next/image';
 
 import DashboardLayout from "../../../../components/dashboardLayout";
+import loader from '../../../../public/loader.svg'
+import success from '../../../../public/success.svg'
+import styles from '../../../styles/animation.module.css'
+
 
 
 
@@ -32,6 +37,8 @@ const CompleteRegistration = () => {
       
 
       const[isLoading, setIsLaoding] = useState(false);
+      const[isDone, setIsDone] = useState(false)
+
     //   const [showOldPassword, setShowOldPassword] = useState(false);
     //   const [showNewPassword, setShowNewPassword] = useState(false);
     //   const [showConfirmNewPassword, setshowConfirmNewPassword] = useState(false);
@@ -102,6 +109,8 @@ const CompleteRegistration = () => {
         e.preventDefault()
         console.log(formData)
 
+        setIsLaoding(true)
+
             try {
                 const response = await axios.post(
                     `https://service-rppp.onrender.com/api/v1/customer/complete?token=${accessTokenValue}`,
@@ -115,6 +124,11 @@ const CompleteRegistration = () => {
                 }
                 )
                 console.log(response)
+
+                if (response.status === 200){
+                    setIsDone(!isDone)
+                    setIsLaoding(false)
+                }
             } catch (error) {
                console.error("Unable to complete reg: ", error);
             }
@@ -130,9 +144,19 @@ const CompleteRegistration = () => {
 
                 <div className={`flex justify-center items-start my-20 w-[800px] mx-auto`}>
 
-                    <div className='w-[430px] bg-white shadow-lg p-5'>
+                    { isDone ? 
 
-                  
+                        <div className={`flex flex-col items-center justify-center mt-10 ${styles.animation}`}>
+                        <div className={`w-[166px] h-[166px]`}>
+                            <Image src={success} width={166} height={166} alt='' />
+                        </div>
+                        <p className="text-center mt-10">Your registration is complete and your account is verified. <br /> Kindly log out and login to effect your verification</p>
+                        </div>
+
+                        :
+
+                        <div className='w-[430px] bg-white shadow-lg p-5'>
+
                             <form  className={`p-5`} onSubmit={handleSubmit}>
 
                                 <div className={`flex flex-col`}>
@@ -246,7 +270,8 @@ const CompleteRegistration = () => {
                                         className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl w-full`} 
                                         value={formData.country} 
                                         required
-                                        onChange={handleChange} 
+                                        onChange={handleChange}
+                                        readOnly
                                     />
                                 </div>
 
@@ -255,16 +280,20 @@ const CompleteRegistration = () => {
                                     <button
                                         type="submit"
                                         className={`w-full bg-purpleBase text-white py-2 px-4 rounded-md hover:bg-purple7 text-sm disabled:opacity-50`}
-                                        disabled={!isAllFieldsFilled() }>
+                                        disabled={!isAllFieldsFilled()}>
                                         {!isLoading ? "Save Changes" : "Saving..."}
+                                        Save
                                     </button>
                                 </div>
                             </form>
-             
-            
-                        {/* <div className="text-red4 text-[13px] text-center h-[20px] flex items-center justify-center">{error}</div> */}
+
+                             {/* <div className="text-red4 text-[13px] text-center h-[20px] flex items-center justify-center">{error}</div> */}
                     
                     </div>
+                    }
+             
+            
+                   
                     
 
                 </div>
