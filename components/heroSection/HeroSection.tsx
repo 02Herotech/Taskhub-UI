@@ -25,7 +25,7 @@ const HeroSection = () => {
             <div className={`max-w-7xl flex items-center justify-between p-5 space-x-24 px-20 pt-[100px] pb-20 mx-auto`}>
                 <div className={`flex flex-col justify-around w-1/2 text-black`}>
                     <div className={`flex flex-col`}>
-                        <h1 className={`text-xl mt-[3rem] mb-5 font-[400] w-[375px] ${styles.revaliaFont}`}>
+                        <h1 className={`text-xl mt-[3rem] mb-5 font-[400] w-[375px] ${revalia.className}`}>
                             GET QUICK<br />AND<span className={`text-purpleBase`}> EFFICIENT </span>SERVICE
                         </h1>
 

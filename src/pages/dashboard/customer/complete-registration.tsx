@@ -12,8 +12,6 @@ import success from '../../../../public/success.svg'
 import styles from '../../../styles/animation.module.css'
 
 
-
-
 interface FormState {
     houseNumber: string,
     streetName : string,
@@ -37,12 +35,7 @@ const CompleteRegistration = () => {
       
 
       const[isLoading, setIsLaoding] = useState(false);
-      const[isDone, setIsDone] = useState(false)
-
-    //   const [showOldPassword, setShowOldPassword] = useState(false);
-    //   const [showNewPassword, setShowNewPassword] = useState(false);
-    //   const [showConfirmNewPassword, setshowConfirmNewPassword] = useState(false);
-
+        const[isDone, setIsDone] = useState(false)
 
       const handleChange = (e: any) => {
         const { name, value } = e.target;
@@ -83,14 +76,6 @@ const CompleteRegistration = () => {
             country: "Austraila"   
         })
       }
-
-
-    // To check active link 
-    const router = useRouter();
-    const isLinkActive = (linkPath: string) => {
-      return router.pathname === linkPath;
-    };
-
 
 
     // To submit formit 
@@ -155,8 +140,8 @@ const CompleteRegistration = () => {
 
                         :
 
-                        <div className='w-[430px] bg-white shadow-lg p-5'>
-
+                    <div className='w-[430px] bg-white shadow-lg p-5'>
+                  
                             <form  className={`p-5`} onSubmit={handleSubmit}>
 
                                 <div className={`flex flex-col`}>
@@ -175,7 +160,6 @@ const CompleteRegistration = () => {
                                         onChange={handleChange} 
                                         required 
                                         maxLength={15}
-                                        // autoComplete='current-passowrd'
                                     />
                                 </div>
 
@@ -194,8 +178,6 @@ const CompleteRegistration = () => {
                                         value={formData.streetName} 
                                         onChange={handleChange} 
                                         required 
-                                        // maxLength={15}
-                                        // autoComplete='new-passowrd'
                                     />
                                 </div>
 
@@ -213,8 +195,6 @@ const CompleteRegistration = () => {
                                         value={formData.town} 
                                         onChange={handleChange} 
                                         required 
-                                        // maxLength={15}
-                                        // autoComplete='new-passowrd'
                                     />
                                 </div>
 
@@ -232,8 +212,6 @@ const CompleteRegistration = () => {
                                         value={formData.state} 
                                         onChange={handleChange} 
                                         required 
-                                        // maxLength={15}
-                                        // autoComplete='new-passowrd'
                                     />
                                 </div>
 
@@ -253,7 +231,6 @@ const CompleteRegistration = () => {
                                         onChange={handleChange} 
                                         required 
                                         maxLength={15}
-                                        // autoComplete='current-passowrd'
                                     />
                                 </div>  
 
@@ -270,7 +247,7 @@ const CompleteRegistration = () => {
                                         className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl w-full`} 
                                         value={formData.country} 
                                         required
-                                        onChange={handleChange}
+                                        onChange={handleChange} 
                                         readOnly
                                     />
                                 </div>
@@ -282,15 +259,15 @@ const CompleteRegistration = () => {
                                         className={`w-full bg-purpleBase text-white py-2 px-4 rounded-md hover:bg-purple7 text-sm disabled:opacity-50`}
                                         disabled={!isAllFieldsFilled()}>
                                         {!isLoading ? "Save Changes" : "Saving..."}
-                                        Save
                                     </button>
                                 </div>
                             </form>
-
-                             {/* <div className="text-red4 text-[13px] text-center h-[20px] flex items-center justify-center">{error}</div> */}
+             
+            
+                        {/* <div className="text-red4 text-[13px] text-center h-[20px] flex items-center justify-center">{error}</div> */}
                     
                     </div>
-                    }
+}
              
             
                    
