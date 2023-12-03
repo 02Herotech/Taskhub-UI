@@ -1,5 +1,6 @@
 import React from 'react';
-import DashboardLayout from "../../../../components/dashboardLayout";
+// import DashboardLayout from "../../../../components/spdashboardLayout";
+import CustomerDashboardLayout from '../../../../components/customerdashboardLayout';
 import customer from "../../../../public/dashboardAssets/portrait.jpg";
 import styles from "../customer/styles.module.scss"
 import Image from 'next/image';
@@ -18,7 +19,7 @@ const Billings = () => {
     return (
      
 
-            <DashboardLayout>
+            <CustomerDashboardLayout>
 
             <p>Billings and Payment</p>
                 
@@ -95,7 +96,7 @@ const Billings = () => {
 
                     </div> */}
                 {/* </div> */}
-            </DashboardLayout>
+            </CustomerDashboardLayout>
     );
 }
  

@@ -1,6 +1,5 @@
 import React from 'react';
-import CustomerDashboardLayout from '../../../../components/customerdashboardLayout';
-
+import SPDashboardLayout from '../../../../components/spdashboardLayout';
 import customer from "../../../../public/dashboardAssets/portrait.jpg";
 import styles from "../customer/styles.module.scss"
 import Image from 'next/image';
@@ -19,7 +18,7 @@ const ViewJobs = () => {
     return (
      
 
-            <CustomerDashboardLayout>
+            <SPDashboardLayout>
                 <p>View Jobs</p>
                 
                 {/* <div className={styles.mainContainer}>
@@ -95,7 +94,7 @@ const ViewJobs = () => {
 
                     </div> */}
                 {/* </div> */}
-            </CustomerDashboardLayout>
+            </SPDashboardLayout>
     );
 }
  

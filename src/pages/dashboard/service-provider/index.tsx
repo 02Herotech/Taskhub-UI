@@ -1,4 +1,4 @@
-import DashboardLayout from "../../../../components/dashboardLayout";
+
 import styles from "./styles.module.scss";
 import Image from "next/image";
 import provider from "../../../../public/dashboardAssets/portrait.jpg";
@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 
 
+import SPDashboardLayout from '../../../../components/spdashboardLayout';
 import Card from "../../../../components/card/Card";
 import Picture1 from "../../../../public/customerAssets/close-up-collection-make-up-beauty-products.jpg";
 import Picture2 from "../../../../public/customerAssets/vintage-sewing-machine-with-thread-measuring-tape.jpg";
@@ -42,7 +43,7 @@ function Index() {
     
 
     return (
-        <DashboardLayout>
+        <SPDashboardLayout>
 
 
             { completeReg ? ""
@@ -62,7 +63,7 @@ function Index() {
             <div className={styles.main}>
                 <div className={styles.provider}>
                     <div className={styles.imageDiv}>
-                        <Image src={provider} className={styles.providerImage} alt="customer-image"/>
+                        <Image src={provider} className={styles.providerImage} alt="service-provider-image"/>
                     </div>
                     <div className={styles.searchDiv}>
                         <GrSearch className={styles.searchLogo}/>
@@ -132,7 +133,7 @@ function Index() {
                     />
                 </div>
             </div>
-        </DashboardLayout>
+        </SPDashboardLayout>
     );
 }
 

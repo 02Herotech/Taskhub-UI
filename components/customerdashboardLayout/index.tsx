@@ -32,7 +32,7 @@ interface IProps {
     children: ReactNode
 }
 
-function DashboardLayout(props: IProps) {
+function CustomerDashboardLayout(props: IProps) {
 
     const router = useRouter();
     const isLinkActive = (linkPath: string) => {
@@ -113,7 +113,7 @@ function DashboardLayout(props: IProps) {
                                     <ul className='hover: bg-purpleBase  py-2 px-4  text-[13px] flex flex-col items-center justify-center rounded-md'>
 
                                         <li className='py-1 px-2 my-1 hover:text-[#FE9B07]'>
-                                            <Link href='/dashboard/ /settings'>
+                                            <Link href='/dashboard/customer/settings'>
                                                 Settings
                                             </Link>
                                         </li>
@@ -183,4 +183,4 @@ function DashboardLayout(props: IProps) {
     );
 }
 
-export default DashboardLayout;
+export default CustomerDashboardLayout;

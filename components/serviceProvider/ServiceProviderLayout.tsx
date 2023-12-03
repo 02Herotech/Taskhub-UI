@@ -37,7 +37,7 @@ const ServiceProviderLayout: React.FC<ServicesProviderDetailsProps> = () => {
     return (
         <div className={`flex overflow-hidden relative justify-center flex-col  px-20 py-[110px] pb-[150px] max-w-7xl mx-auto`}>
             <div className={`w-[600px] h-[65px] font-bold flex-col flex justify-center items-center `}>
-                <h3 className={`${styles.revaliaFont} text-xl`}>FEATURED SERVICE PROVIDERS</h3>
+                <h3 className={`${revalia.className}  text-xl`}>FEATURED SERVICE PROVIDERS</h3>
             </div>
             <div className={`ml-20 `}>
                 <div className={`flex`}>

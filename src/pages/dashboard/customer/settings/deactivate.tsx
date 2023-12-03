@@ -5,7 +5,8 @@ import { IoLockClosedOutline } from "react-icons/io5";
 import { LuUsers } from "react-icons/lu";
 
 
-import DashboardLayout from "../../../../../components/dashboardLayout";
+import CustomerDashboardLayout from '../../../../../components/customerdashboardLayout';
+
 
 
 
@@ -31,7 +32,7 @@ const Deactivate = () => {
     
 
     return (
-        <DashboardLayout>
+        <CustomerDashboardLayout>
             <div className={`m-16 flex flex-col justify-center items-start w-[900px]`}>
                 <h1 className='text-lg font-extrabold'>Settings</h1>
 
@@ -57,7 +58,7 @@ const Deactivate = () => {
                 </div>
                 
             </div>
-        </DashboardLayout>
+        </CustomerDashboardLayout>
     );
 }
  

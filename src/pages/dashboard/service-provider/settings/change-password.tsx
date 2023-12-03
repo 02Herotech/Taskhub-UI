@@ -7,7 +7,7 @@ import { useState } from 'react';
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import axios from 'axios';
 
-import DashboardLayout from "../../../../../components/dashboardLayout";
+import SPDashboardLayout from '../../../../../components/spdashboardLayout';
 
 
 
@@ -157,7 +157,7 @@ const ChangePassword = () => {
     
 
     return (
-        <DashboardLayout>
+        <SPDashboardLayout>
             <div className={`mt-16 flex flex-col justify-center items-start w-[900px]`}>
                 
                 <h1 className='text-lg font-extrabold'>Settings</h1>
@@ -303,7 +303,7 @@ const ChangePassword = () => {
                 </div>
                 
             </div>
-        </DashboardLayout>
+        </SPDashboardLayout>
     );
 }
  

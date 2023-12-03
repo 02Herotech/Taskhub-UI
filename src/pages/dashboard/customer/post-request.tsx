@@ -1,5 +1,5 @@
 import React from 'react';
-import DashboardLayout from "../../../../components/dashboardLayout";
+import CustomerDashboardLayout from '../../../../components/customerdashboardLayout';
 import customer from "../../../../public/dashboardAssets/portrait.jpg";
 import styles from "../customer/styles.module.scss"
 import Image from 'next/image';
@@ -18,7 +18,7 @@ const PostRequest = () => {
     return (
      
 
-            <DashboardLayout>
+            <CustomerDashboardLayout>
 
             <p>Post Request</p>
                 
@@ -95,7 +95,7 @@ const PostRequest = () => {
 
                     </div> */}
                 {/* </div> */}
-            </DashboardLayout>
+            </CustomerDashboardLayout>
     );
 }
  

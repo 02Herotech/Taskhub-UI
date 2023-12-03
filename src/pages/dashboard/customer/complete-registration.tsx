@@ -6,7 +6,7 @@ import axios from 'axios';
 import Link from 'next/link';
 import Image from 'next/image';
 
-import DashboardLayout from "../../../../components/dashboardLayout";
+import CustomerDashboardLayout from '../../../../components/customerdashboardLayout';
 import loader from '../../../../public/loader.svg'
 import success from '../../../../public/success.svg'
 import styles from '../../../styles/animation.module.css'
@@ -124,7 +124,7 @@ const CompleteRegistration = () => {
     
 
     return (
-        <DashboardLayout>
+        <CustomerDashboardLayout>
             <div className={`mt-16 flex flex-col justify-center items-start w-[900px]`}>
          
                 <h1 className='text-lg font-extrabold'>Complete Registration</h1>
@@ -274,7 +274,7 @@ const CompleteRegistration = () => {
                 </div>
                 
             </div>
-        </DashboardLayout>
+        </CustomerDashboardLayout>
     );
 }
  

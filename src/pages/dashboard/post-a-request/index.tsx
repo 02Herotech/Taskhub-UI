@@ -1,6 +1,6 @@
 import * as Yup from "yup";
 import {useFormik} from "formik";
-import DashboardLayout from "../../../../components/dashboardLayout";
+import DashboardLayout from "../../../../components/spdashboardLayout";
 import styles from "./styles.module.scss";
 
 interface IProps {
