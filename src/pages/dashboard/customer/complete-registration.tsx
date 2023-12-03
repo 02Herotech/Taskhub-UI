@@ -114,10 +114,12 @@ const CompleteRegistration = () => {
                     setIsDone(!isDone)
                     setIsLaoding(false)
                 }
-            } catch (error) {
+                } catch (error) {
                console.error("Unable to complete reg: ", error);
-            }
-    
+                }
+            
+            resetForm()
+            
     }
     
 
@@ -140,139 +142,135 @@ const CompleteRegistration = () => {
 
                         :
 
-                    <div className='w-[430px] bg-white shadow-lg p-5'>
-                  
-                            <form  className={`p-5`} onSubmit={handleSubmit}>
-
-                                <div className={`flex flex-col`}>
-
-                                    <label htmlFor="houseNumber" 
-                                    className={`font-bold text-[16px] my-3 flex items-center w-[500px] h-[30px]`}>
-                                        House Number
-                                        <span className={`text-red10`}>*</span>
-                                    </label>
-                                    <input type='number' 
-                                        id='houseNumber' 
-                                        name='houseNumber' 
-                                        placeholder='Enter house number' 
-                                        className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl w-full`} 
-                                        value={formData.houseNumber} 
-                                        onChange={handleChange} 
-                                        required 
-                                        maxLength={15}
-                                    />
-                                </div>
-
-
-                                <div className={`flex flex-col my-3`}>
-                                    <label htmlFor="streetName" 
-                                    className={`font-bold text-[16px] my-3 flex  items-center w-[500px] h-[30px] `}>
-                                        Street Name
-                                        <span className={`text-red10`}>*</span>
-                                    </label>
-                                    <input type='text'
-                                        id='streetName' 
-                                        name='streetName' 
-                                        placeholder='Enter street name' 
-                                        className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl w-full`} 
-                                        value={formData.streetName} 
-                                        onChange={handleChange} 
-                                        required 
-                                    />
-                                </div>
-
-                                <div className={`flex flex-col my-3`}>
-                                    <label htmlFor="town" 
-                                    className={`font-bold text-[16px] my-3 flex  items-center w-[500px] h-[30px] `}>
-                                        Town
-                                        <span className={`text-red10`}>*</span>
-                                    </label>
-                                    <input type='text'
-                                        id='town' 
-                                        name='town' 
-                                        placeholder='Enter town name' 
-                                        className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl w-full`} 
-                                        value={formData.town} 
-                                        onChange={handleChange} 
-                                        required 
-                                    />
-                                </div>
-
-                                <div className={`flex flex-col my-3`}>
-                                    <label htmlFor="state" 
-                                    className={`font-bold text-[16px] my-3 flex  items-center w-[500px] h-[30px] `}>
-                                        State
-                                        <span className={`text-red10`}>*</span>
-                                    </label>
-                                    <input type='text'
-                                        id='state' 
-                                        name='state' 
-                                        placeholder='Enter state name' 
-                                        className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl w-full`} 
-                                        value={formData.state} 
-                                        onChange={handleChange} 
-                                        required 
-                                    />
-                                </div>
-
-                                <div className={`flex flex-col`}>
-
-                                    <label htmlFor="postCode" 
-                                    className={`font-bold text-[16px] my-3 flex items-center w-[500px] h-[30px] appearance-none`}>
-                                        Post Code
-                                        <span className={`text-red10`}>*</span>
-                                    </label>
-                                    <input type='number'
-                                        id='postCode' 
-                                        name='postCode' 
-                                        placeholder='Enter house number' 
-                                        className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl w-full`} 
-                                        value={formData.postCode} 
-                                        onChange={handleChange} 
-                                        required 
-                                        maxLength={15}
-                                    />
-                                </div>  
-
-                                <div className={`flex flex-col my-3`}>
-                                    <label htmlFor="country" 
-                                    className={`font-bold text-[16px] my-3 flex  items-center w-[500px] h-[30px] `}>
-                                        Country
-                                        <span className={`text-red10`}>*</span>
-                                    </label>
-                                    <input type='text'
-                                        id='country' 
-                                        name='country' 
-                                        placeholder='Enter country name' 
-                                        className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl w-full`} 
-                                        value={formData.country} 
-                                        required
-                                        onChange={handleChange} 
-                                        readOnly
-                                    />
-                                </div>
-
-
-                                <div className={`flex justify-center items-center mt-10`}>
-                                    <button
-                                        type="submit"
-                                        className={`w-full bg-purpleBase text-white py-2 px-4 rounded-md hover:bg-purple7 text-sm disabled:opacity-50`}
-                                        disabled={!isAllFieldsFilled()}>
-                                        {!isLoading ? "Save Changes" : "Saving..."}
-                                    </button>
-                                </div>
-                            </form>
-             
-            
-                        {/* <div className="text-red4 text-[13px] text-center h-[20px] flex items-center justify-center">{error}</div> */}
+                        <div className='w-[430px] bg-white shadow-lg p-5'>
                     
-                    </div>
-}
-             
-            
-                   
-                    
+                                <form  className={`p-5`} onSubmit={handleSubmit}>
 
+                                    <div className={`flex flex-col`}>
+
+                                        <label htmlFor="houseNumber" 
+                                        className={`font-bold text-[16px] my-3 flex items-center w-[500px] h-[30px]`}>
+                                            House Number
+                                            <span className={`text-red10`}>*</span>
+                                        </label>
+                                        <input type='number' 
+                                            id='houseNumber' 
+                                            name='houseNumber' 
+                                            placeholder='Enter house number' 
+                                            className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl w-full`} 
+                                            value={formData.houseNumber} 
+                                            onChange={handleChange} 
+                                            required 
+                                            maxLength={15}
+                                        />
+                                    </div>
+
+
+                                    <div className={`flex flex-col my-3`}>
+                                        <label htmlFor="streetName" 
+                                        className={`font-bold text-[16px] my-3 flex  items-center w-[500px] h-[30px] `}>
+                                            Street Name
+                                            <span className={`text-red10`}>*</span>
+                                        </label>
+                                        <input type='text'
+                                            id='streetName' 
+                                            name='streetName' 
+                                            placeholder='Enter street name' 
+                                            className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl w-full`} 
+                                            value={formData.streetName} 
+                                            onChange={handleChange} 
+                                            required 
+                                        />
+                                    </div>
+
+                                    <div className={`flex flex-col my-3`}>
+                                        <label htmlFor="town" 
+                                        className={`font-bold text-[16px] my-3 flex  items-center w-[500px] h-[30px] `}>
+                                            Town
+                                            <span className={`text-red10`}>*</span>
+                                        </label>
+                                        <input type='text'
+                                            id='town' 
+                                            name='town' 
+                                            placeholder='Enter town name' 
+                                            className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl w-full`} 
+                                            value={formData.town} 
+                                            onChange={handleChange} 
+                                            required 
+                                        />
+                                    </div>
+
+                                    <div className={`flex flex-col my-3`}>
+                                        <label htmlFor="state" 
+                                        className={`font-bold text-[16px] my-3 flex  items-center w-[500px] h-[30px] `}>
+                                            State
+                                            <span className={`text-red10`}>*</span>
+                                        </label>
+                                        <input type='text'
+                                            id='state' 
+                                            name='state' 
+                                            placeholder='Enter state name' 
+                                            className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl w-full`} 
+                                            value={formData.state} 
+                                            onChange={handleChange} 
+                                            required 
+                                        />
+                                    </div>
+
+                                    <div className={`flex flex-col`}>
+
+                                        <label htmlFor="postCode" 
+                                        className={`font-bold text-[16px] my-3 flex items-center w-[500px] h-[30px] appearance-none`}>
+                                            Post Code
+                                            <span className={`text-red10`}>*</span>
+                                        </label>
+                                        <input type='number'
+                                            id='postCode' 
+                                            name='postCode' 
+                                            placeholder='Enter house number' 
+                                            className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl w-full`} 
+                                            value={formData.postCode} 
+                                            onChange={handleChange} 
+                                            required 
+                                            maxLength={15}
+                                        />
+                                    </div>  
+
+                                    <div className={`flex flex-col my-3`}>
+                                        <label htmlFor="country" 
+                                        className={`font-bold text-[16px] my-3 flex  items-center w-[500px] h-[30px] `}>
+                                            Country
+                                            <span className={`text-red10`}>*</span>
+                                        </label>
+                                        <input type='text'
+                                            id='country' 
+                                            name='country' 
+                                            placeholder='Enter country name' 
+                                            className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl w-full`} 
+                                            value={formData.country} 
+                                            required
+                                            onChange={handleChange} 
+                                            readOnly
+                                        />
+                                    </div>
+
+
+                                    <div className={`flex justify-center items-center mt-10`}>
+                                        <button
+                                            type="submit"
+                                            className={`w-full bg-purpleBase text-white py-2 px-4 rounded-md hover:bg-purple7 text-sm disabled:opacity-50`}
+                                            disabled={!isAllFieldsFilled() || isLoading}>
+                                            {!isLoading ? "Save Changes" : "Saving..."}
+                                        </button>
+                                    </div>
+                                </form>
+                
+                
+                            {/* <div className="text-red4 text-[13px] text-center h-[20px] flex items-center justify-center">{error}</div> */}
+                        
+                        </div>
+                    }
+             
                 </div>
                 
             </div>

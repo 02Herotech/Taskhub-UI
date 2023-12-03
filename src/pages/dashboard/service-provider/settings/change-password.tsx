@@ -166,12 +166,12 @@ const ChangePassword = () => {
 
                     <div className='flex flex-col justify-center items-center bg-white shadow-lg w-[220px] py-5 text-[15px]'>
                         <div className='flex flex-col justify-center items-start'>
-                            <Link  href="/dashboard/customer/settings/change-password" 
-                                className={`flex items-center justify-center gap-[8px] hover:text-[#FE9B07] px-1 py-2 mx-1 my-2 ${isLinkActive("/dashboard/customer/settings/change-password") && "text-[#FE9B07]"}`}>
+                            <Link  href="/dashboard/service-provider/settings/change-password" 
+                                className={`flex items-center justify-center gap-[8px] hover:text-[#FE9B07] px-1 py-2 mx-1 my-2 ${isLinkActive("/dashboard/service-provider/settings/change-password") && "text-[#FE9B07]"}`}>
                                 <IoLockClosedOutline />Change Password
                             </Link>
-                            <Link  href="/dashboard/customer/settings/deactivate" 
-                                className={`flex items-center justify-center gap-[8px] hover:text-[#FE9B07] px-1 py-2 mx-1 my-2 ${isLinkActive("/dashboard/customer/settings/deactivate") && "text-[#FE9B07]"}`}>
+                            <Link  href="/dashboard/service-provider/settings/deactivate" 
+                                className={`flex items-center justify-center gap-[8px] hover:text-[#FE9B07] px-1 py-2 mx-1 my-2 ${isLinkActive("/dashboard/service-provider/settings/change-password") && "text-[#FE9B07]"}`}>
                                 <LuUsers />Deactivate Account
                             </Link>
                         </div>

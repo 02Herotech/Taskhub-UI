@@ -6,6 +6,8 @@ import React from "react";
 import {GrLocation, GrSearch} from "react-icons/gr";
 import {MdVerified} from "react-icons/md";
 import { useSession } from "next-auth/react";
+import { useEffect, useState } from "react";
+import Link from "next/link";
 
 
 import Card from "../../../../components/card/Card";
@@ -17,16 +19,46 @@ import Picture2 from "../../../../public/customerAssets/vintage-sewing-machine-w
 
 function Index() {
 
+    const [completeReg, setCompleteReg] = useState(true)
+
     const { data: session } = useSession();
     console.log(session)
 
     const firstName = session?.user.user.firstName;
     const lastName = session?.user.user.lastName;
     const lastNameInitial = lastName?.charAt(0);
+    const state = session?.user?.user?.address?.state
+    const country = session?.user?.user?.address?.country
 
+    const isEnabled = session?.user?.user?.enabled
+ 
+
+    useEffect(() => {
+        if (isEnabled === false) {
+            setCompleteReg(!completeReg)
+        }
+    
+    }, [isEnabled])
+    
 
     return (
         <DashboardLayout>
+
+
+            { completeReg ? ""
+
+            :
+
+            <div className='bg-purpleBase mt-4  text-white rounded-md flex justify-center items-center w-[900px] mx-auto py-3'>
+                <p>Before you proceed, kindly complete your registration to have full control of your account -</p>
+                <Link href="/dashboard/service-provider/complete-registration" className={`ml-2 text-[#FE9B07] border-[2px] border-[#FE9B07] py-2 px-4 rounded-md hover:text-[#b4b4b4] hover:border-[#b4b4b4]`}>
+                    Complete
+                </Link>
+            </div>
+
+            }
+
+
             <div className={styles.main}>
                 <div className={styles.provider}>
                     <div className={styles.imageDiv}>
@@ -41,12 +73,25 @@ function Index() {
                     <div className={styles.locationAndAvailability}>
                         <div className={styles.nameAndVerification}>
                             <p>{firstName} {lastNameInitial}.</p>
-                            <MdVerified className={styles.verificationLogo}/>
+
+                            { completeReg ?
+                                <MdVerified className={styles.verificationLogo}/>
+                            :
+                                ""
+                            }
+
                         </div>
-                        <div className={styles.location}>
-                            <GrLocation className={styles.locationLogo}/>
-                            <p>Tasmaia, Australia</p>
-                        </div>
+
+                        
+                        { completeReg ? 
+                            <div className={styles.location}>
+                                <GrLocation className={styles.locationLogo}/>
+                                <p>{state}, {country}</p>
+                            </div>
+                         :
+                         ""
+                        }
+
                         <div className={styles.availabilityDiv}>
                             <p className={styles.aText}>Availability</p>
                             <div className={styles.onDiv}>
