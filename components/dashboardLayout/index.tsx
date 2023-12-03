@@ -45,6 +45,7 @@ function DashboardLayout(props: IProps) {
 
     const firstName = session?.user.user.firstName
     const lastName = session?.user.user.lastName
+    const userRole = session?.user.user.roles[0]
     
 
     const [isOpen, setIsOpen] = useState(false);
@@ -95,7 +96,7 @@ function DashboardLayout(props: IProps) {
 
                         <div className={``}>
                             <p className={`font-extrabold text-[15px]`}>{firstName} {lastName}</p>
-                            <p className={`text-[12px]`}>Customer</p>
+                            <p className={`text-[12px]`}>{userRole}</p>
                         </div>
                         <Image src={portrait} alt="User Portrait" className={`rounded-[50%] h-[40px] w-[40px] object-cover`}/>
 
@@ -112,7 +113,7 @@ function DashboardLayout(props: IProps) {
                                     <ul className='hover: bg-purpleBase  py-2 px-4  text-[13px] flex flex-col items-center justify-center rounded-md'>
 
                                         <li className='py-1 px-2 my-1 hover:text-[#FE9B07]'>
-                                            <Link href='/dashboard/customer/settings'>
+                                            <Link href='/dashboard/ /settings'>
                                                 Settings
                                             </Link>
                                         </li>

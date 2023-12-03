@@ -118,7 +118,7 @@ export const FAQLandingPage: React.FC = () => {
         <div className={`w-full  bg-purpleBase py-[150px] px-[60px]`}>
             <div className={`flex justify-center  flex-col text-white max-w-7xl mx-auto`}>
                 <div className={`my-2 flex flex-col items-center text-center`}>
-                    <h1 className={`text-xl font-[100] ${styles.revaliaFont}`}>
+                    <h1 className={`text-xl font-[100] ${revalia.className}`}>
                         Frequently Asked Questions (FAQs)
                     </h1>
                     <p className={` w-[650px]  font-normal mt-10 mb-[60px] text-base`}>
