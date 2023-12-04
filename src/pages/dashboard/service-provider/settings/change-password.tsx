@@ -171,7 +171,7 @@ const ChangePassword = () => {
                                 <IoLockClosedOutline />Change Password
                             </Link>
                             <Link  href="/dashboard/service-provider/settings/deactivate" 
-                                className={`flex items-center justify-center gap-[8px] hover:text-[#FE9B07] px-1 py-2 mx-1 my-2 ${isLinkActive("/dashboard/service-provider/settings/change-password") && "text-[#FE9B07]"}`}>
+                                className={`flex items-center justify-center gap-[8px] hover:text-[#FE9B07] px-1 py-2 mx-1 my-2 ${isLinkActive("/dashboard/service-provider/settings/deactivate") && "text-[#FE9B07]"}`}>
                                 <LuUsers />Deactivate Account
                             </Link>
                         </div>

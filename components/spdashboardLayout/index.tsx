@@ -142,7 +142,7 @@ function SPDashboardLayout(props: IProps) {
                                 <Link  href="/dashboard/service-provider" className={`flex items-center gap-[20px] hover:text-[#FE9B07] mb-14 ${isLinkActive("/dashboard/service-provider") && "text-[#FE9B07]"}`}>
                                     <RxDashboard size={16}/>Dashboard
                                 </Link>
-                                <Link href="/dashboard/service-providerservice-provider" className={`flex items-center gap-[20px] hover:text-[#FE9B07]  mb-14 ${isLinkActive("/dashboard/service-provider/profile") && "text-[#FE9B07]"}`}>
+                                <Link href="/dashboard/service-provider/profile" className={`flex items-center gap-[20px] hover:text-[#FE9B07]  mb-14 ${isLinkActive("/dashboard/service-provider/profile") && "text-[#FE9B07]"}`}>
                                     <IoPersonOutline size={16}/>Profile
                                 </Link>
                                 <Link href="/dashboard/service-provider/post-request" className={`flex items-center gap-[20px] hover:text-[#FE9B07] mb-14 ${isLinkActive("/dashboard/service-provider/post-request") && "text-[#FE9B07]"}`}>
