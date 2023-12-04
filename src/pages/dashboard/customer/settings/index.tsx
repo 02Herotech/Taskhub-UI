@@ -4,7 +4,8 @@ import { useRouter } from 'next/router';
 import { IoLockClosedOutline } from "react-icons/io5";
 import { LuUsers } from "react-icons/lu";
 
-import DashboardLayout from "../../../../../components/dashboardLayout";
+import CustomerDashboardLayout from '../../../../../components/customerdashboardLayout';
+
 
 
 
@@ -29,7 +30,7 @@ const Settings = () => {
     
 
     return (
-        <DashboardLayout>
+        <CustomerDashboardLayout>
             <div className={`mt-16 flex flex-col justify-center items-start w-[900px]`}>
                 <h1 className='text-lg font-extrabold'>Settings</h1>
         
@@ -51,7 +52,7 @@ const Settings = () => {
                 </div>
 
             </div>
-        </DashboardLayout>
+        </CustomerDashboardLayout>
     );
 }
  

@@ -1,5 +1,5 @@
 import React from 'react';
-import DashboardLayout from "../../../../components/dashboardLayout";
+import CustomerDashboardLayout from '../../../../components/customerdashboardLayout';
 import customer from "../../../../public/dashboardAssets/portrait.jpg";
 import styles from "../customer/styles.module.scss"
 import Image from 'next/image';
@@ -18,7 +18,7 @@ const Profile = () => {
     return (
      
 
-            <DashboardLayout>
+            <CustomerDashboardLayout>
                 <p>Profile</p>
                 
                 {/* <div className={styles.mainContainer}>
@@ -94,7 +94,7 @@ const Profile = () => {
 
                     </div> */}
                 {/* </div> */}
-            </DashboardLayout>
+            </CustomerDashboardLayout>
     );
 }
  

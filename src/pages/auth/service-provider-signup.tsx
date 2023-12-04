@@ -15,6 +15,7 @@ import { BackButton } from '../../../components/buttons/Button'
 // import axios from 'axios'
 import router from "next/router";
 import flag from '../../../public/flag.jpg'
+import { error } from 'console';
 
 interface FormState {
     firstName: string;
@@ -49,7 +50,7 @@ const ServiceProviderSignup: React.FC<FormState> = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
-    const [signUpError, setSignUpError] = useState<string | null>(null);
+    const [signUpError, setSignUpError] = useState<string | null>("");
 
 
 
@@ -371,6 +372,7 @@ const ServiceProviderSignup: React.FC<FormState> = () => {
                                 {signUpError}
                             </div>
                         )}
+
                     </form>
                 </div>
 

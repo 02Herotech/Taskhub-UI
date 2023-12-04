@@ -32,7 +32,7 @@ interface IProps {
     children: ReactNode
 }
 
-function DashboardLayout(props: IProps) {
+function SPDashboardLayout(props: IProps) {
 
     const router = useRouter();
     const isLinkActive = (linkPath: string) => {
@@ -102,7 +102,7 @@ function DashboardLayout(props: IProps) {
 
                         <div className=' flex relative cursor-pointer' onClick={contactClick}>
                             <ul>
-                                <li  className={`text-[20px] hover:text-[#FE9B07] ${isLinkActive("/dashboard/customer/settings") && "text-[#FE9B07]"} `}>
+                                <li  className={`text-[20px] hover:text-[#FE9B07] ${isLinkActive("/dashboard/service-provider/settings") && "text-[#FE9B07]"} `}>
                                     <GoGear />
                                 </li>
 
@@ -113,7 +113,7 @@ function DashboardLayout(props: IProps) {
                                     <ul className='hover: bg-purpleBase  py-2 px-4  text-[13px] flex flex-col items-center justify-center rounded-md'>
 
                                         <li className='py-1 px-2 my-1 hover:text-[#FE9B07]'>
-                                            <Link href='/dashboard/ /settings'>
+                                            <Link href='/dashboard/service-provider/settings'>
                                                 Settings
                                             </Link>
                                         </li>
@@ -139,25 +139,25 @@ function DashboardLayout(props: IProps) {
                     <div className={`flex flex-col bg-purpleBase min-h-screen w-[240px] items-center`}>
                         <div className={`flex flex-col items-start justify-between text-white py-20`}>
                             <div className='mb-[20em] text-[14px]'>
-                                <Link  href="/dashboard/customer" className={`flex items-center gap-[20px] hover:text-[#FE9B07] mb-14 ${isLinkActive("/dashboard/customer") && "text-[#FE9B07]"}`}>
+                                <Link  href="/dashboard/service-provider" className={`flex items-center gap-[20px] hover:text-[#FE9B07] mb-14 ${isLinkActive("/dashboard/service-provider") && "text-[#FE9B07]"}`}>
                                     <RxDashboard size={16}/>Dashboard
                                 </Link>
-                                <Link href="/dashboard/customer/profile" className={`flex items-center gap-[20px] hover:text-[#FE9B07]  mb-14 ${isLinkActive("/dashboard/customer/profile") && "text-[#FE9B07]"}`}>
+                                <Link href="/dashboard/service-provider/profile" className={`flex items-center gap-[20px] hover:text-[#FE9B07]  mb-14 ${isLinkActive("/dashboard/service-provider/profile") && "text-[#FE9B07]"}`}>
                                     <IoPersonOutline size={16}/>Profile
                                 </Link>
-                                <Link href="/dashboard/customer/post-request" className={`flex items-center gap-[20px] hover:text-[#FE9B07] mb-14 ${isLinkActive("/dashboard/customer/post-request") && "text-[#FE9B07]"}`}>
+                                <Link href="/dashboard/service-provider/post-request" className={`flex items-center gap-[20px] hover:text-[#FE9B07] mb-14 ${isLinkActive("/dashboard/service-provider/post-request") && "text-[#FE9B07]"}`}>
                                     <IoClipboardOutline size={16}/>Post a Request
                                 </Link>
-                                <Link href="/dashboard/customer/bookings" className={`flex items-center gap-[20px] hover:text-[#FE9B07] mb-14 ${isLinkActive("/dashboard/customer/bookings") && "text-[#FE9B07]"}`}>
+                                <Link href="/dashboard/service-provider/bookings" className={`flex items-center gap-[20px] hover:text-[#FE9B07] mb-14 ${isLinkActive("/dashboard/service-provider/bookings") && "text-[#FE9B07]"}`}>
                                     <TfiWallet size={16}/>Bookings
                                 </Link>
-                                <Link href="/dashboard/customer/view-jobs" className={`flex items-center gap-[20px] hover:text-[#FE9B07] mb-14 ${isLinkActive("/dashboard/customer/view-jobs") && "text-[#FE9B07]"}`}>
+                                <Link href="/dashboard/service-provider/view-jobs" className={`flex items-center gap-[20px] hover:text-[#FE9B07] mb-14 ${isLinkActive("/dashboard/service-provider/view-jobs") && "text-[#FE9B07]"}`}>
                                     <GoPulse size={16}/>View Jobs
                                 </Link>
-                                <Link href="/dashboard/customer/billings&payments" className={`flex items-center gap-[20px] hover:text-[#FE9B07] mb-14 ${isLinkActive("/dashboard/customer/billings&payments") && "text-[#FE9B07]"}`}>
+                                <Link href="/dashboard/service-provider/billings&payments" className={`flex items-center gap-[20px] hover:text-[#FE9B07] mb-14 ${isLinkActive("/dashboard/service-provider/billings&payments") && "text-[#FE9B07]"}`}>
                                     <CgBox size={16}/> Billing and Payments
                                 </Link>
-                                <Link href="/dashboard/customer/help&support" className={`flex items-center gap-[20px] hover:text-[#FE9B07] mb-14 ${isLinkActive("/dashboard/customer/help&support") && "text-[#FE9B07]"}`}>
+                                <Link href="/dashboard/service-provider/help&support" className={`flex items-center gap-[20px] hover:text-[#FE9B07] mb-14 ${isLinkActive("/dashboard/service-provider/help&support") && "text-[#FE9B07]"}`}>
                                     <FiHelpCircle size={16}/>Help and Support
                                 </Link>
                             </div>
@@ -183,4 +183,4 @@ function DashboardLayout(props: IProps) {
     );
 }
 
-export default DashboardLayout;
+export default SPDashboardLayout;

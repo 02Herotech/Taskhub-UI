@@ -1,5 +1,5 @@
 import React from 'react';
-import DashboardLayout from "../../../../../components/dashboardLayout";
+import DashboardLayout from "../../../../../components/spdashboardLayout";
 import styles from "@/pages/dashboard/service-provider/styles.module.scss";
 import style from "../../market/service-provider/styles.module.scss";
 import {MdVerified} from "react-icons/md";

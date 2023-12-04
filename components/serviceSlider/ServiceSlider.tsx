@@ -26,7 +26,7 @@ const ServiceSlider = () => {
                     <Image src={image1} width={700} alt=''/>
                 </div>
                 <div className='flex flex-col w-[300px] h-[292px] bg-purpleBase items-center justify-center text-center'>
-                    <h1 className={`text-white ${styles.revaliaFont} uppercase text-xl`}>Service <br />Categories</h1>
+                    <h1 className={`text-white ${revalia.className}  uppercase text-xl`}>Service <br />Categories</h1>
                     <button className='text-[15px] text-white bg-[#ff9b07] hover:bg-[#ff8b07] py-2 px-8 mt-6 font-extrabold'>BOOK NOW</button>
                 </div>
            </div>

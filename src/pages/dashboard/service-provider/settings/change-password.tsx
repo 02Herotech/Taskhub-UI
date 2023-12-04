@@ -7,7 +7,7 @@ import { useState } from 'react';
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import axios from 'axios';
 
-import DashboardLayout from "../../../../../components/dashboardLayout";
+import SPDashboardLayout from '../../../../../components/spdashboardLayout';
 
 
 
@@ -157,7 +157,7 @@ const ChangePassword = () => {
     
 
     return (
-        <DashboardLayout>
+        <SPDashboardLayout>
             <div className={`mt-16 flex flex-col justify-center items-start w-[900px]`}>
                 
                 <h1 className='text-lg font-extrabold'>Settings</h1>
@@ -171,7 +171,7 @@ const ChangePassword = () => {
                                 <IoLockClosedOutline />Change Password
                             </Link>
                             <Link  href="/dashboard/service-provider/settings/deactivate" 
-                                className={`flex items-center justify-center gap-[8px] hover:text-[#FE9B07] px-1 py-2 mx-1 my-2 ${isLinkActive("/dashboard/service-provider/settings/change-password") && "text-[#FE9B07]"}`}>
+                                className={`flex items-center justify-center gap-[8px] hover:text-[#FE9B07] px-1 py-2 mx-1 my-2 ${isLinkActive("/dashboard/service-provider/settings/deactivate") && "text-[#FE9B07]"}`}>
                                 <LuUsers />Deactivate Account
                             </Link>
                         </div>
@@ -303,7 +303,7 @@ const ChangePassword = () => {
                 </div>
                 
             </div>
-        </DashboardLayout>
+        </SPDashboardLayout>
     );
 }
  
