@@ -60,7 +60,8 @@ function Index() {
             }
 
 
-            <div className={styles.main}>
+            {/* <div className={styles.main}> */}
+            <div className={`m-10 w-[900px] flex flex-col justify-center`}>
                 <div className={styles.provider}>
                     <div className={styles.imageDiv}>
                         <Image src={provider} className={styles.providerImage} alt="service-provider-image"/>

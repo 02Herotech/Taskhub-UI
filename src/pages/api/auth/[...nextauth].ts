@@ -59,8 +59,9 @@ export default NextAuth({
           emailAddress: email,
           password,
         });
-
+        
         const { data, status } = response;
+        console.log(response)
 
         if (status === 200) {
           return {
@@ -99,19 +100,6 @@ export default NextAuth({
     },
   },
 
-  // callbacks: {
-  //   async jwt({ token, user, trigger, session }) {
-  //     // If there's any change to the session
-  //     if (trigger === "update") {
-  //       return { ...token, ...session.user };
-  //     }
-  //     return { ...token, ...user };
-  //   },
-  //   async session({ session, token, user }) {
-  //     session.user.user= token;
-  //     return session;
-  //   },
-  // },
 
 });
 
