@@ -139,6 +139,11 @@ const CompleteRegistration = () => {
                     idType: idTypeValue,
                     idNumber: idNumberValue,
                     idFile: idFileValue
+                },
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                      }
                 }
                 )
 
@@ -304,22 +309,24 @@ const CompleteRegistration = () => {
 
                                         <div className={`flex flex-col w-[300px]`}>
 
-                                            <label htmlFor="id" 
+                                            <label htmlFor="idType" 
                                             className={`font-bold text-[16px] my-3 flex items-center w-[500px] h-[30px] appearance-none`}>
                                                 ID Type
                                                 <span className={`text-red10`}>*</span>
                                             </label>
-                                            <select name="id" 
-                                            id="id"
+                                            <select name="idType" 
+                                            id="idType"
                                             className='border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl w-full'
                                             value={formData.idType} 
                                             onChange={handleChange} 
-                                            // required 
+                                            required 
                                             >
-                                                <option value="International Passport">International Passport</option>
-                                                <option value="Drivers Licence">Drivers Licence</option>
-                                                <option value="National ID">National ID</option>
+                                                <option  value="International Passport" className='hover:text-red6'>International Passport</option>
+                                                <option value="Photo ID">Photo ID</option>
+                                                <option value="Driver's Licence">Driver's Licence</option>
+                                                <option value="Medicare Card">Medicare Card</option>
                                             </select>
+
                                         </div>  
 
                                         <div className={`flex flex-col w-[300px]`}>

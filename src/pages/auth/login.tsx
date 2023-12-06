@@ -1,22 +1,24 @@
 
 import React, { useState, useEffect } from "react";
-import { signIn } from "next-auth/react";
+import { signIn, signOut } from "next-auth/react";
 import Link from "next/link";
 import Image from "next/image";
 import logo from "../../../public/logo.png";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { useSession } from "next-auth/react";
-import router from "next/router";
+import { useRouter } from "next/router";
+import axios from 'axios'
 
 import google from "../../../public/google.png"
 import { BsArrowLeftCircle } from 'react-icons/bs'
+
 // import { setTimeout } from "timers/promises";
 
 
 interface FormState {
   email: string;
   password: string;
-  userType: 'customer' | 'serviceProvider';
+  userType: 'customer' | 'service-provider';
   // rememberMe: boolean;
   // error: string;
 }
@@ -25,7 +27,7 @@ const Login: React.FC<FormState> = () => {
   
   const[isLoading, setIsLaoding] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-  const [error, setError] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const [formData, setFormData] = useState({
     email: "",
@@ -34,7 +36,8 @@ const Login: React.FC<FormState> = () => {
     // rememberMe: false,
     // error: "",
   });
-
+  
+  const router = useRouter()
 
   const {data: session } = useSession();
 
@@ -55,34 +58,94 @@ const Login: React.FC<FormState> = () => {
     setShowPassword(!showPassword);
   };
 
+  // const onSubmit = async (event: { preventDefault: () => void }) => {
+  //   event.preventDefault();
+  //   console.log("formdata", formData);
+  //   setIsLaoding(true)
+
+  //   const result = await signIn("credentials", {
+  //     redirect: false,
+  //     email: formData.email,
+  //     password: formData.password,
+  //     userType: formData.userType
+  //   });
+
+  //   console.log("result", result);
+  //   console.log("session", session);
+
+  
+  //   if (result && result.ok) {
+  //     if (formData.userType === "customer") {
+  //       router.push("/dashboard/customer");
+  //     } else if (formData.userType === "serviceProvider") {
+  //       router.push("/dashboard/service-provider");
+  //     }
+  //   } else {      
+  //     setErrorMessage("Invalid email/password")
+  //     setIsLaoding(false) 
+  //   }
+
+
+
+  // };
+
+
+
   const onSubmit = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
     console.log("formdata", formData);
     setIsLaoding(true)
+    
+    const emailValue = formData.email
+    const passwordValue = formData.password
+    
+    try {
+      const response = await axios.post('https://service-rppp.onrender.com/api/v1/auth/login', {
+        emailAddress: emailValue,
+        password: passwordValue
+      })
 
-    const result = await signIn("credentials", {
-      redirect: false,
-      email: formData.email,
-      password: formData.password,
-      userType: formData.userType
-    });
+      console.log("response:", response)
 
-    console.log("result", result);
-    console.log("session", session);
+      console.log("status: ", response.status)
+      
+      if (response.status === 200) {
+        const userTypeRole = response.data.user.roles[0];
+        if (
+          (formData.userType === "customer" && userTypeRole === "CUSTOMER") ||
+          (formData.userType === "service-provider" && userTypeRole === "SERVICE_PROVIDER")
+        ) {
+
+          await signIn("credentials", {
+                redirect: false,
+                email: formData.email,
+                password: formData.password,
+                userType: formData.userType
+              });
+
+          router.push(`/dashboard/${formData.userType}`);
+        } else {
+          setErrorMessage("Invalid User Role");
+          setIsLaoding(false);
+        }
+      }
+             
+    } catch (error: any) {
+      console.log(error)
+      setIsLaoding(false) 
+      setErrorMessage(error.response.data.message)
+    }
+
+    setTimeout(() => {
+       setErrorMessage("");
+     }, 3000);
+  }
+            
+      
+
 
   
-    if (result && result.ok) {
-      if (formData.userType === "customer") {
-        router.push("/dashboard/customer");
-      } else if (formData.userType === "serviceProvider") {
-        router.push("/dashboard/service-provider");
-      }
-    } else {      
-      setError("Invalid email/password")
-      setIsLaoding(false) 
-    }
-  };
-
+  
   return (
     <div className={` w-full`}>
       <div className={`p-5 flex h-[80px] drop-shadow-md fixed z-50 w-full bg-white font-extrabold justify-center`}>
@@ -127,13 +190,13 @@ const Login: React.FC<FormState> = () => {
                 </label>
               </div>
               <div className={`flex`}>
-                <label htmlFor="serviceProvider" className={`font-bold text-[14px] px-2 my-1`}>
+                <label htmlFor="service-provider" className={`font-bold text-[14px] px-2 my-1`}>
                   <input
                     type="radio"
-                    id="serviceProvider"
+                    id="service-provider"
                     name="userType"
-                    value="serviceProvider"
-                    checked={formData.userType === 'serviceProvider'}
+                    value="service-provider"
+                    checked={formData.userType === 'service-provider'}
                     onChange={handleChange}
                     className="mr-2"
                     />
@@ -232,7 +295,7 @@ const Login: React.FC<FormState> = () => {
               </button>
             </div>
             
-            <div className="text-red4 text-[13px] text-center h-[20px] flex items-center justify-center">{error}</div>
+            <div className="text-red4 text-[13px] text-center h-[20px] flex items-center justify-center">{errorMessage}</div>
 
           </form>
         </div>

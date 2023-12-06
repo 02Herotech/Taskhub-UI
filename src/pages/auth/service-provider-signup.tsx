@@ -167,7 +167,7 @@ const ServiceProviderSignup: React.FC<FormState> = () => {
                     // Clear the error message after 5 seconds
                     setTimeout(() => {
                         setSignUpError(null);
-                    }, 8000);
+                    }, 3000);
                 })
 
                 // .catch((error) => console.error('rejected', error));
