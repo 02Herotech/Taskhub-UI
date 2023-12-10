@@ -101,19 +101,9 @@ const CompleteRegistration = () => {
       }
 
 
-    // // To check active link 
-    // const router = useRouter();
-    // const isLinkActive = (linkPath: string) => {
-    //   return router.pathname === linkPath;
-    // };
-
-
 
     // To submit formit 
-    
-    
-    
-    
+     
     const {data: session} = useSession()
     const accessTokenValue = session?.user.accessToken;
     
@@ -343,7 +333,7 @@ const CompleteRegistration = () => {
                                                 className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl w-full`} 
                                                 value={formData.idNumber} 
                                                 onChange={handleChange} 
-                                                // required 
+                                                required 
                                             />
 
                                         </div>  

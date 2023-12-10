@@ -141,6 +141,11 @@ const ChangePassword = () => {
                 {
                     oldPassword: oldPasswordValue,
                     newPassword: NewPasswordValue
+                },
+                {
+                    headers: {
+                        "Content-type": "application/json"
+                    }
                 }
                 
                 )

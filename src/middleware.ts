@@ -20,7 +20,6 @@ if (token && publicPath){
     }
 }
 
- 
 
 export const config = {
   matcher: [
