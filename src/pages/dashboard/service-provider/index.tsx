@@ -52,7 +52,8 @@ function Index() {
 
             <div className='bg-purpleBase mt-4  text-white rounded-md flex justify-center items-center w-[900px] mx-auto py-3'>
                 <p>Before you proceed, kindly complete your registration to have full control of your account -</p>
-                <Link href="/dashboard/service-provider/complete-registration" className={`ml-2 text-[#FE9B07] border-[2px] border-[#FE9B07] py-2 px-4 rounded-md hover:text-[#b4b4b4] hover:border-[#b4b4b4]`}>
+                <Link href="/dashboard/service-provider/complete-registration" 
+                className={`ml-2 text-[#FE9B07] border-[2px] border-[#FE9B07] py-2 px-4 rounded-md hover:text-[#b4b4b4] hover:border-[#b4b4b4]`}>
                     Complete
                 </Link>
             </div>
