@@ -25,7 +25,7 @@ interface FormState {
 
 const Login: React.FC<FormState> = () => {
   
-  const[isLoading, setIsLaoding] = useState(false);
+  const[isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -58,43 +58,11 @@ const Login: React.FC<FormState> = () => {
     setShowPassword(!showPassword);
   };
 
-  // const onSubmit = async (event: { preventDefault: () => void }) => {
-  //   event.preventDefault();
-  //   console.log("formdata", formData);
-  //   setIsLaoding(true)
-
-  //   const result = await signIn("credentials", {
-  //     redirect: false,
-  //     email: formData.email,
-  //     password: formData.password,
-  //     userType: formData.userType
-  //   });
-
-  //   console.log("result", result);
-  //   console.log("session", session);
-
-  
-  //   if (result && result.ok) {
-  //     if (formData.userType === "customer") {
-  //       router.push("/dashboard/customer");
-  //     } else if (formData.userType === "serviceProvider") {
-  //       router.push("/dashboard/service-provider");
-  //     }
-  //   } else {      
-  //     setErrorMessage("Invalid email/password")
-  //     setIsLaoding(false) 
-  //   }
-
-
-
-  // };
-
-
 
   const onSubmit = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
     console.log("formdata", formData);
-    setIsLaoding(true)
+    setIsLoading(true)
     
     const emailValue = formData.email
     const passwordValue = formData.password
@@ -110,11 +78,17 @@ const Login: React.FC<FormState> = () => {
       console.log("status: ", response.status)
       
       if (response.status === 200) {
+        
+        const accessTokenValue = response.data.accessToken
         const userTypeRole = response.data.user.roles[0];
+     
+
         if (
           (formData.userType === "customer" && userTypeRole === "CUSTOMER") ||
           (formData.userType === "service-provider" && userTypeRole === "SERVICE_PROVIDER")
         ) {
+
+          axios.defaults.headers.common['Authorization'] = `Bearer ${accessTokenValue}`;
 
           await signIn("credentials", {
                 redirect: false,
@@ -126,13 +100,13 @@ const Login: React.FC<FormState> = () => {
           router.push(`/dashboard/${formData.userType}`);
         } else {
           setErrorMessage("Invalid User Role");
-          setIsLaoding(false);
+          setIsLoading(false);
         }
       }
              
     } catch (error: any) {
       console.log(error)
-      setIsLaoding(false) 
+      setIsLoading(false) 
       setErrorMessage(error.response.data.message)
     }
 
@@ -140,11 +114,7 @@ const Login: React.FC<FormState> = () => {
        setErrorMessage("");
      }, 3000);
   }
-            
       
-
-
-  
   
   return (
     <div className={` w-full`}>

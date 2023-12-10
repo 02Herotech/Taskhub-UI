@@ -22,7 +22,7 @@ interface FormState {
     country: string,
     idType: string,
     idNumber: string,
-    idFile: string
+    idImage: File | undefined
 
 }
 
@@ -35,9 +35,9 @@ const CompleteRegistration = () => {
         state: "",
         postCode: "",
         country: "Australia",
-        idType: "International Passport",
+        idType: "",
         idNumber: "",
-        idFile: ""
+        idImage: undefined
       });
 
       
@@ -61,6 +61,13 @@ const CompleteRegistration = () => {
         }));
     };
 
+    const handleImage = (e: any) => {
+        setFormData((prevData) => ({
+            ...prevData,
+            idImage: e.target.files[0]
+        }));
+    }
+
 
     //   To check all required fields 
       const isAllFieldsFilled = () => {
@@ -70,9 +77,9 @@ const CompleteRegistration = () => {
             "town",
             "state",
             'postCode',
-            // 'idType',
-            // 'idNumber',
-            // 'idFile'
+            'idType',
+            'idNumber',
+            'idImage'
         ];
         return requiredFields.every((field) => formData[field] !== "");
       };
@@ -89,7 +96,7 @@ const CompleteRegistration = () => {
             country: "Australia",
             idType: "",
             idNumber: "",
-            idFile: ""
+            idImage: undefined
         })
       }
 
@@ -103,46 +110,39 @@ const CompleteRegistration = () => {
 
 
     // To submit formit 
-
-    const houseNumberValue = formData.houseNumber;
-    const streetNameValue = formData.streetName;
-    const townValue = formData.town;
-    const stateValue = formData.state;
-    const postCodeValue = formData.postCode;
-    const countryValue = formData.country;
-    const idTypeValue = formData.idType;
-    const idNumberValue = formData.idNumber;
-    const idFileValue = formData.idFile;
-
-
-
-
+    
+    
+    
+    
     const {data: session} = useSession()
     const accessTokenValue = session?.user.accessToken;
-
+    
     const handleSubmit = async (e: {preventDefault: () => void}) => {
         e.preventDefault()
+
+        const apiFormData = new FormData()
+        apiFormData.append("houseNumber", formData.houseNumber )
+        apiFormData.append("streetName", formData.streetName )
+        apiFormData.append("town", formData.town )
+        apiFormData.append("state", formData.state )
+        apiFormData.append("postCode", formData.postCode )
+        apiFormData.append("country", formData.country )
+        apiFormData.append("idImage", formData.idImage! )
+        apiFormData.append("idType", formData.idType )
+        apiFormData.append("idNumber", formData.idNumber )
+
+
         console.log(formData)
-
+        
         setIsLaoding(true)
-
+        
             try {
                 const response = await axios.post(
                     `https://service-rppp.onrender.com/api/v1/service_provider/complete?token=${accessTokenValue}`,
-                {
-                    houseNumber: houseNumberValue,
-                    streetName: streetNameValue,
-                    town: townValue,
-                    state: stateValue,
-                    postCode: postCodeValue,
-                    country: countryValue,
-                    idType: idTypeValue,
-                    idNumber: idNumberValue,
-                    idFile: idFileValue
-                },
+                    apiFormData,
                 {
                     headers: {
-                        "Content-Type": "application/json",
+                        "Content-Type": "multipart/form-data",
                       }
                 }
                 )
@@ -352,26 +352,26 @@ const CompleteRegistration = () => {
 
                                     <div className={`flex flex-col mx-auto w-[300px]`}>
 
-                                        <label htmlFor="idFile" 
+                                        <label htmlFor="idImage" 
                                         className={`font-bold text-[16px] my-3 flex items-center w-[500px] h-[30px] appearance-none`}>
                                             ID Type
                                             <span className={`text-red10`}>*</span>
                                         </label>
                                         <input type='file'
-                                                id='idFile' 
-                                                name='idFile' 
+                                                id='idImage' 
+                                                name='idImage' 
                                                 placeholder='Upload ID' 
                                                 className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl w-full`} 
-                                                value={formData.idFile} 
-                                                onChange={handleChange} 
-                                                // required 
+                                                // value={formData.idImage} 
+                                                onChange={handleImage} 
+                                                required 
                                             />
                                     </div>
 
                                     <div className={`flex justify-center items-center mt-16 w-[300px] mx-auto`}>
                                         <button
                                             type="submit"
-                                            className={`w-full bg-purpleBase text-white py-2 px-4 rounded-md hover:bg-purple7 text-sm disabled:opacity-50`}
+                                            className={`w-full bg-[#34a853] text-white py-2 px-4 rounded-md hover:bg-[#46694f] text-sm disabled:opacity-50`}
                                             disabled={!isAllFieldsFilled() || isLoading}>
                                             {!isLoading ? "Save Changes" : "Saving..."}
                                         </button>

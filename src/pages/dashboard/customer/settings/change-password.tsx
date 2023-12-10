@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { IoLockClosedOutline } from "react-icons/io5";
+import { useSession } from 'next-auth/react';
 import { LuUsers } from "react-icons/lu";
 import { useState } from 'react';
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
@@ -127,29 +128,35 @@ const ChangePassword = () => {
       return router.pathname === linkPath;
     };
 
-
-
+    const {data: session} = useSession()
+    
     // To submit formit 
-
-    const oldPasswordValue = formData.oldPassword;
-    const NewPasswordValue = formData.newPassword;
-
+    
     const handleSubmit = async (e: {preventDefault: () => void}) => {
         e.preventDefault()
+        
+            const accessTokenValue = session?.user.accessToken;
 
+            const oldPasswordValue = formData.oldPassword;
+            const NewPasswordValue = formData.newPassword;
+        
             try {
                 const response = await axios.post('https://service-rppp.onrender.com/api/v1/change-password/int', 
                 {
                     oldPassword: oldPasswordValue,
                     newPassword: NewPasswordValue
+                },
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                      }
                 }
-                
                 )
                 console.log(response)
 
-                if (response.status === 200) {
+                // if (response.status === 200) {
                     
-                }
+                // }
             } catch (error) {
                console.error("Change password error: ", error);
             }
@@ -157,6 +164,7 @@ const ChangePassword = () => {
     }
     
 
+//    
     return (
         <CustomerDashboardLayout>
             <div className={`mt-16 flex flex-col justify-center items-start w-[900px]`}>

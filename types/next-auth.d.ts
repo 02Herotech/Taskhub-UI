@@ -23,6 +23,7 @@ declare module "next-auth" {
                     houseNumber: string | null;
                     streetName:string | null;
                     town: string | null;
+                    postCode: string | null;
                     state: string | null;
                     country: string | null;
                 }
