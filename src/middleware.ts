@@ -7,7 +7,14 @@ export function middleware(request: NextRequest) {
 const path = request.nextUrl.pathname;
 
 const publicPath = path === '/auth/login' || path === '/auth'
-const notPublicPath = path === '/dashboard/customer' || path === '/dashboard/service-provider' //remember to add service provider dashboard
+const notPublicPath = (
+  path === '/dashboard/customer' || 
+  path === '/dashboard/customer/profile' ||
+  path === '/dashboard/customer/complete-registration' ||
+  path === '/dashboard/service-provider' ||
+  path === '/dashboard/service-provider/profile' ||
+  path === '/dashboard/service-provider/complete-registration'
+  )
 
 const token = request.cookies.get('__Secure-next-auth.session-token')
 
@@ -25,7 +32,7 @@ export const config = {
   matcher: [
     '/auth/login',
     '/auth',
-    '/dashboard/customer',
-    '/dashboard/service-provider'
+    '/dashboard/customer/:path*',
+    '/dashboard/service-provider/:path*'
   ],
 }
