@@ -229,13 +229,6 @@ const Profile = () => {
                                     <option value="Tasmania">Tasmania</option>
                                     <option value="Australian Capital Territory">Australian Capital Territory</option>
                                 </select>
-                                {/* <input type="text"
-                                    id='state'
-                                    name='state'
-                                    value= {formData.state}
-                                    className='p-2 border-2 border-grey2 rounded-md w-[500px] my-3'
-                                    required
-                                /> */}
                             </div>
 
                             <div className='flex flex-col'>
@@ -267,12 +260,12 @@ const Profile = () => {
 
                     </form>
                 </div>
-             </div>
+            </div>
              
                 
              
              
-            </CustomerDashboardLayout>
+        </CustomerDashboardLayout>
     );
 }
  
