@@ -7,6 +7,9 @@ import Link from 'next/link';
 
 import customer from "../../../../public/dashboardAssets/portrait.jpg";
 import CustomerDashboardLayout from '../../../../components/customerdashboardLayout';
+import ServiceCategoryDetails from '../../../../components/ServiceCategory/ServiceCategoryDetails'
+
+
 import Card from "../../../../components/card2/Card";
 import Picture1 from "../../../../public/customerAssets/close-up-collection-make-up-beauty-products.jpg";
 import Picture2 from "../../../../public/customerAssets/vintage-sewing-machine-with-thread-measuring-tape.jpg";
@@ -101,57 +104,13 @@ const CustomerDashboard = () => {
                             <input type="text" className={`w-[350px] outline-none`} placeholder="Search"/>
                         </div>
                     </div>
-                    {/* </div> */}
                     
-                    {/* <div className={styles.topButtonDiv}>
-                        <button className={styles.editBtn}>
-                            Edit Profile
-                        </button>
-                        <button className={styles.accountBtn}>
-                            Switch Account
-                        </button>
-                    </div> */}
+                    <div className='flex my-10'>
+                        <ServiceCategoryDetails />
+                    </div>
 
-                    {/* <div className={styles.cardsDiv}>
-                        <Card
-                            image={Picture1}
-                            title={"HEADIE’S Clean Agent"}
-                            pay={55}
-                            stars={3}
-                        />
-                        <Card
-                            image={Picture1}
-                            title={"ELECTRICAL SERVICE CONSULT"}
-                            pay={35}
-                            stars={3}
-                        />
-                        <Card
-                            image={Picture1}
-                            title={"HEADIE’S Clean Agent"}
-                            pay={55}
-                            stars={3}
-                        />
-                        <Card
-                            image={Picture1}
-                            title={"ELECTRICAL SERVICE CONSULT"}
-                            pay={35}
-                            stars={3}
-                        />
-                        <Card
-                            image={Picture1}
-                            title={"HEADIE’S Clean Agent"}
-                            pay={55}
-                            stars={3}
-                        />
-                        <Card
-                            image={Picture1}
-                            title={"ELECTRICAL SERVICE CONSULT"}
-                            pay={35}
-                            stars={5}
-                        />
-
-                    </div> */}
                 </div>
+
             </CustomerDashboardLayout>
     );
 }
