@@ -4,16 +4,6 @@ import { useSession } from 'next-auth/react';
 import CustomerDashboardLayout from '../../../../components/customerdashboardLayout';
 
 
-
-import customer from "../../../../public/dashboardAssets/portrait.jpg";
-import styles from "../customer/styles.module.scss"
-import Image from 'next/image';
-import {MdVerified} from "react-icons/md";
-import {GrLocation, GrSearch} from "react-icons/gr";
-import Card from "../../../../components/card2/Card";
-import Picture1 from "../../../../public/customerAssets/close-up-collection-make-up-beauty-products.jpg";
-import Picture2 from "../../../../public/customerAssets/vintage-sewing-machine-with-thread-measuring-tape.jpg";
-
 interface FormState {
     streetNumber: string;
     streetName: string;
@@ -74,7 +64,7 @@ const Profile = () => {
             streetName: '',
             unitNumber: '',
             suburb: '',
-            state: 'Western Australia',
+            state: '',
             postCode: ''
         })
       }
@@ -89,9 +79,15 @@ const Profile = () => {
 
     const {data: session} = useSession()
 
-    const firstNameValue = session?.user.user.firstName
-    const lastNameValue = session?.user.user.lastName
-    const eamilAddressValue = session?.user.user.emailAddress
+    const firstNameValue = session?.user.user.firstName || '';
+    const lastNameValue = session?.user.user.lastName || '';
+    const eamilAddressValue = session?.user.user.emailAddress || '';
+    const streetNumberValue = session?.user.user.address.streetNumber || '';
+    const streetNameValue = session?.user.user.address.streetName || '';
+    const suburbValue = session?.user.user.address.suburb || '';
+    const postCodeValue = session?.user.user.address.postCode || '';
+    const stateValue = session?.user.user.address.state || '';
+    const unitNumberValue = session?.user.user.address.unitNumber || '';
 
 
     return (
@@ -134,7 +130,7 @@ const Profile = () => {
                     </h2>
 
                     <form className='my-[50px]'
-                    onSubmit={handleSubmit}
+                        onSubmit={handleSubmit}
                     >
 
                         <div className='flex justify-between w-[700px] my-5'>
@@ -147,9 +143,9 @@ const Profile = () => {
                                 <input type="number"
                                     id='streetNumber' 
                                     name='streetNumber'
+                                    placeholder= {streetNumberValue}
                                     value= {formData.streetNumber}
                                     className='p-2 border-2 border-grey2 rounded-md w-[150px] my-3'
-                                    required
                                     onChange={handleChange}
                                 />
                             </div>
@@ -163,6 +159,7 @@ const Profile = () => {
                                 <input type="text"
                                     id='streetName'
                                     name='streetName'
+                                    placeholder= {streetNameValue}
                                     value= {formData.streetName}
                                     className='p-2 border-2 border-grey2 rounded-md w-[500px] my-3'
                                     required
@@ -181,6 +178,7 @@ const Profile = () => {
                                 <input type="number"
                                     id='unitNumber' 
                                     name='unitNumber'
+                                    placeholder={unitNumberValue}
                                     value= {formData.unitNumber}
                                     className='p-2 border-2 border-grey2 rounded-md w-[150px] my-3'
                                     onChange={handleChange}
@@ -196,6 +194,7 @@ const Profile = () => {
                                 <input type="text"
                                     id='suburb'
                                     name='suburb'
+                                    placeholder={suburbValue}
                                     value= {formData.suburb}
                                     className='p-2 border-2 border-grey2 rounded-md w-[500px] my-3'
                                     required
@@ -220,6 +219,7 @@ const Profile = () => {
                                     required
                                     onChange={handleChange}
                                 >
+                                    <option value='' disabled>{stateValue}</option>
                                     <option value="Western Australia">Western Australia</option>
                                     <option value="Northern Territory">Northern Territory</option>
                                     <option value="South Australia">South Australia</option>
@@ -238,8 +238,9 @@ const Profile = () => {
                                     Post Code <span className={`text-red10`}>*</span>
                                 </label>
                                 <input type="number"
-                                    id='postCode' 
+                                    id='postCode'
                                     name='postCode'
+                                    placeholder={postCodeValue}
                                     value= {formData.postCode}
                                     className='p-2 border-2 border-grey2 rounded-md w-[150px] my-3'
                                     required

@@ -20,12 +20,12 @@ declare module "next-auth" {
                 phoneNumber: string;
                 address: {
                     id: string | null; 
-                    houseNumber: string | null;
+                    streetNumber: string | null;
                     streetName:string | null;
-                    town: string | null;
+                    suburb: string | null;
                     postCode: string | null;
                     state: string | null;
-                    country: string | null;
+                    unitNumber: string | null;
                 }
                 profileImage: string | null;
                 enabled: boolean | null;

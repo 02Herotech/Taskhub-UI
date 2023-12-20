@@ -95,7 +95,6 @@ const isAllFieldsFilled = () => {
                     <form className='flex flex-col'
                     // onSubmit={handleSubmit}
                     > 
-
                         <p className='text-md font-extrabold my-5'>Request Details</p>
 
                         <input type="text"

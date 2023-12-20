@@ -29,8 +29,8 @@ const CustomerDashboard = () => {
     const firstName = session?.user.user.firstName;
     const lastName = session?.user.user.lastName;
     const lastNameInitial = lastName?.charAt(0);
+    const suburb = session?.user?.user?.address?.suburb
     const state = session?.user?.user?.address?.state
-    const country = session?.user?.user?.address?.country
 
 
 
@@ -90,7 +90,7 @@ const CustomerDashboard = () => {
                                 { completeReg ? 
                                 <div className={`flex text-[13px] items-center justify-center`}>
                                     <GrLocation className={`mr-1`}/>
-                                    <p>{state}, {country}</p>
+                                    <p>{suburb}, {state}</p>
                                 </div>
                                 :
                                     ""

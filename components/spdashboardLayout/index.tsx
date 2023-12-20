@@ -35,6 +35,7 @@ interface IProps {
 function SPDashboardLayout(props: IProps) {
 
     const router = useRouter();
+    
     const isLinkActive = (linkPath: string) => {
       return router.pathname === linkPath;
     };
@@ -136,7 +137,7 @@ function SPDashboardLayout(props: IProps) {
 
                 <div className={`flex`}>
 
-                    <div className={`flex flex-col bg-purpleBase min-h-screen w-[240px] items-center`}>
+                    <div className={`flex flex-col bg-purpleBase min-h-screen w-[250px] items-center`}>
                         <div className={`flex flex-col items-start justify-between text-white py-20`}>
                             <div className='mb-[20em] text-[14px]'>
                                 <Link  href="/dashboard/service-provider" className={`flex items-center gap-[20px] hover:text-[#FE9B07] mb-14 ${isLinkActive("/dashboard/service-provider") && "text-[#FE9B07]"}`}>
@@ -145,11 +146,11 @@ function SPDashboardLayout(props: IProps) {
                                 <Link href="/dashboard/service-provider/profile" className={`flex items-center gap-[20px] hover:text-[#FE9B07]  mb-14 ${isLinkActive("/dashboard/service-provider/profile") && "text-[#FE9B07]"}`}>
                                     <IoPersonOutline size={16}/>Profile
                                 </Link>
-                                <Link href="/dashboard/service-provider/post-request" className={`flex items-center gap-[20px] hover:text-[#FE9B07] mb-14 ${isLinkActive("/dashboard/service-provider/post-request") && "text-[#FE9B07]"}`}>
-                                    <IoClipboardOutline size={16}/>Post a Request
+                                <Link href="/dashboard/service-provider/listings" className={`flex items-center gap-[20px] hover:text-[#FE9B07] mb-14 ${isLinkActive("/dashboard/service-provider/listings") && "text-[#FE9B07]"}`}>
+                                    <IoClipboardOutline size={16}/>Listings
                                 </Link>
-                                <Link href="/dashboard/service-provider/bookings" className={`flex items-center gap-[20px] hover:text-[#FE9B07] mb-14 ${isLinkActive("/dashboard/service-provider/bookings") && "text-[#FE9B07]"}`}>
-                                    <TfiWallet size={16}/>Bookings
+                                <Link href="/dashboard/service-provider/manage-bookings" className={`flex items-center gap-[20px] hover:text-[#FE9B07] mb-14 ${isLinkActive("/dashboard/service-provider/manage-bookings") && "text-[#FE9B07]"}`}>
+                                    <TfiWallet size={16}/>Manage Bookings
                                 </Link>
                                 <Link href="/dashboard/service-provider/view-jobs" className={`flex items-center gap-[20px] hover:text-[#FE9B07] mb-14 ${isLinkActive("/dashboard/service-provider/view-jobs") && "text-[#FE9B07]"}`}>
                                     <GoPulse size={16}/>View Jobs
@@ -171,7 +172,7 @@ function SPDashboardLayout(props: IProps) {
                         </div>
                     </div>
 
-                    <div className='w-[900px] flex flex-col justify-start items-center mx-auto'>{props.children}</div>
+                    <div className='w-full flex flex-col justify-start items-center mx-auto'>{props.children}</div>
                 </div>
 
                 {/*Footer*/}
