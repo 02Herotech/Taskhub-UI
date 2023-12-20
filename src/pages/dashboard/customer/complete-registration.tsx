@@ -13,23 +13,23 @@ import styles from '../../../styles/animation.module.css'
 
 
 interface FormState {
-    houseNumber: string,
+    streetNumber: string,
     streetName : string,
-    town: string,
+    suburb: string,
     state: string,
     postCode: string,
-    country: string   
+    unitNumber: string   
 }
 
 const CompleteRegistration = () => {
 
     const [formData, setFormData] = useState({
-        houseNumber: "",
+        streetNumber: "",
         streetName: "",
-        town: "",
+        suburb: "",
         state: "",
         postCode: "",
-        country: "Australia"   
+        unitNumber: ""   
       });
 
       
@@ -55,9 +55,9 @@ const CompleteRegistration = () => {
     //   To check all required fields 
       const isAllFieldsFilled = () => {
         const requiredFields: (keyof FormState)[] = [
-            "houseNumber",
+            "streetNumber",
             "streetName",
-            "town",
+            "suburb",
             "state",
             'postCode',
         ];
@@ -68,24 +68,24 @@ const CompleteRegistration = () => {
     //   To reset form fields after submission 
       const resetForm = () => {
         setFormData({
-            houseNumber: "",
+            streetNumber: "",
             streetName: "",
-            town: "",
+            suburb: "",
             state: "",
             postCode: "",
-            country: "Austraila"   
+            unitNumber: ""   
         })
       }
 
 
     // To submit formit 
 
-    const houseNumberValue = formData.houseNumber;
+    const streetNumberValue = formData.streetNumber;
     const streetNameValue = formData.streetName;
-    const townValue = formData.town;
+    const suburbValue = formData.suburb;
     const stateValue = formData.state;
     const postCodeValue = formData.postCode;
-    const countryValue = formData.country;
+    const unitNumberValue = formData.unitNumber;
 
     const {data: session} = useSession()
     const accessTokenValue = session?.user.accessToken;
@@ -100,12 +100,12 @@ const CompleteRegistration = () => {
                 const response = await axios.post(
                     `https://service-rppp.onrender.com/api/v1/customer/complete?token=${accessTokenValue}`,
                 {
-                    houseNumber: houseNumberValue,
+                    streetNumber: streetNumberValue,
                     streetName: streetNameValue,
-                    town: townValue,
+                    suburb: suburbValue,
                     state: stateValue,
                     postCode: postCodeValue,
-                    country: countryValue,
+                    unitNumber: unitNumberValue,
                 }
                 )
                 console.log(response)
@@ -148,23 +148,37 @@ const CompleteRegistration = () => {
 
                                     <div className={`flex flex-col`}>
 
-                                        <label htmlFor="houseNumber" 
+                                        <label htmlFor="streetNumber" 
                                         className={`font-bold text-[16px] my-3 flex items-center w-[500px] h-[30px]`}>
-                                            House Number
+                                            Street Number
                                             <span className={`text-red10`}>*</span>
                                         </label>
                                         <input type='number' 
-                                            id='houseNumber' 
-                                            name='houseNumber' 
+                                            id='streetNumber' 
+                                            name='streetNumber' 
                                             placeholder='Enter house number' 
                                             className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl w-full`} 
-                                            value={formData.houseNumber} 
+                                            value={formData.streetNumber} 
                                             onChange={handleChange} 
                                             required 
                                             maxLength={15}
                                         />
                                     </div>
 
+                                    <div className={`flex flex-col my-3`}>
+                                        <label htmlFor="unitNumber" 
+                                        className={`font-bold text-[16px] my-3 flex  items-center w-[500px] h-[30px] `}>
+                                            Unit Number
+                                        </label>
+                                        <input type='text'
+                                            id='unitNumber' 
+                                            name='unitNumber' 
+                                            placeholder='Enter country name' 
+                                            className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl w-full`} 
+                                            value={formData.unitNumber} 
+                                            onChange={handleChange} 
+                                        />
+                                    </div>
 
                                     <div className={`flex flex-col my-3`}>
                                         <label htmlFor="streetName" 
@@ -184,17 +198,17 @@ const CompleteRegistration = () => {
                                     </div>
 
                                     <div className={`flex flex-col my-3`}>
-                                        <label htmlFor="town" 
+                                        <label htmlFor="suburb" 
                                         className={`font-bold text-[16px] my-3 flex  items-center w-[500px] h-[30px] `}>
-                                            Town
+                                            Suburb
                                             <span className={`text-red10`}>*</span>
                                         </label>
                                         <input type='text'
-                                            id='town' 
-                                            name='town' 
+                                            id='suburb' 
+                                            name='suburb' 
                                             placeholder='Enter town name' 
                                             className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl w-full`} 
-                                            value={formData.town} 
+                                            value={formData.suburb} 
                                             onChange={handleChange} 
                                             required 
                                         />
@@ -206,15 +220,24 @@ const CompleteRegistration = () => {
                                             State
                                             <span className={`text-red10`}>*</span>
                                         </label>
-                                        <input type='text'
-                                            id='state' 
-                                            name='state' 
-                                            placeholder='Enter state name' 
+                                        <select 
+                                            name="state" 
+                                            id="state"
+                                            value= {formData.state}
                                             className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl w-full`} 
-                                            value={formData.state} 
-                                            onChange={handleChange} 
-                                            required 
-                                        />
+                                            required
+                                            onChange={handleChange}
+                                        >
+                                            <option value="">--Select State--</option>
+                                            <option value="Western Australia">Western Australia</option>
+                                            <option value="Northern Territory">Northern Territory</option>
+                                            <option value="South Australia">South Australia</option>
+                                            <option value="Queensland">Queensland</option>
+                                            <option value="New South Wales">New South Wales</option>
+                                            <option value="Victoria">Victoria</option>
+                                            <option value="Tasmania">Tasmania</option>
+                                            <option value="Australian Capital Territory">Australian Capital Territory</option>
+                                        </select>
                                     </div>
 
                                     <div className={`flex flex-col`}>
@@ -236,23 +259,6 @@ const CompleteRegistration = () => {
                                         />
                                     </div>  
 
-                                    <div className={`flex flex-col my-3`}>
-                                        <label htmlFor="country" 
-                                        className={`font-bold text-[16px] my-3 flex  items-center w-[500px] h-[30px] `}>
-                                            Country
-                                            <span className={`text-red10`}>*</span>
-                                        </label>
-                                        <input type='text'
-                                            id='country' 
-                                            name='country' 
-                                            placeholder='Enter country name' 
-                                            className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl w-full`} 
-                                            value={formData.country} 
-                                            required
-                                            onChange={handleChange} 
-                                            readOnly
-                                        />
-                                    </div>
 
 
                                     <div className={`flex justify-center items-center mt-10`}>

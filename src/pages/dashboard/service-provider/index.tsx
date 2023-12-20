@@ -28,8 +28,8 @@ function Index() {
     const firstName = session?.user.user.firstName;
     const lastName = session?.user.user.lastName;
     const lastNameInitial = lastName?.charAt(0);
+    const suburb = session?.user?.user?.address?.suburb
     const state = session?.user?.user?.address?.state
-    const country = session?.user?.user?.address?.country
 
     const isEnabled = session?.user?.user?.enabled
  
@@ -89,7 +89,7 @@ function Index() {
                         { completeReg ? 
                             <div className={styles.location}>
                                 <GrLocation className={styles.locationLogo}/>
-                                <p>{state}, {country}</p>
+                                <p>{suburb}, {state}</p>
                             </div>
                          :
                          ""

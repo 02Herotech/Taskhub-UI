@@ -20,7 +20,7 @@ const Bookings = () => {
 
             <SPDashboardLayout>
 
-                <p>Bookings</p>
+                <p>Manage Bookings</p>
                 {/* <div className={styles.mainContainer}>
 
                     <div>

@@ -119,11 +119,13 @@ const Login: React.FC<FormState> = () => {
   return (
     <div className={` w-full`}>
       <div className={`p-5 flex h-[80px] drop-shadow-md fixed z-50 w-full bg-white font-extrabold justify-center`}>
-        <div className='w-[80em]'>
-            <Link href='/' className={`flex space-x-3 items-center`}>
-                <Image src={logo} width={50} height={40} alt='' className={`mt-[-10px]`} />
-                <h4 className={`text-sm font-extrabold `}>TaskHub</h4>
-            </Link>
+        <div className='w-[80em] flex justify-start'>
+          <div className="">
+              <Link href='/' className={`flex space-x-3 items-center`}>
+                  <Image src={logo} width={50} height={40} alt='' className={`mt-[-10px]`} />
+                  <h4 className={`text-sm font-extrabold `}>TaskHub</h4>
+              </Link>
+            </div>
         </div>
       </div>
 

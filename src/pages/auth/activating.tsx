@@ -41,10 +41,6 @@ const VerifyEmail = () => {
     }
   };
  
-
-  
-
-
   useEffect(() => {
     if (tokenAndHashedEmail.length > 0) {
       verifyUserEmail();
@@ -55,11 +51,13 @@ const VerifyEmail = () => {
 
     <div className={`m-auto`}>
       <div className={`p-5 flex h-[80px] drop-shadow-md fixed z-50 w-full bg-white font-extrabold justify-center`}>
-          <div className='w-[80em]'>
+          <div className='w-[80em] flex justify-start'>
+            <div>
               <Link href='/' className={`flex space-x-3 items-center`}>
                   <Image src={logoImg} width={50} height={40} alt='' className={`mt-[-10px]`} />
                   <h4 className={`text-sm font-extrabold `}>TaskHub</h4>
               </Link>
+            </div>
           </div>
       </div>
 

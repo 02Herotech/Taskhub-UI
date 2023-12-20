@@ -14,27 +14,26 @@ import styles from '../../../styles/animation.module.css';
 
 
 interface FormState {
-    houseNumber: string,
+    streetNumber: string,
     streetName : string,
-    town: string,
+    suburb: string,
     state: string,
     postCode: string,
-    country: string,
+    unitNumber: string,
+    idImage: File | undefined,
     idType: string,
-    idNumber: string,
-    idImage: File | undefined
-
+    idNumber: string
 }
 
 const CompleteRegistration = () => {
 
     const [formData, setFormData] = useState({
-        houseNumber: "",
+        streetNumber: "",
         streetName: "",
-        town: "",
+        suburb: "",
         state: "",
         postCode: "",
-        country: "Australia",
+        unitNumber: "",
         idType: "",
         idNumber: "",
         idImage: undefined
@@ -72,9 +71,9 @@ const CompleteRegistration = () => {
     //   To check all required fields 
       const isAllFieldsFilled = () => {
         const requiredFields: (keyof FormState)[] = [
-            "houseNumber",
+            "streetNumber",
             "streetName",
-            "town",
+            "suburb",
             "state",
             'postCode',
             'idType',
@@ -88,12 +87,12 @@ const CompleteRegistration = () => {
     //   To reset form fields after submission 
       const resetForm = () => {
         setFormData({
-            houseNumber: "",
+            streetNumber: "",
             streetName: "",
-            town: "",
+            suburb: "",
             state: "",
             postCode: "",
-            country: "Australia",
+            unitNumber: "Australia",
             idType: "",
             idNumber: "",
             idImage: undefined
@@ -111,15 +110,15 @@ const CompleteRegistration = () => {
         e.preventDefault()
 
         const apiFormData = new FormData()
-        apiFormData.append("houseNumber", formData.houseNumber )
-        apiFormData.append("streetName", formData.streetName )
-        apiFormData.append("town", formData.town )
-        apiFormData.append("state", formData.state )
-        apiFormData.append("postCode", formData.postCode )
-        apiFormData.append("country", formData.country )
-        apiFormData.append("idImage", formData.idImage! )
-        apiFormData.append("idType", formData.idType )
-        apiFormData.append("idNumber", formData.idNumber )
+        apiFormData.append("streetNumber", formData.streetNumber)
+        apiFormData.append("streetName", formData.streetName)
+        apiFormData.append("suburb", formData.suburb)
+        apiFormData.append("state", formData.state)
+        apiFormData.append("postCode", formData.postCode)
+        apiFormData.append("unitNumber", formData.unitNumber)
+        apiFormData.append("idImage", formData.idImage!)
+        apiFormData.append("idType", formData.idType)
+        apiFormData.append("idNumber", formData.idNumber)
 
 
         console.log(formData)
@@ -180,23 +179,40 @@ const CompleteRegistration = () => {
 
                                         <div className={`flex flex-col w-[300px]`}>
 
-                                            <label htmlFor="houseNumber" 
+                                            <label htmlFor="streetNumber" 
                                             className={`font-bold text-[16px] my-3 flex items-center w-[500px] h-[30px]`}>
-                                                House Number
+                                                Street Number
                                                 <span className={`text-red10`}>*</span>
                                             </label>
                                             <input type='number' 
-                                                id='houseNumber' 
-                                                name='houseNumber' 
+                                                id='streetNumber' 
+                                                name='streetNumber' 
                                                 placeholder='Enter house number' 
                                                 className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl w-full`} 
-                                                value={formData.houseNumber} 
+                                                value={formData.streetNumber} 
                                                 onChange={handleChange} 
                                                 required 
                                                 maxLength={15}
                                             />
                                         </div>
 
+                                        <div className={`flex flex-col w-[300px]`}>
+                                            <label htmlFor="unitNumber" 
+                                            className={`font-bold text-[16px] my-3 flex  items-center w-[500px] h-[30px] `}>
+                                                Unit Number
+                                            </label>
+                                            <input type='text'
+                                                id='unitNumber' 
+                                                name='unitNumber' 
+                                                className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl w-full`} 
+                                                value={formData.unitNumber} 
+                                                onChange={handleChange} 
+                                            />
+                                        </div>
+
+                                    </div>
+
+                                    <div className='flex justify-around my-3'>
 
                                         <div className={`flex flex-col w-[300px]`}>
                                             <label htmlFor="streetName" 
@@ -215,26 +231,27 @@ const CompleteRegistration = () => {
                                             />
                                         </div>
 
-                                    </div>
-
-                                    <div className='flex justify-around my-3'>
-
                                         <div className={`flex flex-col w-[300px]`}>
-                                            <label htmlFor="town" 
+                                            <label htmlFor="suburb" 
                                             className={`font-bold text-[16px] my-3 flex  items-center w-[500px] h-[30px] `}>
-                                                Town
+                                                Suburb
                                                 <span className={`text-red10`}>*</span>
                                             </label>
                                             <input type='text'
-                                                id='town' 
-                                                name='town' 
+                                                id='suburb' 
+                                                name='suburb' 
                                                 placeholder='Enter town name' 
                                                 className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl w-full`} 
-                                                value={formData.town} 
+                                                value={formData.suburb} 
                                                 onChange={handleChange} 
                                                 required 
                                             />
                                         </div>
+
+
+                                    </div>
+
+                                    <div className='flex justify-around my-3'>
 
                                         <div className={`flex flex-col w-[300px]`}>
                                             <label htmlFor="state" 
@@ -242,20 +259,25 @@ const CompleteRegistration = () => {
                                                 State
                                                 <span className={`text-red10`}>*</span>
                                             </label>
-                                            <input type='text'
-                                                id='state' 
-                                                name='state' 
-                                                placeholder='Enter state name' 
+                                            <select 
+                                                name="state" 
+                                                id="state"
+                                                value= {formData.state}
                                                 className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl w-full`} 
-                                                value={formData.state} 
-                                                onChange={handleChange} 
-                                                required 
-                                            />
+                                                required
+                                                onChange={handleChange}
+                                            >
+                                                <option value="">--Select State--</option>
+                                                <option value="Western Australia">Western Australia</option>
+                                                <option value="Northern Territory">Northern Territory</option>
+                                                <option value="South Australia">South Australia</option>
+                                                <option value="Queensland">Queensland</option>
+                                                <option value="New South Wales">New South Wales</option>
+                                                <option value="Victoria">Victoria</option>
+                                                <option value="Tasmania">Tasmania</option>
+                                                <option value="Australian Capital Territory">Australian Capital Territory</option>
+                                            </select>
                                         </div>
-
-                                    </div>
-
-                                    <div className='flex justify-around my-3'>
 
                                         <div className={`flex flex-col w-[300px]`}>
 
@@ -276,22 +298,6 @@ const CompleteRegistration = () => {
                                             />
                                         </div>  
 
-                                        <div className={`flex flex-col w-[300px]`}>
-                                            <label htmlFor="country" 
-                                            className={`font-bold text-[16px] my-3 flex  items-center w-[500px] h-[30px] `}>
-                                                Country
-                                                <span className={`text-red10`}>*</span>
-                                            </label>
-                                            <input type='text'
-                                                id='country' 
-                                                name='country' 
-                                                className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl w-full`} 
-                                                value={formData.country} 
-                                                required
-                                                onChange={handleChange} 
-                                                readOnly
-                                            />
-                                        </div>
 
                                     </div>
 
@@ -311,7 +317,8 @@ const CompleteRegistration = () => {
                                             onChange={handleChange} 
                                             required 
                                             >
-                                                <option  value="International Passport" className='hover:text-red6'>International Passport</option>
+                                                <option value="">--Select ID Type--</option>
+                                                <option  value="International Passport">International Passport</option>
                                                 <option value="Photo ID">Photo ID</option>
                                                 <option value="Driver's Licence">Driver's Licence</option>
                                                 <option value="Medicare Card">Medicare Card</option>

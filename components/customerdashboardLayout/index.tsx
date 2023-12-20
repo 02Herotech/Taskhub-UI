@@ -136,7 +136,7 @@ function CustomerDashboardLayout(props: IProps) {
 
                 <div className={`flex`}>
 
-                    <div className={`flex flex-col bg-purpleBase min-h-screen w-[240px] items-center`}>
+                    <div className={`flex flex-col bg-purpleBase min-h-screen w-[250px] items-center`}>
                         <div className={`flex flex-col items-start justify-between text-white py-20`}>
                             <div className='mb-[20em] text-[14px]'>
                                 <Link  href="/dashboard/customer" className={`flex items-center gap-[20px] hover:text-[#FE9B07] mb-14 ${isLinkActive("/dashboard/customer") && "text-[#FE9B07]"}`}>
