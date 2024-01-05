@@ -134,8 +134,6 @@ const ChangePassword = () => {
     
     const handleSubmit = async (e: {preventDefault: () => void}) => {
         e.preventDefault()
-        
-            // const accessTokenValue = session?.user.accessToken;
 
             const oldPasswordValue = formData.oldPassword;
             const NewPasswordValue = formData.newPassword;
@@ -143,7 +141,11 @@ const ChangePassword = () => {
 
     
         
-            try {
+        try {
+
+                const userToken = session?.user.accessToken
+                console.log("accessToken :", userToken)
+
                 const response = await axios.post('https://service-rppp.onrender.com/api/v1/change-password/int',
                 {
                     oldPassword: oldPasswordValue,
@@ -151,19 +153,21 @@ const ChangePassword = () => {
                 },
                 {
                     headers: {
-                        "Content-Type": "application/json",
-                      }
-                })
-        
+                        Authorization: `Bearer ${userToken}`,
+                        "Content-Type": "application/json"
+                    }
+                }
+                )
+    
                 console.log(response)
 
                 // if (response.status === 200) {
                     
                 // }
             } catch (error) {
-               console.error("Change password error: ", error);
+                console.error("Change password error: ", error);
             }
-            
+                
     
     }
     

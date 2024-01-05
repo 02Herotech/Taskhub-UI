@@ -13,25 +13,25 @@ import Picture2 from "../../../../public/customerAssets/vintage-sewing-machine-w
 
 
 interface FormState {
-    jobTitle: string;
-    jobDescription: string;
-    category: string;
-    address: string;
-    budget: string;
-    document: File | undefined;
+    taskServiceTitle: string;
+    taskDescription: string;
+    // serviceCategory: string;
+    customerAddress: string;
+    customerBudget: string;
+    taskImage: File | undefined;
+    taskDate: [string | number]
 }
 
 
 const PostRequest = () => {
 
-    
   const [formData, setFormData] = useState({
-    jobTitle: '',
-    jobDescription: '',
-    category: '',
-    address: '',
-    budget: '',
-    document: undefined
+    taskServiceTitle: '',
+    taskDescription: '',
+    customerAddress: '',
+    customerBudget: '',
+    taskImage: undefined,
+    taskDate: ''
 })
 
 const [isLoading, setIsLoading] = useState(false)
@@ -53,7 +53,7 @@ const handleChange = (e: any) => {
 const handleFile = (e: any) => {
     setFormData((prevData) => ({
         ...prevData,
-        document: e.target.files[0]
+        taskImage: e.target.files[0]
     }));
 }
 
@@ -61,12 +61,12 @@ const handleFile = (e: any) => {
 //   To check all required fields 
 const isAllFieldsFilled = () => {
     const requiredFields: (keyof FormState)[] = [
-        'jobTitle',
-        'jobDescription',
-        'category',
-        'address',
-        'budget',
-        'document'
+        'taskServiceTitle',
+        'taskDescription',
+        'customerAddress',
+        'customerBudget',
+        'taskDate',
+        'taskImage'
     ];
     return requiredFields.every((field) => formData[field] !== "");
   };
@@ -75,12 +75,12 @@ const isAllFieldsFilled = () => {
 
   const resetForm = () => {
     setFormData({
-        jobTitle: '',
-        jobDescription: '',
-        category: '',
-        address: '',
-        budget: '',
-        document: undefined
+        taskServiceTitle: '',
+        taskDescription: '',
+        customerAddress: '',
+        customerBudget: '',
+        taskDate: '',
+        taskImage: undefined
     })
   }
 
@@ -99,9 +99,9 @@ const isAllFieldsFilled = () => {
 
                         <input type="text"
                             placeholder='Title'
-                            id='jobTitle' 
-                            name='jobTitle'
-                            value= {formData.jobTitle}
+                            id='taskServiceTitle' 
+                            name='taskServiceTitle'
+                            value= {formData.taskServiceTitle}
                             className='p-2 border-2 border-grey2 rounded-md w-[300px] my-5'
                             required
                             onChange={handleChange}
@@ -112,9 +112,9 @@ const isAllFieldsFilled = () => {
                                 placeholder='Description'
                                 cols={10}
                                 rows={5}
-                                id='jobDescription'
-                                name='jobDescription'
-                                value= {formData.jobDescription}
+                                id='taskDescription'
+                                name='taskDescription'
+                                value= {formData.taskDescription}
                                 className=' resize-none p-2 border-2 border-grey2 rounded-md w-full '
                                 required
                                 onChange={handleChange}
@@ -122,7 +122,7 @@ const isAllFieldsFilled = () => {
                             <p className='text-[13px] flex justify-end text-grey4'>(maximum of 50 characters)</p>
                         </div>
         
-                        <select 
+                        {/* <select 
                             name="category" 
                             id="category"
                             value= {formData.category}
@@ -130,7 +130,7 @@ const isAllFieldsFilled = () => {
                             required
                             onChange={handleChange}
                         >
-                            <option value="" className='text-grey3'>--Select a Category--</option>
+                            <option value='' disabled>--Select a Category--</option>
                             <option value="Western Australia">Tech</option>
                             <option value="Northern Territory">Plumber</option>
                             <option value="South Australia">Electrician</option>
@@ -138,13 +138,14 @@ const isAllFieldsFilled = () => {
                             <option value="New South Wales">Gardener</option>
                             <option value="Victoria">Painter</option>
                             <option value="Tasmania">Laundry</option>
-                        </select>
+                            <option value="Tasmania">Caterer</option>
+                        </select> */}
                 
                         <input type="text"
                             placeholder='Address'
-                            id='address'
-                            name='address'
-                            value= {formData.address}
+                            id='customerAddress'
+                            name='customerAddress'
+                            value= {formData.customerAddress}
                             className='p-2 border-2 border-grey2 rounded-md w-[500px] my-5'
                             required
                             onChange={handleChange}
@@ -155,9 +156,9 @@ const isAllFieldsFilled = () => {
                         <input 
                             type="number"
                             placeholder="Customer's Budget"
-                            id='budget' 
-                            name='budget'
-                            value= {formData.budget}
+                            id='customerBudget' 
+                            name='customerBudget'
+                            value= {formData.customerBudget}
                             className='border-none outline-none w-full'
                             required
                             onChange={handleChange}
@@ -173,6 +174,16 @@ const isAllFieldsFilled = () => {
                             className='p-2 border-2 border-grey2 rounded-md w-[300px] my-5'
                             required
                             onChange={handleFile}
+                        />
+
+                        <input type="date"
+                            // placeholder='date'
+                            id='date'
+                            name='date'
+                            value= {formData.taskDate}
+                            className='p-2 border-2 border-grey2 rounded-md w-[500px] my-5'
+                            required
+                            onChange={handleChange}
                         />
 
                         <button 

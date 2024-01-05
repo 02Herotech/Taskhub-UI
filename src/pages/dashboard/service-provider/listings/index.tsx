@@ -4,8 +4,10 @@ import { FaArrowLeft } from "react-icons/fa6";
 
 
 import SPDashboardLayout from '../../../../../components/spdashboardLayout';
+import styles from './listing.module.css'
+
 import customer from "../../../../public/dashboardAssets/portrait.jpg";
-import styles from "../customer/styles.module.scss"
+// import styles from "../customer/styles.module.scss"
 import Image from 'next/image';
 import {MdVerified} from "react-icons/md";
 import {GrLocation, GrSearch} from "react-icons/gr";
@@ -53,7 +55,7 @@ const PostRequest = () => {
         serviceDescription: '',
         serviceName: '',
         pricing: '',
-        availableDays: '',
+        availableDays: [],
         available: '',
         startMinute: '',
         startHour: '',
@@ -144,7 +146,7 @@ const PostRequest = () => {
             serviceDescription: '',
             serviceName: '',
             pricing: '',
-            availableDays: '',
+            availableDays: [],
             available: '',
             startMinute: '',
             startHour: '',
@@ -162,6 +164,25 @@ const PostRequest = () => {
       }
 
 
+      // Check box for days of the week 
+  
+      const daysOfWeek = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'];
+      
+      const [checkedDays, setCheckedDays] = useState<string[]>([]);
+  
+
+      // Function to handle checkbox change
+
+      const handleCheckBoxChange = (day: string) => {
+        if (checkedDays.includes(day)) {
+          setCheckedDays(checkedDays.filter((checkedDay) => checkedDay !== day));
+        } else {
+          setCheckedDays([...checkedDays, day]);
+        }
+      };
+
+
+      
     //   To go to next step
 
     const [currentStep, setCurrentStep] = useState(0)
@@ -231,7 +252,8 @@ const PostRequest = () => {
                                                 name="businessTitle" 
                                                 id="businessTitle" 
                                                 cols={50}
-                                                rows={5}
+                                                rows={4}
+                                                maxLength={50}
                                                 className='resize-none border-grey4 border-[1.5px] rounded-lg p-2 shadow-lg'
                                             />
                                         </div>
@@ -253,17 +275,22 @@ const PostRequest = () => {
                                             className='border-grey4 border-[1.5px] rounded-lg p-2 w-[300px]'
                                         >
                                             <option value="" className='text-grey4'>--Select Category--</option>
-                                            <option value="Gardener">Gardener</option>
-                                            <option value="Tech">Tech</option>
-                                            <option value="Mechanic">Mechanic</option>
-                                            <option value="Laundry">Laundry</option>
-                                            <option value="Caterer">Caterer</option>
-
+                                            <option value="Home Services">Home Services</option>
+                                            <option value="Personal Services">Personal Services</option>
+                                            <option value="Education & Tutoring">Education & Tutoring</option>
+                                            <option value="Professional Services">Professional Services</option>
+                                            <option value="Automotive Services">Automotive Services</option>
+                                            <option value="Health & Fitness">Health & Fitness</option>
+                                            <option value="Technology & Electronics">Technology & Electronics</option>
+                                            <option value="Home Improvement">Home Improvement</option>
+                                            <option value="Real Estate Services">Real Estate Services</option>
+                                            <option value="Delivery & Logistics">Delivery & Logistics</option>
+                                            <option value="Art & Creativity">Art & Creativity</option>
+                                            <option value="Wedding Services">Wedding Services</option>
+                                            <option value="Childcare & Babysitting">Childcare & Babysitting</option>
+                                            <option value="Travel & Adventure">Travel & Adventure</option>
                                         </select>
-
-
                                     </div>
-                                    
                                 </div>
                                 
                             )}
@@ -287,6 +314,7 @@ const PostRequest = () => {
                                                     id="businessTitle" 
                                                     cols={50}
                                                     rows={10}
+                                                    maxLength={500}
                                                     className='resize-none border-grey4 border-[1.5px] rounded-lg p-2 shadow-lg ml-10'
                                                 />
                                             </div>
@@ -296,31 +324,66 @@ const PostRequest = () => {
 
                                     <div className='my-16'>
                                         <h3 className='text-md font-extrabold mb-5'>Availability</h3>
-                                        <div className='flex flex-col text-[15px] ml-5'>
-                                            <label  
-                                                    htmlFor="businessTitle"
-                                                    className='font-semibold mb-10'
-                                            >
-                                                Choose your business working Days and Hour 
-                                            </label>
+                                        <p className='font-semibold ml-5'>Choose your business working Days and Hour</p>
 
-                                            <select
-                                                name="availability" 
-                                                id="availability" 
-                                                className='border-grey4 border-[1.5px] rounded-lg p-2 w-[300px]'
-                                            >
-                                                <option value="" className='text-grey4'>--Select Category--</option>
-                                                <option value="Gardener">Gardener</option>
-                                                <option value="Tech">Tech</option>
-                                                <option value="Mechanic">Mechanic</option>
-                                                <option value="Laundry">Laundry</option>
-                                                <option value="Caterer">Caterer</option>
+                                        <div className='flex items-center text-[15px] ml-5 mt-8'>
+                                            <p  className='text-md font-semibold'>TIME:</p>
+                                            
+                                            <div className='flex items-center w-[280px] justify-around ml-3'>
+                                                <input type="time" 
+                                                    className=" p-2 border rounded-md" 
+                                                    id='openTime'
+                                                    name='openTime'
+                                                />
 
-                                            </select>
+                                                <p>-</p>   
+
+                                                <input type="time" 
+                                                    className=" p-2 border rounded-md" 
+                                                    id='closeTime'
+                                                    name='closeTime'
+                                                /> 
+                                            </div>
+
                                         </div>
 
-                                            {/* <p  className='text-[11px] text-grey4 flex justify-end mt-2'>(maximum of 500 characters)</p> */}
+                                        <div className='flex text-[12px]  w-[185px] justify-between ml-[85px] text-grey4 mt-1'>
+                                            <p>Open</p>
+                                            <p>Close</p>
+                                        </div>
+
+                                        <div className='flex items-center text-[15px] ml-5 mt-8'>
+                                            <p  className='text-md font-semibold'>DAYS:</p>
+                                        
+                                            <div className='flex items-center ml-3 space-x-4'>
+                                            
+                                               {daysOfWeek.map((day) => (
+                                                    <label
+                                                    key={day}
+                                                    className={`flex items-center justify-center border-[1.5px] py-2 px-4 cursor-pointer rounded-lg font-semibold ${
+                                                        checkedDays.includes(day) ? 'bg-green5 text-white' : 'bg-white  text-grey5  border-grey5'
+                                                    } transition-colors duration-200`}
+                                                    >
+                                                    <input
+                                                        type="checkbox"
+                                                        checked={checkedDays.includes(day)}
+                                                        onChange={() => handleCheckBoxChange(day)}
+                                                        className="hidden"
+                                                    />
+                                                    {day}
+                                                    </label>
+                                                ))}
+                
+                                            </div>
+
+                                            <div className="flex space-x-4">
+                                                
+                                                </div>
+                                        </div>
+                            
                                     </div>
+                                    
+
                                
                                 </div>
                             )}

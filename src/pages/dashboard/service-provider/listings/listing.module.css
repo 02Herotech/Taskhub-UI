@@ -1,0 +1,10 @@
+
+.checkBox {
+    /* display: none; */
+    cursor: pointer;
+}
+
+.checkBox:checked ~ span {
+    background-color: green;
+}
+
