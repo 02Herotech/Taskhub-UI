@@ -330,6 +330,7 @@ const PostRequest = () => {
                                             <p  className='text-md font-semibold'>TIME:</p>
                                             
                                             <div className='flex items-center w-[280px] justify-around ml-3'>
+
                                                 <input type="time" 
                                                     className=" p-2 border rounded-md" 
                                                     id='openTime'
@@ -360,8 +361,8 @@ const PostRequest = () => {
                                                {daysOfWeek.map((day) => (
                                                     <label
                                                     key={day}
-                                                    className={`flex items-center justify-center border-[1.5px] py-2 px-4 cursor-pointer rounded-lg font-semibold ${
-                                                        checkedDays.includes(day) ? 'bg-green5 text-white' : 'bg-white  text-grey5  border-grey5'
+                                                    className={`flex items-center justify-center border-[1.5px] py-2 px-4 cursor-pointer rounded-lg font-semibold hover:bg-green2 ${
+                                                        checkedDays.includes(day) ? 'bg-[rgba(20,120,47,255)] text-white' : 'bg-white  text-grey5  border-grey5'
                                                     } transition-colors duration-200`}
                                                     >
                                                     <input
