@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { useSession } from 'next-auth/react';
+import { useSession } from 'next-auth/react'
+import axios from 'axios';
 
 import CustomerDashboardLayout from '../../../../components/customerdashboardLayout';
 
@@ -70,25 +71,74 @@ const Profile = () => {
       }
 
 
-    // To submit form 
+      
+      const {data: session} = useSession()
+      
+      const firstNameValue = session?.user.user.firstName || '';
+      const lastNameValue = session?.user.user.lastName || '';
+      const eamilAddressValue = session?.user.user.emailAddress || '';
+      const streetNumberValue = session?.user.user.address.streetNumber || '';
+      const streetNameValue = session?.user.user.address.streetName || '';
+      const suburbValue = session?.user.user.address.suburb || '';
+      const postCodeValue = session?.user.user.address.postCode || '';
+      const stateValue = session?.user.user.address.state || '';
+      const unitNumberValue = session?.user.user.address.unitNumber || '';
+      
+      // To submit form 
+  
+      const handleSubmit = async (e: {preventDefault: () => void}) => {
+          e.preventDefault()
+          console.log(formData)
 
-    const handleSubmit = async (e: {preventDefault: () => void}) => {
-        e.preventDefault()
-        console.log(formData)
-    }
+          const streetNumebrValue = formData.streetNumber
+          const streetNameValue = formData.streetName
+          const suburbValue = formData.suburb
+          const postCodeValue = formData.postCode
+          const stateValue = formData.state
+          const unitNumberValue = formData.unitNumber
 
-    const {data: session} = useSession()
+          try {
+            const response = await axios.patch('https://service-rppp.onrender.com/api/v1/customer/update', 
+            [
+                {
+                    "op":"replace",
+                    "path":"/user/address/streetNumber",
+                    "value":{streetNumebrValue}
+                },
+                {
+                    "op":"replace",
+                    "path":"/user/address/streetName",
+                    "value":{streetNameValue}
+                },
+                {
+                    "op":"replace",
+                    "path":"/user/address/suburb",
+                    "value":{suburbValue}
+                },
+                {
+                    "op":"replace",
+                    "path":"/user/address/postCode",
+                    "value":{postCodeValue}
+                },
+                {
+                    "op":"replace",
+                    "path":"/user/address/state",
+                    "value":{stateValue}
+                },
+                {
+                    "op":"replace",
+                    "path":"/user/address/unitNumber",
+                    "value":{unitNumberValue}
+                }
+            ]
+            )
 
-    const firstNameValue = session?.user.user.firstName || '';
-    const lastNameValue = session?.user.user.lastName || '';
-    const eamilAddressValue = session?.user.user.emailAddress || '';
-    const streetNumberValue = session?.user.user.address.streetNumber || '';
-    const streetNameValue = session?.user.user.address.streetName || '';
-    const suburbValue = session?.user.user.address.suburb || '';
-    const postCodeValue = session?.user.user.address.postCode || '';
-    const stateValue = session?.user.user.address.state || '';
-    const unitNumberValue = session?.user.user.address.unitNumber || '';
-
+            console.log(response)
+            
+          } catch (error) {
+            console.log(error)
+          }
+      }
 
     return (
             <CustomerDashboardLayout>
