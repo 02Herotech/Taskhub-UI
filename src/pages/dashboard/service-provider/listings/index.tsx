@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { AiOutlineRight  } from "react-icons/ai";
 import { FaArrowLeft } from "react-icons/fa6";
+import Link from 'next/link';
 
 
 import SPDashboardLayout from '../../../../../components/spdashboardLayout';
@@ -230,13 +231,13 @@ const PostRequest = () => {
                     ))}
                 </div>   
                 
-                <div className='my-16 flex flex-col justify-center items-start w-[800px]'>
+                <div className='my-16 flex flex-col justify-center items-start w-[900px]'>
 
                         
                         <form>
 
                             {currentStep === 0 && (
-                                <div >
+                                <div>
                                     <h1 className='text-lg font-extrabold'>Bussiness Name</h1>
 
                                     <div className='my-20'>
@@ -255,6 +256,7 @@ const PostRequest = () => {
                                                 rows={4}
                                                 maxLength={50}
                                                 className='resize-none border-grey4 border-[1.5px] rounded-lg p-2 shadow-lg'
+                                                placeholder=''
                                             />
                                         </div>
 
@@ -296,7 +298,7 @@ const PostRequest = () => {
                             )}
 
                             {currentStep === 1 && (
-                               <div >
+                               <div>
                                     <h1 className='text-lg font-extrabold'>Description & Availability</h1>
 
                                     <div className='my-16'>
@@ -383,67 +385,168 @@ const PostRequest = () => {
                                         </div>
                             
                                     </div>
-                                    
-
-                               
+                                
                                 </div>
                             )}
 
                             {currentStep === 2 && (
                                 <div >
-                                <h1 className='text-lg font-extrabold'>Description & Availability</h1>
+                                    <h1 className='text-lg font-extrabold'>Pricing</h1>
+                                    <h3 className='text-[16px] my-5'>Choose the pricing method that best suit your niche</h3>
 
-                                <div className='my-16'>
-                                    <h3 className='text-md font-extrabold mb-5'>Description</h3>
-                                        <div className='flex flex-col text-[15px] ml-5'>
-                                            <label  
-                                                    htmlFor="businessTitle"
-                                                    className='font-semibold mb-10'
-                                            >
-                                                Briefly Describe Your Service
-                                            </label>
+                                    <div className='my-16'>
+                                        <h3 className='text-[16px] font-extrabold'>Business Fixed Price</h3>
 
-                                            <textarea 
-                                                name="businessTitle" 
-                                                id="businessTitle" 
-                                                cols={50}
-                                                rows={10}
-                                                className='resize-none border-grey4 border-[1.5px] rounded-lg p-2 shadow-lg ml-10'
+                                        <div className='text-[15px] flex space-x-2 mt-10'>
+                                            <p className='text-grey5 border-[1.5px] border-grey6 py-2 px-4 rounded-[12px] select-none'>AUD$</p>
+                                            
+                                            <input 
+                                                type="number" 
+                                                id='fixedPrice'
+                                                className='border-[1.5px] border-grey6 text-grey5 rounded-[12px] py-2 px-4 w-[150px]'
+                                                placeholder='0.00'
                                             />
                                         </div>
-
-                                        <p  className='text-[11px] text-grey4 flex justify-end mt-2'>(maximum of 500 characters)</p>
-                                </div>
-
-                                <div className='my-16'>
-                                    <h3 className='text-md font-extrabold mb-5'>Availability</h3>
-                                    <div className='flex flex-col text-[15px] ml-5'>
-                                        <label  
-                                                htmlFor="businessTitle"
-                                                className='font-semibold mb-10'
-                                        >
-                                            Choose your business working Days and Hour 
-                                        </label>
-
-                                        <select
-                                            name="availability" 
-                                            id="availability" 
-                                            className='border-grey4 border-[1.5px] rounded-lg p-2 w-[300px]'
-                                        >
-                                            <option value="" className='text-grey4'>--Select Category--</option>
-                                            <option value="Gardener">Gardener</option>
-                                            <option value="Tech">Tech</option>
-                                            <option value="Mechanic">Mechanic</option>
-                                            <option value="Laundry">Laundry</option>
-                                            <option value="Caterer">Caterer</option>
-
-                                        </select>
                                     </div>
 
-                                        {/* <p  className='text-[11px] text-grey4 flex justify-end mt-2'>(maximum of 500 characters)</p> */}
-                                </div>
+                                    <div className='my-16'>
+                                        <h3 className='text-[16px] font-extrabold'>Package Pricing</h3>
+
+                                        <div className='flex space-x-6 mt-10'>
+                                            
+                                            <div className=' space-y-8'>
+                                                <div className=' flex flex-col items-center space-y-[10px]'>
+                                                    <label 
+                                                        htmlFor='basic'
+                                                        className=' bg-[#FE9B07] rounded-[12px] text-white text-center w-[160px] py-[35px] font-extrabold text-[14px]'
+                                                    >
+                                                        Basic
+                                                    </label>
+                                                
+                                                    <textarea
+                                                        rows={5}
+                                                        cols={10}
+                                                        id='basicText'
+                                                        className=' resize-none border-[1.5px] border-grey6 text-grey5 rounded-[12px] py-2 px-4 w-[160px] h-[200px] text-[12px]'
+                                                        placeholder='Describe details of the offer'
+                                                    />
+                                                </div>
+
+                                                <div>
+                                                    <p className='text-[14px] ml-2.5'>Price</p>
+
+                                                    <div className='flex space-x-1 mt-5 text-[13px]'>
+                                                        <p className='text-grey5 border-[1.5px] border-grey6 p-2 rounded-[12px] select-none'>AUD$</p>
+                                                    
+                                                        <input 
+                                                            type="number" 
+                                                            id='basicPrice'
+                                                            className='border-[1.5px] border-grey6 text-grey5 rounded-[12px] p-2 w-[80px]'
+                                                            placeholder='0.00'
+                                                        />
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                            <div className=' space-y-8'>
+                                                <div className='flex flex-col items-center space-y-[10px] text-[13px]'>
+                                                    <label 
+                                                        htmlFor='standard'
+                                                        className=' bg-[#FE9B07] rounded-[12px] text-white text-center w-[160px] py-[35px] font-extrabold text-[14px]'
+                                                    >
+                                                        Standard
+                                                    </label>
+                                                
+                                                    <textarea 
+                                                        rows={5}
+                                                        cols={10} 
+                                                        id='standardText'
+                                                        className=' resize-none border-[1.5px] border-grey6 text-grey5 rounded-[12px] py-2 px-4 w-[160px] h-[200px] text-[12px]'
+                                                        placeholder='Describe details of the offer'
+                                                    />
+                                                </div>
+
+                                                <div>
+                                                    <p className='text-[14px] ml-2.5'>Price</p>
+
+                                                    <div className='flex space-x-1 mt-5 text-[13px]'>
+                                                        <p className='text-grey5 border-[1.5px] border-grey6 p-2 rounded-[12px] select-none'>AUD$</p>
+                                                    
+                                                        <input 
+                                                            type="number" 
+                                                            id='standardPrice'
+                                                            className='border-[1.5px] border-grey6 text-grey5 rounded-[12px] p-2 w-[80px]'
+                                                            placeholder='0.00'
+                                                        />
+                                                    </div>
+
+                                                </div>
+                                            
+                                            </div>
+
+
+                                            <div className=' space-y-8'>
+                                                <div className='flex flex-col items-center space-y-[10px] text-[13px]'>
+                                                    <label 
+                                                        htmlFor='premium'
+                                                        className=' bg-[#FE9B07] rounded-[12px] text-white text-center w-[160px] py-[35px] font-extrabold text-[14px]'
+                                                    >
+                                                        Premium
+                                                    </label>
+                                                
+                                                    <textarea 
+                                                        rows={5}
+                                                        cols={10} 
+                                                        id='standardText'
+                                                        className=' resize-none border-[1.5px] border-grey6 text-grey5 rounded-[12px] py-2 px-4 w-[160px] h-[200px] text-[12px]'
+                                                        placeholder='Describe details of the offer'
+                                                    />
+                                                </div>
+
+                                                <div>
+                                                    <p className='text-[14px] ml-2.5'>Price</p>
+
+                                                    <div className='flex space-x-1 mt-5 text-[13px]'>
+                                                        <p className='text-grey5 border-[1.5px] border-grey6 p-2 rounded-[12px] select-none'>AUD$</p>
+                                                    
+                                                        <input 
+                                                            type="number" 
+                                                            id='standardPrice'
+                                                            className='border-[1.5px] border-grey6 text-grey5 rounded-[12px] p-2 w-[80px]'
+                                                            placeholder='0.00'
+                                                        />
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className='my-16'>
+                                        <h3 className='text-[16px] font-extrabold'>Hourly Rate</h3>
+
+                                        <div className='mt-10'>
+                                            <p className='text-[14px] ml-2.5'>Price</p>
+
+                                            <div className='flex space-x-3 mt-5 items-center'>
+                                                <div className='flex space-x-1  text-[13px]'>
+                                                    <p className='text-grey5 border-[1.5px] border-grey6 p-2 rounded-[12px] select-none'>AUD$</p>
+                                            
+                                                    <input 
+                                                        type="number" 
+                                                        id='standardPrice'
+                                                        className='border-[1.5px] border-grey6 text-grey5 rounded-[12px] p-2 w-[80px]'
+                                                        placeholder='0.00'
+                                                    />
+                                                </div>
+
+                                                <h3 className='font-extrabold text-grey5'>PER HOUR</h3>
+                                            </div>
+                                        </div>
+                                    </div>
                            
-                            </div>
+                                </div>
                             )}
 
                             {currentStep === 3 && (
@@ -610,7 +713,7 @@ const PostRequest = () => {
 
                         </form>
                     
-                        <div className='w-full mt-10 relative'>
+                        <div className='w-full mt-16 relative'>
                             {currentStep > 0 && 
                                 <button
                                 className='absolute left-0 bottom-0 flex items-center hover:text-[#FE9B07]'
@@ -627,6 +730,7 @@ const PostRequest = () => {
                             >
                                 Save & Continue
                             </button>
+                        
                         </div>
                 </div>
 
