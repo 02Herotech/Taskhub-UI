@@ -98,7 +98,7 @@ const CompleteRegistration = () => {
 
             try {
                 const response = await axios.post(
-                    `https://service-rppp.onrender.com/api/v1/customer/complete?token=${accessTokenValue}`,
+                    `http://54.198.113.229:8080/api/v1/customer/complete?token=${accessTokenValue}`,
                 {
                     streetNumber: streetNumberValue,
                     streetName: streetNameValue,
