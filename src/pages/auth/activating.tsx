@@ -31,7 +31,7 @@ const VerifyEmail = () => {
     
     try {
       setLoading(true);
-      await axios.post(`https://service-rppp.onrender.com/api/v1/user/verify?${tokenAndHashedEmail}`);
+      await axios.post(`http://54.198.113.229:8080/api/v1/user/verify?${tokenAndHashedEmail}`);
       setVerified(true);
     } catch (error) {
       setError(true);
