@@ -3,6 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { StaticImageData } from 'next/image'
 import Head from 'next/head'
+ 
 
 import ServicesLayout from '../../components/services/ServicesLayout'
 import ServiceProviderLayout from '../../components/serviceProvider/ServiceProviderLayout'
@@ -22,6 +23,7 @@ const fedex = require('../../public/fedex.png') as StaticImageData;
 
 
 const Home = () => {
+
   return (
     <div>
       <Head>
