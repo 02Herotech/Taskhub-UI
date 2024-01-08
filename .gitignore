@@ -36,4 +36,4 @@ yarn-error.log*
 next-env.d.ts
 
 # middleware
-/middleware
+/src/middleware.ts/

@@ -16,7 +16,7 @@ const notPublicPath = (
   path === '/dashboard/service-provider/complete-registration'
   )
 
-const token = request.cookies.get('next-auth.session-token')
+const token = request.cookies.get('__Secure-next-auth.session-token')
 
 if (!token && notPublicPath){
         return NextResponse.redirect(new URL('/auth/login', request.nextUrl))
