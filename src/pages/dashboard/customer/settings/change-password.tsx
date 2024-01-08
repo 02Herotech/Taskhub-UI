@@ -145,7 +145,7 @@ const ChangePassword = () => {
                 const userToken = session?.user.accessToken
                 console.log("accessToken :", userToken)
 
-                const response = await axios.post('http://54.198.113.229:8080/api/v1/change-password/int',
+                const response = await axios.post('https://test.jacinthsolutions.com.au/api/v1/change-password/int',
                 {
                     oldPassword: oldPasswordValue,
                     newPassword: NewPasswordValue

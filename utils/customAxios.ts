@@ -4,10 +4,10 @@ import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 // Create a custom Axios instance with default configuration
 const customAxios = axios.create({
-  baseURL: 'http://54.198.113.229:8080', 
+  baseURL: 'https://test.jacinthsolutions.com.au/', 
   timeout: 5000, 
   headers: {
-    'Authorization': 'Bearer your_access_token', // Set default headers
+    'Authorization': 'Bearer your_access_token', 
     'Content-Type': 'application/json',
   },
 });
@@ -15,8 +15,7 @@ const customAxios = axios.create({
 // You can also add interceptors for request and response
 customAxios.interceptors.request.use(
   (config: any) => {
-    // Modify the request configuration before it is sent
-    // For example, you can add authentication headers, logging, etc.
+   
     return config;
   },
   (error: any) => {
@@ -27,8 +26,7 @@ customAxios.interceptors.request.use(
 
 customAxios.interceptors.response.use(
   (response: any) => {
-    // Modify the response data before it is returned
-    // For example, you can handle common errors or modify the data structure
+
     return response;
   },
   (error: any) => {

@@ -127,7 +127,7 @@ const CompleteRegistration = () => {
         
             try {
                 const response = await axios.post(
-                    `http://54.198.113.229:8080/api/v1/service_provider/complete?token=${accessTokenValue}`,
+                    `https://test.jacinthsolutions.com.au/api/v1/service_provider/complete?token=${accessTokenValue}`,
                     apiFormData,
                 {
                     headers: {

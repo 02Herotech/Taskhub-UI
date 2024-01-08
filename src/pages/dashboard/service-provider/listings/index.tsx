@@ -29,11 +29,12 @@ interface FormState {
     startHour: number;
     closeMinute: number;
     closeHour: number;
-    houseNumber: string;
+    streetNumber: string;
     streetName: string;
-    town: string;
+    unitNumber: string;
+    suburb: string;
     state: string;
-    country: string;
+    postCode: string;
     image1: File | undefined;
     image2: File | undefined;
     image3: File | undefined;
@@ -62,11 +63,12 @@ const PostRequest = () => {
         startHour: '',
         closeMinute: '',
         closeHour: '',
-        houseNumber: '',
+        streetNumber: '',
         streetName: '',
-        town: '',
+        unitNumber: '',
+        suburb: '',
         state: '',
-        country: '',
+        postCode: '',
         image1: undefined,
         image2: undefined,
         image3: undefined
@@ -125,12 +127,11 @@ const PostRequest = () => {
             "startHour",
             "closeMinute",
             "closeHour",
-            "houseNumber",
-            "streetName",
-            "town",
-            "state",
-            "country",
-            "country",
+            'streetNumber',
+            'streetName',
+            'suburb',
+            'state',
+            'postCode',
             "image1",
             "image2",
             "image3"
@@ -153,11 +154,12 @@ const PostRequest = () => {
             startHour: '',
             closeMinute: '',
             closeHour: '',
-            houseNumber: '',
+            streetNumber: '',
             streetName: '',
-            town: '',
+            unitNumber: '',
+            suburb: '',
             state: '',
-            country: '',
+            postCode: '',
             image1: undefined,
             image2: undefined,
             image3: undefined
@@ -433,7 +435,7 @@ const PostRequest = () => {
                                                 </div>
 
                                                 <div>
-                                                    <p className='text-[14px] ml-2.5'>Price</p>
+                                                    <p className='text-[14px] ml-2.5 font-extrabold'>Price</p>
 
                                                     <div className='flex space-x-1 mt-5 text-[13px]'>
                                                         <p className='text-grey5 border-[1.5px] border-grey6 p-2 rounded-[12px] select-none'>AUD$</p>
@@ -468,7 +470,7 @@ const PostRequest = () => {
                                                 </div>
 
                                                 <div>
-                                                    <p className='text-[14px] ml-2.5'>Price</p>
+                                                    <p className='text-[14px] ml-2.5 font-extrabold'>Price</p>
 
                                                     <div className='flex space-x-1 mt-5 text-[13px]'>
                                                         <p className='text-grey5 border-[1.5px] border-grey6 p-2 rounded-[12px] select-none'>AUD$</p>
@@ -505,7 +507,7 @@ const PostRequest = () => {
                                                 </div>
 
                                                 <div>
-                                                    <p className='text-[14px] ml-2.5'>Price</p>
+                                                    <p className='text-[14px] ml-2.5 font-extrabold'>Price</p>
 
                                                     <div className='flex space-x-1 mt-5 text-[13px]'>
                                                         <p className='text-grey5 border-[1.5px] border-grey6 p-2 rounded-[12px] select-none'>AUD$</p>
@@ -562,7 +564,7 @@ const PostRequest = () => {
                                                     htmlFor="streetNumber"
                                                     className='font-semibold mb-4'
                                                 >
-                                                    Street Number
+                                                    Street Number <span className={`text-red10`}>*</span>
                                                 </label>
 
                                                 <input
@@ -578,7 +580,7 @@ const PostRequest = () => {
                                                     htmlFor="streetName"
                                                     className='font-semibold mb-4'
                                                 >
-                                                    Street Name
+                                                    Street Name <span className={`text-red10`}>*</span>
                                                 </label>
 
                                                 <input
@@ -592,16 +594,16 @@ const PostRequest = () => {
 
                                         <div className='flex flex-col text-[15px] my-10'>
                                             <label  
-                                                htmlFor="postalCode"
+                                                htmlFor="unitNumber"
                                                 className='font-semibold mb-4'
                                             >
-                                                Postal Code
+                                                Unit Number
                                             </label>
 
                                             <input
                                                 type='number'
-                                                name="postalCode" 
-                                                id="postalCode" 
+                                                name="unitNumber" 
+                                                id="unitNumber" 
                                                 className='border-grey4 border-[1.5px] rounded-lg p-2 shadow-lg ml-3 w-[100px]'
                                             />
                                         </div>
@@ -609,26 +611,20 @@ const PostRequest = () => {
                                         <div className='flex items-center'>
                                             <div className='flex flex-col text-[15px] '>
                                                 <label  
-                                                    htmlFor="city"
+                                                    htmlFor="suburb"
                                                     className='font-semibold mb-4'
                                                 >
-                                                    City
+                                                    Suburb <span className={`text-red10`}>*</span>
                                                 </label>
 
                                             
-                                                <select
-                                                    name="city" 
-                                                    id="city" 
-                                                    className='border-grey4 border-[1.5px] rounded-lg ml-3 p-2 w-[200px]'
-                                                >
-                                                    <option value="" className='text-grey4'>--Select City--</option>
-                                                    <option value="Gardener">Gardener</option>
-                                                    <option value="Tech">Tech</option>
-                                                    <option value="Mechanic">Mechanic</option>
-                                                    <option value="Laundry">Laundry</option>
-                                                    <option value="Caterer">Caterer</option>
-
-                                                 </select>
+                                                <input
+                                                   type="text"
+                                                   id='suburb'
+                                                   name='suburb'
+                                                   className='border-grey4 border-[1.5px] rounded-lg ml-3 p-2 w-[200px]'
+                                                />
+                                                 
                                             </div>
 
                                             <div className='flex flex-col text-[15px] ml-10 '>
@@ -636,38 +632,40 @@ const PostRequest = () => {
                                                     htmlFor="state"
                                                     className='font-semibold mb-4'
                                                 >
-                                                    State
+                                                    State <span className={`text-red10`}>*</span>
                                                 </label>
 
                                                 <select
                                                     name="state" 
                                                     id="state" 
                                                     className='border-grey4 border-[1.5px] rounded-lg ml-3 p-2 w-[350px]'
-                                                >
-                                                <option value="" className='text-grey4'>--Select State--</option>
-                                                <option value="Gardener">Gardener</option>
-                                                <option value="Tech">Tech</option>
-                                                <option value="Mechanic">Mechanic</option>
-                                                <option value="Laundry">Laundry</option>
-                                                <option value="Caterer">Caterer</option>
-
+                                                > 
+                                                    <option value="" disabled>--Select State--</option>
+                                                    <option value="Western Australia">Western Australia</option>
+                                                    <option value="Northern Territory">Northern Territory</option>
+                                                    <option value="South Australia">South Australia</option>
+                                                    <option value="Queensland">Queensland</option>
+                                                    <option value="New South Wales">New South Wales</option>
+                                                    <option value="Victoria">Victoria</option>
+                                                    <option value="Tasmania">Tasmania</option>
+                                                    <option value="Australian Capital Territory">Australian Capital Territory</option>
                                                 </select>
                                             </div>
                                         </div>
                                         
                                         <div className='flex flex-col text-[15px] my-10 '>
                                             <label  
-                                                htmlFor="country"
+                                                htmlFor="postCode"
                                                 className='font-semibold mb-4'
                                             >
-                                                Country
+                                                Post Code <span className={`text-red10`}>*</span>
                                             </label>
 
                                             <input
-                                                type='text'
-                                                name="country" 
-                                                id="country" 
-                                                className='border-grey4 border-[1.5px] rounded-lg p-2 shadow-lg ml-3 w-[200px]'
+                                               type="number"
+                                               id='postCode' 
+                                               name='postCode'
+                                               className='border-grey4 border-[1.5px] rounded-lg p-2 shadow-lg ml-3 w-[200px]'
                                                 // readOnly
                                             />
                                         </div>
