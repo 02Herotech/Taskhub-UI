@@ -176,7 +176,7 @@ const CustomerSignup: React.FC<FormState> = () => {
         };
 
         console.log(body)
- 
+
         signUpApiCall(body)
             .unwrap() // Unwrap the result to handle possible errors
             .then(() => {
