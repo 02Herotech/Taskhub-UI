@@ -29,7 +29,7 @@ const ChangePassword = () => {
     
         try {
           setLoading(true);
-         const response = await axios.post(`https://service-rppp.onrender.com/api/v1/change-password/change?${token}`);
+         const response = await axios.post(`https://test.jacinthsolutions.com.au/api/v1/change-password/change?${token}`);
          console.log(response)
          setChanged(true);
         } catch (error) {
@@ -72,7 +72,7 @@ const ChangePassword = () => {
             <div className={`w-[166px] h-[166px]`}>
                 <Image src={success} width={166} height={166} alt='' />
             </div>
-              <p className="text-center mt-10">Your password has been changed successfully. <br /> Kindly proceed to <a href="/auth/login" className="text-purpleBase underline hover:text-purple7">Login</a></p>
+              <p className="text-center mt-10">Your password has been changed successfully. <br /> Kindly proceed to <Link href="/auth/login" className="text-purpleBase underline hover:text-purple7">Login</Link></p>
           </div>
         )}
         

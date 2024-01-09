@@ -98,7 +98,7 @@ const CompleteRegistration = () => {
 
             try {
                 const response = await axios.post(
-                    `https://service-rppp.onrender.com/api/v1/customer/complete?token=${accessTokenValue}`,
+                    `https://test.jacinthsolutions.com.au/api/v1/customer/complete?token=${accessTokenValue}`,
                 {
                     streetNumber: streetNumberValue,
                     streetName: streetNameValue,

@@ -63,7 +63,7 @@ const Profile = () => {
             streetName: '',
             unitNumber: '',
             suburb: '',
-            state: 'Western Australia',
+            state: '',
             postCode: ''
         })
       }
@@ -142,7 +142,7 @@ const Profile = () => {
                             <input type="number"
                                 id='streetNumber' 
                                 name='streetNumber'
-                                placeholder={streetNameValue}
+                                placeholder={streetNumberValue}
                                 value= {formData.streetNumber}
                                 className='p-2 border-2 border-grey2 rounded-md w-[150px] my-3'
                                 required
@@ -205,7 +205,8 @@ const Profile = () => {
 
                     <div className='flex justify-between w-[700px] my-5'>
                         <div className='flex flex-col'>
-                            <label htmlFor="state"
+                            <label 
+                                htmlFor="state"
                                 className='font-extrabold'
                             >
                                 State <span className={`text-red10`}>*</span>
@@ -218,8 +219,9 @@ const Profile = () => {
                                 className='p-2 border-2 border-grey2 rounded-md w-[500px] my-3'
                                 required
                                 onChange={handleChange}
+                                placeholder={stateValue}
                             >
-                                <option value="" disabled>{stateValue}</option>
+                                <option value="" disabled>--Select State--</option>
                                 <option value="Western Australia">Western Australia</option>
                                 <option value="Northern Territory">Northern Territory</option>
                                 <option value="South Australia">South Australia</option>
@@ -232,12 +234,13 @@ const Profile = () => {
                         </div>
 
                         <div className='flex flex-col'>
-                            <label htmlFor="unitNumber"
+                            <label htmlFor="postCode"
                             className='font-extrabold'
                             >
                                 Post Code <span className={`text-red10`}>*</span>
                             </label>
-                            <input type="number"
+                            <input 
+                                type="number"
                                 id='postCode' 
                                 name='postCode'
                                 placeholder={postCodeValue}

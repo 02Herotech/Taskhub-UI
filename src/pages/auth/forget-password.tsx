@@ -36,7 +36,7 @@ const ForgetPassword = () => {
         setIsLoading(true);
         
         try {
-            const response = await axios.post("https://service-rppp.onrender.com/api/v1/user/forgot-password", {email});
+            const response = await axios.post("https://test.jacinthsolutions.com.au/api/v1/user/forgot-password", {email});
             console.log(response);
             console.log(response.status);
 

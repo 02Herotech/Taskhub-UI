@@ -31,7 +31,7 @@ const VerifyEmail = () => {
     
     try {
       setLoading(true);
-      await axios.post(`https://service-rppp.onrender.com/api/v1/user/verify?${tokenAndHashedEmail}`);
+      await axios.post(`https://test.jacinthsolutions.com.au/api/v1/user/verify?${tokenAndHashedEmail}`);
       setVerified(true);
     } catch (error) {
       setError(true);
@@ -74,7 +74,7 @@ const VerifyEmail = () => {
             <div className={`w-[166px] h-[166px]`}>
                 <Image src={success} width={166} height={166} alt='' />
             </div>
-              <p className="text-center mt-10">Your email has been verified successfully. <br /> Kindly proceed to <a href="/auth/login" className="text-purpleBase underline hover:text-purple7">Login</a></p>
+              <p className="text-center mt-10">Your email has been verified successfully. <br /> Kindly proceed to <Link href="/auth/login" className="text-purpleBase underline hover:text-purple7">Login</Link></p>
           </div>
         )}
         

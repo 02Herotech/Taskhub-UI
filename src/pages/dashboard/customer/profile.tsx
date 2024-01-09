@@ -98,7 +98,7 @@ const Profile = () => {
           const unitNumberValue = formData.unitNumber
 
           try {
-            const response = await axios.patch('https://service-rppp.onrender.com/api/v1/customer/update', 
+            const response = await axios.patch('https://test.jacinthsolutions.com.au/api/v1/customer/update', 
             [
                 {
                     "op":"replace",
