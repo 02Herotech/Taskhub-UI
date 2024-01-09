@@ -1,15 +1,13 @@
-import React, { useState, useEffect } from "react";
-import { signIn, signOut } from "next-auth/react";
-import Link from "next/link";
-import Image from "next/image";
-import logo from "../../../public/logo.png";
-import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/router";
 import axios from "axios";
+import { signIn, useSession } from "next-auth/react";
+import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import React, { useState } from "react";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import logo from "../../../public/logo.png";
 
 import google from "../../../public/google.png";
-import { BsArrowLeftCircle } from "react-icons/bs";
 
 // import { setTimeout } from "timers/promises";
 
