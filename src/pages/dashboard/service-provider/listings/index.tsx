@@ -18,7 +18,7 @@ import Picture2 from "../../../../public/customerAssets/vintage-sewing-machine-w
 
 interface FormState {
     businessName: string;
-    serviceCategoies: string;
+    serviceCategories: string;
     // subCategories: string;
     serviceDescription: string;
     serviceName: string;
@@ -43,7 +43,10 @@ interface FormState {
 const PostRequest = () => {
 
     const step = [
-        {id: '1', name: 'Business Name'},
+        {id: '1', 
+        name: 'Business Name',
+        fields: ['businessName', 'serviceCategories']
+        },
         {id: '2', name: ' Description & Status'},
         {id: '3', name: 'Pricing'},
         {id: '4', name: 'Location & Image'}
@@ -53,7 +56,7 @@ const PostRequest = () => {
 
     const [formData, setFormData] = useState({
         businessName: '',
-        serviceCategoies: '',
+        serviceCategories: '',
         serviceDescription: '',
         serviceName: '',
         pricing: '',
@@ -111,40 +114,22 @@ const PostRequest = () => {
             image3: e.target.files[0]
         }));
     }
-
     
-    //   To check all required fields 
+    
+    // Check if necessary inputs are filled for each step
+ 
     const isAllFieldsFilled = () => {
-        const requiredFields: (keyof FormState)[] = [
-            "businessName",
-            "serviceCategoies",
-            "serviceDescription",
-            "serviceName",
-            "pricing",
-            "availableDays",
-            "available",
-            "startMinute",
-            "startHour",
-            "closeMinute",
-            "closeHour",
-            'streetNumber',
-            'streetName',
-            'suburb',
-            'state',
-            'postCode',
-            "image1",
-            "image2",
-            "image3"
-        ];
-        return requiredFields.every((field) => formData[field] !== "");
-      };
+        //  const fields = step[currentStep].fields 
+        const requiredFields: (keyof FormState)[] = ['businessName', 'serviceCategories'];
+        return requiredFields.every(field => formData[field] !== '')
+    }
 
     //   To reset the form
 
       const resetForm = () => {
         setFormData({
             businessName: '',
-            serviceCategoies: '',
+            serviceCategories: '',
             serviceDescription: '',
             serviceName: '',
             pricing: '',
@@ -165,6 +150,7 @@ const PostRequest = () => {
             image3: undefined
         })
       }
+
 
 
       // Check box for days of the week 
@@ -191,6 +177,8 @@ const PostRequest = () => {
     const [currentStep, setCurrentStep] = useState(0)
 
     const next = () => {
+        // const fields = step[currentStep].fields
+        
         if(currentStep < step.length -1) {
             setCurrentStep(step => step + 1)
         }
@@ -239,26 +227,28 @@ const PostRequest = () => {
                         <form>
 
                             {currentStep === 0 && (
-                                <div>
+                                <div className='w-full'>
                                     <h1 className='text-lg font-extrabold'>Bussiness Name</h1>
 
-                                    <div className='my-20'>
+                                    <div className='my-20 max-w-[550px]'>
                                         <div className='flex justify-start text-[15px]'>
                                             <label 
-                                            htmlFor="businessTitle"
+                                            htmlFor="businessName"
                                             className='font-semibold mt-2 mr-10 w-[110px]'
                                             >
                                                 Business Title
                                             </label>
 
                                             <textarea 
-                                                name="businessTitle" 
-                                                id="businessTitle" 
+                                                name="businessName" 
+                                                id="businessName" 
                                                 cols={50}
                                                 rows={4}
                                                 maxLength={50}
                                                 className='resize-none border-grey4 border-[1.5px] rounded-lg p-2 shadow-lg'
                                                 placeholder=''
+                                                required
+                                                onChange={handleChange}
                                             />
                                         </div>
 
@@ -267,16 +257,18 @@ const PostRequest = () => {
 
                                     <div className='flex justify-start text-[15px] my-20'>
                                         <label 
-                                            htmlFor="category"
+                                            htmlFor="serviceCategories"
                                             className='font-semibold mt-2 mr-10 w-[110px]'
                                         >
                                             Category
                                         </label>
 
                                         <select
-                                            name="category" 
-                                            id="category" 
+                                            name="serviceCategories" 
+                                            id="serviceCategories" 
                                             className='border-grey4 border-[1.5px] rounded-lg p-2 w-[300px]'
+                                            required
+                                            onChange={handleChange}
                                         >
                                             <option value="" className='text-grey4'>--Select Category--</option>
                                             <option value="Home Services">Home Services</option>
@@ -295,6 +287,17 @@ const PostRequest = () => {
                                             <option value="Travel & Adventure">Travel & Adventure</option>
                                         </select>
                                     </div>
+
+                                    {/* <div className='mt-32 flex justify-end w-[900px] '>
+                                        <button 
+                                            type='submit'
+                                            className='bg-black py-3 px-6 rounded-lg text-white  hover:text-[#FE9B07] disabled:opacity-50'
+                                            onClick={next} 
+                                            disabled={!isAllFieldsFilled()}
+                                        >
+                                            Save & Continue
+                                        </button>
+                                    </div> */}
                                 </div>
                                 
                             )}
@@ -303,7 +306,7 @@ const PostRequest = () => {
                                <div>
                                     <h1 className='text-lg font-extrabold'>Description & Availability</h1>
 
-                                    <div className='my-16'>
+                                    <div className='my-16 w-[600px]'>
                                         <h3 className='text-md font-extrabold mb-5'>Description</h3>
                                             <div className='flex flex-col text-[15px] ml-5'>
                                                 <label  
@@ -381,13 +384,27 @@ const PostRequest = () => {
                 
                                             </div>
 
-                                            <div className="flex space-x-4">
-                                                
-                                                </div>
                                         </div>
                             
                                     </div>
-                                
+
+                                    {/* <div className='mt-32 flex justify-between w-[900px] '>
+                                        <button
+                                            className='flex items-center hover:text-[#FE9B07]'
+                                            onClick={previous}
+                                        >
+                                            <span className='mr-2'><FaArrowLeft /></span> Back
+                                        </button>
+
+                                        <button 
+                                            className='bg-black py-3 px-6 rounded-lg text-white  hover:text-[#FE9B07] disabled:opacity-50'
+                                            onClick={next} 
+                                            disabled={!isAllFieldsFilled()}
+                                            type='submit'
+                                        >   
+                                            Save & Continue
+                                        </button>
+                                    </div>                                 */}
                                 </div>
                             )}
 
