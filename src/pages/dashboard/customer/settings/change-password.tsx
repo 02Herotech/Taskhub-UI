@@ -4,11 +4,18 @@ import { useRouter } from 'next/router';
 import { IoLockClosedOutline } from "react-icons/io5";
 import { useSession } from 'next-auth/react';
 import { LuUsers } from "react-icons/lu";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import axios from 'axios';
+import Image from 'next/image';
+import { signOut } from "next-auth/react";
+
 
 import CustomerDashboardLayout from '../../../../../components/customerdashboardLayout';
+import success from '../../../../../public/success.svg'
+import styles from '../../../../styles/animation.module.css'
+import useCountdown from '@/hooks/useCountdown';
+
 
 
 
@@ -21,6 +28,7 @@ interface FormState {
     error2: string;
 }
 
+
 const ChangePassword = () => {
 
     const [formData, setFormData] = useState({
@@ -32,11 +40,20 @@ const ChangePassword = () => {
    
       });
 
-      const[isLoading, setIsLaoding] = useState(false);
+      const[isLoading, setIsLoading] = useState(false);
+      const [isSuccessful, setisSuccessful] = useState(false);
       const [showOldPassword, setShowOldPassword] = useState(false);
       const [showNewPassword, setShowNewPassword] = useState(false);
       const [showConfirmNewPassword, setshowConfirmNewPassword] = useState(false);
-
+      const [notEmptyError2, setNotEmptyError2] = useState(false);
+      const [errorMessage, setErrorMessage] = useState('')
+      
+      
+      const { secondsLeft, start } = useCountdown();
+      
+      const {data: session} = useSession()
+      
+      const router = useRouter();
 
       const handleChange = (e: any) => {
         const { name, value } = e.target;
@@ -69,12 +86,14 @@ const ChangePassword = () => {
                     ...prevData,
                     error2: "New password must match",
                 }));
+                setNotEmptyError2(true)
             } else {
                 // Clear the error message if the confirm password matches the password
                 setFormData((prevData) => ({
                     ...prevData,
                     error2: "",
                 }));
+                setNotEmptyError2(false)
             }
         }
 
@@ -112,69 +131,80 @@ const ChangePassword = () => {
 
     //   To reset form fields after submission 
       const resetForm = () => {
-        setFormData({
-            oldPassword: "",
-            newPassword: "",
-            confirmNewPassword: "",
-            error1: "",
-            error2: ""
-        })
-      }
+            setFormData({
+                oldPassword: "",
+                newPassword: "",
+                confirmNewPassword: "",
+                error1: "",
+                error2: ""
+            })
+        }
 
 
     // To check active link 
-    const router = useRouter();
     const isLinkActive = (linkPath: string) => {
       return router.pathname === linkPath;
     };
 
-    const {data: session} = useSession()
     
     // To submit formit 
     
     const handleSubmit = async (e: {preventDefault: () => void}) => {
         e.preventDefault()
 
-            const oldPasswordValue = formData.oldPassword;
-            const NewPasswordValue = formData.newPassword;
-            console.log(formData)
+        const oldPasswordValue = formData.oldPassword;
+        const NewPasswordValue = formData.newPassword;
+        const userToken = session?.user.accessToken
+        console.log(formData)
+        console.log("accessToken :", userToken)
+        setIsLoading(true)
 
-    
-        
         try {
-                const userToken = session?.user.accessToken
-                console.log("accessToken :", userToken)
-
-                const response = await axios.post('https://test.jacinthsolutions.com.au/api/v1/change-password/init',
-                {
-                    oldPassword: oldPasswordValue,
-                    newPassword: NewPasswordValue
-                },
-                {
-                    headers: {
-                        Authorization: `Bearer ${userToken}`,
-                        "Content-Type": "application/json"
-                    }
+            const response = await axios.post('https://test.jacinthsolutions.com.au/api/v1/change-password/init', {
+                oldPassword: oldPasswordValue,
+                newPassword: NewPasswordValue
+            },
+            {
+                headers: {
+                    Authorization: `Bearer ${userToken}`,
+                    'Content-Type': 'application/json',
                 }
-                )
-    
-                console.log(response)
+            })
+            console.log("Password Change:", response)
+            if (response.status === 200) {
+                setisSuccessful(true)
+                start(10)
 
-                // if (response.status === 200) {
-                    
-                // }
-            } catch (error) {
-                console.error("Change password error: ", error);
+                try {const logOutRes = await axios.post('https://test.jacinthsolutions.com.au/api/v1/auth/logout')
+                    console.log("Sign Out: ", logOutRes)
+                    setTimeout(() => {
+                        signOut({
+                    redirect: false
+                        })
+                    }, 10000)
+                } catch (error) {
+                    console.error(error);
+                } finally {
+                    setTimeout(() => {
+                       router.push('/auth/login')
+                    }, 12000)
+                }
             }
+        } catch (error: any) {
+                console.error("Change password error: ", error);
+                setErrorMessage(error.response.data.message)
                 
-    
+                setTimeout(() => {
+                    setErrorMessage("");
+                  }, 3000);
+        } finally {
+            setIsLoading(false)
+        }
     }
-    
-
-//    
+   
     return (
         <CustomerDashboardLayout>
-            <div className={`mt-16 flex flex-col justify-center items-start w-[900px]`}>
+            <div className={`mt-16 flex flex-col justify-center items-start w-[800px]`}>
                 
                 <h1 className='text-lg font-extrabold'>Settings</h1>
 
@@ -194,126 +224,139 @@ const ChangePassword = () => {
                     </div>
 
                     <div className='w-[430px] bg-white shadow-lg p-5'>
-                        <h3 className={`font-extrabold`}>Change Password</h3>
 
-                        <div className=" ">
-                            <form  className={` p-5`} onSubmit={handleSubmit}>
+                        { isSuccessful ?
 
-                                <div className={`flex flex-col`}>
+                            <div className={`flex flex-col items-center justify-center ${styles.animation}`}>
+                                <div className={`w-[166px] h-[166px]`}>
+                                    <Image src={success} width={166} height={166} alt='' />
+                                </div>
+                                <p className="text-center mt-10">Please check the email sent to you to confirm password change</p>
+                                <p className="text-center my-10">You'll be logged out in {secondsLeft > 0 && `${secondsLeft}`} sec</p>
+                            </div>   
+                        :             
+                            <div className=" ">
+                                <h3 className={`font-extrabold`}>Change Password</h3>
+                                
+                                <form  className={` p-5`} onSubmit={handleSubmit}>
 
-                                    <label htmlFor="password" 
-                                    className={`font-bold text-[16px] my-3 flex  items-center w-[500px] h-[30px] `}>
-                                        Old Password 
-                                        <span className={`text-red10`}>*</span>
-                                        {/* <p className={`text-red10 p-2  my-0 py-0 text-[10px]`}>{formData.error1}</p> */}
-                                    </label>
-                                    <div className={`relative`}>
-                                        <input type={showOldPassword ? 'text' : 'password'} 
-                                        id='oldPassword' 
-                                        name='oldPassword' 
-                                        placeholder='Enter old password' 
-                                        className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl w-full`} 
-                                        value={formData.oldPassword} 
-                                        onChange={handleChange} 
-                                        required 
-                                        maxLength={15}
-                                        autoComplete='current-passowrd'
-                                        />
+                                    <div className={`flex flex-col`}>
+
+                                        <label htmlFor="password" 
+                                        className={`font-bold text-[16px] my-3 flex  items-center w-[500px] h-[30px] `}>
+                                            Old Password 
+                                            <span className={`text-red10`}>*</span>
+                                            {/* <p className={`text-red10 p-2  my-0 py-0 text-[10px]`}>{formData.error1}</p> */}
+                                        </label>
+                                        <div className={`relative`}>
+                                            <input type={showOldPassword ? 'text' : 'password'} 
+                                            id='oldPassword' 
+                                            name='oldPassword' 
+                                            placeholder='Enter old password' 
+                                            className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl w-full`} 
+                                            value={formData.oldPassword} 
+                                            onChange={handleChange} 
+                                            required 
+                                            maxLength={15}
+                                            autoComplete='current-passowrd'
+                                            />
+                                            <button
+                                                type="button"
+                                                onClick={toggleOldPasswordVisibility}
+                                                className="absolute inset-y-0 right-0 pr-3 flex items-center focus:outline-none"
+                                            >
+                                                {showOldPassword ? (
+                                                    <AiOutlineEye className="h-5 w-5 text-black" />
+                                                ) : (
+                                                    <AiOutlineEyeInvisible className="h-5 w-5 text-black" />
+                                                )}
+                                            </button>
+                                        </div>
+                                    </div>
+
+
+                                    <div className={`flex flex-col my-3`}>
+                                        <label htmlFor="password" 
+                                        className={`font-bold text-[16px] my-3 flex  items-center w-[500px] h-[30px] `}>
+                                            New Password 
+                                            <span className={`text-red10`}>*</span>
+                                            <p className={`text-red10 p-2  my-0 py-0 text-[10px] w-[230px] text-justify`}>{formData.error1}</p>
+                                        </label>
+                                        <div className={`relative`}>
+                                            <input type={showNewPassword ? 'text' : 'password'} 
+                                            id='newPassword' 
+                                            name='newPassword' 
+                                            placeholder='Enter new password' 
+                                            className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl w-full`} 
+                                            value={formData.newPassword} 
+                                            onChange={handleChange} 
+                                            required 
+                                            maxLength={15}
+                                            autoComplete='new-passowrd'
+
+                                            />
+                                            <button
+                                                type="button"
+                                                onClick={toggleNewPasswordVisibility}
+                                                className="absolute inset-y-0 right-0 pr-3 flex items-center focus:outline-none"
+                                            >
+                                                {showNewPassword ? (
+                                                    <AiOutlineEye className="h-5 w-5 text-black" />
+                                                ) : (
+                                                    <AiOutlineEyeInvisible className="h-5 w-5 text-black" />
+                                                )}
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <div className={`flex flex-col`}>
+                                        <label htmlFor="password" 
+                                        className={`font-bold text-[16px] my-3 flex  items-center w-[500px] h-[30px] `}>
+                                            Confirm New Password 
+                                            <span className={`text-red10`}>*</span>
+                                            <p className={`text-red10 p-2  my-0 py-0 text-[10px]`}>{formData.error2}</p>
+                                        </label>
+                                        <div className={`relative`}>
+                                            <input type={showConfirmNewPassword ? 'text' : 'password'} 
+                                            id='confirmNewPassword' 
+                                            name='confirmNewPassword' 
+                                            placeholder='Enter new password' 
+                                            className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl w-full`} 
+                                            value={formData.confirmNewPassword} 
+                                            onChange={handleChange} 
+                                            required 
+                                            maxLength={15}
+                                            autoComplete='new-passowrd'
+                                            />
+                                            <button
+                                                type="button"
+                                                onClick={toggleConfirmNewPasswordVisibility}
+                                                className="absolute inset-y-0 right-0 pr-3 flex items-center focus:outline-none"
+                                            >
+                                                {showConfirmNewPassword ? (
+                                                    <AiOutlineEye className="h-5 w-5 text-black" />
+                                                ) : (
+                                                    <AiOutlineEyeInvisible className="h-5 w-5 text-black" />
+                                                )}
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <div className={`flex justify-center items-center mt-10`}>
                                         <button
-                                            type="button"
-                                            onClick={toggleOldPasswordVisibility}
-                                            className="absolute inset-y-0 right-0 pr-3 flex items-center focus:outline-none"
-                                        >
-                                            {showOldPassword ? (
-                                                <AiOutlineEye className="h-5 w-5 text-black" />
-                                            ) : (
-                                                <AiOutlineEyeInvisible className="h-5 w-5 text-black" />
-                                            )}
+                                            type="submit"
+                                            className={`w-full bg-purpleBase text-white py-2 px-4 rounded-md hover:bg-purple7 text-sm disabled:opacity-50`}
+                                            disabled={!isAllFieldsFilled() || isLoading || notEmptyError2}>
+                                            {!isLoading ? "Save Changes" : "Saving..."}
                                         </button>
                                     </div>
-                                </div>
+                                </form>
+                            
+                                <div className="text-red4 text-[13px] text-center h-[20px] flex items-center justify-center my-3">{errorMessage}</div>
+                            </div>
 
-
-                                <div className={`flex flex-col my-3`}>
-                                    <label htmlFor="password" 
-                                    className={`font-bold text-[16px] my-3 flex  items-center w-[500px] h-[30px] `}>
-                                        New Password 
-                                        <span className={`text-red10`}>*</span>
-                                        <p className={`text-red10 p-2  my-0 py-0 text-[10px] w-[230px] text-justify`}>{formData.error1}</p>
-                                    </label>
-                                    <div className={`relative`}>
-                                        <input type={showNewPassword ? 'text' : 'password'} 
-                                        id='newPassword' 
-                                        name='newPassword' 
-                                        placeholder='Enter new password' 
-                                        className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl w-full`} 
-                                        value={formData.newPassword} 
-                                        onChange={handleChange} 
-                                        required 
-                                        maxLength={15}
-                                        autoComplete='new-passowrd'
-
-                                        />
-                                        <button
-                                            type="button"
-                                            onClick={toggleNewPasswordVisibility}
-                                            className="absolute inset-y-0 right-0 pr-3 flex items-center focus:outline-none"
-                                        >
-                                            {showNewPassword ? (
-                                                <AiOutlineEye className="h-5 w-5 text-black" />
-                                            ) : (
-                                                <AiOutlineEyeInvisible className="h-5 w-5 text-black" />
-                                            )}
-                                        </button>
-                                    </div>
-                                </div>
-
-                                <div className={`flex flex-col`}>
-                                    <label htmlFor="password" 
-                                    className={`font-bold text-[16px] my-3 flex  items-center w-[500px] h-[30px] `}>
-                                        Confirm New Password 
-                                        <span className={`text-red10`}>*</span>
-                                        <p className={`text-red10 p-2  my-0 py-0 text-[10px]`}>{formData.error2}</p>
-                                    </label>
-                                    <div className={`relative`}>
-                                        <input type={showConfirmNewPassword ? 'text' : 'password'} 
-                                        id='confirmNewPassword' 
-                                        name='confirmNewPassword' 
-                                        placeholder='Enter new password' 
-                                        className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl w-full`} 
-                                        value={formData.confirmNewPassword} 
-                                        onChange={handleChange} 
-                                        required 
-                                        maxLength={15}
-                                        autoComplete='new-passowrd'
-                                        />
-                                        <button
-                                            type="button"
-                                            onClick={toggleConfirmNewPasswordVisibility}
-                                            className="absolute inset-y-0 right-0 pr-3 flex items-center focus:outline-none"
-                                        >
-                                            {showConfirmNewPassword ? (
-                                                <AiOutlineEye className="h-5 w-5 text-black" />
-                                            ) : (
-                                                <AiOutlineEyeInvisible className="h-5 w-5 text-black" />
-                                            )}
-                                        </button>
-                                    </div>
-                                </div>
-
-                                <div className={`flex justify-center items-center mt-10`}>
-                                    <button
-                                        type="submit"
-                                        className={`w-full bg-purpleBase text-white py-2 px-4 rounded-md hover:bg-purple7 text-sm disabled:opacity-50`}
-                                        disabled={!isAllFieldsFilled() || isLoading}>
-                                        {!isLoading ? "Save Changes" : "Saving..."}
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
+                        }
             
-                        {/* <div className="text-red4 text-[13px] text-center h-[20px] flex items-center justify-center">{error}</div> */}
-                    
                     </div>
 
                 </div>
