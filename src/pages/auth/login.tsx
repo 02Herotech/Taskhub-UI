@@ -69,10 +69,13 @@ const Login: React.FC<FormState> = () => {
     const passwordValue = formData.password
     
     try {
-      const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}auth/login`, {
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_API_URL}auth/login`, 
+        {
         emailAddress: emailValue,
         password: passwordValue
-      })
+        }
+      );
 
       console.log("response:", response)
 
