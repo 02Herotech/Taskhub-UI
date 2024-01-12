@@ -124,7 +124,7 @@ const ResetPassword: React.FC<FormState> = () => {
                 console.log(password)
                 
                 const response = await axios.post(
-                    `https://test.jacinthsolutions.com.au/api/v1/user/reset-password?t=${(t)}`, 
+                    `${process.env.NEXT_PUBLIC_API_URL}user/reset-password?t=${(t)}`, 
                     {password});
                 console.log(response)
 

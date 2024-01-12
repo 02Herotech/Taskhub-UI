@@ -63,7 +63,7 @@ const Login: React.FC<FormState> = () => {
 
     try {
       const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_API_URL}auth/login`,
+         `${process.env.NEXT_PUBLIC_API_URL}auth/login`,
         {
           emailAddress: emailValue,
           password: passwordValue,
@@ -71,8 +71,6 @@ const Login: React.FC<FormState> = () => {
       );
 
       console.log("response:", response);
-
-      console.log("status: ", response.status);
 
       if (response.status === 200) {
         const accessTokenValue = response.data.accessToken;
