@@ -160,7 +160,7 @@ const ChangePassword = () => {
         setIsLoading(true)
 
         try {
-            const response = await axios.post('https://test.jacinthsolutions.com.au/api/v1/change-password/init', {
+            const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}change-password/init`, {
                 oldPassword: oldPasswordValue,
                 newPassword: NewPasswordValue
             },
@@ -175,7 +175,7 @@ const ChangePassword = () => {
                 setisSuccessful(true)
                 start(10)
 
-                try {const logOutRes = await axios.post('https://test.jacinthsolutions.com.au/api/v1/auth/logout')
+                try {const logOutRes = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}auth/logout`)
                     console.log("Sign Out: ", logOutRes)
                     setTimeout(() => {
                         signOut({

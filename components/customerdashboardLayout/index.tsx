@@ -62,7 +62,7 @@ function CustomerDashboardLayout(props: IProps) {
         })
 
         try {
-            const response = await axios.post('https://test.jacinthsolutions.com.au/api/v1/auth/logout')
+            const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}auth/logout`)
             console.log("Sign Out: ", response)
 
             if(response.status == 200) {

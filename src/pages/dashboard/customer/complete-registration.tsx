@@ -98,7 +98,7 @@ const CompleteRegistration = () => {
 
             try {
                 const response = await axios.post(
-                    `https://test.jacinthsolutions.com.au/api/v1/customer/complete?token=${accessTokenValue}`,
+                    `${process.env.NEXT_PUBLIC_API_URL}customer/complete?token=${accessTokenValue}`,
                 {
                     streetNumber: streetNumberValue,
                     streetName: streetNameValue,

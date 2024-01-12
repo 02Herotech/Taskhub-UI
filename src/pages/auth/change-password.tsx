@@ -29,7 +29,7 @@ const ChangePassword = () => {
     
         try {
           setLoading(true);
-         const response = await axios.post(`https://test.jacinthsolutions.com.au/api/v1/change-password/change?${token}`);
+         const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}change-password/change?${token}`);
          console.log(response)
          setChanged(true);
         } catch (error) {

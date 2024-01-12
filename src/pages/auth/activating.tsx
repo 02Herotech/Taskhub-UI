@@ -31,7 +31,7 @@ const VerifyEmail = () => {
     
     try {
       setLoading(true);
-      await axios.post(`https://test.jacinthsolutions.com.au/api/v1/user/verify?${tokenAndHashedEmail}`);
+      await axios.post(`${process.env.NEXT_PUBLIC_API_URL}user/verify?${tokenAndHashedEmail}`);
       setVerified(true);
     } catch (error) {
       setError(true);

@@ -98,7 +98,7 @@ const Profile = () => {
           const unitNumberValue = formData.unitNumber
 
           try {
-            const response = await axios.patch('https://test.jacinthsolutions.com.au/api/v1/customer/update', 
+            const response = await axios.patch(`${process.env.NEXT_PUBLIC_API_URL}customer/update`, 
             [
                 {
                     "op":"replace",
