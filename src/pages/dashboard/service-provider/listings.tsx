@@ -2,19 +2,11 @@ import React, { useState } from 'react';
 import { AiOutlineRight  } from "react-icons/ai";
 import { FaArrowLeft } from "react-icons/fa6";
 import Link from 'next/link';
+import axios from 'axios';
 
 
-import SPDashboardLayout from '../../../../../components/spdashboardLayout';
+import SPDashboardLayout from '../../../../components/spdashboardLayout';
 import styles from './listing.module.css'
-
-import customer from "../../../../public/dashboardAssets/portrait.jpg";
-// import styles from "../customer/styles.module.scss"
-import Image from 'next/image';
-import {MdVerified} from "react-icons/md";
-import {GrLocation, GrSearch} from "react-icons/gr";
-import Card from "../../../../../components/card2/Card";
-import Picture1 from "../../../../public/customerAssets/close-up-collection-make-up-beauty-products.jpg";
-import Picture2 from "../../../../public/customerAssets/vintage-sewing-machine-with-thread-measuring-tape.jpg";
 
 interface FormState {
     businessName: string;
@@ -29,6 +21,8 @@ interface FormState {
     startHour: number;
     closeMinute: number;
     closeHour: number;
+    openingTime: string;
+    closingTime: string;
     streetNumber: string;
     streetName: string;
     unitNumber: string;
@@ -40,19 +34,25 @@ interface FormState {
     image3: File | undefined;
 }
 
-const PostRequest = () => {
-
+const Listings = () => {
+    
     const step = [
-        {id: '1', 
-        name: 'Business Name',
-        fields: ['businessName', 'serviceCategories']
+        {
+            id: '1', 
+            name: 'Business Name',
+            // fields: ['businessName', 'serviceCategories']
         },
-        {id: '2', name: ' Description & Status'},
+        {
+            id: '2', 
+            name: ' Description & Status',
+            // fields: ['serviceDescription', 'serviceCategories']
+        },
         {id: '3', name: 'Pricing'},
         {id: '4', name: 'Location & Image'}
     ]
 
-    // console.log("step lenght: ", step.length)
+    const [isLoading, setIsLoading] = useState(false)
+
 
     const [formData, setFormData] = useState({
         businessName: '',
@@ -66,6 +66,8 @@ const PostRequest = () => {
         startHour: '',
         closeMinute: '',
         closeHour: '',
+        openingTime: '',
+        closingTime: '',
         streetNumber: '',
         streetName: '',
         unitNumber: '',
@@ -78,7 +80,6 @@ const PostRequest = () => {
     
     })
 
-    const [isLoading, setIsLoading] = useState(false)
     
     const handleChange = (e: any) => {
         const { name, value } = e.target;
@@ -93,6 +94,9 @@ const PostRequest = () => {
             [name]: value,
         }));
     };
+
+
+// To handle images
 
     const handleImage1 = (e: any) => {
         setFormData((preData) => ({
@@ -139,6 +143,8 @@ const PostRequest = () => {
             startHour: '',
             closeMinute: '',
             closeHour: '',
+            openingTime: '',
+            closingTime: '',
             streetNumber: '',
             streetName: '',
             unitNumber: '',
@@ -176,9 +182,7 @@ const PostRequest = () => {
 
     const [currentStep, setCurrentStep] = useState(0)
 
-    const next = () => {
-        // const fields = step[currentStep].fields
-        
+    const next = () => {        
         if(currentStep < step.length -1) {
             setCurrentStep(step => step + 1)
         }
@@ -195,11 +199,47 @@ const PostRequest = () => {
  
 
     // To submit form 
+    // const{data: session} = useSession()
 
     const handleSubmit = async (e: {preventDefault: () => void}) => {
-        e.preventDefault()
-        console.log(formData)
-    }
+      e.preventDefault()
+      console.log(formData)
+      
+    //   const userToken = session?.user.accessToken
+    //   console.log(userToken)
+  
+    //   const taskServiceNameValue = formData.taskServiceName
+    //   const taskDescriptionValue = formData.taskDescription
+    //   const userAddressValue = formData.userAddress
+    //   const customerBudgetValue = formData.customerBudget
+    //   const taskImageValue = formData.taskImage
+    //   const taskDateValue = formData.taskDate
+  
+      try {
+        const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}task/post`, 
+            // {
+            //   taskServiceName: taskServiceNameValue,
+            //   taskDescription: taskDescriptionValue,
+            //   userAddress: userAddressValue,
+            //   customerBudget: customerBudgetValue,
+            //   taskImage: taskImageValue,
+            //   taskDate: taskDateValue
+            // },
+            // {
+            //     headers: {
+            //         Authorization: `Bearer ${userToken}`,
+            //         'Content-Type': 'application/json',
+            //     }
+            // }
+            
+        )
+  
+        console.log(response)
+        
+      } catch (error) {
+        console.log(error)
+      }
+  }
 
 
 
@@ -224,7 +264,7 @@ const PostRequest = () => {
                 <div className='my-16 flex flex-col justify-center items-start w-[900px]'>
 
                         
-                        <form>
+                        <form onSubmit={handleSubmit}>
 
                             {currentStep === 0 && (
                                 <div className='w-full'>
@@ -249,6 +289,7 @@ const PostRequest = () => {
                                                 placeholder=''
                                                 required
                                                 onChange={handleChange}
+                                                value={formData.businessName}
                                             />
                                         </div>
 
@@ -269,6 +310,7 @@ const PostRequest = () => {
                                             className='border-grey4 border-[1.5px] rounded-lg p-2 w-[300px]'
                                             required
                                             onChange={handleChange}
+                                            value={formData.serviceCategories}
                                         >
                                             <option value="" className='text-grey4'>--Select Category--</option>
                                             <option value="Home Services">Home Services</option>
@@ -310,23 +352,25 @@ const PostRequest = () => {
                                         <h3 className='text-md font-extrabold mb-5'>Description</h3>
                                             <div className='flex flex-col text-[15px] ml-5'>
                                                 <label  
-                                                        htmlFor="businessTitle"
+                                                        htmlFor="serviceDescription"
                                                         className='font-semibold mb-10'
                                                 >
                                                     Briefly Describe Your Service
                                                 </label>
 
                                                 <textarea 
-                                                    name="businessTitle" 
-                                                    id="businessTitle" 
+                                                    name="serviceDescription" 
+                                                    id="serviceDescription" 
                                                     cols={50}
                                                     rows={10}
                                                     maxLength={500}
                                                     className='resize-none border-grey4 border-[1.5px] rounded-lg p-2 shadow-lg ml-10'
+                                                    onChange={handleChange}
+                                                    value={formData.serviceDescription}
                                                 />
                                             </div>
 
-                                            <p  className='text-[11px] text-grey4 flex justify-end mt-2'>(maximum of 500 characters)</p>
+                                        <p  className='text-[11px] text-grey4 flex justify-end mt-2'>(maximum of 500 characters)</p>
                                     </div>
 
                                     <div className='my-16'>
@@ -340,16 +384,20 @@ const PostRequest = () => {
 
                                                 <input type="time" 
                                                     className=" p-2 border rounded-md" 
-                                                    id='openTime'
-                                                    name='openTime'
+                                                    id='openingTime'
+                                                    name='openingTime'
+                                                    onChange={handleChange}
+                                                    value={formData.openingTime}
                                                 />
 
                                                 <p>-</p>   
 
                                                 <input type="time" 
                                                     className=" p-2 border rounded-md" 
-                                                    id='closeTime'
-                                                    name='closeTime'
+                                                    id='closingTime'
+                                                    name='closingTime'
+                                                    onChange={handleChange}
+                                                    value={formData.closingTime}
                                                 /> 
                                             </div>
 
@@ -377,8 +425,9 @@ const PostRequest = () => {
                                                         checked={checkedDays.includes(day)}
                                                         onChange={() => handleCheckBoxChange(day)}
                                                         className="hidden"
+                                                        value={formData.availableDays}
                                                     />
-                                                    {day}
+                                                        {day}
                                                     </label>
                                                 ))}
                 
@@ -421,9 +470,12 @@ const PostRequest = () => {
                                             
                                             <input 
                                                 type="number" 
-                                                id='fixedPrice'
+                                                id='pricing'
+                                                name='pricing'
                                                 className='border-[1.5px] border-grey6 text-grey5 rounded-[12px] py-2 px-4 w-[150px]'
                                                 placeholder='0.00'
+                                                onChange={handleChange}
+                                                value={formData.pricing}
                                             />
                                         </div>
                                     </div>
@@ -448,6 +500,7 @@ const PostRequest = () => {
                                                         id='basicText'
                                                         className=' resize-none border-[1.5px] border-grey6 text-grey5 rounded-[12px] py-2 px-4 w-[160px] h-[200px] text-[12px]'
                                                         placeholder='Describe details of the offer'
+                                                        onChange={handleChange}
                                                     />
                                                 </div>
 
@@ -462,6 +515,7 @@ const PostRequest = () => {
                                                             id='basicPrice'
                                                             className='border-[1.5px] border-grey6 text-grey5 rounded-[12px] p-2 w-[80px]'
                                                             placeholder='0.00'
+                                                            onChange={handleChange}
                                                         />
                                                     </div>
 
@@ -483,6 +537,7 @@ const PostRequest = () => {
                                                         id='standardText'
                                                         className=' resize-none border-[1.5px] border-grey6 text-grey5 rounded-[12px] py-2 px-4 w-[160px] h-[200px] text-[12px]'
                                                         placeholder='Describe details of the offer'
+                                                        onChange={handleChange}
                                                     />
                                                 </div>
 
@@ -497,6 +552,7 @@ const PostRequest = () => {
                                                             id='standardPrice'
                                                             className='border-[1.5px] border-grey6 text-grey5 rounded-[12px] p-2 w-[80px]'
                                                             placeholder='0.00'
+                                                            onChange={handleChange}
                                                         />
                                                     </div>
 
@@ -520,6 +576,7 @@ const PostRequest = () => {
                                                         id='standardText'
                                                         className=' resize-none border-[1.5px] border-grey6 text-grey5 rounded-[12px] py-2 px-4 w-[160px] h-[200px] text-[12px]'
                                                         placeholder='Describe details of the offer'
+                                                        onChange={handleChange}
                                                     />
                                                 </div>
 
@@ -534,6 +591,8 @@ const PostRequest = () => {
                                                             id='standardPrice'
                                                             className='border-[1.5px] border-grey6 text-grey5 rounded-[12px] p-2 w-[80px]'
                                                             placeholder='0.00'
+                                                            onChange={handleChange}
+
                                                         />
                                                     </div>
 
@@ -557,6 +616,7 @@ const PostRequest = () => {
                                                         id='standardPrice'
                                                         className='border-[1.5px] border-grey6 text-grey5 rounded-[12px] p-2 w-[80px]'
                                                         placeholder='0.00'
+                                                        onChange={handleChange}
                                                     />
                                                 </div>
 
@@ -589,6 +649,8 @@ const PostRequest = () => {
                                                     name="streetNumber" 
                                                     id="streetNumber" 
                                                     className='border-grey4 border-[1.5px] rounded-lg p-2 shadow-lg ml-3 w-[100px]'
+                                                    onChange={handleChange}
+                                                    value={formData.streetNumber}
                                                 />
                                             </div>
 
@@ -605,6 +667,8 @@ const PostRequest = () => {
                                                     name="streetName" 
                                                     id="streetName" 
                                                     className='border-grey4 border-[1.5px] rounded-lg p-2 shadow-lg ml-3 w-[400px]'
+                                                    onChange={handleChange}
+                                                    value={formData.streetName}
                                                 />
                                             </div>
                                         </div>
@@ -622,6 +686,8 @@ const PostRequest = () => {
                                                 name="unitNumber" 
                                                 id="unitNumber" 
                                                 className='border-grey4 border-[1.5px] rounded-lg p-2 shadow-lg ml-3 w-[100px]'
+                                                onChange={handleChange}
+                                                value={formData.unitNumber}
                                             />
                                         </div>
 
@@ -640,6 +706,8 @@ const PostRequest = () => {
                                                    id='suburb'
                                                    name='suburb'
                                                    className='border-grey4 border-[1.5px] rounded-lg ml-3 p-2 w-[200px]'
+                                                   onChange={handleChange}
+                                                   value={formData.suburb}
                                                 />
                                                  
                                             </div>
@@ -656,6 +724,8 @@ const PostRequest = () => {
                                                     name="state" 
                                                     id="state" 
                                                     className='border-grey4 border-[1.5px] rounded-lg ml-3 p-2 w-[350px]'
+                                                    onChange={handleChange}
+                                                    value={formData.state}
                                                 > 
                                                     <option value="" disabled>--Select State--</option>
                                                     <option value="Western Australia">Western Australia</option>
@@ -683,7 +753,8 @@ const PostRequest = () => {
                                                id='postCode' 
                                                name='postCode'
                                                className='border-grey4 border-[1.5px] rounded-lg p-2 shadow-lg ml-3 w-[200px]'
-                                                // readOnly
+                                               onChange={handleChange}
+                                               value={formData.postCode}
                                             />
                                         </div>
 
@@ -692,7 +763,7 @@ const PostRequest = () => {
                                     <div className='my-16'>
                                         <h3 className='text-md font-extrabold mb-5'>BUSINESS IMAGE</h3>
                                         <p className='text-[13px] font-semibold'>Images (up to 3) <br />Get noticed by the right buyers with visual examples of your services</p>
-                                        {/* <p></p> */}
+                                   
                                         
                                         <div className='flex text-[15px] mt-10 w-[350px] justify-between'>
                                         <input
@@ -700,7 +771,7 @@ const PostRequest = () => {
                                             name="image1" 
                                             id="image1" 
                                             className='file:h-[100px] file:w-[100px] file:bg-transparent file:rounded-lg file:border-[1.5px] file:border-grey4 w-[100px]' 
-                                            // readOnly
+                                            onChange={handleImage1}
                                         />
 
                                         <input
@@ -708,7 +779,7 @@ const PostRequest = () => {
                                             name="image1" 
                                             id="image1" 
                                             className='file:h-[100px] file:w-[100px] file:bg-transparent file:rounded-lg file:border-[1.5px] file:border-grey4 w-[100px]' 
-                                            // readOnly
+                                            onChange={handleImage2}
                                         />
 
                                         <input
@@ -716,7 +787,7 @@ const PostRequest = () => {
                                             name="image1" 
                                             id="image1" 
                                             className='file:h-[100px] file:w-[100px] file:bg-transparent file:rounded-lg file:border-[1.5px] file:border-grey4 w-[100px]' 
-                                            // readOnly
+                                            onChange={handleImage3}
                                         />
                                         </div>
 
@@ -739,12 +810,23 @@ const PostRequest = () => {
                             }
                             
                           
-                            <button 
+                            {currentStep === 3 ?
+                                <button 
+                                    type='submit'
+                                    className='bg-black py-3 px-6 rounded-lg text-white absolute right-0 bottom-0 hover:text-[#FE9B07]'
+                                    // onClick={next}
+                                >
+                                    Submit
+                                </button>
+                                :
+                                <button 
+                                type='button'
                                 className='bg-black py-3 px-6 rounded-lg text-white absolute right-0 bottom-0 hover:text-[#FE9B07]'
                                 onClick={next}
-                            >
+                                >
                                 Save & Continue
-                            </button>
+                                </button>
+                            }
                         
                         </div>
                 </div>
@@ -754,4 +836,4 @@ const PostRequest = () => {
     );
 }
  
-export default PostRequest;
+export default Listings;

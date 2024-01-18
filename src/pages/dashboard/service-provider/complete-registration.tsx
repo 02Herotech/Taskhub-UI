@@ -140,11 +140,12 @@ const CompleteRegistration = () => {
                 
                 if (response.status === 200){
                     setIsDone(!isDone)
-                    setIsLaoding(false)
                 }
-
+                
             } catch (error) {
-               console.error("Unable to complete reg: ", error);
+                console.error("Unable to complete reg: ", error);
+            } finally {
+                setIsLaoding(false)
             }
 
             resetForm()

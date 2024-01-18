@@ -11,12 +11,17 @@ const notPublicPath = (
   path === '/dashboard/customer' || 
   path === '/dashboard/customer/profile' ||
   path === '/dashboard/customer/complete-registration' ||
+  path === '/dashboard/customer/settings' ||
+  path === '/dashboard/customer/settings/change-password' ||
+  path === '/dashboard/customer/post-request' ||
   path === '/dashboard/service-provider' ||
   path === '/dashboard/service-provider/profile' ||
-  path === '/dashboard/service-provider/complete-registration'
+  path === '/dashboard/service-provider/complete-registration' ||
+  path === '/dashboard/service-provider/settings' ||
+  path === '/dashboard/service-provider/settings/change-password'
   )
 
-const token = request.cookies.get('__Secure-next-auth.session-token')
+const token = request.cookies.get('next-auth.session-token')
 
 if (!token && notPublicPath){
         return NextResponse.redirect(new URL('/auth/login', request.nextUrl))
