@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { useSession } from 'next-auth/react';
+import axios from 'axios';
 
 
 import CustomerDashboardLayout from '../../../../components/customerdashboardLayout';
@@ -13,28 +15,28 @@ import Picture2 from "../../../../public/customerAssets/vintage-sewing-machine-w
 
 
 interface FormState {
-    taskServiceTitle: string;
+    taskServiceName: string;
     taskDescription: string;
-    // serviceCategory: string;
-    customerAddress: string;
-    customerBudget: string;
+    userAddress: string;
+    customerBudget: string | number;
     taskImage: File | undefined;
-    taskDate: [string | number]
+    taskDate: Date | undefined
 }
-
 
 const PostRequest = () => {
 
-  const [formData, setFormData] = useState({
-    taskServiceTitle: '',
-    taskDescription: '',
-    customerAddress: '',
-    customerBudget: '',
-    taskImage: undefined,
-    taskDate: ''
-})
+    const [isLoading, setIsLoading] = useState(false)
+    const [resMsg, setResMsg] = useState('')
 
-const [isLoading, setIsLoading] = useState(false)
+    const [formData, setFormData] = useState({
+        taskServiceName: '',
+        taskDescription: '',
+        userAddress: '',
+        customerBudget: '',
+        taskImage: undefined,
+        taskDate: undefined
+    })
+
 
 const handleChange = (e: any) => {
     const { name, value } = e.target;
@@ -44,45 +46,112 @@ const handleChange = (e: any) => {
     }));
 
     // Update the form data with the new password or confirm password value
-    setFormData((prevData) => ({
-        ...prevData,
-        [name]: value,
-    }));
+    // setFormData((prevData) => ({
+    //     ...prevData,
+    //     [name]: value,
+    // }));
 };
 
-const handleFile = (e: any) => {
+
+// To handle input type file
+
+const handleImage = (e: any) => {
     setFormData((prevData) => ({
         ...prevData,
         taskImage: e.target.files[0]
     }));
 }
 
+// const handleImage = (e: any) => {
+//     const selectedFile = e.target.files[0];
 
-//   To check all required fields 
+//     // Check if a file was selected
+//     if (selectedFile) {
+//         setFormData((prevData) => ({
+//             ...prevData,
+//             taskImage: selectedFile
+//         }));
+//     } else {
+//         // Handle the case where the user canceled the file selection
+//         console.error('No file selected.');
+//     }
+// };
+
+
+
 const isAllFieldsFilled = () => {
     const requiredFields: (keyof FormState)[] = [
-        'taskServiceTitle',
+        'taskServiceName',
         'taskDescription',
-        'customerAddress',
+        'userAddress',
         'customerBudget',
         'taskDate',
-        'taskImage'
+        // 'taskImage'
     ];
-    return requiredFields.every((field) => formData[field] !== "");
-  };
+    return requiredFields.every((field) => {
+        const value = formData[field];
+        return typeof value === 'number' || (typeof value === 'string' && value.trim() !== '');
+    });
+};
 
 //   To reset the form
 
   const resetForm = () => {
     setFormData({
-        taskServiceTitle: '',
+        taskServiceName: '',
         taskDescription: '',
-        customerAddress: '',
+        userAddress: '',
         customerBudget: '',
-        taskDate: '',
+        taskDate: undefined,
         taskImage: undefined
     })
   }
+
+// To submit form
+
+  const{data: session} = useSession()
+  const userToken = session?.user.accessToken
+
+  const handleSubmit = async (e: {preventDefault: () => void}) => {
+    e.preventDefault()
+    console.log(formData)
+    setIsLoading(true)
+    
+    const apiFormData = new FormData()
+    apiFormData.append("taskServiceName", formData.taskServiceName)
+    apiFormData.append("taskDescription", formData.taskDescription)
+    apiFormData.append("userAddress", formData.userAddress)
+    apiFormData.append("customerBudget", formData.customerBudget)
+    apiFormData.append("taskImage", formData.taskImage!)
+    apiFormData.append("taskDate", formData.taskDate!)
+    
+    try {
+        const response = await axios.post(
+            `${process.env.NEXT_PUBLIC_API_URL}task/post`, 
+            apiFormData,
+          {
+            headers: {
+                Authorization: `Bearer ${userToken}`,
+                "Content-Type": "multipart/form-data",
+            }
+        }
+      )
+    
+      console.log(response)
+      if (response.status === 200){
+         setResMsg(response.data.message)
+        }
+      
+    } catch (error) {
+      console.log(error)
+    } finally {
+        resetForm()
+        setIsLoading(false)
+        setTimeout(() => {
+            setResMsg('')
+        }, 3000);
+    }
+}
 
     return (
         <CustomerDashboardLayout>
@@ -93,15 +162,15 @@ const isAllFieldsFilled = () => {
             
                 <div className='my-8 flex flex-col justify-center items-start w-[800px] p-8'>
                     <form className='flex flex-col'
-                    // onSubmit={handleSubmit}
+                    onSubmit={handleSubmit}
                     > 
                         <p className='text-md font-extrabold my-5'>Request Details</p>
 
                         <input type="text"
                             placeholder='Title'
-                            id='taskServiceTitle' 
-                            name='taskServiceTitle'
-                            value= {formData.taskServiceTitle}
+                            id='taskServiceName' 
+                            name='taskServiceName'
+                            value= {formData.taskServiceName}
                             className='p-2 border-2 border-grey2 rounded-md w-[300px] my-5'
                             required
                             onChange={handleChange}
@@ -121,66 +190,47 @@ const isAllFieldsFilled = () => {
                             />
                             <p className='text-[13px] flex justify-end text-grey4'>(maximum of 50 characters)</p>
                         </div>
-        
-                        {/* <select 
-                            name="category" 
-                            id="category"
-                            value= {formData.category}
-                            className='p-2 border-2 border-grey2 rounded-md w-[500px] my-5'
-                            required
-                            onChange={handleChange}
-                        >
-                            <option value='' disabled>--Select a Category--</option>
-                            <option value="Western Australia">Tech</option>
-                            <option value="Northern Territory">Plumber</option>
-                            <option value="South Australia">Electrician</option>
-                            <option value="Queensland">Mechanics</option>
-                            <option value="New South Wales">Gardener</option>
-                            <option value="Victoria">Painter</option>
-                            <option value="Tasmania">Laundry</option>
-                            <option value="Tasmania">Caterer</option>
-                        </select> */}
                 
                         <input type="text"
                             placeholder='Address'
-                            id='customerAddress'
-                            name='customerAddress'
-                            value= {formData.customerAddress}
+                            id='userAddress'
+                            name='userAddress'
+                            value= {formData.userAddress}
                             className='p-2 border-2 border-grey2 rounded-md w-[500px] my-5'
                             required
                             onChange={handleChange}
                         />
 
                         <div className=' flex relative p-2 border-2 border-grey2 rounded-md w-[500px] my-5 focus:border-black '>
-                        <p className='abosulte left-2 mr-2'>$</p>
-                        <input 
-                            type="number"
-                            placeholder="Customer's Budget"
-                            id='customerBudget' 
-                            name='customerBudget'
-                            value= {formData.customerBudget}
-                            className='border-none outline-none w-full'
-                            required
-                            onChange={handleChange}
-                        />
+                            <p className='abosulte left-2 mr-2'>$</p>
+                            <input 
+                                type="number"
+                                placeholder="Customer's Budget"
+                                id='customerBudget' 
+                                name='customerBudget'
+                                value= {formData.customerBudget}
+                                className='border-none outline-none w-full'
+                                required
+                                onChange={handleChange}
+                            />
                         </div>
 
                         <input 
                             type="file" 
                             placeholder="jpg,png,pdf format"
-                            id='document' 
-                            name='document'
-                            // value= {formData.budget}
+                            id='taskImage' 
+                            name='taskImage'
+                            // value= {formData.taskImage}
                             className='p-2 border-2 border-grey2 rounded-md w-[300px] my-5'
                             required
-                            onChange={handleFile}
+                            onChange={handleImage}
                         />
 
                         <input type="date"
-                            // placeholder='date'
-                            id='date'
-                            name='date'
-                            value= {formData.taskDate}
+                            placeholder='date'
+                            id='taskDate'
+                            name='taskDate'
+                            // value= {formData.taskDate}
                             className='p-2 border-2 border-grey2 rounded-md w-[500px] my-5'
                             required
                             onChange={handleChange}
@@ -189,13 +239,16 @@ const isAllFieldsFilled = () => {
                         <button 
                             type="submit"
                             className={` bg-[#34a853] text-white w-[180px] py-4 px-6 my-8 rounded-md hover:bg-[#46694f] text-sm disabled:opacity-50`}
-                            disabled={!isAllFieldsFilled() || isLoading}>
+                            disabled={!isAllFieldsFilled() || isLoading}
+                        >
                         
                             {!isLoading ? "Save Changes" : "Saving..."}
                             
                         </button>
 
                     </form>
+
+                    <p className='my-2 text-md'>{resMsg}</p>
 
 
                 </div>

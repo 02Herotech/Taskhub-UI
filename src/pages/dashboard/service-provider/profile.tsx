@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useSession } from 'next-auth/react';
+import axios from 'axios';
 
 import SPDashboardLayout from '../../../../components/spdashboardLayout';
 
@@ -69,13 +70,45 @@ const Profile = () => {
       }
 
 
-    // To submit form 
+   // To submit form 
+  
+   const handleSubmit = async (e: {preventDefault: () => void}) => {
+    e.preventDefault()
+    console.log(formData)
+    
+    const userToken = session?.user.accessToken
 
-    const handleSubmit = async (e: {preventDefault: () => void}) => {
-        e.preventDefault()
-        console.log(formData)
+    const streetNumebrValue = formData.streetNumber
+    const streetNameValue = formData.streetName
+    const suburbValue = formData.suburb
+    const postCodeValue = formData.postCode
+    const stateValue = formData.state
+    const unitNumberValue = formData.unitNumber
+
+
+    try {
+      const response = await axios.patch(`${process.env.NEXT_PUBLIC_API_URL}customer/update`, 
+         
+          {
+              "op":"replace",
+              "path":"/user/address/streetNumber",
+              "value":"{streetNumebrValue}"
+          },
+          {
+              headers: {
+                  Authorization: `Bearer ${userToken}`,
+                  'Content-Type': 'application/json',
+              }
+          }
+          
+      )
+
+      console.log(response)
+      
+    } catch (error) {
+      console.log(error)
     }
-
+}
     const {data: session} = useSession()
 
     const firstNameValue = session?.user.user.firstName || '';

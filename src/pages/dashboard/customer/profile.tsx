@@ -89,48 +89,32 @@ const Profile = () => {
       const handleSubmit = async (e: {preventDefault: () => void}) => {
           e.preventDefault()
           console.log(formData)
+          
+          const userToken = session?.user.accessToken
 
-          const streetNumebrValue = formData.streetNumber
+          const streetNumberValue = formData.streetNumber
           const streetNameValue = formData.streetName
           const suburbValue = formData.suburb
           const postCodeValue = formData.postCode
           const stateValue = formData.state
           const unitNumberValue = formData.unitNumber
 
+
           try {
             const response = await axios.patch(`${process.env.NEXT_PUBLIC_API_URL}customer/update`, 
-            [
+               
                 {
                     "op":"replace",
                     "path":"/user/address/streetNumber",
-                    "value":{streetNumebrValue}
+                    "value":"{streetNumebrValue}"
                 },
                 {
-                    "op":"replace",
-                    "path":"/user/address/streetName",
-                    "value":{streetNameValue}
-                },
-                {
-                    "op":"replace",
-                    "path":"/user/address/suburb",
-                    "value":{suburbValue}
-                },
-                {
-                    "op":"replace",
-                    "path":"/user/address/postCode",
-                    "value":{postCodeValue}
-                },
-                {
-                    "op":"replace",
-                    "path":"/user/address/state",
-                    "value":{stateValue}
-                },
-                {
-                    "op":"replace",
-                    "path":"/user/address/unitNumber",
-                    "value":{unitNumberValue}
+                    headers: {
+                        Authorization: `Bearer ${userToken}`,
+                        'Content-Type': 'application/json',
+                    }
                 }
-            ]
+                
             )
 
             console.log(response)
