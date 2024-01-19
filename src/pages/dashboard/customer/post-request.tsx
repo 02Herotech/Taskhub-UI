@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useSession } from 'next-auth/react';
 import axios from 'axios';
+import { useRef } from 'react';
 
 
 import CustomerDashboardLayout from '../../../../components/customerdashboardLayout';
@@ -27,6 +28,9 @@ const PostRequest = () => {
 
     const [isLoading, setIsLoading] = useState(false)
     const [resMsg, setResMsg] = useState('')
+
+    const taskDateRef = useRef<HTMLInputElement>(null);
+    const taskImageRef = useRef<HTMLInputElement>(null);
 
     const [formData, setFormData] = useState({
         taskServiceName: '',
@@ -105,7 +109,17 @@ const isAllFieldsFilled = () => {
         taskDate: undefined,
         taskImage: undefined
     })
-  }
+
+      // Reset date input
+      if (taskDateRef.current) {
+        taskDateRef.current.value = '';
+      }
+  
+      // Reset file input
+      if (taskImageRef.current) {
+        taskImageRef.current.value = '';
+      }
+  };
 
 // To submit form
 
@@ -224,6 +238,7 @@ const isAllFieldsFilled = () => {
                             className='p-2 border-2 border-grey2 rounded-md w-[300px] my-5'
                             required
                             onChange={handleImage}
+                            ref={taskImageRef}
                         />
 
                         <input type="date"
@@ -234,6 +249,7 @@ const isAllFieldsFilled = () => {
                             className='p-2 border-2 border-grey2 rounded-md w-[500px] my-5'
                             required
                             onChange={handleChange}
+                            ref={taskDateRef}
                         />
 
                         <button 
