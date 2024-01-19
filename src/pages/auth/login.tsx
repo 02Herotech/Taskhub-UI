@@ -81,14 +81,11 @@ const Login: React.FC<FormState> = () => {
           (formData.userType === "service-provider" &&
             userTypeRole === "SERVICE_PROVIDER")
         ) {
-<<<<<<< HEAD
 
-          // axios.defaults.headers.common['Authorization'] = `Bearer ${accessTokenValue}`;
-=======
           axios.defaults.headers.common[
             "Authorization"
           ] = `Bearer ${accessTokenValue}`;
->>>>>>> c7a538394a2b8f6f65ae71ab0b5ce04c93a251fc
+
 
           await signIn("credentials", {
             redirect: false,
