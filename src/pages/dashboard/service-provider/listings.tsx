@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
 import { AiOutlineRight  } from "react-icons/ai";
 import { FaArrowLeft } from "react-icons/fa6";
-import Link from 'next/link';
 import axios from 'axios';
 import { useSession } from 'next-auth/react';
 
 
 import SPDashboardLayout from '../../../../components/spdashboardLayout';
 import styles from './listing.module.css'
-import { url } from 'inspector';
+
 
 interface FormState {
     businessName: string;
@@ -106,14 +105,7 @@ const imageView = document.getElementById("drag-image1")
             image1: e.target.files[0]
         }))
     }
-    const dropArea = document.getElementById("drop-area")
-    const inputFile = document.getElementById("image1")
-  
-    // inputFile?.addEventListener("change", uplaodImage)
-  
-    // function uplaodImage() {
-    //   let imgLink = URL.createObjectURL(inputFile.files[0])
-    // }
+ 
 
     const handleImage2 = (e: any) => {
         setFormData((prevData) => ({

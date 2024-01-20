@@ -5,7 +5,7 @@ import { TermsAndConditions } from '../../components/termsAndPrivacy/TermsAndPri
 
 
 
-const terms = () => {
+const Terms = () => {
     return (
         <div className={`min-h-screen`}>
             <Nav />
@@ -20,4 +20,4 @@ const terms = () => {
     )
 }
 
-export default terms
+export default Terms
