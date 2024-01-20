@@ -3,17 +3,18 @@ import { AiOutlineRight  } from "react-icons/ai";
 import { FaArrowLeft } from "react-icons/fa6";
 import Link from 'next/link';
 import axios from 'axios';
+import { useSession } from 'next-auth/react';
 
 
 import SPDashboardLayout from '../../../../components/spdashboardLayout';
 import styles from './listing.module.css'
+import { url } from 'inspector';
 
 interface FormState {
     businessName: string;
     serviceCategories: string;
-    // subCategories: string;
     serviceDescription: string;
-    serviceName: string;
+    // serviceName: string;
     pricing: number;
     availableDays: [string];
     available: boolean;
@@ -40,12 +41,12 @@ const Listings = () => {
         {
             id: '1', 
             name: 'Business Name',
-            // fields: ['businessName', 'serviceCategories']
+            fields: ['businessName', 'serviceCategories']
         },
         {
             id: '2', 
             name: ' Description & Status',
-            // fields: ['serviceDescription', 'serviceCategories']
+            fields: ['serviceDescription', 'serviceCategories']
         },
         {id: '3', name: 'Pricing'},
         {id: '4', name: 'Location & Image'}
@@ -58,7 +59,7 @@ const Listings = () => {
         businessName: '',
         serviceCategories: '',
         serviceDescription: '',
-        serviceName: '',
+        // serviceName: '',
         pricing: '',
         availableDays: [],
         available: '',
@@ -97,6 +98,7 @@ const Listings = () => {
 
 
 // To handle images
+const imageView = document.getElementById("drag-image1")
 
     const handleImage1 = (e: any) => {
         setFormData((preData) => ({
@@ -104,6 +106,14 @@ const Listings = () => {
             image1: e.target.files[0]
         }))
     }
+    const dropArea = document.getElementById("drop-area")
+    const inputFile = document.getElementById("image1")
+  
+    // inputFile?.addEventListener("change", uplaodImage)
+  
+    // function uplaodImage() {
+    //   let imgLink = URL.createObjectURL(inputFile.files[0])
+    // }
 
     const handleImage2 = (e: any) => {
         setFormData((prevData) => ({
@@ -135,7 +145,7 @@ const Listings = () => {
             businessName: '',
             serviceCategories: '',
             serviceDescription: '',
-            serviceName: '',
+            // serviceName: '',
             pricing: '',
             availableDays: [],
             available: '',
@@ -162,10 +172,8 @@ const Listings = () => {
       // Check box for days of the week 
   
       const daysOfWeek = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'];
-      
       const [checkedDays, setCheckedDays] = useState<string[]>([]);
   
-
       // Function to handle checkbox change
 
       const handleCheckBoxChange = (day: string) => {
@@ -176,8 +184,6 @@ const Listings = () => {
         }
       };
 
-
-      
     //   To go to next step
 
     const [currentStep, setCurrentStep] = useState(0)
@@ -194,19 +200,17 @@ const Listings = () => {
         }
     }
     
-    // Active Step
-
- 
 
     // To submit form 
-    // const{data: session} = useSession()
+
+    const{data: session} = useSession()
+    const userToken = session?.user.accessToken
 
     const handleSubmit = async (e: {preventDefault: () => void}) => {
       e.preventDefault()
-      console.log(formData)
       
-    //   const userToken = session?.user.accessToken
-    //   console.log(userToken)
+      console.log(formData)
+      console.log(userToken)
   
     //   const taskServiceNameValue = formData.taskServiceName
     //   const taskDescriptionValue = formData.taskDescription
@@ -233,12 +237,10 @@ const Listings = () => {
             // }
             
         )
-  
         console.log(response)
-        
-      } catch (error) {
-        console.log(error)
-      }
+        } catch (error) {
+            console.log(error)
+        }
   }
 
 
@@ -276,7 +278,7 @@ const Listings = () => {
                                             htmlFor="businessName"
                                             className='font-semibold mt-2 mr-10 w-[110px]'
                                             >
-                                                Business Title
+                                                Business Title <span className={`text-red10`}>*</span>
                                             </label>
 
                                             <textarea 
@@ -301,7 +303,7 @@ const Listings = () => {
                                             htmlFor="serviceCategories"
                                             className='font-semibold mt-2 mr-10 w-[110px]'
                                         >
-                                            Category
+                                            Category <span className={`text-red10`}>*</span>
                                         </label>
 
                                         <select
@@ -329,17 +331,6 @@ const Listings = () => {
                                             <option value="Travel & Adventure">Travel & Adventure</option>
                                         </select>
                                     </div>
-
-                                    {/* <div className='mt-32 flex justify-end w-[900px] '>
-                                        <button 
-                                            type='submit'
-                                            className='bg-black py-3 px-6 rounded-lg text-white  hover:text-[#FE9B07] disabled:opacity-50'
-                                            onClick={next} 
-                                            disabled={!isAllFieldsFilled()}
-                                        >
-                                            Save & Continue
-                                        </button>
-                                    </div> */}
                                 </div>
                                 
                             )}
@@ -355,7 +346,7 @@ const Listings = () => {
                                                         htmlFor="serviceDescription"
                                                         className='font-semibold mb-10'
                                                 >
-                                                    Briefly Describe Your Service
+                                                    Briefly Describe Your Service <span className={`text-red10`}>*</span>
                                                 </label>
 
                                                 <textarea 
@@ -436,196 +427,39 @@ const Listings = () => {
                                         </div>
                             
                                     </div>
-
-                                    {/* <div className='mt-32 flex justify-between w-[900px] '>
-                                        <button
-                                            className='flex items-center hover:text-[#FE9B07]'
-                                            onClick={previous}
-                                        >
-                                            <span className='mr-2'><FaArrowLeft /></span> Back
-                                        </button>
-
-                                        <button 
-                                            className='bg-black py-3 px-6 rounded-lg text-white  hover:text-[#FE9B07] disabled:opacity-50'
-                                            onClick={next} 
-                                            disabled={!isAllFieldsFilled()}
-                                            type='submit'
-                                        >   
-                                            Save & Continue
-                                        </button>
-                                    </div>                                 */}
                                 </div>
                             )}
 
                             {currentStep === 2 && (
                                 <div >
                                     <h1 className='text-lg font-extrabold'>Pricing</h1>
-                                    <h3 className='text-[16px] my-5'>Choose the pricing method that best suit your niche</h3>
+                                    <h3 className='text-[16px] my-5 font-semibold'>Provide service pricing for your listing</h3>
 
-                                    <div className='my-16'>
-                                        <h3 className='text-[16px] font-extrabold'>Business Fixed Price</h3>
+                                    <div className='m-16'>
+                                        <div className='flex items-center'>
+                                            <h3 className='text-lg font-extrabold'>Service Pricing</h3>
+                                            <p className='ml-2 text-grey5 text-[12px]'>(10% GST inclusive) <span className={`text-red10`}>*</span></p> 
+                                        </div>
 
-                                        <div className='text-[15px] flex space-x-2 mt-10'>
-                                            <p className='text-grey5 border-[1.5px] border-grey6 py-2 px-4 rounded-[12px] select-none'>AUD$</p>
+                                        <div className=' w-[250px]'>
+                                            <div className='text-[15px] flex justify-between mt-10 mb-2'>
+                                                <p className='border-[1.5px] border-grey6 py-2 px-4 rounded-[12px] select-none'>AUD$</p>
+                                                
+                                                <input 
+                                                    type="number" 
+                                                    id='pricing'
+                                                    name='pricing'
+                                                    className='border-[1.5px] border-grey6 rounded-[12px] py-2 px-4 w-[150px]'
+                                                    placeholder='0.00'
+                                                    onChange={handleChange}
+                                                    value={formData.pricing}
+                                                />
+                                            </div>
                                             
-                                            <input 
-                                                type="number" 
-                                                id='pricing'
-                                                name='pricing'
-                                                className='border-[1.5px] border-grey6 text-grey5 rounded-[12px] py-2 px-4 w-[150px]'
-                                                placeholder='0.00'
-                                                onChange={handleChange}
-                                                value={formData.pricing}
-                                            />
+                                            <p className=' text-right text-grey5 text-[12px]'>(Min of AUD$25)</p>
                                         </div>
                                     </div>
-
-                                    <div className='my-16'>
-                                        <h3 className='text-[16px] font-extrabold'>Package Pricing</h3>
-
-                                        <div className='flex space-x-6 mt-10'>
-                                            
-                                            <div className=' space-y-8'>
-                                                <div className=' flex flex-col items-center space-y-[10px]'>
-                                                    <label 
-                                                        htmlFor='basic'
-                                                        className=' bg-[#FE9B07] rounded-[12px] text-white text-center w-[160px] py-[35px] font-extrabold text-[14px]'
-                                                    >
-                                                        Basic
-                                                    </label>
-                                                
-                                                    <textarea
-                                                        rows={5}
-                                                        cols={10}
-                                                        id='basicText'
-                                                        className=' resize-none border-[1.5px] border-grey6 text-grey5 rounded-[12px] py-2 px-4 w-[160px] h-[200px] text-[12px]'
-                                                        placeholder='Describe details of the offer'
-                                                        onChange={handleChange}
-                                                    />
-                                                </div>
-
-                                                <div>
-                                                    <p className='text-[14px] ml-2.5 font-extrabold'>Price</p>
-
-                                                    <div className='flex space-x-1 mt-5 text-[13px]'>
-                                                        <p className='text-grey5 border-[1.5px] border-grey6 p-2 rounded-[12px] select-none'>AUD$</p>
-                                                    
-                                                        <input 
-                                                            type="number" 
-                                                            id='basicPrice'
-                                                            className='border-[1.5px] border-grey6 text-grey5 rounded-[12px] p-2 w-[80px]'
-                                                            placeholder='0.00'
-                                                            onChange={handleChange}
-                                                        />
-                                                    </div>
-
-                                                </div>
-                                            </div>
-
-                                            <div className=' space-y-8'>
-                                                <div className='flex flex-col items-center space-y-[10px] text-[13px]'>
-                                                    <label 
-                                                        htmlFor='standard'
-                                                        className=' bg-[#FE9B07] rounded-[12px] text-white text-center w-[160px] py-[35px] font-extrabold text-[14px]'
-                                                    >
-                                                        Standard
-                                                    </label>
-                                                
-                                                    <textarea 
-                                                        rows={5}
-                                                        cols={10} 
-                                                        id='standardText'
-                                                        className=' resize-none border-[1.5px] border-grey6 text-grey5 rounded-[12px] py-2 px-4 w-[160px] h-[200px] text-[12px]'
-                                                        placeholder='Describe details of the offer'
-                                                        onChange={handleChange}
-                                                    />
-                                                </div>
-
-                                                <div>
-                                                    <p className='text-[14px] ml-2.5 font-extrabold'>Price</p>
-
-                                                    <div className='flex space-x-1 mt-5 text-[13px]'>
-                                                        <p className='text-grey5 border-[1.5px] border-grey6 p-2 rounded-[12px] select-none'>AUD$</p>
-                                                    
-                                                        <input 
-                                                            type="number" 
-                                                            id='standardPrice'
-                                                            className='border-[1.5px] border-grey6 text-grey5 rounded-[12px] p-2 w-[80px]'
-                                                            placeholder='0.00'
-                                                            onChange={handleChange}
-                                                        />
-                                                    </div>
-
-                                                </div>
-                                            
-                                            </div>
-
-
-                                            <div className=' space-y-8'>
-                                                <div className='flex flex-col items-center space-y-[10px] text-[13px]'>
-                                                    <label 
-                                                        htmlFor='premium'
-                                                        className=' bg-[#FE9B07] rounded-[12px] text-white text-center w-[160px] py-[35px] font-extrabold text-[14px]'
-                                                    >
-                                                        Premium
-                                                    </label>
-                                                
-                                                    <textarea 
-                                                        rows={5}
-                                                        cols={10} 
-                                                        id='standardText'
-                                                        className=' resize-none border-[1.5px] border-grey6 text-grey5 rounded-[12px] py-2 px-4 w-[160px] h-[200px] text-[12px]'
-                                                        placeholder='Describe details of the offer'
-                                                        onChange={handleChange}
-                                                    />
-                                                </div>
-
-                                                <div>
-                                                    <p className='text-[14px] ml-2.5 font-extrabold'>Price</p>
-
-                                                    <div className='flex space-x-1 mt-5 text-[13px]'>
-                                                        <p className='text-grey5 border-[1.5px] border-grey6 p-2 rounded-[12px] select-none'>AUD$</p>
-                                                    
-                                                        <input 
-                                                            type="number" 
-                                                            id='standardPrice'
-                                                            className='border-[1.5px] border-grey6 text-grey5 rounded-[12px] p-2 w-[80px]'
-                                                            placeholder='0.00'
-                                                            onChange={handleChange}
-
-                                                        />
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div className='my-16'>
-                                        <h3 className='text-[16px] font-extrabold'>Hourly Rate</h3>
-
-                                        <div className='mt-10'>
-                                            <p className='text-[14px] ml-2.5'>Price</p>
-
-                                            <div className='flex space-x-3 mt-5 items-center'>
-                                                <div className='flex space-x-1  text-[13px]'>
-                                                    <p className='text-grey5 border-[1.5px] border-grey6 p-2 rounded-[12px] select-none'>AUD$</p>
-                                            
-                                                    <input 
-                                                        type="number" 
-                                                        id='standardPrice'
-                                                        className='border-[1.5px] border-grey6 text-grey5 rounded-[12px] p-2 w-[80px]'
-                                                        placeholder='0.00'
-                                                        onChange={handleChange}
-                                                    />
-                                                </div>
-
-                                                <h3 className='font-extrabold text-grey5'>PER HOUR</h3>
-                                            </div>
-                                        </div>
-                                    </div>
-                           
-                                </div>
+                               </div>
                             )}
 
                             {currentStep === 3 && (
@@ -762,24 +596,40 @@ const Listings = () => {
 
                                     <div className='my-16'>
                                         <h3 className='text-md font-extrabold mb-5'>BUSINESS IMAGE</h3>
-                                        <p className='text-[13px] font-semibold'>Images (up to 3) <br />Get noticed by the right buyers with visual examples of your services</p>
+                                        <p className='text-[13px] font-semibold'>Images (up to 3) <br />Get noticed with visual examples of your services</p>
                                    
                                         
-                                        <div className='flex text-[15px] mt-10 w-[350px] justify-between'>
-                                        <input
-                                            type='file'
-                                            name="image1" 
-                                            id="image1" 
-                                            className='file:h-[100px] file:w-[100px] file:bg-transparent file:rounded-lg file:border-[1.5px] file:border-grey4 w-[100px]' 
-                                            onChange={handleImage1}
-                                        />
+                                        <div className=' flex flex-col text-[15px] mt-10 justify-between '>
+                                            
+                                        <label 
+                                            htmlFor="image1"
+                                            className='w-[400px] h-[200px] bg-white text-center rounded-md p-10 border flex flex-col items-center justify-center'
+                                            id='drop-area'
+                                        >
+                                            <input
+                                                type='file'
+                                                name="image1" 
+                                                id="image1" 
+                                                // className=' file:bg-transparent file:rounded-lg file:border-[1.5px] file:border-grey4 w-[100px]' 
+                                                className='hidden'
+                                                onChange={handleImage1}
+                                                accept='image/*'
+                                            />
+                                            <div 
+                                                className={`w-full h-full border rounded-md bg-green4`}
+                                                id='drag-image1'                                            
+                                            >
+                                                <p>Drag and drop</p>
+                                            </div>
+                                        </label>
 
                                         <input
                                             type='file'
                                             name="image1" 
                                             id="image1" 
-                                            className='file:h-[100px] file:w-[100px] file:bg-transparent file:rounded-lg file:border-[1.5px] file:border-grey4 w-[100px]' 
+                                            className='file:h-[100px] file:w-[200px] file:bg-transparent file:rounded-lg file:border-[1.5px] file:border-grey4 w-[200px]' 
                                             onChange={handleImage2}
+                                            accept='image/*'
                                         />
 
                                         <input
@@ -788,6 +638,7 @@ const Listings = () => {
                                             id="image1" 
                                             className='file:h-[100px] file:w-[100px] file:bg-transparent file:rounded-lg file:border-[1.5px] file:border-grey4 w-[100px]' 
                                             onChange={handleImage3}
+                                            accept='image/*'
                                         />
                                         </div>
 

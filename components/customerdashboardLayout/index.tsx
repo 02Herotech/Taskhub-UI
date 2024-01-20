@@ -81,11 +81,11 @@ function CustomerDashboardLayout(props: IProps) {
                 {/*Top Bar*/}
 
                 <div className={`flex justify-between px-6 py-3 border-b-[1.5px] border-grey4 z-50`}>
-                    <div className={`flex justify-center items-center`}>
+                    <Link href='/' className={`flex justify-center items-center`}>
                         <Image src={taskHub} className={`mx-2`} alt="task-hub"/>
                         <h3 className={`text-lg font-extrabold`}>TaskHub</h3>
-                    </div>
-                    <div className={`flex justify-around w-[300px] items-center bg-purpleBase rounded-md px-3 py-2 text-white`}>
+                    </Link>
+                    <div className={`flex justify-around w-[320px] items-center bg-purpleBase rounded-md px-3 py-2 text-white`}>
                         <div className={``}>
                             <span className={`text-[20px]`}><IoIosNotificationsOutline /></span>
                         </div>
@@ -103,10 +103,12 @@ function CustomerDashboardLayout(props: IProps) {
                         <div className=' flex relative cursor-pointer' onClick={contactClick}>
                             <ul>
                                 <li  className={`text-[20px] hover:text-[#FE9B07] ${isLinkActive("/dashboard/customer/settings") && "text-[#FE9B07]"} `}>
-                                    <GoGear />
+                                    <Link href='/dashboard/customer/settings'>
+                                        <GoGear />
+                                    </Link>
                                 </li>
 
-                                { !isOpen ? '' :
+                                {/* { !isOpen ? '' :
                                 <div className='absolute top-[50px] ml-[-75px] w-[100px]'>
                                     <span className='text-purpleBase flex justify-end mb-[-12px] text-[30px]'><IoMdArrowDropup /></span>
 
@@ -124,7 +126,7 @@ function CustomerDashboardLayout(props: IProps) {
                                         </li>
                                     </ul>
                                 </div>
-                                }
+                                } */}
                             </ul>
                         </div>
                         
