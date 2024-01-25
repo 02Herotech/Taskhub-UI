@@ -2,17 +2,10 @@ import React, { useState } from 'react';
 import { useSession } from 'next-auth/react';
 import axios from 'axios';
 import { useRef } from 'react';
+import { useRouter } from 'next/router';
 
 
-import CustomerDashboardLayout from '../../../../components/customerdashboardLayout';
-import customer from "../../../../public/dashboardAssets/portrait.jpg";
-import styles from "../customer/styles.module.scss"
-import Image from 'next/image';
-import {MdVerified} from "react-icons/md";
-import {GrLocation, GrSearch} from "react-icons/gr";
-import Card from "../../../../components/card2/Card";
-import Picture1 from "../../../../public/customerAssets/close-up-collection-make-up-beauty-products.jpg";
-import Picture2 from "../../../../public/customerAssets/vintage-sewing-machine-with-thread-measuring-tape.jpg";
+import CustomerDashboardLayout from '../../../../../components/customerdashboardLayout';
 
 
 interface FormState {
@@ -28,6 +21,8 @@ const PostRequest = () => {
 
     const [isLoading, setIsLoading] = useState(false)
     const [resMsg, setResMsg] = useState('')
+
+    const route = useRouter();
 
     const taskDateRef = useRef<HTMLInputElement>(null);
     const taskImageRef = useRef<HTMLInputElement>(null);
@@ -48,12 +43,6 @@ const handleChange = (e: any) => {
         ...prevData,
         [name]: value,
     }));
-
-    // Update the form data with the new password or confirm password value
-    // setFormData((prevData) => ({
-    //     ...prevData,
-    //     [name]: value,
-    // }));
 };
 
 
@@ -65,22 +54,6 @@ const handleImage = (e: any) => {
         taskImage: e.target.files[0]
     }));
 }
-
-// const handleImage = (e: any) => {
-//     const selectedFile = e.target.files[0];
-
-//     // Check if a file was selected
-//     if (selectedFile) {
-//         setFormData((prevData) => ({
-//             ...prevData,
-//             taskImage: selectedFile
-//         }));
-//     } else {
-//         // Handle the case where the user canceled the file selection
-//         console.error('No file selected.');
-//     }
-// };
-
 
 
 const isAllFieldsFilled = () => {
@@ -163,6 +136,7 @@ const isAllFieldsFilled = () => {
         setIsLoading(false)
         setTimeout(() => {
             setResMsg('')
+            route.push('/dashboard/customer/my-tasks')
         }, 3000);
     }
 }

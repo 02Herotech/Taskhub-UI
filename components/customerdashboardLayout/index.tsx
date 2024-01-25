@@ -1,6 +1,3 @@
-"use client"
-
-
 import React, {ReactNode} from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
@@ -8,10 +5,10 @@ import Link from 'next/link';
 import { signOut, useSession } from 'next-auth/react';
 import axios from "axios";
 import { useState } from 'react';
-import { IoMdArrowDropup } from "react-icons/io";
+import {IoIosNotificationsOutline} from "react-icons/io";
 // import { AuthResponse } from 'next-auth';
 
-import {IoIosNotificationsOutline} from "react-icons/io";
+import { IoMdArrowDropup } from "react-icons/io";
 // import {RiArrowDropDownLine} from "react-icons/ri";
 import {RxDashboard} from "react-icons/rx";
 import {IoPersonOutline} from "react-icons/io5";
@@ -147,8 +144,8 @@ function CustomerDashboardLayout(props: IProps) {
                                 <Link href="/dashboard/customer/profile" className={`flex items-center gap-[20px] hover:text-[#FE9B07]  mb-14 ${isLinkActive("/dashboard/customer/profile") && "text-[#FE9B07]"}`}>
                                     <IoPersonOutline size={16}/>Profile
                                 </Link>
-                                <Link href="/dashboard/customer/post-request" className={`flex items-center gap-[20px] hover:text-[#FE9B07] mb-14 ${isLinkActive("/dashboard/customer/post-request") && "text-[#FE9B07]"}`}>
-                                    <IoClipboardOutline size={16}/>Post a Request
+                                <Link href="/dashboard/customer/my-tasks" className={`flex items-center gap-[20px] hover:text-[#FE9B07] mb-14 ${isLinkActive("/dashboard/customer/my-tasks") && "text-[#FE9B07]"}`}>
+                                    <IoClipboardOutline size={16}/>My Tasks
                                 </Link>
                                 <Link href="/dashboard/customer/bookings" className={`flex items-center gap-[20px] hover:text-[#FE9B07] mb-14 ${isLinkActive("/dashboard/customer/bookings") && "text-[#FE9B07]"}`}>
                                     <TfiWallet size={16}/>Bookings
