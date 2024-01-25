@@ -59,7 +59,7 @@ const Footer = () => {
                     </div>
 
                     <div className={`flex flex-col space-y-2 mt-2`}>
-                        <h3 className={`mb-8 font-extrabold text-sm`}>Services</h3>
+                        <h3 className={`mb-8 font-extrabold text-sm`}>Marketplace</h3>
                         <ul className={`space-y-3 `}>
                             <li>
                                 <Link href='/#' className={`text-[14px] hover:text-grey4`}>Automotive Services</Link>
@@ -94,16 +94,16 @@ const Footer = () => {
 
                         <ul className={`space-y-3`}>
                             <li>
-                                <Link href='/faq' className={`text-[14px] hover:text-grey4`}> FAQs </Link>
+                                <Link href='/faq' className={`text-[14px] hover:text-grey4`}>FAQs</Link>
                             </li>
-                            <li>
+                            {/* <li>
                                 <Link href='#' className={`text-[14px] hover:text-grey4`}>Contact Us </Link>
+                            </li> */}
+                            <li>
+                                <Link href='/terms-and-condition' className={`text-[14px] hover:text-grey4`}>Terms and Conditions</Link>
                             </li>
                             <li>
-                                <Link href='/termsAndConditions' className={`text-[14px] hover:text-grey4`}> Terms and Conditions</Link>
-                            </li>
-                            <li>
-                                <Link href='/privacy' className={`text-[14px] hover:text-grey4`}> Privacy </Link>
+                                <Link href='/privacy' className={`text-[14px] hover:text-grey4`}>Privacy</Link>
                             </li>
                         </ul>
                     </div>

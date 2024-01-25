@@ -70,16 +70,10 @@ const handleLogOut = async () => {
             <Link href="/" className={`p-2 hover:text-purpleBase ${isLinkActive("/") && "text-purpleBase"}`} >
               Home
             </Link>
-            <Link href='/about' className={`p-2 hover:text-purpleBase ${isLinkActive("/about") && "text-purpleBase"}`}  >
-              About Us
+            <Link href="/marketplace" className={`p-2 hover:text-purpleBase ${isLinkActive("/services") && "text-purpleBase"}`} >
+              Marketplace
             </Link>
-            <Link href="/services" className={`p-2 hover:text-purpleBase ${isLinkActive("/services") && "text-purpleBase"}`} >
-              Services
-            </Link>
-            <Link href="/faq" className={`p-2 hover:text-purpleBase ${isLinkActive("/faq") && "text-purpleBase"}`} >
-              FAQs
-            </Link>
-            
+    
             <div className=' flex relative cursor-pointer' onClick={contactClick}>
               <ul>
                 <li  className={`flex hover:text-purpleBase`}>

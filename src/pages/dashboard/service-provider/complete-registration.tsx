@@ -363,6 +363,7 @@ const CompleteRegistration = () => {
                                                 // value={formData.idImage} 
                                                 onChange={handleImage} 
                                                 required 
+                                                accept='image/*'
                                             />
                                     </div>
 

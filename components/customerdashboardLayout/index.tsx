@@ -1,6 +1,3 @@
-"use client"
-
-
 import React, {ReactNode} from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
@@ -8,10 +5,10 @@ import Link from 'next/link';
 import { signOut, useSession } from 'next-auth/react';
 import axios from "axios";
 import { useState } from 'react';
-import { IoMdArrowDropup } from "react-icons/io";
+import {IoIosNotificationsOutline} from "react-icons/io";
 // import { AuthResponse } from 'next-auth';
 
-import {IoIosNotificationsOutline} from "react-icons/io";
+import { IoMdArrowDropup } from "react-icons/io";
 // import {RiArrowDropDownLine} from "react-icons/ri";
 import {RxDashboard} from "react-icons/rx";
 import {IoPersonOutline} from "react-icons/io5";
@@ -81,11 +78,11 @@ function CustomerDashboardLayout(props: IProps) {
                 {/*Top Bar*/}
 
                 <div className={`flex justify-between px-6 py-3 border-b-[1.5px] border-grey4 z-50`}>
-                    <div className={`flex justify-center items-center`}>
+                    <Link href='/' className={`flex justify-center items-center`}>
                         <Image src={taskHub} className={`mx-2`} alt="task-hub"/>
                         <h3 className={`text-lg font-extrabold`}>TaskHub</h3>
-                    </div>
-                    <div className={`flex justify-around w-[300px] items-center bg-purpleBase rounded-md px-3 py-2 text-white`}>
+                    </Link>
+                    <div className={`flex justify-around w-[320px] items-center bg-purpleBase rounded-md px-3 py-2 text-white`}>
                         <div className={``}>
                             <span className={`text-[20px]`}><IoIosNotificationsOutline /></span>
                         </div>
@@ -103,10 +100,12 @@ function CustomerDashboardLayout(props: IProps) {
                         <div className=' flex relative cursor-pointer' onClick={contactClick}>
                             <ul>
                                 <li  className={`text-[20px] hover:text-[#FE9B07] ${isLinkActive("/dashboard/customer/settings") && "text-[#FE9B07]"} `}>
-                                    <GoGear />
+                                    <Link href='/dashboard/customer/settings'>
+                                        <GoGear />
+                                    </Link>
                                 </li>
 
-                                { !isOpen ? '' :
+                                {/* { !isOpen ? '' :
                                 <div className='absolute top-[50px] ml-[-75px] w-[100px]'>
                                     <span className='text-purpleBase flex justify-end mb-[-12px] text-[30px]'><IoMdArrowDropup /></span>
 
@@ -124,7 +123,7 @@ function CustomerDashboardLayout(props: IProps) {
                                         </li>
                                     </ul>
                                 </div>
-                                }
+                                } */}
                             </ul>
                         </div>
                         
@@ -145,8 +144,8 @@ function CustomerDashboardLayout(props: IProps) {
                                 <Link href="/dashboard/customer/profile" className={`flex items-center gap-[20px] hover:text-[#FE9B07]  mb-14 ${isLinkActive("/dashboard/customer/profile") && "text-[#FE9B07]"}`}>
                                     <IoPersonOutline size={16}/>Profile
                                 </Link>
-                                <Link href="/dashboard/customer/post-request" className={`flex items-center gap-[20px] hover:text-[#FE9B07] mb-14 ${isLinkActive("/dashboard/customer/post-request") && "text-[#FE9B07]"}`}>
-                                    <IoClipboardOutline size={16}/>Post a Request
+                                <Link href="/dashboard/customer/my-tasks" className={`flex items-center gap-[20px] hover:text-[#FE9B07] mb-14 ${isLinkActive("/dashboard/customer/my-tasks") && "text-[#FE9B07]"}`}>
+                                    <IoClipboardOutline size={16}/>My Tasks
                                 </Link>
                                 <Link href="/dashboard/customer/bookings" className={`flex items-center gap-[20px] hover:text-[#FE9B07] mb-14 ${isLinkActive("/dashboard/customer/bookings") && "text-[#FE9B07]"}`}>
                                     <TfiWallet size={16}/>Bookings
