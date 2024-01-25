@@ -6,14 +6,12 @@ import { useSession } from 'next-auth/react';
 
 
 import SPDashboardLayout from '../../../../components/spdashboardLayout';
-import styles from './listing.module.css'
 
 
 interface FormState {
     businessName: string;
     serviceCategories: string;
     serviceDescription: string;
-    // serviceName: string;
     pricing: number;
     availableDays: [string];
     available: boolean;
@@ -97,7 +95,6 @@ const Listings = () => {
 
 
 // To handle images
-const imageView = document.getElementById("drag-image1")
 
     const handleImage1 = (e: any) => {
         setFormData((preData) => ({
@@ -204,29 +201,10 @@ const imageView = document.getElementById("drag-image1")
       console.log(formData)
       console.log(userToken)
   
-    //   const taskServiceNameValue = formData.taskServiceName
-    //   const taskDescriptionValue = formData.taskDescription
-    //   const userAddressValue = formData.userAddress
-    //   const customerBudgetValue = formData.customerBudget
-    //   const taskImageValue = formData.taskImage
-    //   const taskDateValue = formData.taskDate
   
       try {
         const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}task/post`, 
-            // {
-            //   taskServiceName: taskServiceNameValue,
-            //   taskDescription: taskDescriptionValue,
-            //   userAddress: userAddressValue,
-            //   customerBudget: customerBudgetValue,
-            //   taskImage: taskImageValue,
-            //   taskDate: taskDateValue
-            // },
-            // {
-            //     headers: {
-            //         Authorization: `Bearer ${userToken}`,
-            //         'Content-Type': 'application/json',
-            //     }
-            // }
+          
             
         )
         console.log(response)
@@ -417,7 +395,6 @@ const imageView = document.getElementById("drag-image1")
                                             </div>
 
                                         </div>
-                            
                                     </div>
                                 </div>
                             )}
@@ -657,7 +634,6 @@ const imageView = document.getElementById("drag-image1")
                                 <button 
                                     type='submit'
                                     className='bg-black py-3 px-6 rounded-lg text-white absolute right-0 bottom-0 hover:text-[#FE9B07]'
-                                    // onClick={next}
                                 >
                                     Submit
                                 </button>
@@ -667,7 +643,7 @@ const imageView = document.getElementById("drag-image1")
                                 className='bg-black py-3 px-6 rounded-lg text-white absolute right-0 bottom-0 hover:text-[#FE9B07]'
                                 onClick={next}
                                 >
-                                Save & Continue
+                                    Save & Continue
                                 </button>
                             }
                         
