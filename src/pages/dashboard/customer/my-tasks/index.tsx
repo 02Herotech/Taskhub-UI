@@ -87,7 +87,7 @@ const MyTask = () => {
 
   useEffect(() => {
     handleFetchTask();
-  }, []);
+  });
 
   // Update active and inactive tasks whenever taskData changes
   useEffect(() => {
