@@ -113,25 +113,22 @@ const MyTask = () => {
 
         <div className="flex justify-center mt-10 w-[700px]">
           <div className="flex w-[400px] justify-evenly items-center">
-            {catgeory.map((category) => {
-              console.log(currentCategory);
-              return (
-                <button
-                  key={category.id}
-                  onClick={() => {
-                    setCurrentCategory(category.name);
-                    handleFetchTask();
-                  }}
-                  className={`text-[15px] border py-1 px-4 rounded-3xl ${
-                    category.name === currentCategory
-                      ? "opacity-[100%]"
-                      : "opacity-[50%]"
-                  }`}
-                >
-                  <p>{category.name}</p>
-                </button>
-              );
-            })}
+            {catgeory.map((category) => (
+              <button
+                key={category.id}
+                onClick={() => {
+                  setCurrentCategory(category.name);
+                  handleFetchTask();
+                }}
+                className={`text-[15px] border py-1 px-4 rounded-3xl ${
+                  category.name === currentCategory
+                    ? "opacity-[100%]"
+                    : "opacity-[50%]"
+                }`}
+              >
+                <p>{category.name}</p>
+              </button>
+            ))}
           </div>
         </div>
 
@@ -140,11 +137,8 @@ const MyTask = () => {
             {currentCategory === "Open" && (
               <div className=" grid grid-cols-2 justify-between">
                 {activeTasks.map((task) => (
-                  <Link href={`/my-tasks/${task.id}`}>
-                    <div
-                      key={task.id}
-                      className="border border-grey3 rounded-lg shadow-lg p-4 mx-10 my-5 w-[250px]"
-                    >
+                  <Link href={`/my-tasks/${task.id}`} key={task.id}>
+                    <div className="border border-grey3 rounded-lg shadow-lg p-4 mx-10 my-5 w-[250px]">
                       <div className="flex justify-between items-center">
                         <h4 className="font-extrabold text-[18px]">
                           {task.taskServiceName}
@@ -210,11 +204,8 @@ const MyTask = () => {
             {currentCategory === "All" && (
               <div className=" grid grid-cols-2 justify-between">
                 {taskData.map((task: taskData) => (
-                  <Link href={`/my-tasks/${task.id}`}>
-                    <div
-                      key={task.id}
-                      className="border border-grey3 rounded-lg shadow-lg p-4 mx-10 my-5 w-[250px]"
-                    >
+                  <Link href={`/my-tasks/${task.id}`} key={task.id}>
+                    <div className="border border-grey3 rounded-lg shadow-lg p-4 mx-10 my-5 w-[250px]">
                       <div className="flex justify-between items-center">
                         <h4 className="font-extrabold text-[18px]">
                           {task.taskServiceName}
@@ -280,11 +271,8 @@ const MyTask = () => {
             {currentCategory === "Closed" && (
               <div className=" grid grid-cols-2 justify-between">
                 {inactiveTasks.map((task: taskData) => (
-                  <Link href={`/my-tasks/${task.id}`}>
-                    <div
-                      key={task.id}
-                      className="border border-grey3 rounded-lg shadow-lg p-4 mx-10 my-5 w-[250px]"
-                    >
+                  <Link href={`/my-tasks/${task.id}`} key={task.id}>
+                    <div className="border border-grey3 rounded-lg shadow-lg p-4 mx-10 my-5 w-[250px]">
                       <div className="flex justify-between items-center">
                         <h4 className="font-extrabold text-[18px]">
                           {task.taskServiceName}
