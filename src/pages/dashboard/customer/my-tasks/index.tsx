@@ -3,13 +3,14 @@ import { useSession } from "next-auth/react";
 import axios from "axios";
 import { useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
+import { Suspense } from "react";
 
 import { CiCalendar } from "react-icons/ci";
 import { FiMapPin } from "react-icons/fi";
 import CustomerDashboardLayout from "../../../../../components/customerdashboardLayout";
 import { current } from "@reduxjs/toolkit";
-import Image from "next/image";
-import loader from "../../../../../public/taskhub-loader.gif";
+import loader from "../../../../../public/taskhub-newloader.gif";
 
 interface taskData {
   id: number;
@@ -44,7 +45,7 @@ const MyTask = () => {
     },
   ];
 
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [taskData, setTaskData] = useState<taskData[]>([]);
   const [activeTasks, setActiveTasks] = useState<taskData[]>([]);
   const [inactiveTasks, setInactiveTasks] = useState<taskData[]>([]);
@@ -53,9 +54,12 @@ const MyTask = () => {
   const [errorMsg, setErrorMsg] = useState("");
 
   const handleFetchTask = async () => {
-    const userToken = session?.user?.accessToken;
+    await new Promise((resolve) => setTimeout(resolve, 3000));
+
+    if (!userToken) {
+      return; // Skip fetching if userToken is not available
+    }
     console.log("usertoken:", userToken);
-    setIsLoading(true);
 
     try {
       const response = await axios.get(
@@ -68,7 +72,6 @@ const MyTask = () => {
         }
       );
 
-      setIsLoading(false);
       const customerTasks = response.data
         .filter((task: taskData) => task.posterId === session?.user?.user.id)
         .sort((a: any, b: any) => b.id - a.id);
@@ -76,18 +79,19 @@ const MyTask = () => {
 
       console.log("task response: ", response);
       console.log("data: ", taskData);
-
-      // setIsLoading(false)
     } catch (error) {
       console.log(error);
       setErrorMsg("Error loading task");
     } finally {
+      setIsLoading(false);
     }
   };
 
+  const userToken = session?.user?.accessToken;
+
   useEffect(() => {
     handleFetchTask();
-  }, []);
+  }, [userToken, session]);
 
   // Update active and inactive tasks whenever taskData changes
   useEffect(() => {
@@ -133,78 +137,85 @@ const MyTask = () => {
         </div>
 
         <div className="my-10 flex justify-around w-[700px]">
-          <div>
-            {currentCategory === "Open" && (
-              <div className=" grid grid-cols-2 justify-between">
-                {activeTasks.map((task) => (
-                  <Link href={`/my-tasks/${task.id}`} key={task.id}>
-                    <div className="border border-grey3 rounded-lg shadow-lg p-4 mx-10 my-5 w-[250px]">
-                      <div className="flex justify-between items-center">
-                        <h4 className="font-extrabold text-[18px]">
-                          {task.taskServiceName}
-                        </h4>
+          {isLoading ? (
+            <div className="w-[700px] flex items-center justify-center h-[300px] ">
+              <Image src={loader} alt="loader" width={150} />
+            </div>
+          ) : (
+            <div>
+              {currentCategory === "Open" && (
+                <div className=" grid grid-cols-2 justify-between">
+                  {activeTasks.map((task) => (
+                    <Link
+                      href={`/dashboard/customer/my-tasks/${task.id} `}
+                      key={task.id}
+                    >
+                      <div className="border border-grey3 rounded-lg shadow-lg p-4 mx-10 my-5 w-[250px]">
+                        <div className="flex justify-between items-center">
+                          <h4 className="font-extrabold text-[18px]">
+                            {task.taskServiceName}
+                          </h4>
 
-                        <div className="w-[12px] h-[12px] block rounded-[50%] border-[1.5px] border-green4 relative">
-                          <span className="w-[6px] h-[6px] block rounded-[50%] bg-green4 absolute right-[1.5px] top-[1.5px]"></span>
+                          <div className="w-[12px] h-[12px] block rounded-[50%] border-[1.5px] border-green4 relative">
+                            <span className="w-[6px] h-[6px] block rounded-[50%] bg-green4 absolute right-[1.5px] top-[1.5px]"></span>
+                          </div>
                         </div>
-                      </div>
 
-                      <div className="flex justify-between my-3 text-[13px]">
-                        <p className="">AUD$ {task.customerBudget}</p>
-                        <p className="">Active {task.active}</p>
+                        <div className="flex justify-between my-3 text-[13px]">
+                          <p className="">AUD$ {task.customerBudget}</p>
+                          <p className="">Active {task.active}</p>
 
-                        <div className="flex items-center space-x-1">
-                          <span className="text-[20px] ">
-                            <CiCalendar />
+                          <div className="flex items-center space-x-1">
+                            <span className="text-[20px] ">
+                              <CiCalendar />
+                            </span>
+                            <p>
+                              {task.taskDates.map((date) => {
+                                const currentDate = new Date(date);
+                                const day = currentDate.getDate();
+                                const monthName =
+                                  currentDate.toLocaleDateString(undefined, {
+                                    month: "short",
+                                  });
+                                return `${day} ${monthName}`;
+                              })}
+                            </p>
+                          </div>
+                        </div>
+
+                        <div className="text-[13px] flex items-center space-x-1">
+                          <span>
+                            <FiMapPin />
                           </span>
-                          <p>
-                            {task.taskDates.map((date) => {
-                              const currentDate = new Date(date);
-                              const day = currentDate.getDate();
-                              const monthName = currentDate.toLocaleDateString(
-                                undefined,
-                                { month: "short" }
-                              );
-                              return `${day} ${monthName}`;
-                            })}
-                          </p>
+                          <p>{task.userAddress}</p>
                         </div>
                       </div>
+                    </Link>
+                  ))}
+                </div>
+              )}
 
-                      <div className="text-[13px] flex items-center space-x-1">
-                        <span>
-                          <FiMapPin />
-                        </span>
-                        <p>{task.userAddress}</p>
-                      </div>
+              {currentCategory === "Open" && activeTasks.length === 0 && (
+                <div className="w-[700px] flex items-center justify-center h-[300px] ">
+                  <p className="text-center text-grey5 text-[15px]">
+                    Open task is empty. <br /> Please use the button below to
+                    create new task
+                  </p>
+                </div>
+              )}
 
-                      {/* <p>Task ID: {task.id}</p> */}
-                      {/* <p>Description Name: {task.taskDescription}</p> */}
-                      {/* <p>active: {task.active}</p> */}
-                      {/* <img src={task.taskImage} alt={`Task ID: ${task.id}`} width="300" height="200" />                      */}
-                    </div>
-                  </Link>
-                ))}
-              </div>
-            )}
-
-            {currentCategory === "Open" && activeTasks.length === 0 && (
-              <div className="w-[700px] flex items-center justify-center h-[300px] ">
-                <p className="text-center text-grey5 text-[15px]">
-                  Open task is empty. <br /> Please use the button below to
-                  create new task
-                </p>
-              </div>
-            )}
-
-            {/* <p className="text-center text-red4 text-[15px]">{errorMsg}</p> */}
-          </div>
+              {/* <p className="text-center text-red4 text-[15px]">{errorMsg}</p> */}
+            </div>
+          )}
 
           <div>
             {currentCategory === "All" && (
               <div className=" grid grid-cols-2 justify-between">
                 {taskData.map((task: taskData) => (
-                  <Link href={`/my-tasks/${task.id}`} key={task.id}>
+                  <Link
+                    href={`/dashboard/customer/my-tasks/${task.id}`}
+                    key={task.id}
+                  >
                     <div className="border border-grey3 rounded-lg shadow-lg p-4 mx-10 my-5 w-[250px]">
                       <div className="flex justify-between items-center">
                         <h4 className="font-extrabold text-[18px]">
@@ -271,7 +282,10 @@ const MyTask = () => {
             {currentCategory === "Closed" && (
               <div className=" grid grid-cols-2 justify-between">
                 {inactiveTasks.map((task: taskData) => (
-                  <Link href={`/my-tasks/${task.id}`} key={task.id}>
+                  <Link
+                    href={`/dashboard/customer/my-tasks/${task.id}`}
+                    key={task.id}
+                  >
                     <div className="border border-grey3 rounded-lg shadow-lg p-4 mx-10 my-5 w-[250px]">
                       <div className="flex justify-between items-center">
                         <h4 className="font-extrabold text-[18px]">

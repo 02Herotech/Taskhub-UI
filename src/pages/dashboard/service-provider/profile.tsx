@@ -129,7 +129,7 @@ const Profile = () => {
       }
     } catch (error: any) {
       console.log("update info: ", error);
-      setErrorMsg(error.response.data.message);
+      setErrorMsg(error.message);
 
       setTimeout(() => {
         setErrorMsg("");
