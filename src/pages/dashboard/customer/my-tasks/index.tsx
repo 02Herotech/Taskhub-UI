@@ -4,6 +4,7 @@ import axios from "axios";
 import { useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { Suspense } from "react";
 
 import { CiCalendar } from "react-icons/ci";
 import { FiMapPin } from "react-icons/fi";
@@ -145,7 +146,10 @@ const MyTask = () => {
               {currentCategory === "Open" && (
                 <div className=" grid grid-cols-2 justify-between">
                   {activeTasks.map((task) => (
-                    <Link href={`/my-tasks/${task.id}`} key={task.id}>
+                    <Link
+                      href={`/dashboard/customer/my-tasks/${task.id} `}
+                      key={task.id}
+                    >
                       <div className="border border-grey3 rounded-lg shadow-lg p-4 mx-10 my-5 w-[250px]">
                         <div className="flex justify-between items-center">
                           <h4 className="font-extrabold text-[18px]">
@@ -208,7 +212,10 @@ const MyTask = () => {
             {currentCategory === "All" && (
               <div className=" grid grid-cols-2 justify-between">
                 {taskData.map((task: taskData) => (
-                  <Link href={`/my-tasks/${task.id}`} key={task.id}>
+                  <Link
+                    href={`/dashboard/customer/my-tasks/${task.id}`}
+                    key={task.id}
+                  >
                     <div className="border border-grey3 rounded-lg shadow-lg p-4 mx-10 my-5 w-[250px]">
                       <div className="flex justify-between items-center">
                         <h4 className="font-extrabold text-[18px]">
@@ -275,7 +282,10 @@ const MyTask = () => {
             {currentCategory === "Closed" && (
               <div className=" grid grid-cols-2 justify-between">
                 {inactiveTasks.map((task: taskData) => (
-                  <Link href={`/my-tasks/${task.id}`} key={task.id}>
+                  <Link
+                    href={`/dashboard/customer/my-tasks/${task.id}`}
+                    key={task.id}
+                  >
                     <div className="border border-grey3 rounded-lg shadow-lg p-4 mx-10 my-5 w-[250px]">
                       <div className="flex justify-between items-center">
                         <h4 className="font-extrabold text-[18px]">
