@@ -6,9 +6,12 @@ import { SlLocationPin } from "react-icons/sl";
 import { PiNotepad } from "react-icons/pi";
 import { FaArrowLeftLong } from "react-icons/fa6";
 import Image from "next/image";
+import { BsThreeDots } from "react-icons/bs";
 
 import CustomerDashboardLayout from "../../../../../../components/customerdashboardLayout";
 import loader from "../../../../../../public/taskhub-newloader.gif";
+import { string } from "yup";
+import { stringify } from "querystring";
 
 interface taskData {
   id: string | number;
@@ -31,7 +34,9 @@ const TaskDetails = () => {
 
   const [taskData, setTaskData] = useState<taskData[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [isOpened, setIsOpened] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
+  const [idValue, setIdValue] = useState("");
 
   const { data: session } = useSession();
 
@@ -76,6 +81,35 @@ const TaskDetails = () => {
     }
   };
 
+  const taskId = parseInt(id as string, 10);
+  console.log("id value: ", taskId);
+
+  const handleDelete = async () => {
+    try {
+      // setIsLoading(true);
+
+      if (!userToken || !id) {
+        return;
+      }
+
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_API_URL}task/delete-task/${taskId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${userToken}`,
+          },
+        }
+      );
+
+      console.log("delete res", response);
+    } catch (error) {
+      console.error(error);
+      // setErrorMsg("Error loading task");
+    } finally {
+      // setIsLoading(false);
+    }
+  };
+
   const userToken = session?.user?.accessToken;
 
   useEffect(() => {
@@ -90,10 +124,32 @@ const TaskDetails = () => {
         <h1 className="text-lg font-extrabold border border-grey2 rounded-md shadow-md p-2">
           VIEW TASK DETAILS
         </h1>
-        <div className="flex mt-16 w-[700px] border border-grey2 rounded-2xl shadow-xl p-10">
+        <div className="flex  flex-col mt-16 w-[700px] border border-grey2 rounded-2xl shadow-xl p-10 relative">
+          <span
+            className="absolute top-2 right-5 text-grey4  cursor-pointer hover:text-grey6"
+            onClick={() => setIsOpened(!isOpened)}
+          >
+            <BsThreeDots />
+          </span>
+          {isOpened && (
+            <div className="flex flex-col text-[12px]  text-grey4 absolute right-8 top-6 items-center space-y-1">
+              <p className=" hover:text-grey6 hover:border-b-[1.5px] cursor-pointer h-[20px] ">
+                Edit
+              </p>
+              <p className=" hover:text-grey6 hover:border-b-[1.5px] cursor-pointer h-[20px]">
+                Close
+              </p>
+              <p
+                className=" hover:text-grey6 hover:border-b-[1.5px] cursor-pointer h-[20px]"
+                onClick={handleDelete}
+              >
+                Delete
+              </p>
+            </div>
+          )}
           {/* <p>Task page {id}</p> */}
           {taskData.map((task, index) => (
-            <div key={index} className="w-full">
+            <div key={index} className="w-full ">
               <h2 className="text-[30px] mb-5 font-extrabold">
                 {task.taskServiceName}
               </h2>

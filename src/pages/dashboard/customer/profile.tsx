@@ -152,7 +152,7 @@ const Profile = () => {
               type="text"
               value={`${firstNameValue} ${lastNameValue}`}
               readOnly
-              className="border-2 border-grey2 rounded-md p-2 w-[300px] focus:border-transparent focus:ring-0 "
+              className="border-2 text-grey4 border-grey2 rounded-md p-2 w-[300px] focus:border-grey2 focus:outline-none"
             />
           </div>
 
@@ -164,7 +164,7 @@ const Profile = () => {
               type="text"
               value={eamilAddressValue}
               readOnly
-              className="border-2 border-grey2 rounded-md p-2 w-[300px] focus:border-transparent focus:ring-0"
+              className="border-2 text-grey4 border-grey2 rounded-md p-2 w-[300px] focus:border-grey2 focus:outline-none"
             />
           </div>
         </div>
