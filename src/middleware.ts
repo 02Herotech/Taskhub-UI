@@ -13,7 +13,8 @@ const notPublicPath = (
   path === '/dashboard/customer/complete-registration' ||
   path === '/dashboard/customer/settings' ||
   path === '/dashboard/customer/settings/change-password' ||
-  path === '/dashboard/customer/post-request' ||
+  path === '/dashboard/customer/my-tasks' ||
+  path === '/dashboard/customer/my-tasks/post-request' ||
   path === '/dashboard/service-provider' ||
   path === '/dashboard/service-provider/profile' ||
   path === '/dashboard/service-provider/complete-registration' ||

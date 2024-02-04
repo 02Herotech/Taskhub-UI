@@ -14,12 +14,14 @@ interface FormState {
   suburb: string;
   state: string;
   postCode: string;
+  error1: string;
 }
 
 const Profile = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccessful, setIsSuccessful] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
+  const [notEmptyError1, setNotEmptyError1] = useState(false);
 
   const [formData, setFormData] = useState({
     streetNumber: "",
@@ -28,20 +30,35 @@ const Profile = () => {
     suburb: "",
     state: "",
     postCode: "",
+    error1: "",
   });
 
   const handleChange = (e: any) => {
     const { name, value } = e.target;
+
     setFormData((prevData) => ({
       ...prevData,
       [name]: value,
     }));
 
-    // Update the form data with the new password or confirm password value
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+    if (name === "postCode") {
+      const numericValue = parseInt(value, 10);
+
+      if (numericValue > 7999 || numericValue < 800) {
+        setFormData((prevData) => ({
+          ...prevData,
+          error1: "Must be btw 800-7999",
+        }));
+        setNotEmptyError1(true);
+      } else {
+        // Clear the error message if the post code is within the valid range
+        setFormData((prevData) => ({
+          ...prevData,
+          error1: "",
+        }));
+        setNotEmptyError1(false);
+      }
+    }
   };
 
   //   To check all required fields
@@ -66,6 +83,7 @@ const Profile = () => {
       suburb: "",
       state: "",
       postCode: "",
+      error1: "",
     });
   };
 
@@ -170,7 +188,7 @@ const Profile = () => {
           </div>
         </div>
 
-        <div className="my-5 w-full h-[600px] flex justify-center items-center">
+        <div className="my-2 w-full h-[500px] flex justify-center items-center">
           {isSuccessful ? (
             <div
               className={`flex flex-col items-center justify-center ${styles.animation}`}
@@ -186,7 +204,7 @@ const Profile = () => {
             <div>
               <h2 className="text-[18px] font-extrabold my-2">Address</h2>
 
-              <form className="my-[40px]" onSubmit={handleSubmit}>
+              <form className="my-[10px]" onSubmit={handleSubmit}>
                 <div className="flex justify-between w-[700px] my-5">
                   <div className="flex flex-col">
                     <label htmlFor="streetNumber" className="font-extrabold">
@@ -253,8 +271,8 @@ const Profile = () => {
                   </div>
                 </div>
 
-                <div className="flex justify-between w-[700px] my-5">
-                  <div className="flex flex-col">
+                <div className="flex justify-between w-[700px] my-5 ">
+                  <div className="flex flex-col  w-[400px]">
                     <label htmlFor="state" className="font-extrabold">
                       State <span className={`text-red10`}>*</span>
                     </label>
@@ -263,7 +281,7 @@ const Profile = () => {
                       name="state"
                       id="state"
                       value={formData.state}
-                      className="p-2 border-2 border-grey2 rounded-md w-[500px] my-3"
+                      className="p-2 border-2 border-grey2 rounded-md my-3"
                       required
                       onChange={handleChange}
                     >
@@ -287,18 +305,31 @@ const Profile = () => {
                     </select>
                   </div>
 
-                  <div className="flex flex-col">
-                    <label htmlFor="unitNumber" className="font-extrabold">
-                      Post Code <span className={`text-red10`}>*</span>
-                    </label>
+                  <div className="flex flex-col  w-[250px]">
+                    <div className="flex items-center">
+                      <label
+                        htmlFor="unitNumber"
+                        className=" flex font-extrabold  w-[150px]"
+                      >
+                        Post Code <span className={`text-red10 ml-1`}>*</span>
+                      </label>
+
+                      <p
+                        className={`text-red10 p-2  my-0 py-0 text-[10px] w-[230px] text-justify font-bold`}
+                      >
+                        {formData.error1}
+                      </p>
+                    </div>
                     <input
                       type="number"
                       id="postCode"
                       name="postCode"
                       placeholder={postCodeValue}
                       value={formData.postCode}
-                      className="p-2 border-2 border-grey2 rounded-md w-[150px] my-3"
+                      className="p-2 border-2 border-grey2 rounded-md my-3"
                       required
+                      min={800}
+                      max={7999}
                       onChange={handleChange}
                     />
                   </div>
