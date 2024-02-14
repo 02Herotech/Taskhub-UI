@@ -145,7 +145,7 @@ const PostRequest = () => {
       subcategories: [
         "Custom Artwork",
         "Artist",
-        "music instructor",
+        "Music Instructor",
         "Craftsmanship",
         "Creative Workshops",
       ],

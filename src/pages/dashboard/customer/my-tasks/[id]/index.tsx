@@ -86,17 +86,16 @@ const TaskDetails = () => {
 
   const handleDelete = async () => {
     try {
-      // setIsLoading(true);
-
       if (!userToken || !id) {
         return;
       }
-
+      console.log("token: ", userToken);
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_API_URL}task/delete-task/${taskId}`,
         {
           headers: {
             Authorization: `Bearer ${userToken}`,
+            "Content-Type": "application/json",
           },
         }
       );
@@ -133,14 +132,14 @@ const TaskDetails = () => {
           </span>
           {isOpened && (
             <div className="flex flex-col text-[12px]  text-grey4 absolute right-8 top-6 items-center space-y-1">
-              <p className=" hover:text-grey6 hover:border-b-[1.5px] cursor-pointer h-[20px] ">
+              <p className=" hover:text-grey6 hover:border-b-[1.5px] cursor-pointer h-[20px] px-2 ">
                 Edit
               </p>
-              <p className=" hover:text-grey6 hover:border-b-[1.5px] cursor-pointer h-[20px]">
+              <p className=" hover:text-grey6 hover:border-b-[1.5px] cursor-pointer h-[20px] px-2">
                 Close
               </p>
               <p
-                className=" hover:text-grey6 hover:border-b-[1.5px] cursor-pointer h-[20px]"
+                className=" hover:text-grey6 hover:border-b-[1.5px] cursor-pointer h-[20px] px-2"
                 onClick={handleDelete}
               >
                 Delete
@@ -227,7 +226,7 @@ const TaskDetails = () => {
         <div className="w-[700px] mt-10">
           <a
             href="/dashboard/customer/my-tasks"
-            className="flex justify-center items-center text-[14px] text-[#969696] space-x-2"
+            className="flex justify-center items-center text-[14px] text-[#969696] space-x-2 hover:text-[#FE9B07] hover:scale-110"
           >
             <span>
               <FaArrowLeftLong />
