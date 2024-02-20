@@ -6,6 +6,7 @@ import { useSession } from "next-auth/react";
 
 // import SPDashboardLayout from "../../../../../components/spdashboardLayout";
 import SPDashboardLayout from "../../../../../components/spdashboardLayout";
+import { json } from "stream/consumers";
 
 interface FormState {
   businessName: string;
@@ -415,7 +416,15 @@ const Listings = () => {
 
   // Check box for days of the week
 
-  const daysOfWeek = ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"];
+  const daysOfWeek = [
+    "MONDAY",
+    "TUESDAY",
+    "WEDNESDAY",
+    "THURSDAY",
+    "FRIDAY",
+    "SATURDAY",
+    "SUNDAY",
+  ];
   const [checkedDays, setCheckedDays] = useState<string[]>([]);
 
   // Function to handle checkbox change
@@ -440,20 +449,6 @@ const Listings = () => {
 
     console.log("formdata:", formData);
 
-    // const [openHour, openMinutes] = formData.openingTime.split(":");
-    // setFormData({
-    //   ...formData,
-    //   startHour: openHour,
-    //   startMinute: openMinutes,
-    // });
-
-    // const [endHour, endMinutes] = formData.closingTime.split(":");
-    // setFormData({
-    //   ...formData,
-    //   closeHour: endHour,
-    //   closeMinute: endMinutes,
-    // });
-
     const apiFormData = new FormData();
     apiFormData.append("businessName", formData.businessName);
     apiFormData.append("serviceCategory", selectedCategory);
@@ -461,8 +456,8 @@ const Listings = () => {
     apiFormData.append("serviceDescription ", formData.serviceDescription);
     apiFormData.append("pricing", formData.pricing);
 
-    const checkedDaysString = checkedDays.join(",");
-    apiFormData.append("availableDays", checkedDaysString);
+    // const checkedDaysString = checkedDays.join(",");
+    apiFormData.append("availableDays", JSON.stringify(checkedDays));
     apiFormData.append("available", formData.available.toString());
     apiFormData.append("startHour", formData.startHour);
     apiFormData.append("closeMinute", formData.closeMinute);
@@ -954,28 +949,6 @@ const Listings = () => {
                 </p>
 
                 <div className=" flex flex-col text-[15px] mt-10 justify-between space-y-10">
-                  {/* <label
-                    htmlFor="image1"
-                    className="w-[400px] h-[200px] bg-white text-center rounded-md p-10 border flex flex-col items-center justify-center"
-                    id="drop-area"
-                  >
-                    <input
-                      type="file"
-                      name="image1"
-                      id="image1"
-                      // className=' file:bg-transparent file:rounded-lg file:border-[1.5px] file:border-grey4 w-[100px]'
-                      className="hidden"
-                      onChange={handleImage1}
-                      accept="image/*"
-                    />
-                    <div
-                      className={`w-full h-full border rounded-md bg-green4`}
-                      id="drag-image1"
-                    >
-                      <p>Drag and drop</p>
-                    </div>
-                  </label> */}
-
                   <input
                     type="file"
                     name="image1"
@@ -1032,7 +1005,6 @@ const Listings = () => {
               </button>
             ) : (
               <div
-                // type="button"
                 className="bg-black py-3 px-6 rounded-lg text-white w-[200px] hover:text-[#FE9B07] cursor-pointer flex justify-center"
                 onClick={next}
               >

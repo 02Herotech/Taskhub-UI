@@ -10,8 +10,6 @@ import { BsThreeDots } from "react-icons/bs";
 
 import CustomerDashboardLayout from "../../../../../../components/customerdashboardLayout";
 import loader from "../../../../../../public/taskhub-newloader.gif";
-import { string } from "yup";
-import { stringify } from "querystring";
 
 interface taskData {
   id: string | number;
@@ -89,7 +87,7 @@ const TaskDetails = () => {
       if (!userToken || !id) {
         return;
       }
-      console.log("token: ", userToken);
+      console.log(userToken);
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_API_URL}task/delete-task/${taskId}`,
         {
@@ -99,13 +97,13 @@ const TaskDetails = () => {
           },
         }
       );
-
       console.log("delete res", response);
-    } catch (error) {
-      console.error(error);
-      // setErrorMsg("Error loading task");
-    } finally {
-      // setIsLoading(false);
+      if (response.status === 200) {
+        router.push("/dashboard/customer/my-tasks");
+      }
+    } catch (error: any) {
+      console.error(error.message);
+      setErrorMsg(error.message);
     }
   };
 
@@ -123,6 +121,11 @@ const TaskDetails = () => {
         <h1 className="text-lg font-extrabold border border-grey2 rounded-md shadow-md p-2">
           VIEW TASK DETAILS
         </h1>
+
+        <p className="text-center w-[700px] text-red10 mt-4 -mb-4">
+          {errorMsg}
+        </p>
+
         <div className="flex  flex-col mt-16 w-[700px] border border-grey2 rounded-2xl shadow-xl p-10 relative">
           <span
             className="absolute top-2 right-5 text-grey4  cursor-pointer hover:text-grey6"
@@ -220,7 +223,6 @@ const TaskDetails = () => {
               </div>
             )}
           </div>
-          {/* {errorMsg && <p>{errorMsg}</p>} */}
         </div>
 
         <div className="w-[700px] mt-10">
