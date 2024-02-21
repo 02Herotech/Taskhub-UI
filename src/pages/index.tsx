@@ -11,6 +11,7 @@ import Nav from "../../components/nav/Nav";
 import Footer from "../../components/footer/Footer";
 import GetStarted from "../../components/getStarted";
 import FeaturedSP from "../../components/featuredSP";
+import Testimonials from "../../components/testimonials";
 const automative = require("../../public/automative.png") as StaticImageData;
 const fedex = require("../../public/fedex.png") as StaticImageData;
 
@@ -74,11 +75,15 @@ const Home = () => {
           description={""}
         /> */}
 
+        {/* <FAQLandingPage /> */}
+
         <div>
           <FeaturedSP />
         </div>
 
-        <FAQLandingPage />
+        <div>
+          <Testimonials />
+        </div>
       </main>
 
       <Footer />

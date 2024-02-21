@@ -85,18 +85,21 @@ const GetStarted = () => {
             <p className="font-extrabold">Own your dashboard</p>
           </div>
           <span className="bg-white h-[3.5px] w-[250px] block"></span>
-          <div className="flex items-center w-[270px] flex-col text-[16px] space-y-7">
+          <div className="flex items-center w-[270px] flex-col text-[15px] space-y-5 text-justify">
             <p>
-              As a verified <span className="text-[#FE9B07]">Customer</span>,
-              you can post a tasks, book a services, manage your bookings and
-              payments{" "}
+              As a verified{" "}
+              <span className="text-[#FE9B07] font-bold ">Customer</span>, you
+              can post a tasks, connect with Service Provider, book a services,
+              make payments, etc{" "}
             </p>
             <div className="flex items-end">
               <p>
                 As a verified{" "}
-                <span className="text-[#FE9B07]">Servuce Provider</span>, you
-                can post your listings, view your orders, manage your booking
-                and make payment{" "}
+                <span className="text-[#FE9B07] font-bold">
+                  Servuce Provider
+                </span>
+                , you can post your listings, connect with customers, view your
+                orders, recieve payment, get rated, etc{" "}
               </p>
             </div>
           </div>
