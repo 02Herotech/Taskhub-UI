@@ -7,6 +7,7 @@ import { MdVerified } from "react-icons/md";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { FaRegUser } from "react-icons/fa";
 
 import SPDashboardLayout from "../../../../components/spdashboardLayout";
 import Card from "../../../../components/card/Card";
@@ -24,7 +25,7 @@ function Index() {
   const lastNameInitial = lastName?.charAt(0);
   const suburb = session?.user?.user?.address?.suburb;
   const state = session?.user?.user?.address?.state;
-
+  const profilePicture = session?.user.user.profileImage;
   const isEnabled = session?.user?.user?.enabled;
 
   useEffect(() => {
@@ -52,90 +53,65 @@ function Index() {
         </div>
       )}
 
-      {/* <div className={styles.main}> */}
       <div className={`m-10 w-[900px] flex flex-col justify-center`}>
-        <div className={styles.provider}>
-          <div className={styles.imageDiv}>
-            <Image
-              src={provider}
-              className={styles.providerImage}
-              alt="service-provider-image"
-            />
-          </div>
-          <div className={styles.searchDiv}>
-            <GrSearch className={styles.searchLogo} />
-            <input
-              type="text"
-              className={styles.searchInput}
-              placeholder="Search"
-            />
-          </div>
-        </div>
-        <div className={styles.providerInfo}>
-          <div className={styles.locationAndAvailability}>
-            <div className={styles.nameAndVerification}>
-              <p>
-                {firstName} {lastNameInitial}.
-              </p>
+        <div className={`flex items-center justify-between`}>
+          <div className="flex justify-center items-center">
+            {profilePicture ? (
+              <div
+                className={`w-[160px] h-[160px] rounded-[50%] border-2 border-[#FE9B07] flex justify-center items-center`}
+              >
+                <img
+                  src={profilePicture}
+                  alt="customer-image"
+                  className={`rounded-[50%] object-cover h-[150px]`}
+                  width={150}
+                />
+              </div>
+            ) : (
+              <span
+                className={` bg-grey3 rounded-[50%] border-[2px] border-[#FE9B07] border-whiten p-7 text-[80px] text-white`}
+              >
+                <FaRegUser />
+              </span>
+            )}
+            <div className={`flex flex-col justify-center items-start ml-5`}>
+              <div
+                className={`flex items-center justify-center text-[18px] font-extrabold`}
+              >
+                <p>
+                  {firstName} {lastNameInitial}.
+                </p>
+
+                {completeReg ? (
+                  <MdVerified className={`text-green4 ml-2`} />
+                ) : (
+                  ""
+                )}
+              </div>
 
               {completeReg ? (
-                <MdVerified className={styles.verificationLogo} />
+                <div className={`flex text-[13px] items-center justify-center`}>
+                  <GrLocation className={`mr-1`} />
+                  <p>
+                    {suburb}, {state}
+                  </p>
+                </div>
               ) : (
                 ""
               )}
             </div>
-
-            {completeReg ? (
-              <div className={styles.location}>
-                <GrLocation className={styles.locationLogo} />
-                <p>
-                  {suburb}, {state}
-                </p>
-              </div>
-            ) : (
-              ""
-            )}
-
-            <div className={styles.availabilityDiv}>
-              <p className={styles.aText}>Availability</p>
-              <div className={styles.onDiv}>
-                <p>ON</p>
-                <div className={styles.on}></div>
-              </div>
-            </div>
           </div>
 
-          <div className={styles.topButtonDiv}>
-            <button className={styles.editBtn}>Edit Profile</button>
-            <button className={styles.accountBtn}>Switch Account</button>
+          <div
+            className={`flex justify-center border-[1px] border-[#D9D9D9] p-2 rounded-md items-center`}
+          >
+            <GrSearch className={`mr-2`} />
+            <input
+              type="text"
+              className={`w-[350px] outline-none`}
+              placeholder="Search"
+            />
           </div>
-        </div>
-
-        <div className={styles.cardsDiv}>
-          <Card
-            image={Picture1}
-            description={
-              "I Provide Painting Services for House, Offices and Shops"
-            }
-            address={"No 102, 02 Arena , Sydney Flat A, New South Wales."}
-            count={3}
-          />
-          <Card
-            image={Picture2}
-            description={
-              "I Provide Painting Services for House, Offices and Shops"
-            }
-            address={"No 102, 02 Arena , Sydney Flat A, New South Wales."}
-            count={1}
-          />
-          <Card
-            image={Picture1}
-            description={
-              "I Provide Painting Services for House, Offices and Shops"
-            }
-            address={"No 102, 02 Arena , Sydney Flat A, New South Wales."}
-            count={5}
-          />
         </div>
       </div>
     </SPDashboardLayout>

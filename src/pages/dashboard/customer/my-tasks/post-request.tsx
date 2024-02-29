@@ -145,7 +145,7 @@ const PostRequest = () => {
       subcategories: [
         "Custom Artwork",
         "Artist",
-        "music instructor",
+        "Music Instructor",
         "Craftsmanship",
         "Creative Workshops",
       ],
@@ -340,7 +340,12 @@ const PostRequest = () => {
 
         <div className="my-8 flex flex-col justify-center items-start w-[800px] p-8">
           <form className="flex flex-col" onSubmit={handleSubmit}>
-            <p className="text-md font-extrabold my-5">Request Details</p>
+            <div className="flex flex-col my-5  space-y-2">
+              <p className="text-md font-extrabold ">Request Details</p>
+              <span className="text-[12px] font-extrabold text-red5">
+                (All fields are required)
+              </span>
+            </div>
 
             <input
               type="text"

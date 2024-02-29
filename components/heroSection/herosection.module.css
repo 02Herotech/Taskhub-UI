@@ -108,3 +108,17 @@
   from {opacity: 50%;}
   to {opacity: 100%;}
 } */
+
+
+.image-slider {
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+  }
+  
+  .slider {
+    width: 100%;
+    height: auto;
+    transition: opacity 1s ease; /* You can adjust the transition duration */
+  }
+  

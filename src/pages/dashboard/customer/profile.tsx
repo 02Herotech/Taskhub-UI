@@ -159,7 +159,7 @@ const Profile = () => {
 
   return (
     <CustomerDashboardLayout>
-      <div className="mt-16 flex flex-col justify-center items-start w-[800px] p-8 border-2 border-grey2 rounded-md">
+      <div className="my-16 flex flex-col justify-center items-start w-[800px] p-8 border-2 border-grey2 rounded-md">
         <h1 className="text-lg font-extrabold">Profile</h1>
         <div className="flex flex-col my-8 w-[500px]">
           <div className="flex items-center justify-between my-4">
@@ -186,7 +186,7 @@ const Profile = () => {
             />
           </div>
         </div>
-        <div className="my-5 w-full h-[600px] flex justify-center items-center">
+        <div className="my-5 w-full h-[500px] flex justify-center items-center  ">
           {isSuccessful ? (
             <div
               className={`flex flex-col items-center justify-center ${styles.animation}`}
@@ -202,8 +202,8 @@ const Profile = () => {
             <div>
               <h2 className="text-[18px] font-extrabold my-2">Address</h2>
 
-              <form className="my-[40px]" onSubmit={handleSubmit}>
-                <div className="flex justify-between w-[700px] my-5">
+              <form className="mt-[40px]" onSubmit={handleSubmit}>
+                <div className="flex justify-between w-[700px] my-5 ">
                   <div className="flex flex-col">
                     <label htmlFor="streetNumber" className="font-extrabold">
                       Street Number <span className={`text-red10`}>*</span>
@@ -335,7 +335,7 @@ const Profile = () => {
 
                 <button
                   type="submit"
-                  className={` bg-[#34a853] text-white py-4 px-6 rounded-md hover:bg-[#46694f] text-sm disabled:opacity-50`}
+                  className={` bg-[#34a853] text-white mt-4 py-4 px-6 rounded-md hover:bg-[#46694f] text-sm disabled:opacity-50`}
                   disabled={!isAllFieldsFilled() || isLoading}
                 >
                   {!isLoading ? "Save Changes" : "Saving..."}

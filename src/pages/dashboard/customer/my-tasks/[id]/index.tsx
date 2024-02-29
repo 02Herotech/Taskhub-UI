@@ -10,8 +10,6 @@ import { BsThreeDots } from "react-icons/bs";
 
 import CustomerDashboardLayout from "../../../../../../components/customerdashboardLayout";
 import loader from "../../../../../../public/taskhub-newloader.gif";
-import { string } from "yup";
-import { stringify } from "querystring";
 
 interface taskData {
   id: string | number;
@@ -86,27 +84,26 @@ const TaskDetails = () => {
 
   const handleDelete = async () => {
     try {
-      // setIsLoading(true);
-
       if (!userToken || !id) {
         return;
       }
-
+      console.log(userToken);
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_API_URL}task/delete-task/${taskId}`,
         {
           headers: {
             Authorization: `Bearer ${userToken}`,
+            "Content-Type": "application/json",
           },
         }
       );
-
       console.log("delete res", response);
-    } catch (error) {
-      console.error(error);
-      // setErrorMsg("Error loading task");
-    } finally {
-      // setIsLoading(false);
+      if (response.status === 200) {
+        router.push("/dashboard/customer/my-tasks");
+      }
+    } catch (error: any) {
+      console.error(error.message);
+      setErrorMsg(error.message);
     }
   };
 
@@ -124,6 +121,11 @@ const TaskDetails = () => {
         <h1 className="text-lg font-extrabold border border-grey2 rounded-md shadow-md p-2">
           VIEW TASK DETAILS
         </h1>
+
+        <p className="text-center w-[700px] text-red10 mt-4 -mb-4">
+          {errorMsg}
+        </p>
+
         <div className="flex  flex-col mt-16 w-[700px] border border-grey2 rounded-2xl shadow-xl p-10 relative">
           <span
             className="absolute top-2 right-5 text-grey4  cursor-pointer hover:text-grey6"
@@ -133,14 +135,14 @@ const TaskDetails = () => {
           </span>
           {isOpened && (
             <div className="flex flex-col text-[12px]  text-grey4 absolute right-8 top-6 items-center space-y-1">
-              <p className=" hover:text-grey6 hover:border-b-[1.5px] cursor-pointer h-[20px] ">
+              <p className=" hover:text-grey6 hover:border-b-[1.5px] cursor-pointer h-[20px] px-2 ">
                 Edit
               </p>
-              <p className=" hover:text-grey6 hover:border-b-[1.5px] cursor-pointer h-[20px]">
+              <p className=" hover:text-grey6 hover:border-b-[1.5px] cursor-pointer h-[20px] px-2">
                 Close
               </p>
               <p
-                className=" hover:text-grey6 hover:border-b-[1.5px] cursor-pointer h-[20px]"
+                className=" hover:text-grey6 hover:border-b-[1.5px] cursor-pointer h-[20px] px-2"
                 onClick={handleDelete}
               >
                 Delete
@@ -221,13 +223,12 @@ const TaskDetails = () => {
               </div>
             )}
           </div>
-          {/* {errorMsg && <p>{errorMsg}</p>} */}
         </div>
 
         <div className="w-[700px] mt-10">
           <a
             href="/dashboard/customer/my-tasks"
-            className="flex justify-center items-center text-[14px] text-[#969696] space-x-2"
+            className="flex justify-center items-center text-[14px] text-[#969696] space-x-2 hover:text-[#FE9B07] hover:scale-110"
           >
             <span>
               <FaArrowLeftLong />

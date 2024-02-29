@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import axios from "axios";
-import { useRef } from "react";
+
 import Link from "next/link";
 import Image from "next/image";
-import { Suspense } from "react";
+
+import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
 import { CiCalendar } from "react-icons/ci";
 import { FiMapPin } from "react-icons/fi";
@@ -106,6 +107,31 @@ const MyTask = () => {
     console.log("Inactive tasks: ", inactiveTasks);
   }, [taskData]);
 
+  const tasksPerPage = 6;
+  const [currentPage, setCurrentPage] = useState(1);
+
+  // Calculate the indexes for the tasks to be displayed on the current page
+  const indexOfLastTask = currentPage * tasksPerPage;
+  const indexOfFirstTask = indexOfLastTask - tasksPerPage;
+
+  const currentActiveTasks = activeTasks.slice(
+    indexOfFirstTask,
+    indexOfLastTask
+  );
+  const currentCLosedTasks = inactiveTasks.slice(
+    indexOfFirstTask,
+    indexOfLastTask
+  );
+  const currentAllTasks = taskData.slice(indexOfFirstTask, indexOfLastTask);
+
+  const nthPageforActive = Math.ceil(activeTasks.length / tasksPerPage);
+  const nthPageforClosed = Math.ceil(inactiveTasks.length / tasksPerPage);
+  const nthPageforAll = Math.ceil(taskData.length / tasksPerPage);
+
+  // const handlePageChange = (pageNumber: any) => {
+  //   setCurrentPage(pageNumber);
+  // };
+
   return (
     <CustomerDashboardLayout>
       <div
@@ -124,7 +150,7 @@ const MyTask = () => {
                   setCurrentCategory(category.name);
                   handleFetchTask();
                 }}
-                className={`text-[15px] border py-1 px-4 rounded-3xl ${
+                className={`text-[15px] border py-1 px-4 rounded-3xl hover:border-[#FE9B07] hover:text-[#FE9B07] ${
                   category.name === currentCategory
                     ? "opacity-[100%]"
                     : "opacity-[50%]"
@@ -144,10 +170,99 @@ const MyTask = () => {
           ) : (
             <div>
               {currentCategory === "Open" && (
-                <div className=" grid grid-cols-2 justify-between">
-                  {activeTasks.map((task) => (
+                <div className="flex flex-col">
+                  <div className=" grid grid-cols-2 justify-between max-h-[500px]">
+                    {currentActiveTasks.map((task) => (
+                      <Link
+                        href={`/dashboard/customer/my-tasks/${task.id} `}
+                        key={task.id}
+                      >
+                        <div className="border border-grey3 rounded-lg shadow-lg p-4 mx-10 my-5 w-[250px]">
+                          <div className="flex justify-between items-center">
+                            <h4 className="font-extrabold text-[18px]">
+                              {task.taskServiceName}
+                            </h4>
+
+                            <div className="w-[12px] h-[12px] block rounded-[50%] border-[1.5px] border-green4 relative">
+                              <span className="w-[6px] h-[6px] block rounded-[50%] bg-green4 absolute right-[1.5px] top-[1.5px]"></span>
+                            </div>
+                          </div>
+
+                          <div className="flex justify-between my-3 text-[13px]">
+                            <p className="">AUD$ {task.customerBudget}</p>
+                            <p className="">Active {task.active}</p>
+
+                            <div className="flex items-center space-x-1">
+                              <span className="text-[20px] ">
+                                <CiCalendar />
+                              </span>
+                              <p>
+                                {task.taskDates.map((date) => {
+                                  const currentDate = new Date(date);
+                                  const day = currentDate.getDate();
+                                  const monthName =
+                                    currentDate.toLocaleDateString(undefined, {
+                                      month: "short",
+                                    });
+                                  return `${day} ${monthName}`;
+                                })}
+                              </p>
+                            </div>
+                          </div>
+
+                          <div className="text-[13px] flex items-center space-x-1">
+                            <span>
+                              <FiMapPin />
+                            </span>
+                            <p>{task.userAddress}</p>
+                          </div>
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+
+                  {currentCategory === "Open" && activeTasks.length > 0 && (
+                    <div className="flex justify-center items-center my-10 space-x-5">
+                      <button
+                        onClick={() => setCurrentPage(currentPage - 1)}
+                        disabled={currentPage === 1}
+                        className="border rounded-full p-2 hover:border-[#FE9B07] hover:text-[#FE9B07] cursor-pointer disabled:border-grey4 disabled:text-grey4"
+                      >
+                        <IoIosArrowBack />
+                      </button>
+                      <p>{currentPage}</p>
+                      <button
+                        onClick={() => setCurrentPage(currentPage + 1)}
+                        disabled={currentPage === nthPageforAll}
+                        className="border rounded-full p-2 hover:border-[#FE9B07] hover:text-[#FE9B07] cursor-pointer disabled:border-grey4 disabled:text-grey4"
+                      >
+                        <IoIosArrowForward />
+                      </button>
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {currentCategory === "Open" && activeTasks.length === 0 && (
+                <div className="w-[700px] flex items-center justify-center h-[300px] ">
+                  <p className="text-center text-grey5 text-[15px]">
+                    Open task is empty. <br /> Please use the button below to
+                    create new task
+                  </p>
+                </div>
+              )}
+
+              {/* <p className="text-center text-red4 text-[15px]">{errorMsg}</p> */}
+            </div>
+          )}
+
+          <div>
+            {currentCategory === "All" && (
+              <div className="flex flex-col">
+                <div className=" grid grid-cols-2 justify-between max-h-[500px]">
+                  {currentAllTasks.map((task: taskData) => (
                     <Link
-                      href={`/dashboard/customer/my-tasks/${task.id} `}
+                      href={`/dashboard/customer/my-tasks/${task.id}`}
                       key={task.id}
                     >
                       <div className="border border-grey3 rounded-lg shadow-lg p-4 mx-10 my-5 w-[250px]">
@@ -193,76 +308,26 @@ const MyTask = () => {
                     </Link>
                   ))}
                 </div>
-              )}
 
-              {currentCategory === "Open" && activeTasks.length === 0 && (
-                <div className="w-[700px] flex items-center justify-center h-[300px] ">
-                  <p className="text-center text-grey5 text-[15px]">
-                    Open task is empty. <br /> Please use the button below to
-                    create new task
-                  </p>
-                </div>
-              )}
-
-              {/* <p className="text-center text-red4 text-[15px]">{errorMsg}</p> */}
-            </div>
-          )}
-
-          <div>
-            {currentCategory === "All" && (
-              <div className=" grid grid-cols-2 justify-between">
-                {taskData.map((task: taskData) => (
-                  <Link
-                    href={`/dashboard/customer/my-tasks/${task.id}`}
-                    key={task.id}
-                  >
-                    <div className="border border-grey3 rounded-lg shadow-lg p-4 mx-10 my-5 w-[250px]">
-                      <div className="flex justify-between items-center">
-                        <h4 className="font-extrabold text-[18px]">
-                          {task.taskServiceName}
-                        </h4>
-
-                        <div className="w-[12px] h-[12px] block rounded-[50%] border-[1.5px] border-green4 relative">
-                          <span className="w-[6px] h-[6px] block rounded-[50%] bg-green4 absolute right-[1.5px] top-[1.5px]"></span>
-                        </div>
-                      </div>
-
-                      <div className="flex justify-between my-3 text-[13px]">
-                        <p className="">AUD$ {task.customerBudget}</p>
-                        <p className="">Active {task.active}</p>
-
-                        <div className="flex items-center space-x-1">
-                          <span className="text-[20px] ">
-                            <CiCalendar />
-                          </span>
-                          <p>
-                            {task.taskDates.map((date) => {
-                              const currentDate = new Date(date);
-                              const day = currentDate.getDate();
-                              const monthName = currentDate.toLocaleDateString(
-                                undefined,
-                                { month: "short" }
-                              );
-                              return `${day} ${monthName}`;
-                            })}
-                          </p>
-                        </div>
-                      </div>
-
-                      <div className="text-[13px] flex items-center space-x-1">
-                        <span>
-                          <FiMapPin />
-                        </span>
-                        <p>{task.userAddress}</p>
-                      </div>
-
-                      {/* <p>Task ID: {task.id}</p> */}
-                      {/* <p>Description Name: {task.taskDescription}</p> */}
-                      {/* <p>active: {task.active}</p> */}
-                      {/* <img src={task.taskImage} alt={`Task ID: ${task.id}`} width="300" height="200" />                      */}
-                    </div>
-                  </Link>
-                ))}
+                {currentCategory === "All" && taskData.length > 0 && (
+                  <div className="flex justify-center items-center my-10 space-x-5">
+                    <button
+                      onClick={() => setCurrentPage(currentPage - 1)}
+                      disabled={currentPage === 1}
+                      className="border rounded-full p-2 hover:border-[#FE9B07] hover:text-[#FE9B07] cursor-pointer disabled:border-grey4 disabled:text-grey4"
+                    >
+                      <IoIosArrowBack />
+                    </button>
+                    <p>{currentPage}</p>
+                    <button
+                      onClick={() => setCurrentPage(currentPage + 1)}
+                      disabled={currentPage === nthPageforActive}
+                      className="border rounded-full p-2 hover:border-[#FE9B07] hover:text-[#FE9B07] cursor-pointer disabled:border-grey4 disabled:text-grey4"
+                    >
+                      <IoIosArrowForward />
+                    </button>
+                  </div>
+                )}
               </div>
             )}
 
@@ -280,59 +345,76 @@ const MyTask = () => {
 
           <div>
             {currentCategory === "Closed" && (
-              <div className=" grid grid-cols-2 justify-between">
-                {inactiveTasks.map((task: taskData) => (
-                  <Link
-                    href={`/dashboard/customer/my-tasks/${task.id}`}
-                    key={task.id}
-                  >
-                    <div className="border border-grey3 rounded-lg shadow-lg p-4 mx-10 my-5 w-[250px]">
-                      <div className="flex justify-between items-center">
-                        <h4 className="font-extrabold text-[18px]">
-                          {task.taskServiceName}
-                        </h4>
+              <div className="flex flex-col">
+                <div className=" grid grid-cols-2 justify-between max-h-[500px]">
+                  {currentCLosedTasks.map((task: taskData) => (
+                    <Link
+                      href={`/dashboard/customer/my-tasks/${task.id}`}
+                      key={task.id}
+                    >
+                      <div className="border border-grey3 rounded-lg shadow-lg p-4 mx-10 my-5 w-[250px]">
+                        <div className="flex justify-between items-center">
+                          <h4 className="font-extrabold text-[18px]">
+                            {task.taskServiceName}
+                          </h4>
 
-                        <div className="w-[12px] h-[12px] block rounded-[50%] border-[1.5px] border-green4 relative">
-                          <span className="w-[6px] h-[6px] block rounded-[50%] bg-green4 absolute right-[1.5px] top-[1.5px]"></span>
+                          <div className="w-[12px] h-[12px] block rounded-[50%] border-[1.5px] border-green4 relative">
+                            <span className="w-[6px] h-[6px] block rounded-[50%] bg-green4 absolute right-[1.5px] top-[1.5px]"></span>
+                          </div>
                         </div>
-                      </div>
 
-                      <div className="flex justify-between my-3 text-[13px]">
-                        <p className="">AUD$ {task.customerBudget}</p>
-                        <p className="">Active {task.active}</p>
+                        <div className="flex justify-between my-3 text-[13px]">
+                          <p className="">AUD$ {task.customerBudget}</p>
+                          <p className="">Active {task.active}</p>
 
-                        <div className="flex items-center space-x-1">
-                          <span className="text-[20px] ">
-                            <CiCalendar />
+                          <div className="flex items-center space-x-1">
+                            <span className="text-[20px] ">
+                              <CiCalendar />
+                            </span>
+                            <p>
+                              {task.taskDates.map((date) => {
+                                const currentDate = new Date(date);
+                                const day = currentDate.getDate();
+                                const monthName =
+                                  currentDate.toLocaleDateString(undefined, {
+                                    month: "short",
+                                  });
+                                return `${day} ${monthName}`;
+                              })}
+                            </p>
+                          </div>
+                        </div>
+
+                        <div className="text-[13px] flex items-center space-x-1">
+                          <span>
+                            <FiMapPin />
                           </span>
-                          <p>
-                            {task.taskDates.map((date) => {
-                              const currentDate = new Date(date);
-                              const day = currentDate.getDate();
-                              const monthName = currentDate.toLocaleDateString(
-                                undefined,
-                                { month: "short" }
-                              );
-                              return `${day} ${monthName}`;
-                            })}
-                          </p>
+                          <p>{task.userAddress}</p>
                         </div>
                       </div>
+                    </Link>
+                  ))}
+                </div>
 
-                      <div className="text-[13px] flex items-center space-x-1">
-                        <span>
-                          <FiMapPin />
-                        </span>
-                        <p>{task.userAddress}</p>
-                      </div>
-
-                      {/* <p>Task ID: {task.id}</p> */}
-                      {/* <p>Description Name: {task.taskDescription}</p> */}
-                      {/* <p>active: {task.active}</p> */}
-                      {/* <img src={task.taskImage} alt={`Task ID: ${task.id}`} width="300" height="200" />                      */}
-                    </div>
-                  </Link>
-                ))}
+                {currentCategory === "Closed" && inactiveTasks.length > 0 && (
+                  <div className="flex justify-center items-center my-10 space-x-5">
+                    <button
+                      onClick={() => setCurrentPage(currentPage - 1)}
+                      disabled={currentPage === 1}
+                      className="border rounded-full p-2 hover:border-[#FE9B07] hover:text-[#FE9B07] cursor-pointer disabled:border-grey4 disabled:text-grey4"
+                    >
+                      <IoIosArrowBack />
+                    </button>
+                    <p>{currentPage}</p>
+                    <button
+                      onClick={() => setCurrentPage(currentPage + 1)}
+                      disabled={currentPage === nthPageforClosed}
+                      className="border rounded-full p-2 hover:border-[#FE9B07] hover:text-[#FE9B07] cursor-pointer disabled:border-grey4 disabled:text-grey4"
+                    >
+                      <IoIosArrowForward />
+                    </button>
+                  </div>
+                )}
               </div>
             )}
 
@@ -348,7 +430,7 @@ const MyTask = () => {
           </div>
         </div>
 
-        <div className="flex justify-center items-center w-[700px] my-4">
+        <div className="flex justify-center items-center w-[700px] my-2">
           <Link href="/dashboard/customer/my-tasks/post-request">
             <button className="bg-purpleBase text-[15px] rounded-lg border-none px-4 py-2 text-white hover:bg-purpleHover">
               Create New Task
