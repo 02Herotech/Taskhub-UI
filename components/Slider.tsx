@@ -59,7 +59,7 @@ const TestimonialSlider = () => {
       setSelectedTestimonial((prevIndex) =>
         prevIndex === testimonials.length - 1 ? 0 : prevIndex + 1
       );
-    }, 3000);
+    }, 2000);
 
     // Clear the timer when component unmounts or when the selected testimonial changes
     return () => clearTimeout(timer);
@@ -105,7 +105,7 @@ const TestimonialSlider = () => {
               src={testimonials[selectedTestimonial].image}
               width={50}
               alt=""
-            ></Image>
+            />
             <div className="text-[12px]">
               <p className="font-bold">
                 {testimonials[selectedTestimonial].name}

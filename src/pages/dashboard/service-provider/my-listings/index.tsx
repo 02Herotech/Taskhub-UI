@@ -202,18 +202,18 @@ const Listings = () => {
     },
   };
 
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormState>({
     businessName: "",
     serviceCategories: "",
     subCategory: "",
     serviceDescription: "",
-    pricing: "",
+    pricing: 0,
     availableDays: [],
     available: true,
-    startMinute: "",
-    startHour: "",
-    closeMinute: "",
-    closeHour: "",
+    startMinute: 0,
+    startHour: 0,
+    closeMinute: 0,
+    closeHour: 0,
     openingTime: "",
     closingTime: "",
     streetNumber: "",
@@ -391,13 +391,13 @@ const Listings = () => {
       serviceCategories: "",
       subCategory: "",
       serviceDescription: "",
-      pricing: "",
+      pricing: 0,
       availableDays: [],
       available: true,
-      startMinute: "",
-      startHour: "",
-      closeMinute: "",
-      closeHour: "",
+      startMinute: 0,
+      startHour: 0,
+      closeMinute: 0,
+      closeHour: 0,
       openingTime: "",
       closingTime: "",
       streetNumber: "",
@@ -416,27 +416,28 @@ const Listings = () => {
 
   // Check box for days of the week
 
-  const daysOfWeek = [
-    "MONDAY",
-    "TUESDAY",
-    "WEDNESDAY",
-    "THURSDAY",
-    "FRIDAY",
-    "SATURDAY",
-    "SUNDAY",
-  ];
+  const daysOfWeek = ["Mon", "Tues", "Wed", "Thur", "Fri", "Sat", "Sun"];
   const [checkedDays, setCheckedDays] = useState<string[]>([]);
 
   // Function to handle checkbox change
 
+  // const handleCheckBoxChange = (day: string) => {
+  //   if (checkedDays.includes(day)) {
+  //     // If the day is already checked, remove it from the array
+  //     setCheckedDays(checkedDays.filter((checkedDay) => checkedDay !== day));
+  //   } else {
+  //     // If the day is not checked, add it to the array
+  //     setCheckedDays([...checkedDays, day]);
+  //   }
+  // };
+
   const handleCheckBoxChange = (day: string) => {
-    if (checkedDays.includes(day)) {
-      // If the day is already checked, remove it from the array
-      setCheckedDays(checkedDays.filter((checkedDay) => checkedDay !== day));
-    } else {
-      // If the day is not checked, add it to the array
-      setCheckedDays([...checkedDays, day]);
-    }
+    setFormData((prevState) => ({
+      ...prevState,
+      availableDays: prevState.availableDays.includes(day)
+        ? prevState.availableDays.filter((checkedDay) => checkedDay !== day)
+        : [...prevState.availableDays, day],
+    }));
   };
 
   // To submit form
@@ -454,24 +455,23 @@ const Listings = () => {
     apiFormData.append("serviceCategory", selectedCategory);
     apiFormData.append("subCategory", selectedSubCategory);
     apiFormData.append("serviceDescription ", formData.serviceDescription);
-    apiFormData.append("pricing", formData.pricing);
-
+    apiFormData.append("pricing", String(formData.pricing));
     // const checkedDaysString = checkedDays.join(",");
-    apiFormData.append("availableDays", JSON.stringify(checkedDays));
+    apiFormData.append("availableDays", JSON.stringify(formData.availableDays));
     apiFormData.append("available", formData.available.toString());
-    apiFormData.append("startHour", formData.startHour);
-    apiFormData.append("closeMinute", formData.closeMinute);
-    apiFormData.append("closeHour", formData.closeHour);
-    apiFormData.append("startMinute", formData.startMinute);
+    apiFormData.append("startHour", String(formData.startHour));
+    apiFormData.append("closeMinute", String(formData.closeMinute));
+    apiFormData.append("closeHour", String(formData.closeHour));
+    apiFormData.append("startMinute", String(formData.startMinute));
     apiFormData.append("streetNumber", formData.streetNumber);
     apiFormData.append("streetName", formData.streetName);
     apiFormData.append("suburb", formData.suburb);
     apiFormData.append("state", formData.state);
     apiFormData.append("postCode", formData.postCode);
     apiFormData.append("unitNumber", formData.unitNumber);
-    apiFormData.append("image1", formData.image1!);
-    apiFormData.append("image2", formData.image2!);
-    apiFormData.append("image3", formData.image3!);
+    formData.image1 && apiFormData.append("image1", formData.image1);
+    formData.image2 && apiFormData.append("image2", formData.image2);
+    formData.image3 && apiFormData.append("image3", formData.image3);
 
     console.log("apiform:", apiFormData);
     console.log("checkedday:", checkedDays);
@@ -734,7 +734,7 @@ const Listings = () => {
                       <p className="text-md font-semibold">DAYS:</p>
 
                       <div className="flex items-center ml-3 space-x-4">
-                        {daysOfWeek.map((day) => (
+                        {/* {daysOfWeek.map((day) => (
                           <label
                             key={day}
                             className={`flex items-center justify-center border-[1.5px] py-2 px-4 cursor-pointer rounded-lg font-semibold hover:bg-green2 ${
@@ -749,6 +749,25 @@ const Listings = () => {
                               onChange={() => handleCheckBoxChange(day)}
                               className="hidden"
                               value={checkedDays}
+                            />
+                            {day}
+                          </label>
+                        ))} */}
+
+                        {daysOfWeek.map((day) => (
+                          <label
+                            key={day}
+                            className={`flex items-center justify-center border-[1.5px] py-2 px-4 cursor-pointer rounded-lg font-semibold hover:bg-green2 ${
+                              formData.availableDays.includes(day)
+                                ? "bg-[rgba(20,120,47,255)] text-white"
+                                : "bg-white  text-grey5  border-grey5"
+                            } transition-colors duration-200`}
+                          >
+                            <input
+                              type="checkbox"
+                              value={day}
+                              checked={formData.availableDays.includes(day)}
+                              onChange={() => handleCheckBoxChange(day)}
                             />
                             {day}
                           </label>

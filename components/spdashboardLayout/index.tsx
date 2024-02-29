@@ -7,7 +7,7 @@ import Link from "next/link";
 import { signOut, useSession } from "next-auth/react";
 import axios from "axios";
 import { useState } from "react";
-import { IoMdArrowDropup } from "react-icons/io";
+import { FaRegUser } from "react-icons/fa";
 
 // import { AuthResponse } from 'next-auth';
 
@@ -45,6 +45,7 @@ function SPDashboardLayout(props: IProps) {
   const firstName = session?.user.user.firstName;
   const lastName = session?.user.user.lastName;
   const userRole = session?.user.user.roles[0];
+  const profilePicture = session?.user.user.profileImage;
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -73,8 +74,6 @@ function SPDashboardLayout(props: IProps) {
 
   return (
     <div className="max-w-7xl mx-auto">
-      {/* <div className={``}> */}
-
       {/*Top Bar*/}
 
       <div
@@ -85,7 +84,7 @@ function SPDashboardLayout(props: IProps) {
           <h3 className={`text-lg font-extrabold`}>TaskHub</h3>
         </Link>
         <div
-          className={`flex justify-around w-[320px] items-center bg-purpleBase rounded-md px-3 py-2 text-white`}
+          className={`flex justify-around items-center bg-purpleBase rounded-md px-3 py-2 text-white space-x-4`}
         >
           <div className={``}>
             <span className={`text-[20px]`}>
@@ -109,11 +108,21 @@ function SPDashboardLayout(props: IProps) {
             </p>
             <p className={`text-[12px]`}>{userRole}</p>
           </div>
-          <Image
-            src={portrait}
-            alt="User Portrait"
-            className={`rounded-[50%] h-[40px] w-[40px] object-cover`}
-          />
+
+          {profilePicture ? (
+            <img
+              src={profilePicture}
+              alt="User Portrait"
+              className={`rounded-[50%] h-[40px] w-[40px] object-cover`}
+              width={20}
+            />
+          ) : (
+            <span
+              className={` bg-grey2 rounded-[50%] border-[2px] border-[#FE9B07]  p-2`}
+            >
+              <FaRegUser />
+            </span>
+          )}
 
           <div className=" flex relative cursor-pointer" onClick={contactClick}>
             <ul>

@@ -96,7 +96,7 @@ const GetStarted = () => {
               <p>
                 As a verified{" "}
                 <span className="text-[#FE9B07] font-bold">
-                  Servuce Provider
+                  Service Provider
                 </span>
                 , you can post your listings, connect with customers, view your
                 orders, recieve payment, get rated, etc{" "}

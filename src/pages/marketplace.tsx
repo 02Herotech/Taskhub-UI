@@ -1,41 +1,57 @@
-import React, { useState } from 'react'
-import Head from 'next/head'
+import React, { useState } from "react";
+import Head from "next/head";
+import { FiTool } from "react-icons/fi";
+import { BiVector } from "react-icons/bi";
 
-import ServiceSlider from '../../components/serviceSlider/ServiceSlider'
-import Nav from '../../components/nav/Nav'
-import NewFooter from '../../components/NewFooter/NewFooter'
-import ServiceCategoryDetails from '../../components/ServiceCategory/ServiceCategoryDetails'
-import { poppins } from '@/styles/font'
-import { HiMiniBars4 } from 'react-icons/hi2'
-import { BiSolidQuoteAltLeft } from 'react-icons/bi'
-
-
-
-
-
-
+import ServiceSlider from "../../components/serviceSlider/ServiceSlider";
+import Nav from "../../components/nav/Nav";
+import NewFooter from "../../components/NewFooter/NewFooter";
+import ServiceCategoryDetails from "../../components/ServiceCategory/ServiceCategoryDetails";
+import { poppins } from "@/styles/font";
+import { HiMiniBars4 } from "react-icons/hi2";
+import { BiSolidQuoteAltLeft } from "react-icons/bi";
 
 const Marketplace = () => {
+  // const catgeories = {Gardening, khskks, jgsjsjjsd}
 
-    // const catgeories = {Gardening, khskks, jgsjsjjsd}
+  const [isOpen, setIsOpen] = useState(false);
 
-    const [isOpen, setIsOpen] = useState(false)
+  return (
+    <div>
+      <Head>
+        <title>TaskHub | Services</title>
+      </Head>
 
+      <Nav />
 
-
-    return (
+      <main className={`min-h-screen py-20 ${poppins.className}`}>
         <div>
-            <Head>
-                <title>TaskHub | Services</title>
-            </Head>
+          <ServiceSlider />
+        </div>
 
-            <Nav />
+        <div className="max-w-7xl mx-auto px-20 my-20 flex flex-col space-y-20">
+          <div className="">
+            <div className="flex bg-[#381F8C] w-[200px] items-center justify-center space-x-2 py-3">
+              <span className="text-[#FE9B07]">
+                <FiTool />
+              </span>
+              <p className="text-white">Service Listings</p>
+            </div>
+            <div></div>
+          </div>
 
-            <main className={`min-h-screen py-20 ${poppins.className}`}>
-                <div>
-                    <ServiceSlider />
-                </div>
-                <div className='flex  max-w-7xl mx-auto px-20 justify-around items-start mt-72 mb-20'>
+          <div className="">
+            <div className="flex bg-[#381F8C] w-[200px] items-center justify-center space-x-2 py-3">
+              <span className="text-[#FE9B07]">
+                <BiVector />
+              </span>
+              <p className="text-white">Task Requests</p>
+            </div>
+            <div></div>
+          </div>
+        </div>
+
+        {/* <div className='flex  max-w-7xl mx-auto px-20 justify-around items-start mt-72 mb-20'>
                     <div className='w-[350px] flex flex-col items-center justify-around h-full'>
                         <div className='w-[250px] h-[450px]'>
                             <h2 className='text-center bg-purpleBase text-white py-2 px-5 flex justify-center items-center cursor-pointer hover:bg-purple7' onClick={() => setIsOpen(!isOpen)}>
@@ -75,16 +91,13 @@ const Marketplace = () => {
                     <div>
                         <ServiceCategoryDetails />
                     </div>
-                </div>
+                </div> */}
 
-                
-                <div className={`h-[1.5px] w-[45em] bg-black max-w-7xl mx-auto`}></div>
-            </main>
-
-           <NewFooter />
-
-        </div>
-    )
-}
+        {/* <div className={`h-[1.5px] w-[45em] bg-black max-w-7xl mx-auto`}></div> */}
+      </main>
+      <NewFooter />
+    </div>
+  );
+};
 
 export default Marketplace;
