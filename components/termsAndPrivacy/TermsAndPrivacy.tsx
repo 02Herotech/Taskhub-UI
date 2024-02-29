@@ -27,7 +27,9 @@ export const TermsAndConditions = () => {
           update to our Terms and Conditions, TaskHub has updated information
           related to Fees.
         </p>
-        <p>User Agreement: www.taskhub.com</p>
+        <p>
+          User Agreement: <span className="font-bold">www.taskhub.com</span>
+        </p>
         <p className="my-5">
           TaskHub operates an online platform allowing Users to connect through
           the TaskHub Platform with other Users who provide Services.
@@ -1006,188 +1008,426 @@ export const TermsAndConditions = () => {
             between the User and TaskHub with respect to its subject matter.
           </li>
         </ul>
-        Revised May 2023 copyright &copy; TaskHub 2022
-        <p className="my-2 ml-4">APPENDIX A:</p>
-        <p className="my-2 ml-4">MODEL TASK CONTRACT:</p>
-        <p className="my-1 ml-4">
+        <p className="my-8 font-bold">
+          Revised May 2023 copyright &copy; TaskHub 2024
+        </p>
+        {/* <p className="font-extrabold my-4">18. GENERAL</p> */}
+        <p className="font-extrabold my-4">APPENDIX A:</p>
+        <p className="font-extrabold my-4">MODEL TASK CONTRACT:</p>
+        <p className="my-4">
           The terms used in this Task Contract have the meaning set out in the
           TaskHub Glossary. A Task Contract is created in accordance with the
           TaskHub Agreement. Unless otherwise agreed, the Poster and the Tasker
           enter into a Task Contract on the following terms:
         </p>
-        <p className="my-2 ml-4">1 COMMENCEMENT DATE AND TERM</p>
-        1.1 The Task Contract is created when the Poster accepts the Tasker's
-        Offer on a Posted Task to provide Services. When using Search Assist,
-        the Task Contract is created when the Tasker makes an Instant Claim. 1.2
-        The Task Contract will continue until terminated in accordance with
-        clause 7.
-        <p className="my-2 ml-4">2 SERVICES</p>
-        2.1 The Tasker will perform Services in a proper and workmanlike manner.
-        2.2 The Tasker must perform the Services at the time and location
-        agreed. 2.3 The parties must perform their obligations in accordance
-        with any other terms or conditions agreed by the parties during or
-        subsequent to the creation of the Task Contract. 2.4 The parties
-        acknowledge that the Task Contract is one of personal service where the
-        Poster selected the Tasker to perform the Services. Therefore, the
-        Tasker must not subcontract any part of the Services to any third party
-        without the Poster's consent. 2.5 The Tasker remains responsible and
-        liable at all times to the Poster for any acts or omissions of a
-        subcontractor as if those acts or omissions had been made by the Tasker.
-        <p className="my-2 ml-4">3 WARRANTIES</p>
-        3.1 Each party warrants that the information provided in the creation of
-        the Task Contract is true and accurate. 3.2 The Tasker warrants that
-        they have (and any subcontractor has) the right to work and provide
-        Services and hold all relevant licenses in the jurisdiction where the
-        Services are performed.
-        <p className="my-2 ml-4">4 PAYMENT OR CANCELLATION</p>
-        4.1 Upon the creation of the Task Contract, the Poster must pay the
-        Agreed Price into the Payment Account. 4.2 Upon the Services being
-        completed, the Tasker will provide notice on the TaskHub Platform. 4.3
-        The Poster will be prompted to confirm the Services are complete. If the
-        Tasker has completed the Services in accordance with clause 2, the
-        Poster must use the TaskHub Platform to release the Tasker Funds from
-        the Payment Account. For Recurring Services, the Tasker Funds for an
-        Occurrence will automatically be released by TaskHub from the Payment
-        Account to the Tasker unless paused by the Poster in accordance with the
-        User's TaskHub Agreement. 4.4 If the parties agree to cancel the Task
-        Contract, or the Poster is unable to contact the Tasker to perform the
-        Task Contract, the Tasker Funds will be dealt with in accordance with
-        the User's TaskHub Agreement.
-        <p className="my-2 ml-4">5 LIMITATION OF LIABILITY</p>
-        5.1 Except for liability in relation to a breach of a Non-excludable
-        Condition, the parties exclude all Consequential Loss arising out of or
-        in connection to the Services, and any claims by any third person, or
-        the Task Contract, even if the party causing the breach knew the loss
-        was possible or the loss was otherwise foreseeable. 5.2 Subject to any
-        insurance or agreement to the contrary, the liability of each party to
-        the other except for a breach of any Non-Excludable Condition is capped
-        at the Agreed Price.
-        <p className="my-2 ml-4">6 DISPUTES</p>
-        6.1 If a dispute arises between the parties, the parties will attempt to
-        resolve the dispute within 14 days by informal negotiation (by phone,
-        email or otherwise). 6.2 If the parties are unable to resolve the
-        dispute in accordance with clause 6.1, either party may refer the
-        dispute to TaskHub and act in accordance with clause 18 of the TaskHub
-        Agreement.
-        <p className="my-2 ml-4">7 TERMINATION OF CONTRACT</p>
-        <p className="my-1 ml-4">The Task Contract will terminate when:</p>
-        (a) the Services are completed and the Agreed Price is released from the
-        Payment Account; (b) a party is terminated or suspended from the TaskHub
-        Platform, at the election of the other party; (c) otherwise agreed by
-        the parties or the Third Party Dispute Service; or (d) notified by
-        TaskHub in accordance with the party's TaskHub Agreement.
-        <p className="my-2 ml-4">8 APPLICATION OF POLICIES</p>
-        The parties incorporate by reference the applicable Policies.
-        <p className="my-2 ml-4">9 GOVERNING LAW</p>
-        The Task Contract is governed by the laws of the jurisdiction where the
-        Posted Task was posted on the TaskHub Platform.
-        <p className="my-2 ml-4">
-          Revised May 2023 copyright &copy; TaskHub 2022
+        <p className="font-extrabold my-4">1. COMMENCEMENT DATE AND TERM</p>
+        <ul className="ml-4 text-[12px] flex flex-col space-y-2 text-justify">
+          <li className="flex">
+            <span className="mr-2"> 1.1</span>
+            The Task Contract is created when the Poster accepts the Tasker's
+            Offer on a Posted Task to provide Services. When using Search
+            Assist, the Task Contract is created when the Tasker makes an
+            Instant Claim.
+          </li>
+          <li className="flex">
+            <span className="mr-2">1.2</span>
+            The Task Contract will continue until terminated in accordance with
+            clause 7.
+          </li>
+        </ul>
+        <p className="font-extrabold my-4">2. SERVICES</p>
+        <ul className="ml-4 text-[12px] flex flex-col space-y-2 text-justify">
+          <li className="flex">
+            <span className="mr-2"> 2.1</span>
+            The Tasker will perform Services in a proper and workmanlike manner.
+          </li>
+          <li className="flex">
+            <span className="mr-2">2.2</span>
+            The Tasker must perform the Services at the time and location
+            agreed.
+          </li>
+          <li className="flex">
+            <span className="mr-2">2.2</span>
+            The Tasker must perform the Services at the time and location
+            agreed.
+          </li>
+          <li className="flex">
+            <span className="mr-2">2.3</span>
+            The parties must perform their obligations in accordance with any
+            other terms or conditions agreed by the parties during or subsequent
+            to the creation of the Task Contract.
+          </li>
+          <li className="flex">
+            <span className="mr-2">2.4</span>
+            The parties acknowledge that the Task Contract is one of personal
+            service where the Poster selected the Tasker to perform the
+            Services. Therefore, the Tasker must not subcontract any part of the
+            Services to any third party without the Poster's consent.
+          </li>
+          <li className="flex">
+            <span className="mr-2">2.4</span>
+            The Tasker remains responsible and liable at all times to the Poster
+            for any acts or omissions of a subcontractor as if those acts or
+            omissions had been made by the Tasker.
+          </li>
+        </ul>
+        <p className="font-extrabold my-4">3. WARRANTIES</p>
+        <ul className="ml-4 text-[12px] flex flex-col space-y-2 text-justify">
+          <li className="flex">
+            <span className="mr-2"> 3.1</span>
+            Each party warrants that the information provided in the creation of
+            the Task Contract is true and accurate. 3.2 The Tasker warrants that
+            they have (and any subcontractor has) the right to work and provide
+            Services and hold all relevant licenses in the jurisdiction where
+            the Services are performed.
+          </li>
+        </ul>
+        <p className="font-extrabold my-4">4. PAYMENT OR CANCELLATION</p>
+        <ul className="ml-4 text-[12px] flex flex-col space-y-2 text-justify">
+          <li className="flex">
+            <span className="mr-2">4.1</span>
+            Upon the creation of the Task Contract, the Poster must pay the
+            Agreed Price into the Payment Account. 4.2 Upon the Services being
+            completed, the Tasker will provide notice on the TaskHub Platform.
+            4.3 The Poster will be prompted to confirm the Services are
+            complete. If the Tasker has completed the Services in accordance
+            with clause 2, the Poster must use the TaskHub Platform to release
+            the Tasker Funds from the Payment Account. For Recurring Services,
+            the Tasker Funds for an Occurrence will automatically be released by
+            TaskHub from the Payment Account to the Tasker unless paused by the
+            Poster in accordance with the User's TaskHub Agreement. 4.4 If the
+            parties agree to cancel the Task Contract, or the Poster is unable
+            to contact the Tasker to perform the Task Contract, the Tasker Funds
+            will be dealt with in accordance with the User's TaskHub Agreement.
+          </li>
+        </ul>
+        <p className="font-extrabold my-4">5. LIMITATION OF LIABILITY</p>
+        <ul className="ml-4 text-[12px] flex flex-col space-y-2 text-justify">
+          <li className="flex">
+            <span className="mr-2">5.1</span>
+            Except for liability in relation to a breach of a Non-excludable
+            Condition, the parties exclude all Consequential Loss arising out of
+            or in connection to the Services, and any claims by any third
+            person, or the Task Contract, even if the party causing the breach
+            knew the loss was possible or the loss was otherwise foreseeable.
+            5.2 Subject to any insurance or agreement to the contrary, the
+            liability of each party to the other except for a breach of any
+            Non-Excludable Condition is capped at the Agreed Price.
+          </li>
+        </ul>
+        <p className="font-extrabold my-4">6. DISPUTES</p>
+        <ul className="ml-4 text-[12px] flex flex-col space-y-2 text-justify">
+          <li className="flex">
+            <span className="mr-2">6.1</span>
+            If a dispute arises between the parties, the parties will attempt to
+            resolve the dispute within 14 days by informal negotiation (by
+            phone, email or otherwise). 6.2 If the parties are unable to resolve
+            the dispute in accordance with clause 6.1, either party may refer
+            the dispute to TaskHub and act in accordance with clause 18 of the
+            TaskHub Agreement.
+          </li>
+        </ul>
+        <p className="font-extrabold my-4">7. TERMINATION OF CONTRACT</p>
+        <p className="ml-4">The Task Contract will terminate when:</p>
+        <ul className="ml-4 text-[12px] flex flex-col space-y-2 text-justify">
+          <li className="flex">
+            <span className="mr-2">(a)</span>
+            the Services are completed and the Agreed Price is released from the
+            Payment Account;
+          </li>
+          <li className="flex">
+            <span className="mr-2">(b)</span>a party is terminated or suspended
+            from the TaskHub Platform, at the election of the other party;
+          </li>
+          <li className="flex">
+            <span className="mr-2">(c)</span>otherwise agreed by the parties or
+            the Third Party Dispute Service; or
+          </li>
+          <li className="flex">
+            <span className="mr-2">(c)</span>notified by TaskHub in accordance
+            with the party's TaskHub Agreement.
+          </li>
+        </ul>
+        <p className="font-extrabold my-4">8. APPLICATION OF POLICIES</p>
+        <p className="ml-4">
+          The parties incorporate by reference the applicable Policies.
         </p>
-        <p className="my-2 ml-4">TaskHub Glossary</p>
-        "Agreement" means the most updated version of the agreement between
-        TaskHub and a User. "Agreed Price" means agreed price for Services
-        (including any variation) paid into the Payment Account made by the
-        Poster but does not include any costs incurred by the Tasker when
-        completing Services which the Poster agrees to reimburse. "TaskHub",
-        "we" "us" or "our" means the legal entity prescribed in Your Country
-        Specific Terms. "TaskHub Badge" means a badge that may be issued to a
-        User based on the User meeting certain qualifications or other
-        thresholds, including Verification Icons, as determined and set by
-        TaskHub. "TaskHub Platform" means the TaskHub website at
-        https://www.taskhub.com/, TaskHub smartphone app, and any other
-        affiliated platform that may be introduced from time to time. "TaskHub
-        Service" means the service of providing the TaskHub Platform. "Badge"
-        means an TaskHub Badge and Verification Icon. "Business Day" means a day
-        on which banks are open for general business in the jurisdiction where
-        Users have their TaskHub Platform account, other than a Saturday, Sunday
-        or public holiday. "Business Partner Contract" means a contract between
-        a Business Partner and a Tasker to perform Business Services. "Business
-        Partner" means the business or individual that enters into an agreement
-        with TaskHub to acquire Business Services. "Business Services" means
-        Services provided by a Tasker to a Business Partner acquired for the
-        purpose of on selling to a third party (such as the Business Partner's
-        customer). "Cancellation Admin Fee" means the Fee payable by a Poster or
-        a Tasker for cancelling a Task Contract and will not exceed 22% of the
-        Agreed Price. "Consequential Loss" means any loss, damage or expense
-        recoverable at law: (a) other than a loss, damage or expense that would
-        be suffered or incurred by any person in a similar situation to the
-        person suffering or incurring the loss, damage or expense; or (b) which
-        is a loss of: a. opportunity or goodwill; b. profits, anticipated
-        savings or business; c. data; or d. value of any equipment, and any
-        costs or expenses incurred in connection with the foregoing. "Country
-        Specific Terms" means those terms set out in Appendix B. "Customer"
-        means a User that uses the TaskHub Platform to search for particular
-        Services. "Fees" means all fees payable to TaskHub by Users including
-        the Service Fee. "Identity Verification Services" means the tools
-        available to help Users verify the identity, qualifications or skills of
-        other Users including mobile phone verification, verification of payment
-        information, References, integration with social media, TaskHub Badges
-        and Verification Icons. "Instant Claim" means the acceptance of an Offer
-        by a Tasker via the Search Assist function. "Marketing Material" means
-        any updates, news and special offers in relation to TaskHub or its Third
-        Party Services. "Non-excludable Condition" means any implied condition,
-        warranty or guarantee in a contract, the exclusion of which would
-        contravene the law or cause any part of the contract to be void. Further
-        detail on the Non-excludable Conditions for consumers in the United
-        Kingdom and in Ireland is set out in the relevant Your Country Specific
-        Terms. "Occurrence" means each individual occurrence of services to be
-        performed by a Tasker that form part of Recurring Services. "Offer"
-        means an offer made by a Tasker in response to a Posted Task to perform
-        the Services, or an offer made by a Poster for the performance of
-        Services by a Tasker when using Search Assist. "Payment Account" means
-        the account operated by the Payment Provider. "Payment Provider" means
-        an entity appointed by TaskHub that manages and operates the Payment
-        Account including accepting payments from and making payments to Users.
-        "Personal Information" has the same meaning as described in Your Country
-        Specific Terms. "Policies" means the policies posted by TaskHub on the
-        TaskHub Platform, including but not limited to the Community Guidelines.
-        "Poster" means a User that uses the TaskHub Platform to search for
-        particular Services. "Posted Task" means the Poster's request for
-        Services published on the Platform (including via Search Assist), and
-        includes the deadline for completion, price and description of the
-        Services to be provided. "Poster Service Fee" means the fee payable by
-        the Poster to TaskHub as consideration for the TaskHub Services (and
-        comprised as part of the Agreed Price) displayed to a Poster prior to
-        entering into each Task Contract "Recurring Services" means the same
-        services procured by a Poster using the Search Assist feature from the
-        same Tasker on a recurring basis, for example weekly, fortnightly or
-        monthly. "Reference" means a feature allowing a User to request other
-        Users to post a reference on the TaskHub Platform endorsing that User.
-        "Search Assist" means a feature of the TaskHub Platform whereby a Poster
-        can submit specific details of a Posted Task with TaskHub's assistance
-        to calculate the Agreed Price and find potential Taskers to perform the
-        Services. This may also be referred to on the TaskHub Platform as
-        "Instant Booking". "Service Fee" means the Poster Service Fee and the
-        Tasker Service Fee. "Services" means the services to be rendered as
-        described in the Posted Task, including any variations or amendments
-        agreed before or subsequent to the creation of a Task Contract and for
-        Recurring Services the Services are the services to be performed under
-        each Occurrence. "Stored Value" means the physical or virtual card,
-        coupon, voucher or code containing credit or a discount or refund
-        provided as credit or anything else identified or described as 'Stored
-        Value' in this Agreement, for use on the TaskHub Platform. "Task
-        Contract" means the separate contract which is formed between a Poster
-        and a Tasker for Services. In the absence of, or in addition to, any
-        terms specifically agreed, the model terms of which are included in
-        Appendix A to the Agreement apply to Task Contracts. "Tasker" means a
-        User who provides Services to Posters. "Tasker Funds" means the Agreed
-        Price less the Service Fee. "Tasker Listing" means a page published by a
-        Tasker, containing details (including prices) of a service they are
-        willing to provide to Posters. "Tasker Service Fee" means the fee
-        payable by the Tasker to TaskHub as consideration for the TaskHub
-        Services (and comprised as part of the Agreed Price) displayed to a
-        Tasker prior to entering into each Task Contract. "Third Party Dispute
-        Service" means a third party dispute resolution service provider used to
-        resolve any disputes between Users. "Third Party Service" means the
-        promotions and links to services offered by third parties as may be
-        featured on the TaskHub Platform from time to time. "User" or "You"
-        means the person who has signed up to use the TaskHub Platform, whether
-        as the Customer, Poster, Tasker, or otherwise. "Verification Icons"
-        means the icons available to be displayed on a User's profile and any
-        such posts on the TaskHub Platform to confirm details such as a User's
-        qualification, license, certificate or other skill. Revised May 2022
-        copyright TaskHub.
+        <p className="font-extrabold my-4">9. GOVERNING LAW</p>
+        <p className="ml-4">
+          The Task Contract is governed by the laws of the jurisdiction where
+          the Posted Task was posted on the TaskHub Platform.
+        </p>
+        <p className="my-8 font-bold">
+          Revised May 2023 copyright &copy; TaskHub 2024
+        </p>
+        <p className="font-extrabold my-4">TASKHUB GLOSSARY</p>
+        <div className=" text-[12px] flex flex-col space-y-4 text-justify">
+          <p className="">
+            <span className="mr-1 font-bold">"Agreement"</span>
+            means the most updated version of the agreement between TaskHub and
+            a User.
+          </p>
+          <p>
+            <span className="mr-1 font-bold">"Agreed Price"</span>means agreed
+            price for Services (including any variation) paid into the Payment
+            Account made by the Poster but does not include any costs incurred
+            by the Tasker when completing Services which the Poster agrees to
+            reimburse.
+          </p>
+          <p>
+            <span className="mr-1 font-bold">
+              "TaskHub", "we" "us" or "our"
+            </span>
+            means the legal entity prescribed in Your Country Specific Terms.
+          </p>
+          <p>
+            <span className="mr-1 font-bold">"TaskHub Badge"</span>
+            means a badge that may be issued to a User based on the User meeting
+            certain qualifications or other thresholds, including Verification
+            Icons, as determined and set by TaskHub.
+          </p>
+          <p>
+            <span className="mr-1 font-bold">"TaskHub Platform"</span>
+            means the TaskHub website at <b>https://www.taskhub.com/</b>,
+            TaskHub smartphone app, and any other affiliated platform that may
+            be introduced from time to time.
+          </p>
+          <p>
+            <span className="mr-1 font-bold">"TaskHub Service"</span>
+            means the service of providing the TaskHub Platform.
+          </p>
+          <p>
+            <span className="mr-1 font-bold">"Badge"</span>
+            means an TaskHub Badge and Verification Icon.
+          </p>
+          <p>
+            <span className="mr-1 font-bold">"Business Day"</span>
+            means a day on which banks are open for general business in the
+            jurisdiction where Users have their TaskHub Platform account, other
+            than a Saturday, Sunday or public holiday.
+          </p>
+          <p>
+            <span className="mr-1 font-bold">"Business Partner Contract"</span>
+            means a contract between a Business Partner and a Tasker to perform
+            Business Services.
+          </p>
+          <p>
+            <span className="mr-1 font-bold">"Business Partner"</span>
+            means the business or individual that enters into an agreement with
+            TaskHub to acquire Business Services.
+          </p>
+          <p>
+            <span className="mr-1 font-bold">"Business Services"</span>
+            means Services provided by a Tasker to a Business Partner acquired
+            for the purpose of on selling to a third party (such as the Business
+            Partner's customer)
+          </p>
+          <p>
+            <span className="mr-1 font-bold">"Cancellation Admin Fee"</span>
+            means the Fee payable by a Poster or a Tasker for cancelling a Task
+            Contract and will not exceed 22% of the Agreed Price.
+          </p>
+          <p>
+            <span className="mr-1 font-bold">"Consequential Loss"</span>
+            means any loss, damage or expense recoverable at law:
+          </p>
+          <p className="flex">
+            <span className="mr-2">(a)</span>
+            other than a loss, damage or expense that would be suffered or
+            incurred by any person in a similar situation to the person
+            suffering or incurring the loss, damage or expense; or
+          </p>
+          <div className="flex flex-col space-y-2">
+            <p className="flex">
+              <span className="mr-2">(b)</span>
+              which is a loss of:
+            </p>
+            <ul className="list-disc ml-4">
+              <li>opportunity or goodwill;</li>
+              <li>profits, anticipated savings or business;</li>
+              <li>data; or</li>
+              <li>
+                value of any equipment, and any costs or expenses incurred in
+                connection with the foregoing
+              </li>
+            </ul>
+          </div>
+          <p>
+            <span className="mr-1 font-bold">"Country Specific Terms"</span>
+            means those terms set out in Appendix B.
+          </p>
+          <p>
+            <span className="mr-1 font-bold">"Customer"</span>
+            means a User that uses the TaskHub Platform to search for particular
+            Services.
+          </p>
+          <p>
+            <span className="mr-1 font-bold">"Fees"</span>
+            means all fees payable to TaskHub by Users including the Service
+            Fee.
+          </p>
+          <p>
+            <span className="mr-1 font-bold">
+              "Identity Verification Services"
+            </span>
+            means the tools available to help Users verify the identity,
+            qualifications or skills of other Users including mobile phone
+            verification, verification of payment information, References,
+            integration with social media, TaskHub Badges and Verification
+            Icons.
+          </p>
+          <p>
+            <span className="mr-1 font-bold">"Instant Claim"</span>
+            means the acceptance of an Offer by a Tasker via the Search Assist
+            function.
+          </p>
+          <p>
+            <span className="mr-1 font-bold"> "Marketing Material"</span>
+            means any updates, news and special offers in relation to TaskHub or
+            its Third Party Services.
+          </p>
+          <p>
+            <span className="mr-1 font-bold">"Non-excludable Condition"</span>
+            means any implied condition, warranty or guarantee in a contract,
+            the exclusion of which would contravene the law or cause any part of
+            the contract to be void. Further detail on the Non-excludable
+            Conditions for consumers in the United Kingdom and in Ireland is set
+            out in the relevant Your Country Specific Terms.
+          </p>
+          <p>
+            <span className="mr-1 font-bold">"Occurrence"</span>
+            means each individual occurrence of services to be performed by a
+            Tasker that form part of Recurring Services.
+          </p>
+          <p>
+            <span className="mr-1 font-bold">"Offer"</span>
+            means an offer made by a Tasker in response to a Posted Task to
+            perform the Services, or an offer made by a Poster for the
+            performance of Services by a Tasker when using Search Assist.
+          </p>
+          <p>
+            <span className="mr-1 font-bold">"Payment Account"</span>
+            means the account operated by the Payment Provider.
+          </p>
+          <p>
+            <span className="mr-1 font-bold">"Payment Provider"</span>
+            means an entity appointed by TaskHub that manages and operates the
+            Payment Account including accepting payments from and making
+            payments to Users.
+          </p>
+          <p>
+            <span className="mr-1 font-bold">"Personal Information"</span>
+            has the same meaning as described in Your Country Specific Terms.
+          </p>
+          <p>
+            <span className="mr-1 font-bold">"Policies"</span>
+            means the policies posted by TaskHub on the TaskHub Platform,
+            including but not limited to the Community Guidelines.
+          </p>
+          <p>
+            <span className="mr-1 font-bold">"Poster"</span>
+            means a User that uses the TaskHub Platform to search for particular
+            Services.
+          </p>
+          <p>
+            <span className="mr-1 font-bold">"Posted Task"</span>
+            means the Poster's request for Services published on the Platform
+            (including via Search Assist), and includes the deadline for
+            completion, price and description of the Services to be provided.
+          </p>
+          <p>
+            <span className="mr-1 font-bold">"Poster Service Fee"</span>
+            means the fee payable by the Poster to TaskHub as consideration for
+            the TaskHub Services (and comprised as part of the Agreed Price)
+            displayed to a Poster prior to entering into each Task Contract
+          </p>
+          <p>
+            <span className="mr-1 font-bold">"Recurring Services"</span>
+            means the same services procured by a Poster using the Search Assist
+            feature from the same Tasker on a recurring basis, for example
+            weekly, fortnightly or monthly.
+          </p>
+          <p>
+            <span className="mr-1 font-bold">"Reference"</span>
+            means a feature allowing a User to request other Users to post a
+            reference on the TaskHub Platform endorsing that User.
+          </p>
+          <p>
+            <span className="mr-1 font-bold">"Search Assist"</span>
+            means a feature of the TaskHub Platform whereby a Poster can submit
+            specific details of a Posted Task with TaskHub's assistance to
+            calculate the Agreed Price and find potential Taskers to perform the
+            Services. This may also be referred to on the TaskHub Platform as
+            "Instant Booking".
+          </p>
+          <p>
+            <span className="mr-1 font-bold">"Service Fee"</span>
+            means the Poster Service Fee and the Tasker Service Fee.
+          </p>
+          <p>
+            <span className="mr-1 font-bold">"Service"</span>
+            means the services to be rendered as described in the Posted Task,
+            including any variations or amendments agreed before or subsequent
+            to the creation of a Task Contract and for Recurring Services the
+            Services are the services to be performed under each Occurrence.
+          </p>
+          <p>
+            <span className="mr-1 font-bold">"Stored Value"</span>
+            means the physical or virtual card, coupon, voucher or code
+            containing credit or a discount or refund provided as credit or
+            anything else identified or described as <b>'Stored Value'</b> in
+            this Agreement, for use on the TaskHub Platform.
+          </p>
+          <p>
+            <span className="mr-1 font-bold">"Task Contract"</span>
+            means the separate contract which is formed between a Poster and a
+            Tasker for Services. In the absence of, or in addition to, any terms
+            specifically agreed, the model terms of which are included in
+            Appendix A to the Agreement apply to Task Contracts.
+          </p>
+          <p>
+            <span className="mr-1 font-bold">"Tasker"</span>
+            means a User who provides Services to Posters. "Tasker Funds" means
+            the Agreed Price less the Service Fee.
+          </p>
+          <p>
+            <span className="mr-1 font-bold">"Tasker Listing"</span>
+            means a page published by a Tasker, containing details (including
+            prices) of a service they are willing to provide to Posters.
+          </p>
+          <p>
+            <span className="mr-1 font-bold">"Tasker Service Fee"</span>
+            means the fee payable by the Tasker to TaskHub as consideration for
+            the TaskHub Services (and comprised as part of the Agreed Price)
+            displayed to a Tasker prior to entering into each Task Contract.
+          </p>
+          <p>
+            <span className="mr-1 font-bold">
+              "Third Party Dispute Service"
+            </span>
+            means a third party dispute resolution service provider used to
+            resolve any disputes between Users.
+          </p>
+          <p>
+            <span className="mr-1 font-bold">"Third Party Service"</span>
+            means the promotions and links to services offered by third parties
+            as may be featured on the TaskHub Platform from time to time.
+          </p>
+          <p>
+            <span className="mr-1 font-bold">"User" or "You" </span>
+            means the person who has signed up to use the TaskHub Platform,
+            whether as the Customer or Service Provider.
+          </p>
+          <p>
+            <span className="mr-1 font-bold">"Verification Icons"</span>
+            means the icons available to be displayed on a User's profile and
+            any such posts on the TaskHub Platform to confirm details such as a
+            User's qualification, license, certificate or other skill.
+          </p>
+        </div>
+        <p className="my-8 font-bold">
+          Revised May 2023 copyright &copy; TaskHub 2024
+        </p>
       </div>
     </div>
   );
