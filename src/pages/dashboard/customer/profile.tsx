@@ -89,15 +89,15 @@ const Profile = () => {
 
   const { data: session } = useSession();
 
-  const firstNameValue = session?.user.user.firstName || "";
-  const lastNameValue = session?.user.user.lastName || "";
-  const eamilAddressValue = session?.user.user.emailAddress || "";
-  const streetNumberValue = session?.user.user.address.streetNumber || "";
-  const streetNameValue = session?.user.user.address.streetName || "";
-  const suburbValue = session?.user.user.address.suburb || "";
-  const postCodeValue = session?.user.user.address.postCode || "";
-  const stateValue = session?.user.user.address.state || "";
-  const unitNumberValue = session?.user.user.address.unitNumber || "";
+  const firstNameValue = session?.user?.user?.firstName || "";
+  const lastNameValue = session?.user?.user?.lastName || "";
+  const eamilAddressValue = session?.user?.user?.emailAddress || "";
+  const streetNumberValue = session?.user?.user?.address?.streetNumber || "";
+  const streetNameValue = session?.user?.user?.address?.streetName || "";
+  const suburbValue = session?.user?.user?.address?.suburb || "";
+  const postCodeValue = session?.user?.user?.address?.postCode || "";
+  const stateValue = session?.user?.user?.address?.state || "";
+  const unitNumberValue = session?.user?.user?.address?.unitNumber || "";
 
   // To submit form
 
@@ -106,7 +106,7 @@ const Profile = () => {
     console.log(formData);
     setIsLoading(true);
 
-    const userToken = session?.user.accessToken;
+    const userToken = session?.user?.accessToken;
     const userID = session?.user?.user.id;
     const userPhoneNumber = session?.user?.user.phoneNumber;
 
