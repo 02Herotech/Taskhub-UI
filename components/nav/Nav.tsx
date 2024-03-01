@@ -28,23 +28,25 @@ const Nav = () => {
 
   const customer = "CUSTOMER";
 
-  const handleLogOut = async () => {
+  const handleLogOut = async (e: { preventDefault: () => void }) => {
+    e.preventDefault();
+    // try {
+    //   const response = await axios.post(
+    //     `${process.env.NEXT_PUBLIC_API_URL}auth/logout`
+    //   );
+    //   console.log("Sign Out: ", response);
+
+    //   if (response.status === 200) {
+    //     // Refresh the page
+    //     window.location.reload();
+    //   }
+    // } catch (error) {
+    //   console.error(error);
+    // }
     await signOut({
       redirect: false,
     });
-
-    // router.push('/auth/login')
-
-    // try {
-    //     const response = await axios.post('https://service-rppp.onrender.com/api/v1/auth/logout')
-    //     console.log("Sign Out: ", response)
-
-    //     if(response.status == 200) {
-    //         router.push('/auth/login')
-    //     }
-    // } catch (error) {
-    //     console.error(error)
-    // }
+    window.location.reload();
   };
 
   return (

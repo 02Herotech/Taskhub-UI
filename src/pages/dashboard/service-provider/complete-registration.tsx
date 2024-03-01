@@ -305,10 +305,10 @@ const CompleteRegistration = () => {
                   </div>
 
                   <div className={`flex flex-col w-[300px]`}>
-                    <div className="flex items-center border">
+                    <div className="flex items-center">
                       <label
                         htmlFor="postCode"
-                        className={`font-bold text-[16px] my-3 flex items-center w-[120px] h-[30px] appearance-none border border-red4`}
+                        className={`font-bold text-[16px] my-3 flex items-center w-[120px] h-[30px] appearance-none`}
                       >
                         Post Code
                         <span className={`text-red10`}>*</span>
