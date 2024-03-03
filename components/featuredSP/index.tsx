@@ -8,11 +8,12 @@ import featuredSP from "../../public/featuredSP.png";
 
 const FeaturedSP = () => {
   return (
-    <div className={`flex items-end py-10 max-w-7xl mx-auto my-8`}>
+    <div className={`flex py-10 max-w-7xl mx-auto mb-8 mt-10 `}>
       <div>
-        <Image src={featuredSP} width={1000} alt=""></Image>
+        <Image src={featuredSP} width={700} alt="" className="h-full"></Image>
       </div>
-      <div className="bg-[#381F8C] h-[700px] w-full  px-12 py-6 text-white ">
+
+      <div className=" h-[750px] w-full  px-12 py-6 flex fle-col items-center bg-gradient-to-r from-[#E9F3FF] to-[#F5DDFD] ">
         <div className="w-[550px]  flex flex-col  justify-center space-y-8">
           <h1 className={`${revalia.className} text-[40px]`}>
             FEATURED SERVICE PROVIDERS
