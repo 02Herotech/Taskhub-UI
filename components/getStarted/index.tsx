@@ -39,7 +39,7 @@ const GetStarted = () => {
         <div className="flex flex-col space-y-10 absolute top-[40px] right-[0px] items-end">
           <div className="flex space-x-10">
             <div
-              className={`bg-[#009CDE] w-[320px] h-[330px] px-6 py-10  text-white space-y-6 hover:bg-white hover:text-black transition-colors duration-700 group hover:shadow-2xl delay-100`}
+              className={`bg-[#009CDE] w-[320px] h-[330px] px-6 py-10  text-white space-y-6 hover:bg-white hover:text-black transition-colors duration-700 group hover:shadow-2xl delay-100 cursor-pointer`}
             >
               <div className="flex space-x-5 text-[18px]">
                 <p>01</p>
@@ -74,7 +74,7 @@ const GetStarted = () => {
               </div>
             </div>
             <div
-              className={`bg-[#009CDE] w-[320px] h-[330px] px-6 py-10  text-white space-y-6 hover:bg-white hover:text-black transition-colors duration-700 group hover:shadow-2xl delay-100`}
+              className={`bg-[#009CDE] w-[320px] h-[330px] px-6 py-10  text-white space-y-6 hover:bg-white hover:text-black transition-colors duration-700 group hover:shadow-2xl delay-100 cursor-pointer`}
             >
               <div className="flex space-x-5 text-[18px]">
                 <p>02</p>
@@ -99,7 +99,7 @@ const GetStarted = () => {
           {/* <div className="bg-[#009CDE] w-[320px] h-[330px] px-6 py-6  text-white space-y-4 ">
            */}
           <div
-            className={`bg-[#009CDE] w-[320px] h-[330px] px-6 py-10  text-white space-y-6 hover:bg-white hover:text-black transition-colors duration-700 group hover:shadow-2xl delay-100`}
+            className={`bg-[#009CDE] w-[320px] h-[330px] px-6 py-6  text-white space-y-6 hover:bg-white hover:text-black transition-colors duration-700 group hover:shadow-2xl delay-100 cursor-pointer`}
           >
             <div className="flex space-x-5 text-[18px]">
               <p>03</p>

@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import logoImg from "../../../public/logo.png";
 import Image from "next/image";
+import { IoIosArrowRoundForward } from "react-icons/io";
 
 import welcome from "../../../public/welcome.svg";
 import image1 from "../../../public/signupConfirm1.png";
@@ -15,8 +16,8 @@ const SignupConfirmation = () => {
       <div
         className={`p-5 flex h-[80px] drop-shadow-md fixed z-50 w-full bg-white font-extrabold justify-center`}
       >
-        <div className="w-[80em]">
-          <Link href="/" className={`flex space-x-3 items-center`}>
+        <div className="w-[80em] flex ">
+          <Link href="/" className={`flex space-x-3 items-center p-2`}>
             <Image
               src={logoImg}
               width={50}
@@ -30,51 +31,63 @@ const SignupConfirmation = () => {
       </div>
 
       <div
-        className={`flex max-w-7xl mx-auto h-full flex-col items-center justify-center min-h-screen pt-20 bg-purpleBase`}
+        className={`flex max-w-7xl mx-auto h-full flex-col items-center justify-center min-h-screen pt-20 bg-gradient-to-r from-[#E9F3FF] to-[#F5DDFD]`}
       >
-        {/* <div className={`w-[166px] h-[166px] `}>
-          <Image src={welcome} width={166} height={166} alt="" />
-        </div>
-        <p className="text-center mt-10">
-          Before we get started, please use the link <br /> in the mail sent to
-          you to verify your email
-        </p> */}
-        {/* <Link href='https://mail.google.com/mail/u/0/#inbox' target='_blank' className={`text-purpleBase  underline hover:text-md`}>Link to my mail</Link > */}
-
-        <div className=" h-full w-full p-12 flex justify-center items-center ">
-          <div className="items-center w-[800px] text-white border border-white flex flex-col  space-y-16 justify-center">
-            <div className="flex flex-col items-center space-y-3">
-              <h1 className="text-[45px] text-center">Welcome to TaskHub!</h1>
-              <div className="text-justify w-[430px]  text-[14px] flex flex-col space-y-3">
-                <p className="">
-                  We’re thrilled to have you onboard. should you have any
-                  inquires or require support, feel free to reach out to us on
-                  our support platform.
+        <div className="flex flex-col justify-center items-center  relative ">
+          <div className="items-center  flex flex-col justify-center space-y-[100px]">
+            <div className="flex flex-col justify-center items-center  space-y-5">
+              <h1 className="text-[45px] text-center font-bold mt-10 ">
+                Welcome to TaskHub!
+              </h1>
+              <div className="flex flex-col justify-center items-center">
+                <p className="text-[15px] font-semibold">
+                  We’re thrilled to have you onboard!
                 </p>
-                <p>Enjoy your journey with us!</p>
+                <p className="text-[15px] font-semibold">
+                  Kindly use the link sent to your email address to verify to
+                  email
+                </p>
               </div>
             </div>
 
-            <div className="flex">
-              <div>
+            <div className="flex justify-center items-center space-x-16">
+              <div className="text-center flex flex-col justify-center items-center  space-y-3">
                 <div className="flex -space-x-2">
                   <Image src={image1} width={20} alt="" />
                   <Image src={image2} width={20} alt="" />
                   <Image src={image3} width={20} alt="" />
                 </div>
-                <p>
+                <p className="leading-tight text-[15px]">
                   Connect <br /> with customers
                 </p>
               </div>
               <Image
                 src={image4}
-                width={350}
+                width={400}
                 alt=""
                 className="rounded-b-3xl"
               />
-              <p>Over 50+ services available</p>
+              <p className="text-center leading-tight text-[15px]">
+                <span className="text-[30px] font-bold">50+</span> <br />
+                services available
+              </p>
             </div>
           </div>
+
+          <div className="py-4 px-6 bg-white rounded-full absolute bottom-44">
+            <Link
+              href="/auth/login"
+              className="flex items-center bg-purpleBase hover:bg-purpleHover py-2 px-8 rounded-full text-white "
+            >
+              Proceed to Login{" "}
+              <span className="-rotate-45 ml-1">
+                <IoIosArrowRoundForward />
+              </span>
+            </Link>
+          </div>
+
+          <div className="bg-[#FE9B07AB] rounded-full h-[60px] w-[60px] absolute top-24 left-16"></div>
+          <div className="bg-[#FE9B07AB] rounded-full h-[30px] w-[30px] absolute top-8 right-24"></div>
         </div>
       </div>
     </div>
