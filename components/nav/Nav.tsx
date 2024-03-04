@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import Image from "next/image";
@@ -14,6 +14,7 @@ import { poppins } from "@/styles/font";
 
 const Nav = () => {
   const router = useRouter();
+
   const isLinkActive = (linkPath: string) => {
     return router.pathname === linkPath;
   };
@@ -88,25 +89,39 @@ const Nav = () => {
               Marketplace
             </Link>
 
-            <div
-              className=" flex relative cursor-pointer"
-              onClick={contactClick}
-            >
+            <div className=" flex relative ">
               <ul>
-                <li className={`flex hover:text-purpleBase items-center`}>
+                <li
+                  className={`flex hover:text-purpleBase items-center cursor-pointer`}
+                  onClick={contactClick}
+                >
                   Contact Us
                   <span className="text-[15px]">
                     {isOpen ? <FaAngleUp /> : <FaAngleDown />}
                   </span>
                 </li>
 
-                {!isOpen ? (
-                  ""
-                ) : (
+                {isOpen && (
                   <div className="absolute top-16 ml-[-10px] bg-[#ead8d8] w-[250px] text-[13px] py-2 px-4">
-                    <ul className="hover:">
-                      <li>Email: privacy@taskhub.com.au</li>
-                      <li>Phone: +6145000000</li>
+                    <ul>
+                      <li className="mb-1">
+                        Email:{" "}
+                        <Link
+                          href="mailto:privacy@taskhub.com.au"
+                          className="hover:text-grey6"
+                        >
+                          privacy@taskhub.com.au
+                        </Link>
+                      </li>
+                      <li>
+                        Phone:{" "}
+                        <Link
+                          href="tel:+6145000000"
+                          className="hover:text-grey6"
+                        >
+                          +6145000000
+                        </Link>
+                      </li>
                     </ul>
                   </div>
                 )}

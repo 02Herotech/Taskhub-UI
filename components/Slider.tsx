@@ -59,7 +59,7 @@ const TestimonialSlider = () => {
       setSelectedTestimonial((prevIndex) =>
         prevIndex === testimonials.length - 1 ? 0 : prevIndex + 1
       );
-    }, 2000);
+    }, 5000);
 
     // Clear the timer when component unmounts or when the selected testimonial changes
     return () => clearTimeout(timer);

@@ -74,7 +74,7 @@ const GetStarted = () => {
               </div>
             </div>
             <div
-              className={`bg-[#009CDE] w-[320px] h-[330px] px-6 py-10  text-white space-y-6 hover:bg-white hover:text-black transition-colors duration-700 group hover:shadow-2xl delay-100 cursor-pointer`}
+              className={`bg-[#009CDE] w-[320px] h-[330px] px-6 py-10  text-white space-y-6 hover:bg-white hover:text-black transition-colors duration-700 hover:border hover:border-grey2 group hover:shadow-2xl delay-100 cursor-pointer`}
             >
               <div className="flex space-x-5 text-[18px]">
                 <p>02</p>
@@ -99,7 +99,7 @@ const GetStarted = () => {
           {/* <div className="bg-[#009CDE] w-[320px] h-[330px] px-6 py-6  text-white space-y-4 ">
            */}
           <div
-            className={`bg-[#009CDE] w-[320px] h-[330px] px-6 py-6  text-white space-y-6 hover:bg-white hover:text-black transition-colors duration-700 group hover:shadow-2xl delay-100 cursor-pointer`}
+            className={`bg-[#009CDE] w-[320px] h-[330px] px-6 py-6  text-white space-y-6 hover:bg-white hover:text-black transition-colors duration-700 group hover:border hover:border-grey2 hover:shadow-2xl delay-100 cursor-pointer`}
           >
             <div className="flex space-x-5 text-[18px]">
               <p>03</p>
@@ -110,8 +110,8 @@ const GetStarted = () => {
               <p>
                 As a verified{" "}
                 <span className="text-[#FE9B07] font-bold ">Customer</span>, you
-                can post a tasks, connect with Service Provider, book a
-                services, make payments, etc{" "}
+                can post tasks, connect with Service Provider, book services,
+                make payments, etc{" "}
               </p>
               <div className="flex items-end">
                 <p>
