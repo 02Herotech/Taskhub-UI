@@ -246,8 +246,7 @@ const MyTask = () => {
               {currentCategory === "Open" && activeTasks.length === 0 && (
                 <div className="w-[700px] flex items-center justify-center h-[300px] ">
                   <p className="text-center text-grey5 text-[15px]">
-                    Open task is empty. <br /> Please use the button below to
-                    create new task
+                    Open task is empty
                   </p>
                 </div>
               )}
@@ -334,8 +333,7 @@ const MyTask = () => {
             {currentCategory === "All" && taskData.length === 0 && (
               <div className="w-[700px] flex items-center justify-center h-[300px] ">
                 <p className="text-center text-grey5 text-[15px]">
-                  All task is empty. <br /> Please use the button below to get
-                  started
+                  All task is empty
                 </p>
               </div>
             )}
@@ -421,7 +419,7 @@ const MyTask = () => {
             {currentCategory === "Closed" && inactiveTasks.length === 0 && (
               <div className="w-[700px] flex items-center justify-center h-[300px]">
                 <p className="text-center text-grey5 text-[15px]">
-                  Unfortunately, closed task is empty
+                  Closed task is empty
                 </p>
               </div>
             )}

@@ -159,15 +159,15 @@ function CustomerDashboardLayout(props: IProps) {
 
       <div className={`flex`}>
         <div
-          className={`flex flex-col bg-purpleBase min-h-screen w-[250px] items-center`}
+          className={`flex flex-col bg-purpleBase min-h-screen w-[230px] items-center`}
         >
           <div
-            className={`flex flex-col items-start justify-between text-white py-20`}
+            className={`flex flex-col items-start justify-between text-white py-20 `}
           >
             <div className="mb-[20em] text-[14px]">
               <Link
                 href="/dashboard/customer"
-                className={`flex items-center gap-[20px] hover:text-[#FE9B07] mb-14 ${
+                className={`flex items-center gap-[10px] hover:text-[#FE9B07] mb-14 ${
                   isLinkActive("/dashboard/customer") && "text-[#FE9B07]"
                 }`}
               >
@@ -176,7 +176,7 @@ function CustomerDashboardLayout(props: IProps) {
               </Link>
               <Link
                 href="/dashboard/customer/profile"
-                className={`flex items-center gap-[20px] hover:text-[#FE9B07]  mb-14 ${
+                className={`flex items-center gap-[10px] hover:text-[#FE9B07]  mb-14 ${
                   isLinkActive("/dashboard/customer/profile") &&
                   "text-[#FE9B07]"
                 }`}
@@ -186,7 +186,7 @@ function CustomerDashboardLayout(props: IProps) {
               </Link>
               <Link
                 href="/dashboard/customer/my-tasks"
-                className={`flex items-center gap-[20px] hover:text-[#FE9B07] mb-14 ${
+                className={`flex items-center gap-[10px] hover:text-[#FE9B07] mb-14 ${
                   isLinkActive("/dashboard/customer/my-tasks") &&
                   "text-[#FE9B07]"
                 }`}
@@ -196,7 +196,7 @@ function CustomerDashboardLayout(props: IProps) {
               </Link>
               <Link
                 href="/dashboard/customer/bookings"
-                className={`flex items-center gap-[20px] hover:text-[#FE9B07] mb-14 ${
+                className={`flex items-center gap-[10px] hover:text-[#FE9B07] mb-14 ${
                   isLinkActive("/dashboard/customer/bookings") &&
                   "text-[#FE9B07]"
                 }`}
@@ -206,7 +206,7 @@ function CustomerDashboardLayout(props: IProps) {
               </Link>
               <Link
                 href="/dashboard/customer/view-jobs"
-                className={`flex items-center gap-[20px] hover:text-[#FE9B07] mb-14 ${
+                className={`flex items-center gap-[10px] hover:text-[#FE9B07] mb-14 ${
                   isLinkActive("/dashboard/customer/view-jobs") &&
                   "text-[#FE9B07]"
                 }`}
@@ -216,16 +216,17 @@ function CustomerDashboardLayout(props: IProps) {
               </Link>
               <Link
                 href="/dashboard/customer/billings&payments"
-                className={`flex items-center gap-[20px] hover:text-[#FE9B07] mb-14 ${
+                className={`flex items-center gap-[10px] hover:text-[#FE9B07] mb-14 ${
                   isLinkActive("/dashboard/customer/billings&payments") &&
                   "text-[#FE9B07]"
                 }`}
               >
-                <CgBox size={16} /> Billing and Payments
+                <CgBox size={16} />
+                Payments
               </Link>
               <Link
                 href="/dashboard/customer/help&support"
-                className={`flex items-center gap-[20px] hover:text-[#FE9B07] mb-14 ${
+                className={`flex items-center gap-[10px] hover:text-[#FE9B07] mb-14 ${
                   isLinkActive("/dashboard/customer/help&support") &&
                   "text-[#FE9B07]"
                 }`}
@@ -236,7 +237,7 @@ function CustomerDashboardLayout(props: IProps) {
             </div>
 
             <button
-              className={`flex items-center text-[16px] gap-[20px] hover:text-[#FE9B07]`}
+              className={`flex items-center text-[16px] gap-[10px] hover:text-[#FE9B07]`}
               onClick={handleLogOut}
             >
               <FiLogOut size={16} /> Logout
