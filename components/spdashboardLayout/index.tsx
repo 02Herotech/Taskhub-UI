@@ -175,7 +175,7 @@ function SPDashboardLayout(props: IProps) {
             <div className="mb-[20em] text-[14px]">
               <Link
                 href="/dashboard/service-provider"
-                className={`flex items-center gap-[20px] hover:text-[#FE9B07] mb-14 ${
+                className={`flex items-center gap-[10px] hover:text-[#FE9B07] mb-14 ${
                   isLinkActive("/dashboard/service-provider") &&
                   "text-[#FE9B07]"
                 }`}
@@ -185,7 +185,7 @@ function SPDashboardLayout(props: IProps) {
               </Link>
               <Link
                 href="/dashboard/service-provider/profile"
-                className={`flex items-center gap-[20px] hover:text-[#FE9B07]  mb-14 ${
+                className={`flex items-center gap-[10px] hover:text-[#FE9B07]  mb-14 ${
                   isLinkActive("/dashboard/service-provider/profile") &&
                   "text-[#FE9B07]"
                 }`}
@@ -195,7 +195,7 @@ function SPDashboardLayout(props: IProps) {
               </Link>
               <Link
                 href="/dashboard/service-provider/my-listings"
-                className={`flex items-center gap-[20px] hover:text-[#FE9B07] mb-14 ${
+                className={`flex items-center gap-[10px] hover:text-[#FE9B07] mb-14 ${
                   isLinkActive("/dashboard/service-provider/my-listings") &&
                   "text-[#FE9B07]"
                 }`}
@@ -205,17 +205,17 @@ function SPDashboardLayout(props: IProps) {
               </Link>
               <Link
                 href="/dashboard/service-provider/manage-bookings"
-                className={`flex items-center gap-[20px] hover:text-[#FE9B07] mb-14 ${
+                className={`flex items-center gap-[10px] hover:text-[#FE9B07] mb-14 ${
                   isLinkActive("/dashboard/service-provider/manage-bookings") &&
                   "text-[#FE9B07]"
                 }`}
               >
                 <TfiWallet size={16} />
-                Manage Bookings
+                Bookings
               </Link>
               <Link
                 href="/dashboard/service-provider/view-jobs"
-                className={`flex items-center gap-[20px] hover:text-[#FE9B07] mb-14 ${
+                className={`flex items-center gap-[10px] hover:text-[#FE9B07] mb-14 ${
                   isLinkActive("/dashboard/service-provider/view-jobs") &&
                   "text-[#FE9B07]"
                 }`}
@@ -225,17 +225,18 @@ function SPDashboardLayout(props: IProps) {
               </Link>
               <Link
                 href="/dashboard/service-provider/billings&payments"
-                className={`flex items-center gap-[20px] hover:text-[#FE9B07] mb-14 ${
+                className={`flex items-center gap-[10px] hover:text-[#FE9B07] mb-14 ${
                   isLinkActive(
                     "/dashboard/service-provider/billings&payments"
                   ) && "text-[#FE9B07]"
                 }`}
               >
-                <CgBox size={16} /> Billing and Payments
+                <CgBox size={16} />
+                Manage Payments
               </Link>
               <Link
                 href="/dashboard/service-provider/help&support"
-                className={`flex items-center gap-[20px] hover:text-[#FE9B07] mb-14 ${
+                className={`flex items-center gap-[10px] hover:text-[#FE9B07] mb-14 ${
                   isLinkActive("/dashboard/service-provider/help&support") &&
                   "text-[#FE9B07]"
                 }`}
@@ -246,7 +247,7 @@ function SPDashboardLayout(props: IProps) {
             </div>
 
             <button
-              className={`flex items-center text-[16px] gap-[20px] hover:text-[#FE9B07]`}
+              className={`flex items-center text-[16px] gap-[10px] hover:text-[#FE9B07]`}
               onClick={handleLogOut}
             >
               <FiLogOut size={16} /> Logout
