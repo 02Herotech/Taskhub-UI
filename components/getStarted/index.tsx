@@ -20,7 +20,7 @@ const GetStarted = () => {
               <p>Dear User,</p>
               <p className=" text-justify">
                 We are excited to welcome you to Syncskills latest innovation –
-                TaskHub! This new solution is designed to allow you to
+                TaskHub111! This new solution is designed to allow you to
                 effortlessly find, connect, and engage with the perfect service
                 professionals.
               </p>
