@@ -1,3 +1,9 @@
+const Step2 = () => {
+  return <div>jkhvjkl</div>;
+};
+
+export default Step2;
+
 // import React, { useState } from "react";
 // import { FaArrowLeft } from "react-icons/fa6";
 

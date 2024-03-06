@@ -1,3 +1,9 @@
+const Step1 = () => {
+  return <div>jkhvjkl</div>;
+};
+
+export default Step1;
+
 // import { useState } from "react";
 
 // interface FormState {
