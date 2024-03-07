@@ -44,8 +44,8 @@ const SignupConfirmation = () => {
                   We’re thrilled to have you onboard!
                 </p>
                 <p className="text-[15px] font-semibold">
-                  Kindly use the link sent to your email address to verify to
-                  email
+                  Before first, kindly use the link sent to your email address
+                  to verify to email
                 </p>
               </div>
             </div>
@@ -86,7 +86,7 @@ const SignupConfirmation = () => {
             </Link>
           </div>
 
-          <div className="bg-[#FE9B07AB] rounded-full h-[60px] w-[60px] absolute top-24 left-16"></div>
+          <div className="bg-[#FE9B07AB] rounded-full h-[60px] w-[60px] absolute top-20 left-16"></div>
           <div className="bg-[#FE9B07AB] rounded-full h-[30px] w-[30px] absolute top-8 right-24"></div>
         </div>
       </div>

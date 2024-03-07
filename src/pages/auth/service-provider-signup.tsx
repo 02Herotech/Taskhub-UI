@@ -461,7 +461,7 @@ const ServiceProviderSignup: React.FC<FormState> = () => {
                 <label htmlFor="agreement" className={`font-bold text-[12px]`}>
                   I agree to all{" "}
                   <Link
-                    href="/termsAndConditions"
+                    href="/terms-and-condition"
                     className={`text-purpleBase hover:underline`}
                   >
                     Terms of service{" "}

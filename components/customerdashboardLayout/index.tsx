@@ -204,7 +204,7 @@ function CustomerDashboardLayout(props: IProps) {
                 <TfiWallet size={16} />
                 Bookings
               </Link>
-              <Link
+              {/* <Link
                 href="/dashboard/customer/view-jobs"
                 className={`flex items-center gap-[10px] hover:text-[#FE9B07] mb-14 ${
                   isLinkActive("/dashboard/customer/view-jobs") &&
@@ -213,7 +213,7 @@ function CustomerDashboardLayout(props: IProps) {
               >
                 <GoPulse size={16} />
                 View Jobs
-              </Link>
+              </Link> */}
               <Link
                 href="/dashboard/customer/billings&payments"
                 className={`flex items-center gap-[10px] hover:text-[#FE9B07] mb-14 ${
