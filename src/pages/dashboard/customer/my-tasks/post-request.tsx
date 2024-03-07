@@ -173,6 +173,7 @@ const PostRequest = () => {
 
   const [isLoading, setIsLoading] = useState(false);
   const [resMsg, setResMsg] = useState("");
+  const [errMsg, setErrMsg] = useState("");
 
   const route = useRouter();
 
@@ -316,15 +317,19 @@ const PostRequest = () => {
       console.log(response);
       if (response.status === 200) {
         setResMsg(response.data.message);
+        route.push("/dashboard/customer/my-tasks");
       }
-    } catch (error) {
+    } catch (error: any) {
       console.log(error);
+      if (error.response.status !== 200) {
+        setErrMsg("Error trying to task. Please try again");
+      }
     } finally {
       resetForm();
       setIsLoading(false);
       setTimeout(() => {
         setResMsg("");
-        route.push("/dashboard/customer/my-tasks");
+        setErrMsg("");
       }, 3000);
     }
   };
@@ -489,6 +494,7 @@ const PostRequest = () => {
           </form>
 
           <p className="my-2 text-md">{resMsg}</p>
+          <p className="my-2 text-[15px] text-red5">{errMsg}</p>
         </div>
       </div>
     </CustomerDashboardLayout>
