@@ -1,13 +1,12 @@
-import styles from "./styles.module.scss";
-import Image from "next/image";
-import provider from "../../../../public/dashboardAssets/portrait.jpg";
 import React from "react";
+import axios from "axios";
 import { GrLocation, GrSearch } from "react-icons/gr";
 import { MdVerified } from "react-icons/md";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { FaRegUser } from "react-icons/fa";
+import Head from "next/head";
 
 import SPDashboardLayout from "../../../../components/spdashboardLayout";
 import Card from "../../../../components/card/Card";
@@ -16,29 +15,50 @@ import Picture2 from "../../../../public/customerAssets/vintage-sewing-machine-w
 
 function Index() {
   const [completeReg, setCompleteReg] = useState(true);
+  const [suburb, setSuburb] = useState("");
+  const [state, setState] = useState("");
+  const [profilePicture, setProfilePicture] = useState(null);
 
   const { data: session } = useSession();
-  console.log(session);
 
   const firstName = session?.user.user.firstName;
   const lastName = session?.user.user.lastName;
   const lastNameInitial = lastName?.charAt(0);
-  const suburb = session?.user?.user?.address?.suburb;
-  const state = session?.user?.user?.address?.state;
-  const profilePicture = session?.user.user.profileImage;
-  const isEnabled = session?.user?.user?.enabled;
+  const userID = session?.user?.user?.id;
+
+  const handleUserProfile = async () => {
+    try {
+      if (!userID) {
+        return;
+      }
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_URL}user/user-profile/${userID}`
+      );
+      console.log("userProfile:", response);
+      if (response.status === 200) {
+        if (response.data.enabled === false) {
+          setCompleteReg(false);
+        }
+        setSuburb(response.data.address.suburb);
+        setState(response.data.address.state);
+        setProfilePicture(response.data.profileImage);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   useEffect(() => {
-    if (isEnabled === false) {
-      setCompleteReg(!completeReg);
-    }
-  }, [isEnabled]);
+    handleUserProfile();
+  }, [userID]);
 
   return (
     <SPDashboardLayout>
-      {completeReg ? (
-        ""
-      ) : (
+      <Head>
+        <title>TaskHub | SP Dashboard</title>
+      </Head>
+
+      {!completeReg && (
         <div className="bg-purpleBase mt-4  text-white rounded-md flex justify-center items-center w-[900px] mx-auto py-3">
           <p>
             Before you proceed, kindly complete your registration to have full
@@ -56,7 +76,13 @@ function Index() {
       <div className={`m-10 w-[900px] flex flex-col justify-center`}>
         <div className={`flex items-center justify-between`}>
           <div className="flex justify-center items-center">
-            {profilePicture ? (
+            {profilePicture === "" || profilePicture === null ? (
+              <span
+                className={` bg-grey3 rounded-[50%] border-[2px] border-[#FE9B07] border-whiten p-7 text-[80px] text-white`}
+              >
+                <FaRegUser />
+              </span>
+            ) : (
               <div
                 className={`w-[160px] h-[160px] rounded-[50%] border-2 border-[#FE9B07] flex justify-center items-center`}
               >
@@ -67,12 +93,6 @@ function Index() {
                   width={150}
                 />
               </div>
-            ) : (
-              <span
-                className={` bg-grey3 rounded-[50%] border-[2px] border-[#FE9B07] border-whiten p-7 text-[80px] text-white`}
-              >
-                <FaRegUser />
-              </span>
             )}
             <div className={`flex flex-col justify-center items-start ml-5`}>
               <div
@@ -82,11 +102,7 @@ function Index() {
                   {firstName} {lastNameInitial}.
                 </p>
 
-                {completeReg ? (
-                  <MdVerified className={`text-green4 ml-2`} />
-                ) : (
-                  ""
-                )}
+                {completeReg && <MdVerified className={`text-yellow5 ml-2`} />}
               </div>
 
               {completeReg ? (

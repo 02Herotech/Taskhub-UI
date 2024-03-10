@@ -12,6 +12,7 @@ import { FiMapPin } from "react-icons/fi";
 import CustomerDashboardLayout from "../../../../../components/customerdashboardLayout";
 import { current } from "@reduxjs/toolkit";
 import loader from "../../../../../public/taskhub-newloader.gif";
+import Head from "next/head";
 
 interface taskData {
   id: number;
@@ -107,7 +108,7 @@ const MyTask = () => {
     console.log("Inactive tasks: ", inactiveTasks);
   }, [taskData]);
 
-  const tasksPerPage = 6;
+  const tasksPerPage = 4;
   const [currentPage, setCurrentPage] = useState(1);
 
   // Calculate the indexes for the tasks to be displayed on the current page
@@ -134,6 +135,11 @@ const MyTask = () => {
 
   return (
     <CustomerDashboardLayout>
+      <div>
+        <Head>
+          <title>TaskHub | My Task</title>
+        </Head>
+      </div>
       <div
         className={`my-16 flex flex-col justify-center items-start w-[900px]`}
       >
@@ -171,50 +177,80 @@ const MyTask = () => {
             <div>
               {currentCategory === "Open" && (
                 <div className="flex flex-col">
-                  <div className=" grid grid-cols-2 justify-between max-h-[500px]">
+                  <div className=" flex flex-col space-y-2  w-[700px]">
                     {currentActiveTasks.map((task) => (
                       <Link
                         href={`/dashboard/customer/my-tasks/${task.id} `}
                         key={task.id}
                       >
-                        <div className="border border-grey3 rounded-lg shadow-lg p-4 mx-10 my-5 w-[250px]">
-                          <div className="flex justify-between items-center">
-                            <h4 className="font-extrabold text-[18px]">
-                              {task.taskServiceName}
-                            </h4>
-
-                            <div className="w-[12px] h-[12px] block rounded-[50%] border-[1.5px] border-green4 relative">
-                              <span className="w-[6px] h-[6px] block rounded-[50%] bg-green4 absolute right-[1.5px] top-[1.5px]"></span>
-                            </div>
+                        <div className="border-[1.5px] border-grey3 hover:border-[#FE9B07] rounded-lg shadow-lg p-4 my-5 w-full flex group transition-colors duration-200 space-x-2">
+                          <div
+                            className={`w-[100px] h-[100px] rounded-[50%] border-2 border-grey3 flex justify-center items-center group-hover:border-[#FE9B07] transition-colors duration-200 `}
+                          >
+                            <img
+                              src={task.taskImage}
+                              alt=""
+                              width={90}
+                              className={`rounded-[50%] object-cover h-[90px]`}
+                            />
                           </div>
-
-                          <div className="flex justify-between my-3 text-[13px]">
-                            <p className="">AUD$ {task.customerBudget}</p>
-                            <p className="">Active {task.active}</p>
-
-                            <div className="flex items-center space-x-1">
-                              <span className="text-[20px] ">
-                                <CiCalendar />
-                              </span>
-                              <p>
-                                {task.taskDates.map((date) => {
-                                  const currentDate = new Date(date);
-                                  const day = currentDate.getDate();
-                                  const monthName =
-                                    currentDate.toLocaleDateString(undefined, {
-                                      month: "short",
-                                    });
-                                  return `${day} ${monthName}`;
-                                })}
-                              </p>
+                          <div className="flex  justify-between px-4 w-[550px]">
+                            <div className="flex flex-col space-y-6 justify-center">
+                              <h4 className="font-extrabold text-[18px]">
+                                {task.taskServiceName}
+                              </h4>
+                              <div className="flex space-x-3 items-center text-[12px]">
+                                <div className=" flex items-center space-x-1 bg-[#F8E9FE] text-green6 rounded-lg py-1 px-2 ">
+                                  <span>
+                                    <FiMapPin />
+                                  </span>
+                                  <p>{task.userAddress.slice(0, 15)}</p>
+                                </div>
+                                <p className="bg-[#F8A8AB] rounded-lg py-1 px-2 ">
+                                  ${task.customerBudget}
+                                </p>
+                              </div>
                             </div>
-                          </div>
+                            <div className="flex flex-col items-end space-y-4">
+                              <div
+                                className={`w-[12px] h-[12px]  rounded-[50%] border-[1.5px] border-green4 relative flex justify-center items-center ${
+                                  task.active === true
+                                    ? " border-green5"
+                                    : " border-red5"
+                                }`}
+                              >
+                                <span
+                                  className={`w-[6px] h-[6px] block rounded-[50%] ${
+                                    task.active === true
+                                      ? " bg-green5"
+                                      : " bg-red5"
+                                  }`}
+                                ></span>
+                              </div>
 
-                          <div className="text-[13px] flex items-center space-x-1">
-                            <span>
-                              <FiMapPin />
-                            </span>
-                            <p>{task.userAddress}</p>
+                              <div className="flex flex-col space-y-2 items-center">
+                                <h2 className="font-bold">Needed on:</h2>
+                                <div className="flex items-center space-x-1 text-[12px]">
+                                  <span className="text-[20px] ">
+                                    <CiCalendar />
+                                  </span>
+                                  <p>
+                                    {task.taskDates.map((date) => {
+                                      const currentDate = new Date(date);
+                                      const day = currentDate.getDate();
+                                      const monthName =
+                                        currentDate.toLocaleDateString(
+                                          undefined,
+                                          {
+                                            month: "short",
+                                          }
+                                        );
+                                      return `${day} ${monthName}`;
+                                    })}
+                                  </p>
+                                </div>
+                              </div>
+                            </div>
                           </div>
                         </div>
                       </Link>
@@ -250,58 +286,86 @@ const MyTask = () => {
                   </p>
                 </div>
               )}
-
-              {/* <p className="text-center text-red4 text-[15px]">{errorMsg}</p> */}
             </div>
           )}
 
           <div>
             {currentCategory === "All" && (
               <div className="flex flex-col">
-                <div className=" grid grid-cols-2 justify-between max-h-[500px]">
+                <div className=" flex flex-col space-y-2  w-[700px]">
                   {currentAllTasks.map((task: taskData) => (
                     <Link
-                      href={`/dashboard/customer/my-tasks/${task.id}`}
+                      href={`/dashboard/customer/my-tasks/${task.id} `}
                       key={task.id}
                     >
-                      <div className="border border-grey3 rounded-lg shadow-lg p-4 mx-10 my-5 w-[250px]">
-                        <div className="flex justify-between items-center">
-                          <h4 className="font-extrabold text-[18px]">
-                            {task.taskServiceName}
-                          </h4>
-
-                          <div className="w-[12px] h-[12px] block rounded-[50%] border-[1.5px] border-green4 relative">
-                            <span className="w-[6px] h-[6px] block rounded-[50%] bg-green4 absolute right-[1.5px] top-[1.5px]"></span>
-                          </div>
+                      <div className="border-[1.5px] border-grey3 hover:border-[#FE9B07] rounded-lg shadow-lg p-4 my-5 w-full flex group transition-colors duration-200 space-x-2">
+                        <div
+                          className={`w-[100px] h-[100px] rounded-[50%] border-2 border-grey3 flex justify-center items-center group-hover:border-[#FE9B07] transition-colors duration-200 `}
+                        >
+                          <img
+                            src={task.taskImage}
+                            alt=""
+                            width={90}
+                            className={`rounded-[50%] object-cover h-[90px]`}
+                          />
                         </div>
-
-                        <div className="flex justify-between my-3 text-[13px]">
-                          <p className="">AUD$ {task.customerBudget}</p>
-                          <p className="">Active {task.active}</p>
-
-                          <div className="flex items-center space-x-1">
-                            <span className="text-[20px] ">
-                              <CiCalendar />
-                            </span>
-                            <p>
-                              {task.taskDates.map((date) => {
-                                const currentDate = new Date(date);
-                                const day = currentDate.getDate();
-                                const monthName =
-                                  currentDate.toLocaleDateString(undefined, {
-                                    month: "short",
-                                  });
-                                return `${day} ${monthName}`;
-                              })}
-                            </p>
+                        <div className="flex  justify-between px-4 w-[550px]">
+                          <div className="flex flex-col space-y-6 justify-center">
+                            <h4 className="font-extrabold text-[18px]">
+                              {task.taskServiceName}
+                            </h4>
+                            <div className="flex space-x-3 items-center text-[12px]">
+                              <div className=" flex items-center space-x-1 bg-[#F8E9FE] text-green6 rounded-lg py-1 px-2 ">
+                                <span>
+                                  <FiMapPin />
+                                </span>
+                                <p>{task.userAddress.slice(0, 15)}</p>
+                              </div>
+                              <p className="bg-[#F8A8AB] rounded-lg py-1 px-2 ">
+                                ${task.customerBudget}
+                              </p>
+                            </div>
                           </div>
-                        </div>
+                          <div className="flex flex-col items-end space-y-4">
+                            <div
+                              className={`w-[12px] h-[12px]  rounded-[50%] border-[1.5px] border-green4 relative flex justify-center items-center ${
+                                task.active === true
+                                  ? " border-green5"
+                                  : " border-red5"
+                              }`}
+                            >
+                              <span
+                                className={`w-[6px] h-[6px] block rounded-[50%] ${
+                                  task.active === true
+                                    ? " bg-green5"
+                                    : " bg-red5"
+                                }`}
+                              ></span>
+                            </div>
 
-                        <div className="text-[13px] flex items-center space-x-1">
-                          <span>
-                            <FiMapPin />
-                          </span>
-                          <p>{task.userAddress}</p>
+                            <div className="flex flex-col space-y-2 items-center">
+                              <h2 className="font-bold">Needed on:</h2>
+                              <div className="flex items-center space-x-1 text-[12px]">
+                                <span className="text-[20px] ">
+                                  <CiCalendar />
+                                </span>
+                                <p>
+                                  {task.taskDates.map((date) => {
+                                    const currentDate = new Date(date);
+                                    const day = currentDate.getDate();
+                                    const monthName =
+                                      currentDate.toLocaleDateString(
+                                        undefined,
+                                        {
+                                          month: "short",
+                                        }
+                                      );
+                                    return `${day} ${monthName}`;
+                                  })}
+                                </p>
+                              </div>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </Link>
@@ -337,57 +401,85 @@ const MyTask = () => {
                 </p>
               </div>
             )}
-
-            {/* <p className="text-center text-red4 text-[15px]">{errorMsg}</p> */}
           </div>
 
           <div>
             {currentCategory === "Closed" && (
               <div className="flex flex-col">
-                <div className=" grid grid-cols-2 justify-between max-h-[500px]">
+                <div className=" flex flex-col space-y-2  w-[700px]">
                   {currentCLosedTasks.map((task: taskData) => (
                     <Link
-                      href={`/dashboard/customer/my-tasks/${task.id}`}
+                      href={`/dashboard/customer/my-tasks/${task.id} `}
                       key={task.id}
                     >
-                      <div className="border border-grey3 rounded-lg shadow-lg p-4 mx-10 my-5 w-[250px]">
-                        <div className="flex justify-between items-center">
-                          <h4 className="font-extrabold text-[18px]">
-                            {task.taskServiceName}
-                          </h4>
-
-                          <div className="w-[12px] h-[12px] block rounded-[50%] border-[1.5px] border-green4 relative">
-                            <span className="w-[6px] h-[6px] block rounded-[50%] bg-green4 absolute right-[1.5px] top-[1.5px]"></span>
-                          </div>
+                      <div className="border-[1.5px] border-grey3 hover:border-[#FE9B07] rounded-lg shadow-lg p-4 my-5 w-full flex group transition-colors duration-200 space-x-2">
+                        <div
+                          className={`w-[100px] h-[100px] rounded-[50%] border-2 border-grey3 flex justify-center items-center group-hover:border-[#FE9B07] transition-colors duration-200 `}
+                        >
+                          <img
+                            src={task.taskImage}
+                            alt=""
+                            width={90}
+                            className={`rounded-[50%] object-cover h-[90px]`}
+                          />
                         </div>
-
-                        <div className="flex justify-between my-3 text-[13px]">
-                          <p className="">AUD$ {task.customerBudget}</p>
-                          <p className="">Active {task.active}</p>
-
-                          <div className="flex items-center space-x-1">
-                            <span className="text-[20px] ">
-                              <CiCalendar />
-                            </span>
-                            <p>
-                              {task.taskDates.map((date) => {
-                                const currentDate = new Date(date);
-                                const day = currentDate.getDate();
-                                const monthName =
-                                  currentDate.toLocaleDateString(undefined, {
-                                    month: "short",
-                                  });
-                                return `${day} ${monthName}`;
-                              })}
-                            </p>
+                        <div className="flex  justify-between px-4 w-[550px]">
+                          <div className="flex flex-col space-y-6 justify-center">
+                            <h4 className="font-extrabold text-[18px]">
+                              {task.taskServiceName}
+                            </h4>
+                            <div className="flex space-x-3 items-center text-[12px]">
+                              <div className=" flex items-center space-x-1 bg-[#F8E9FE] text-green6 rounded-lg py-1 px-2 ">
+                                <span>
+                                  <FiMapPin />
+                                </span>
+                                <p>{task.userAddress.slice(0, 15)}</p>
+                              </div>
+                              <p className="bg-[#F8A8AB] rounded-lg py-1 px-2 ">
+                                ${task.customerBudget}
+                              </p>
+                            </div>
                           </div>
-                        </div>
+                          <div className="flex flex-col items-end space-y-4">
+                            <div
+                              className={`w-[12px] h-[12px]  rounded-[50%] border-[1.5px] border-green4 relative flex justify-center items-center ${
+                                task.active === true
+                                  ? " border-green5"
+                                  : " border-red5"
+                              }`}
+                            >
+                              <span
+                                className={`w-[6px] h-[6px] block rounded-[50%] ${
+                                  task.active === true
+                                    ? " bg-green5"
+                                    : " bg-red5"
+                                }`}
+                              ></span>
+                            </div>
 
-                        <div className="text-[13px] flex items-center space-x-1">
-                          <span>
-                            <FiMapPin />
-                          </span>
-                          <p>{task.userAddress}</p>
+                            <div className="flex flex-col space-y-2 items-center">
+                              <h2 className="font-bold">Needed on:</h2>
+                              <div className="flex items-center space-x-1 text-[12px]">
+                                <span className="text-[20px] ">
+                                  <CiCalendar />
+                                </span>
+                                <p>
+                                  {task.taskDates.map((date) => {
+                                    const currentDate = new Date(date);
+                                    const day = currentDate.getDate();
+                                    const monthName =
+                                      currentDate.toLocaleDateString(
+                                        undefined,
+                                        {
+                                          month: "short",
+                                        }
+                                      );
+                                    return `${day} ${monthName}`;
+                                  })}
+                                </p>
+                              </div>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </Link>

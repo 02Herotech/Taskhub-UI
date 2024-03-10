@@ -6,13 +6,11 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import { signOut, useSession } from "next-auth/react";
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FaRegUser } from "react-icons/fa";
 
-// import { AuthResponse } from 'next-auth';
-
 import { IoIosNotificationsOutline } from "react-icons/io";
-// import {RiArrowDropDownLine} from "react-icons/ri";
+
 import { RxDashboard } from "react-icons/rx";
 import { IoPersonOutline } from "react-icons/io5";
 import { IoClipboardOutline } from "react-icons/io5";
@@ -21,7 +19,6 @@ import { FiHelpCircle, FiMessageCircle } from "react-icons/fi";
 import { FiLogOut } from "react-icons/fi";
 import { GoGear, GoPulse } from "react-icons/go";
 import { TfiWallet } from "react-icons/tfi";
-// import { AuthResponse } from '../../types/next-auth';
 
 import portrait from "./../../public/dashboardAssets/portrait.jpg";
 import taskHub from "./../../public/dashboardAssets/TASK.png";
@@ -38,16 +35,36 @@ function SPDashboardLayout(props: IProps) {
     return router.pathname === linkPath;
   };
 
+  const [isOpen, setIsOpen] = useState(false);
+  const [profilePicture, setProfilePicture] = useState(null);
+
   const { data: session } = useSession();
   console.log(session);
-  // console.log(session?.user.accessToken)
 
   const firstName = session?.user.user.firstName;
   const lastName = session?.user.user.lastName;
   const userRole = session?.user.user.roles[0];
-  const profilePicture = session?.user.user.profileImage;
+  const userID = session?.user?.user?.id;
 
-  const [isOpen, setIsOpen] = useState(false);
+  const handleUserProfile = async () => {
+    try {
+      if (!userID) {
+        return;
+      }
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_URL}user/user-profile/${userID}`
+      );
+      if (response.status === 200) {
+        setProfilePicture(response.data.profileImage);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    handleUserProfile();
+  }, [userID]);
 
   const contactClick = () => {
     setIsOpen(!isOpen);
@@ -109,19 +126,19 @@ function SPDashboardLayout(props: IProps) {
             <p className={`text-[12px]`}>{userRole}</p>
           </div>
 
-          {profilePicture ? (
+          {profilePicture === "" || profilePicture === null ? (
+            <span
+              className={` bg-grey2 rounded-[50%] border-[2px] border-[#FE9B07]  p-2`}
+            >
+              <FaRegUser />
+            </span>
+          ) : (
             <img
               src={profilePicture}
               alt="User Portrait"
               className={`rounded-[50%] h-[40px] w-[40px] object-cover`}
               width={20}
             />
-          ) : (
-            <span
-              className={` bg-grey2 rounded-[50%] border-[2px] border-[#FE9B07]  p-2`}
-            >
-              <FaRegUser />
-            </span>
           )}
 
           <div className=" flex relative cursor-pointer" onClick={contactClick}>
@@ -247,7 +264,7 @@ function SPDashboardLayout(props: IProps) {
             </div>
 
             <button
-              className={`flex items-center text-[16px] gap-[10px] hover:text-[#FE9B07]`}
+              className={`flex items-center gap-[10px] hover:text-[#FE9B07]`}
               onClick={handleLogOut}
             >
               <FiLogOut size={16} /> Logout
