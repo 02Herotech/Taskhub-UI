@@ -5,6 +5,7 @@ import { useRef } from "react";
 import { useRouter } from "next/router";
 
 import CustomerDashboardLayout from "../../../../../components/customerdashboardLayout";
+import Head from "next/head";
 
 interface FormState {
   taskServiceName: string;
@@ -317,7 +318,10 @@ const PostRequest = () => {
       console.log(response);
       if (response.status === 200) {
         setResMsg(response.data.message);
-        route.push("/dashboard/customer/my-tasks");
+
+        setTimeout(() => {
+          route.push("/dashboard/customer/my-tasks");
+        }, 900);
       }
     } catch (error: any) {
       console.log(error);
@@ -336,6 +340,11 @@ const PostRequest = () => {
 
   return (
     <CustomerDashboardLayout>
+      <div>
+        <Head>
+          <title>TaskHub | Post Task</title>
+        </Head>
+      </div>
       <div
         className={`mt-16 flex flex-col justify-center items-start w-[900px]`}
       >

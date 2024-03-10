@@ -118,15 +118,15 @@ const TaskDetails = () => {
       <div
         className={`my-16 flex flex-col justify-center items-start w-[900px]`}
       >
-        <h1 className="text-lg font-extrabold border border-grey2 rounded-md shadow-md p-2">
-          VIEW TASK DETAILS
+        <h1 className="text-lg font-extrabold border-[1.5px] border-[#FE9B07] rounded-md shadow-md py-2 px-4">
+          Task Details
         </h1>
 
         <p className="text-center w-[700px] text-red10 mt-4 -mb-4">
           {errorMsg}
         </p>
 
-        <div className="flex  flex-col mt-16 w-[700px] border border-grey2 rounded-2xl shadow-xl p-10 relative">
+        <div className="flex  flex-col mt-16 w-[700px] border-[1.5px] border-[#FE9B07] rounded-2xl shadow-xl p-10 relative">
           <span
             className="absolute top-2 right-5 text-grey4  cursor-pointer hover:text-grey6"
             onClick={() => setIsOpened(!isOpened)}

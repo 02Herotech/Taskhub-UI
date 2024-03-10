@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import axios from "axios";
 import Image from "next/image";
+import { useRouter } from "next/router";
 
 import CustomerDashboardLayout from "../../../../components/customerdashboardLayout";
 import success from "../../../../public/success.svg";
 import styles from "../../../styles/animation.module.css";
+import Head from "next/head";
 
 interface FormState {
   streetNumber: string;
@@ -23,6 +25,14 @@ const Profile = () => {
   const [errorMsg, setErrorMsg] = useState("");
   const [notEmptyError1, setNotEmptyError1] = useState(false);
 
+  const [streetNumber, setStreetNumber] = useState("");
+  const [streetName, setStreetName] = useState("");
+  const [suburb, setSuburb] = useState("");
+  const [state, setState] = useState("");
+  const [postCode, setPostCode] = useState("");
+  const [unitNumber, setUnitNumber] = useState("");
+  const [profilePicture, setProfilePicture] = useState(null);
+
   const [formData, setFormData] = useState({
     streetNumber: "",
     streetName: "",
@@ -32,6 +42,8 @@ const Profile = () => {
     postCode: "",
     error1: "",
   });
+
+  const router = useRouter();
 
   const handleChange = (e: any) => {
     const { name, value } = e.target;
@@ -92,12 +104,38 @@ const Profile = () => {
   const firstNameValue = session?.user?.user?.firstName || "";
   const lastNameValue = session?.user?.user?.lastName || "";
   const eamilAddressValue = session?.user?.user?.emailAddress || "";
-  const streetNumberValue = session?.user?.user?.address?.streetNumber || "";
-  const streetNameValue = session?.user?.user?.address?.streetName || "";
-  const suburbValue = session?.user?.user?.address?.suburb || "";
-  const postCodeValue = session?.user?.user?.address?.postCode || "";
-  const stateValue = session?.user?.user?.address?.state || "";
-  const unitNumberValue = session?.user?.user?.address?.unitNumber || "";
+  const userID = session?.user?.user?.id;
+
+  const handleUserProfile = async () => {
+    try {
+      if (!userID) {
+        return;
+      }
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_URL}user/user-profile/${userID}`
+      );
+      console.log("userProfile:", response);
+      if (response.status === 200) {
+        setSuburb(response.data.address.suburb);
+        setState(response.data.address.state);
+        setStreetName(response.data.address.streetName);
+        setStreetNumber(response.data.address.streetNumber);
+        setPostCode(response.data.address.postCode);
+        setUnitNumber(response.data.address.unitNumber);
+        setProfilePicture(response.data.profileImage);
+      }
+    } catch (error) {
+      console.error(error);
+      setErrorMsg("Eror fetching user's address");
+      setTimeout(() => {
+        setErrorMsg("");
+      }, 3000);
+    }
+  };
+
+  useEffect(() => {
+    handleUserProfile();
+  }, [userID]);
 
   // To submit form
 
@@ -116,6 +154,7 @@ const Profile = () => {
     const postCodeValue = formData.postCode;
     const stateValue = formData.state;
     const unitNumberValue = formData.unitNumber;
+    const profileImageValue = profilePicture;
 
     try {
       const response = await axios.patch(
@@ -131,7 +170,7 @@ const Profile = () => {
             state: stateValue,
             postCode: postCodeValue,
           },
-          profileImage: "",
+          profileImage: profileImageValue,
         },
         {
           headers: {
@@ -144,6 +183,10 @@ const Profile = () => {
       console.log(response);
       if (response.status === 200) {
         setIsSuccessful(true);
+
+        setTimeout(() => {
+          router.push("/dashboard/customer");
+        }, 900);
       }
     } catch (error: any) {
       console.log("update info: ", error);
@@ -153,12 +196,18 @@ const Profile = () => {
         setErrorMsg("");
       }, 3000);
     } finally {
+      resetForm();
       setIsLoading(false);
     }
   };
 
   return (
     <CustomerDashboardLayout>
+      <div>
+        <Head>
+          <title>TaskHub | Profile</title>
+        </Head>
+      </div>
       <div className="my-16 flex flex-col justify-center items-start w-[800px] p-8 border-2 border-grey2 rounded-md">
         <h1 className="text-lg font-extrabold">Profile</h1>
         <div className="flex flex-col my-8 w-[500px]">
@@ -194,9 +243,7 @@ const Profile = () => {
               <div className={`w-[166px] h-[166px]`}>
                 <Image src={success} width={200} height={200} alt="success" />
               </div>
-              <p className="text-center mt-10">
-                Please logout and login to effect change
-              </p>
+              <p className="text-center mt-10">Successful</p>
             </div>
           ) : (
             <div>
@@ -212,7 +259,7 @@ const Profile = () => {
                       type="number"
                       id="streetNumber"
                       name="streetNumber"
-                      placeholder={streetNumberValue}
+                      placeholder={streetNumber}
                       value={formData.streetNumber}
                       className="p-2 border-2 border-grey2 rounded-md w-[150px] my-3"
                       onChange={handleChange}
@@ -227,7 +274,7 @@ const Profile = () => {
                       type="text"
                       id="streetName"
                       name="streetName"
-                      placeholder={streetNameValue}
+                      placeholder={streetName}
                       value={formData.streetName}
                       className="p-2 border-2 border-grey2 rounded-md w-[500px] my-3"
                       required
@@ -245,7 +292,7 @@ const Profile = () => {
                       type="number"
                       id="unitNumber"
                       name="unitNumber"
-                      placeholder={unitNumberValue}
+                      placeholder={unitNumber}
                       value={formData.unitNumber}
                       className="p-2 border-2 border-grey2 rounded-md w-[150px] my-3"
                       onChange={handleChange}
@@ -260,7 +307,7 @@ const Profile = () => {
                       type="text"
                       id="suburb"
                       name="suburb"
-                      placeholder={suburbValue}
+                      placeholder={suburb}
                       value={formData.suburb}
                       className="p-2 border-2 border-grey2 rounded-md w-[500px] my-3"
                       required
@@ -284,7 +331,7 @@ const Profile = () => {
                       onChange={handleChange}
                     >
                       <option value="" disabled>
-                        {stateValue}
+                        {state}
                       </option>
                       <option value="Western Australia">
                         Western Australia
@@ -322,7 +369,7 @@ const Profile = () => {
                       type="number"
                       id="postCode"
                       name="postCode"
-                      placeholder={postCodeValue}
+                      placeholder={postCode}
                       value={formData.postCode}
                       className="p-2 border-2 border-grey2 rounded-md my-3"
                       required
