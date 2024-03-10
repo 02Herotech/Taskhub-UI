@@ -10,7 +10,7 @@ import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { CiCalendar } from "react-icons/ci";
 import { FiMapPin } from "react-icons/fi";
 import CustomerDashboardLayout from "../../../../../components/customerdashboardLayout";
-import { current } from "@reduxjs/toolkit";
+
 import loader from "../../../../../public/taskhub-newloader.gif";
 import Head from "next/head";
 
@@ -33,10 +33,6 @@ const MyTask = () => {
       id: "1",
       name: "Open",
     },
-    // {
-    //   id: "2",
-    //   name: " Closed",
-    // },
     {
       id: "2",
       name: "Closed",
@@ -61,7 +57,6 @@ const MyTask = () => {
     if (!userToken) {
       return; // Skip fetching if userToken is not available
     }
-    console.log("usertoken:", userToken);
 
     try {
       const response = await axios.get(
@@ -83,7 +78,7 @@ const MyTask = () => {
       console.log("data: ", taskData);
     } catch (error) {
       console.log(error);
-      setErrorMsg("Error loading task");
+      setErrorMsg("Error loading tasks");
     } finally {
       setIsLoading(false);
     }
@@ -144,7 +139,7 @@ const MyTask = () => {
         className={`my-16 flex flex-col justify-center items-start w-[900px]`}
       >
         <h1 className="text-lg font-extrabold border border-grey2 rounded-md p-2">
-          MY TASKS
+          My Tasks
         </h1>
 
         <div className="flex justify-center mt-10 w-[700px]">
