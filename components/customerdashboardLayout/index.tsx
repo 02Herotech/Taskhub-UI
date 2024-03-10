@@ -79,7 +79,9 @@ function CustomerDashboardLayout(props: IProps) {
       console.log("Sign Out: ", response);
 
       if (response.status == 200) {
-        router.push("/auth/login");
+        setTimeout(() => {
+          router.push("/auth/login");
+        }, 800);
       }
     } catch (error) {
       console.error(error);
