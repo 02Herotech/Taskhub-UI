@@ -13,10 +13,11 @@ import success from "../../../public/success.svg";
 import styles from "../../styles/animation.module.css";
 
 import welcome from "../../../public/welcome.svg";
-import image1 from "../../../public/signupConfirm1.png";
-import image2 from "../../../public/signupConfirm2.png";
-import image3 from "../../../public/signupConfirm3.png";
-import image4 from "../../../public/signupConfirm4.png";
+
+import image1 from "../../../public/activationImage1.jpg";
+import image2 from "../../../public/activationImage2.jpg";
+import image3 from "../../../public/activationChat1.png";
+import image4 from "../../../public/activationChat2.png";
 
 const VerifyEmail = () => {
   const [tokenAndHashedEmail, setTokenAndHashedEmail] = useState<string>("");
@@ -51,6 +52,22 @@ const VerifyEmail = () => {
     }
   }, [tokenAndHashedEmail]);
 
+  const [selectedCustomerChat, setSelectedCustomerChat] = useState(0);
+  const [customerChat, setCustomerChat] = useState([
+    {
+      id: 1,
+      chat: "Hey, I need a plumber in my house",
+    },
+    {
+      id: 2,
+      chat: "What's your price to fix my bathroom?",
+    },
+    {
+      id: 3,
+      chat: "Okay, send me your invoice",
+    },
+  ]);
+
   return (
     <div className={`m-auto`}>
       <div
@@ -76,51 +93,73 @@ const VerifyEmail = () => {
         <div className="flex flex-col justify-center items-center  relative ">
           <div className="items-center  flex flex-col justify-center space-y-[50px]">
             <div className="flex flex-col justify-center items-center  h-[220px] mt-5 ">
-              {loading && (
+              {/* {loading && (
                 <div>
                   <Image src={newloader} width={150} height={150} alt="" />
                 </div>
-              )}
+              )} */}
 
-              {verified && (
-                <div
-                  className={`flex flex-col items-center justify-center ${styles.animation}`}
-                >
-                  <Image src={success} width={130} height={130} alt="" />
+              {/* {verified && ( */}
+              <div
+                className={`flex flex-col items-center justify-center ${styles.animation}`}
+              >
+                <Image src={success} width={130} height={130} alt="" />
 
-                  <p className="text-center mt-4 font-bold">
-                    Your email has been verified successfully.
-                  </p>
-                </div>
-              )}
-              {error && (
+                <p className="text-center mt-4 font-bold">
+                  Your email has been verified successfully.
+                </p>
+              </div>
+
+              {/* {error && (
                 <div className="text-red5">
                   Email already verified. Please log in
                 </div>
-              )}
+              )} */}
             </div>
 
-            <div className="flex justify-center items-center space-x-16">
-              <div className="text-center flex flex-col justify-center items-center  space-y-3">
-                <div className="flex -space-x-2">
-                  <Image src={image1} width={20} alt="" />
-                  <Image src={image2} width={20} alt="" />
-                  <Image src={image3} width={20} alt="" />
+            <div className="flex justify-center items-center relative w-[1100px] ">
+              <div className="flex justify-center items-center space-x-20  ">
+                <div
+                  className={`w-[200px] h-[200px]  flex justify-center items-center `}
+                >
+                  <Image
+                    src={image1}
+                    alt=""
+                    width={200}
+                    className={`rounded-[50%] object-cover h-[200px]`}
+                  />
                 </div>
-                <p className="leading-tight text-[15px]">
-                  Connect <br /> with customers
+                <div
+                  className={`w-[200px] h-[200px]  flex justify-center items-center `}
+                >
+                  <Image
+                    src={image2}
+                    alt=""
+                    width={200}
+                    className={`rounded-[50%] object-cover h-[200px]`}
+                  />
+                </div>
+              </div>
+              <div className="absolute inset-0 flex justify-center items-center  ">
+                <p className="text-center leading-tight text-[15px]">
+                  <span className="text-[30px] font-bold">50+</span> <br />
+                  services <br /> available
                 </p>
               </div>
-              <Image
-                src={image4}
-                width={400}
-                alt=""
-                className="rounded-b-3xl"
-              />
-              <p className="text-center leading-tight text-[15px]">
-                <span className="text-[30px] font-bold">50+</span> <br />
-                services available
-              </p>
+              <div className="flex absolute inset-0 justify-start items-start space-x-2 ">
+                <Image src={image3} alt="" width={40} />
+                <p className="bg-grey2 w-[200px] py-2 px-4 rounded-md text-[12px] -mt-10">
+                  "Hi, I'm a plumber. How may I be of your service?"
+                </p>
+              </div>
+
+              <div className="flex absolute inset-0 justify-end items-center space-x-2 ">
+                <p className="bg-grey2 w-[200px] py-2 px-4 rounded-md text-[12px] -mt-10 transition-all delay-500">
+                  "Hi, I'm a plumber. How may I be of your service?"
+                </p>
+
+                <Image src={image4} alt="" width={40} />
+              </div>
             </div>
           </div>
 
@@ -135,6 +174,9 @@ const VerifyEmail = () => {
               </span>
             </Link>
           </div>
+
+          <div className="bg-[#FE9B07AB] rounded-full h-[60px] w-[60px] absolute top-20 left-60"></div>
+          <div className="bg-[#FE9B07AB] rounded-full h-[30px] w-[30px] absolute top-8 right-72"></div>
         </div>
       </div>
     </div>
