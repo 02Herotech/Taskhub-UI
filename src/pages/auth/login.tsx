@@ -102,7 +102,9 @@ const Login: React.FC<FormState> = () => {
     } catch (error: any) {
       console.log(error);
       setIsLoading(false);
+      // if (error) {
       setErrorMessage(error.response.data.message);
+      // }
     }
 
     setTimeout(() => {

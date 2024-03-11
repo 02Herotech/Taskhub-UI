@@ -13,9 +13,6 @@ interface FormState {
   state: string;
   postCode: string;
   error1: string;
-  image1: File | undefined;
-  image2: File | undefined;
-  image3: File | undefined;
 }
 
 interface Step4Props {
@@ -23,13 +20,11 @@ interface Step4Props {
   handleChange4: (event: React.ChangeEvent<HTMLInputElement>) => void;
   handleChange4b: (event: React.ChangeEvent<HTMLSelectElement>) => void;
   formData: FormState;
-  handleImage1: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  handleImage2: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  handleImage3: (event: React.ChangeEvent<HTMLInputElement>) => void;
   handleSubmit: (e: { preventDefault: () => void }) => void;
   isSuccessful: any;
   errMsg: any;
   isLoading: any;
+  listingData: any;
 }
 
 const Step4 = ({
@@ -37,13 +32,11 @@ const Step4 = ({
   handleChange4,
   handleChange4b,
   formData,
-  handleImage1,
-  handleImage2,
-  handleImage3,
   handleSubmit,
   isSuccessful,
   errMsg,
   isLoading,
+  listingData,
 }: Step4Props) => {
   const isAllFieldsFilled = () => {
     const requiredFields: (keyof FormState)[] = [
@@ -53,9 +46,6 @@ const Step4 = ({
       "suburb",
       "state",
       "postCode",
-      "image1",
-      "image2",
-      "image3",
     ];
     return requiredFields.every((field) => formData[field] !== "");
   };
@@ -199,39 +189,35 @@ const Step4 = ({
 
             <div className="my-16">
               <h3 className="text-md font-extrabold mb-5">BUSINESS IMAGE</h3>
-              <p className="text-[13px] font-semibold">
-                Images (up to 3) <br />
-                Get noticed with visual examples of your services
-              </p>
-
-              <div className=" flex flex-col text-[15px] mt-10 justify-between space-y-10">
-                <input
-                  type="file"
-                  name="image1"
-                  id="image1"
-                  // className="file:h-[100px] file:w-[200px] file:bg-transparent file:rounded-lg file:border-[1.5px] file:border-grey4 w-[200px]"
-                  onChange={handleImage1}
-                  accept="image/*"
-                />
-
-                <input
-                  type="file"
-                  name="image2"
-                  id="image2"
-                  // className="file:h-[100px] file:w-[200px] file:bg-transparent file:rounded-lg file:border-[1.5px] file:border-grey4 w-[200px]"
-                  onChange={handleImage2}
-                  accept="image/*"
-                />
-
-                <input
-                  type="file"
-                  name="image3"
-                  id="image3"
-                  // className="file:h-[100px] file:w-[100px] file:bg-transparent file:rounded-lg file:border-[1.5px] file:border-grey4 w-[100px]"
-                  onChange={handleImage3}
-                  accept="image/*"
-                />
+              <div className="text-[13px] font-semibold flex flex-col space-y-8 ">
+                <div className="flex flex-col space-y-3">
+                  <p> Images (up to 3)</p>
+                  <p>Get noticed with visual examples of your services</p>
+                </div>
+                <div className="flex space-x-3">
+                  {listingData?.businessPictures.map(
+                    (
+                      image: string | undefined,
+                      index: React.Key | null | undefined
+                    ) => (
+                      <div
+                        key={index}
+                        className="w-[300px] h-[200px] border-2 rounded-xl border-grey3"
+                      >
+                        <img
+                          src={image}
+                          alt="Service Images"
+                          width={300}
+                          height={200}
+                          className="rounded-xl bg-cover h-[200px] w[300px]"
+                        />
+                      </div>
+                    )
+                  )}
+                </div>
               </div>
+
+              <div className=" flex flex-col text-[15px] mt-10 justify-between space-y-10"></div>
             </div>
 
             <div className="flex justify-center">
@@ -255,7 +241,7 @@ const Step4 = ({
                 className={` py-3 bg-purpleBase px-6 rounded-lg text-white w-[200px] hover:bg-purpleHover cursor-pointer flex justify-center disabled:opacity-50`}
                 disabled={!isAllFieldsFilled() || isLoading}
               >
-                Submit
+                {isLoading ? "Submitting" : "Submit"}
               </button>
             </div>
           </form>

@@ -3,14 +3,9 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import axios from "axios";
-import Link from "next/link";
-import Image from "next/image";
 import Head from "next/head";
 
 import CustomerDashboardLayout from "../../../../components/customerdashboardLayout";
-import loader from "../../../../public/loader.svg";
-import success from "../../../../public/success.svg";
-import styles from "../../../styles/animation.module.css";
 
 interface FormState {
   streetNumber: string;
@@ -23,12 +18,6 @@ interface FormState {
 }
 
 const CompleteRegistration = () => {
-  const router = useRouter();
-
-  const [notEmptyError1, setNotEmptyError1] = useState(false);
-  const [errMsg, setErrMsg] = useState("");
-  const [profilePicture, setProfilePicture] = useState(null);
-
   const [formData, setFormData] = useState({
     streetNumber: "",
     streetName: "",
@@ -39,6 +28,11 @@ const CompleteRegistration = () => {
     error1: "",
   });
 
+  const router = useRouter();
+
+  const [notEmptyError1, setNotEmptyError1] = useState(false);
+  const [errMsg, setErrMsg] = useState("");
+  // const [profilePicture, setProfilePicture] = useState(null);
   const [isLoading, setIsLaoding] = useState(false);
   const [isDone, setIsDone] = useState(false);
 
@@ -101,6 +95,8 @@ const CompleteRegistration = () => {
   };
 
   // To submit formit
+  const { data: session } = useSession();
+  const accessTokenValue = session?.user.accessToken;
 
   const streetNumberValue = formData.streetNumber;
   const streetNameValue = formData.streetName;
@@ -108,9 +104,6 @@ const CompleteRegistration = () => {
   const stateValue = formData.state;
   const postCodeValue = formData.postCode;
   const unitNumberValue = formData.unitNumber;
-
-  const { data: session } = useSession();
-  const accessTokenValue = session?.user.accessToken;
 
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
@@ -131,14 +124,14 @@ const CompleteRegistration = () => {
       );
 
       if (response.status === 200) {
-        setIsLaoding(false);
+        resetForm();
         router.push("/dashboard/customer");
       }
     } catch (error: any) {
       console.error(error);
       setErrMsg(error.message);
     } finally {
-      resetForm();
+      setIsLaoding(false);
     }
   };
 
@@ -156,19 +149,6 @@ const CompleteRegistration = () => {
         <div
           className={`flex justify-center items-start my-20 w-[800px] mx-auto`}
         >
-          {/* {isDone ? (
-            <div
-              className={`flex flex-col items-center justify-center mt-10 ${styles.animation}`}
-            >
-              <div className={`w-[166px] h-[166px]`}>
-                <Image src={success} width={166} height={166} alt="" />
-              </div>
-              <p className="text-center mt-10">
-                Your registration is complete and your account is verified.{" "}
-                <br /> Kindly log out and login to effect your verification
-              </p>
-            </div>
-          ) : ( */}
           <div className="w-[430px] bg-white shadow-lg p-5">
             <form className={`p-5`} onSubmit={handleSubmit}>
               <div className={`flex flex-col`}>
@@ -327,8 +307,6 @@ const CompleteRegistration = () => {
               {errMsg}
             </div>
           </div>
-
-          {/* endin)} */}
         </div>
       </div>
     </CustomerDashboardLayout>
