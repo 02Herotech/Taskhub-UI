@@ -11,16 +11,16 @@ interface Step3Props {
   nextStep: () => void;
   prevStep: () => void;
   handleChange3: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  setNotEmptyError1: any;
   notEmptyError1: any;
+  listingData: any;
 }
 const Step3 = ({
   nextStep,
   prevStep,
   handleChange3,
-  setNotEmptyError1,
   formData,
   notEmptyError1,
+  listingData,
 }: Step3Props) => {
   const isAllFieldsFilled = () => {
     const requiredFields: (keyof FormState)[] = ["pricing"];
@@ -56,7 +56,7 @@ const Step3 = ({
                 id="pricing"
                 name="pricing"
                 className="border-[1.5px] border-grey6 rounded-[12px] py-2 px-4 w-[150px]"
-                placeholder="0.00"
+                placeholder={listingData?.pricing}
                 onChange={handleChange3}
                 value={formData.pricing}
                 min={25}

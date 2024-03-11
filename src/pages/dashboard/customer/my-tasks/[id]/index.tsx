@@ -10,6 +10,7 @@ import { BsThreeDots } from "react-icons/bs";
 
 import CustomerDashboardLayout from "../../../../../../components/customerdashboardLayout";
 import loader from "../../../../../../public/taskhub-newloader.gif";
+import Link from "next/link";
 
 interface taskData {
   id: string | number;
@@ -23,8 +24,6 @@ interface taskData {
   taskImage: string;
   taskDates: [number];
 }
-
-// ... (existing imports)
 
 const TaskDetails = () => {
   const router = useRouter();
@@ -149,7 +148,7 @@ const TaskDetails = () => {
               </p>
             </div>
           )}
-          {/* <p>Task page {id}</p> */}
+
           {taskData.map((task, index) => (
             <div key={index} className="w-full ">
               <h2 className="text-[30px] mb-5 font-extrabold">
@@ -225,8 +224,8 @@ const TaskDetails = () => {
           </div>
         </div>
 
-        <div className="w-[700px] mt-10">
-          <a
+        <div className="w-[700px] mt-10  flex justify-center">
+          <Link
             href="/dashboard/customer/my-tasks"
             className="flex justify-center items-center text-[14px] text-[#969696] space-x-2 hover:text-[#FE9B07] hover:scale-110"
           >
@@ -234,7 +233,7 @@ const TaskDetails = () => {
               <FaArrowLeftLong />
             </span>
             <p>Back</p>
-          </a>
+          </Link>
         </div>
       </div>
     </CustomerDashboardLayout>

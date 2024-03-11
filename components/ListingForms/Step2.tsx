@@ -50,7 +50,16 @@ const Step2 = ({
   // Check if necessary inputs are filled for each step
 
   const isAllFieldsFilled = () => {
-    const requiredFields: (keyof FormState)[] = ["serviceDescription"];
+    const requiredFields: (keyof FormState)[] = [
+      "serviceDescription",
+      "available",
+      "startMinute",
+      "startHour",
+      "closeMinute",
+      "closeHour",
+      "openingTime",
+      "closingTime",
+    ];
     return requiredFields.every((field) => formData[field] !== "");
   };
 
@@ -96,7 +105,7 @@ const Step2 = ({
               <label
                 htmlFor="available"
                 className={`flex w-[50px] h-[18px] rounded-full items-center ${
-                  formData.available ? "bg-green5" : "bg-grey5"
+                  formData.available ? "bg-green5" : "bg-red5"
                 }`}
                 onClick={() =>
                   setFormData({

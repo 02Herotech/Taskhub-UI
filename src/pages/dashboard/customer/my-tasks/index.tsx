@@ -142,8 +142,8 @@ const MyTask = () => {
           My Tasks
         </h1>
 
-        <div className="flex justify-center mt-10 w-[700px]">
-          <div className="flex w-[400px] justify-evenly items-center">
+        <div className="flex justify-start mt-10 w-[700px] ">
+          <div className="flex w-[350px] justify-between items-center ">
             {catgeory.map((category) => (
               <button
                 key={category.id}
@@ -178,7 +178,7 @@ const MyTask = () => {
                         href={`/dashboard/customer/my-tasks/${task.id} `}
                         key={task.id}
                       >
-                        <div className="border-[1.5px] border-grey3 hover:border-[#FE9B07] rounded-lg shadow-lg p-4 my-5 w-full flex group transition-colors duration-200 space-x-2">
+                        <div className="border-[1.5px] border-grey3 hover:border-[#FE9B07]  hover:bg-[#F2F0F3] rounded-lg shadow-lg p-4 my-5 w-full flex group transition-colors duration-200 space-x-2 bg-[#FBFAFB]">
                           <div
                             className={`w-[100px] h-[100px] rounded-[50%] border-2 border-grey3 flex justify-center items-center group-hover:border-[#FE9B07] transition-colors duration-200 `}
                           >
@@ -201,7 +201,7 @@ const MyTask = () => {
                                   </span>
                                   <p>{task.userAddress.slice(0, 15)}</p>
                                 </div>
-                                <p className="bg-[#F8A8AB] rounded-lg py-1 px-2 ">
+                                <p className="bg-[#F8E9FE] rounded-lg py-1 px-2 ">
                                   ${task.customerBudget}
                                 </p>
                               </div>
@@ -223,8 +223,8 @@ const MyTask = () => {
                                 ></span>
                               </div>
 
-                              <div className="flex flex-col space-y-2 items-center">
-                                <h2 className="font-bold">Needed on:</h2>
+                              <div className="flex flex-col space-y-2 items-center font-bold">
+                                <h2 className="">Needed on:</h2>
                                 <div className="flex items-center space-x-1 text-[12px]">
                                   <span className="text-[20px] ">
                                     <CiCalendar />

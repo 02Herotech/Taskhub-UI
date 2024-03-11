@@ -371,13 +371,14 @@ const CreateListings = () => {
       );
       console.log(response);
       if (response.status === 201) {
-        setIsLoading(false);
+        // setIsLoading(false);
         setIsSuccessful(true);
 
         setTimeout(() => {
           route.push("/dashboard/service-provider/my-listings");
         }, 2000);
       }
+      resetForm();
     } catch (error) {
       console.log(error);
       setErrMsg("Error creating listing");
@@ -386,7 +387,7 @@ const CreateListings = () => {
         setErrMsg("");
       }, 3000);
     } finally {
-      resetForm();
+      setIsLoading(false);
     }
   };
 

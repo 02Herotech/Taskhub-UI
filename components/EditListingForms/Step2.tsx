@@ -3,14 +3,7 @@ import { FaArrowLeft } from "react-icons/fa6";
 
 interface FormState {
   serviceDescription: string;
-  availableDays: string[];
   available: boolean;
-  startMinute: string;
-  startHour: string;
-  closeMinute: string;
-  closeHour: string;
-  openingTime: string;
-  closingTime: string;
 }
 
 interface Step2Props {
@@ -18,7 +11,7 @@ interface Step2Props {
   nextStep: () => void;
   prevStep: () => void;
   handleChange: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
-  handleChange2: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  listingData: any;
   setFormData: any;
 }
 
@@ -27,28 +20,9 @@ const Step2 = ({
   prevStep,
   formData,
   handleChange,
-  handleChange2,
+  listingData,
   setFormData,
 }: Step2Props) => {
-  const [notEmptyError1, setNotEmptyError1] = useState(false);
-
-  const daysOfWeek = ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"];
-
-  // To hand checked days
-
-  const handleCheckBoxChange = (day: string) => {
-    setFormData((prevState: { availableDays: string[] }) => ({
-      ...prevState,
-      availableDays: prevState.availableDays.includes(day)
-        ? prevState.availableDays.filter(
-            (checkedDay: string) => checkedDay !== day
-          )
-        : [...prevState.availableDays, day],
-    }));
-  };
-
-  // Check if necessary inputs are filled for each step
-
   const isAllFieldsFilled = () => {
     const requiredFields: (keyof FormState)[] = ["serviceDescription"];
     return requiredFields.every((field) => formData[field] !== "");
@@ -80,7 +54,7 @@ const Step2 = ({
                 className="resize-none border-grey4 border-[1.5px] rounded-lg p-2 shadow-lg ml-10"
                 onChange={handleChange}
                 value={formData.serviceDescription}
-                placeholder="I provide ..."
+                placeholder={listingData?.serviceDescription}
               />
             </div>
 
@@ -96,7 +70,7 @@ const Step2 = ({
               <label
                 htmlFor="available"
                 className={`flex w-[50px] h-[18px] rounded-full items-center ${
-                  formData.available ? "bg-green5" : "bg-grey5"
+                  formData.available ? "bg-green5" : "bg-red5"
                 }`}
                 onClick={() =>
                   setFormData({
@@ -122,52 +96,70 @@ const Step2 = ({
               <div className="flex items-center text-[15px] ml-5 mt-8">
                 <p className="text-md font-semibold">TIME:</p>
 
-                <div className="flex items-center w-[280px] justify-around ml-3">
-                  <input
-                    type="time"
-                    className="p-2 border rounded-md"
-                    id="openingTime"
-                    name="openingTime"
-                    onChange={handleChange2}
-                    value={formData.openingTime}
-                  />
+                <div className="flex items-center  space-x-2 ml-3 ">
+                  <div className="flex items-center p-2 border rounded-md font-semibold space-x-2">
+                    {listingData?.startHour ? (
+                      <p>{listingData?.startHour}</p>
+                    ) : (
+                      <p>0</p>
+                    )}
+                    <p>:</p>
+                    {listingData?.startMinute ? (
+                      <p>{listingData?.startMinute}</p>
+                    ) : (
+                      <p>0</p>
+                    )}
+                  </div>
 
                   <p>-</p>
 
-                  <input
-                    type="time"
-                    className="p-2 border rounded-md"
-                    id="closingTime"
-                    name="closingTime"
-                    onChange={handleChange2}
-                    value={formData.closingTime}
-                  />
+                  <div className="flex items-center p-2 border rounded-md font-semibold space-x-2">
+                    {listingData?.closeHour ? (
+                      <p>{listingData?.closeHour}</p>
+                    ) : (
+                      <p>0</p>
+                    )}
+                    <p>:</p>
+                    {listingData?.closeMinute ? (
+                      <p>{listingData?.closeMinute}</p>
+                    ) : (
+                      <p>0</p>
+                    )}
+                  </div>
                 </div>
               </div>
 
-              <div className="flex text-[12px] w-[185px] justify-between ml-[85px] text-grey4 mt-1">
+              <div className="flex text-[12px] w-[120px] justify-between ml-[85px] text-grey4 mt-1">
                 <p>Open</p>
                 <p>Close</p>
               </div>
 
-              <div className="flex items-center text-[15px] ml-5 mt-8">
+              <div className="flex items-center space-x-3 text-[15px] ml-5 mt-8">
                 <p className="text-md font-semibold">DAYS:</p>
 
-                <div className="flex items-center ml-3 space-x-4">
-                  {daysOfWeek.map((day) => (
-                    <label
-                      key={day}
-                      className={`flex items-center justify-center border-[1.5px] py-2 px-4 cursor-pointer rounded-lg font-semibold hover:bg-green2  border-grey5 ${
-                        formData.availableDays.includes(day)
-                          ? "bg-[rgba(20,120,47,255)] text-white"
-                          : "bg-white text-grey5 border-grey5"
-                      } transition-colors duration-200`}
-                      onClick={() => handleCheckBoxChange(day)} // Handle click event on label
-                    >
-                      {day}
-                    </label>
-                  ))}
-                </div>
+                {listingData &&
+                Array.isArray(listingData.availableDays) &&
+                listingData.availableDays.length > 0 ? (
+                  <div className="flex space-x-2">
+                    {listingData.availableDays.map(
+                      (
+                        day: string | any[],
+                        index: React.Key | null | undefined
+                      ) => (
+                        <span
+                          key={index}
+                          className="bg-[#14782F] rounded-xl font-bold py-2 px-3 text-white"
+                        >
+                          {day.slice(0, 3)}
+                        </span>
+                      )
+                    )}
+                  </div>
+                ) : (
+                  <p className="bg-[#14782F] rounded-xl font-bold py-2 text-center text-white w-[150px]">
+                    Not Available
+                  </p>
+                )}
               </div>
             </div>
           </div>

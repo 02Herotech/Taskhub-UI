@@ -49,7 +49,6 @@ const Step4 = ({
     const requiredFields: (keyof FormState)[] = [
       "streetNumber",
       "streetName",
-      "unitNumber",
       "suburb",
       "state",
       "postCode",
@@ -255,7 +254,7 @@ const Step4 = ({
                 className={` py-3 bg-purpleBase px-6 rounded-lg text-white w-[200px] hover:bg-purpleHover cursor-pointer flex justify-center disabled:opacity-50`}
                 disabled={!isAllFieldsFilled() || isLoading}
               >
-                Submit
+                {isLoading ? "Submitting" : "Submit"}
               </button>
             </div>
           </form>

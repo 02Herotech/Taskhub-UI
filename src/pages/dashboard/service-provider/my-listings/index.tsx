@@ -95,16 +95,13 @@ const Listing = () => {
         }
       );
 
-      console.log("Listing: ", response);
-      setListingData(response.data.content);
-      console.log("ListingData: ", listingData);
-      // const customerTasks = response.data
-      //   .filter((task: taskData) => task.posterId === session?.user?.user.id)
-      //   .sort((a: any, b: any) => b.id - a.id);
-      // setTaskData(customerTasks);
+      const sortedListings = response.data.content.sort(
+        (a: any, b: any) => b.id - a.id
+      );
 
-      // console.log("task response: ", response);
-      // console.log("data: ", taskData);
+      console.log("Listing: ", response);
+      setListingData(sortedListings);
+      console.log("ListingData: ", listingData);
     } catch (error) {
       console.log(error);
       setErrorMsg("Error loading listings");
@@ -133,22 +130,25 @@ const Listing = () => {
     console.log("Inactive Listings: ", inactiveListings);
   }, [listingData]);
 
-  // Calculate the indexes for the tasks to be displayed on the current page
+  // Calculate the indexes for the listings to be displayed on the current page
   const listingsPerPage = 4;
   const [currentPage, setCurrentPage] = useState(1);
 
-  const indexOfLastTask = currentPage * listingsPerPage;
-  const indexOfFirstTask = indexOfLastTask - listingsPerPage;
+  const indexOfLastListing = currentPage * listingsPerPage;
+  const indexOfFirstListing = indexOfLastListing - listingsPerPage;
 
   const currentActiveListings = activeListings.slice(
-    indexOfFirstTask,
-    indexOfLastTask
+    indexOfFirstListing,
+    indexOfLastListing
   );
   const currentCLosedListings = inactiveListings.slice(
-    indexOfFirstTask,
-    indexOfLastTask
+    indexOfFirstListing,
+    indexOfLastListing
   );
-  const currentAllTasks = listingData.slice(indexOfFirstTask, indexOfLastTask);
+  const currentAllListings = listingData.slice(
+    indexOfFirstListing,
+    indexOfLastListing
+  );
 
   const nthPageforActive = Math.ceil(activeListings.length / listingsPerPage);
   const nthPageforClosed = Math.ceil(inactiveListings.length / listingsPerPage);
@@ -202,28 +202,34 @@ const Listing = () => {
                   <div className=" grid grid-cols-2 gap-2 w-[700px] ml-16  ">
                     {currentActiveListings.map((listing) => (
                       <Link
-                        href={`/dashboard/customer/my-tasks/${listing.id} `}
+                        href={`/dashboard/service-provider/my-listings/${listing.id} `}
                         key={listing.id}
                       >
-                        <div className="border-[1.5px] space-y-4 flex-col justify-center items-center border-grey3 hover:border-[#FE9B07] rounded-2xl shadow-lg p-4 my-5 flex group transition-colors duration-200 h-[250px] w-[220px]">
+                        <div className="border-[1.5px] flex-col justify-around space-y-2 items-center border-grey3 hover:border-[#FE9B07] rounded-2xl shadow-lg px-3 py-4 my-5 flex group transition-colors duration-200 h-[250px] w-[220px]">
                           <img
                             src={listing.businessPictures[0]}
                             alt=""
                             width={200}
-                            className={`rounded-2xl object-cover h-[170px] border-[1.5px] border-grey3 group-hover:border-[#FE9B07] transition-colors duration-200`}
+                            className={`rounded-2xl bg-cover h-[170px] border-[1.5px] border-grey3 group-hover:border-[#FE9B07] transition-colors duration-200 w-[200px]`}
                           />
 
-                          <div className="flex justify-between w-[190px] items-center">
-                            <div className="flex flex-col justify-center text-[13px]  space-y-2">
-                              <p className="font-extrabold">
-                                ${listing.pricing}
-                              </p>
-                              <div className=" flex items-center space-x-1 text-grey4">
-                                <span>
-                                  <FiMapPin />
-                                </span>
+                          <div className="flex justify-between w-[190px] items-center ">
+                            <div className="flex flex-col space-y-2">
+                              <h4 className="font-extrabold text-[18px]">
+                                {listing.businessName}
+                              </h4>
 
-                                <p>{listing.userAddress.state}</p>
+                              <div className="flex items-center text-[13px]  space-x-2">
+                                <p className=" text-grey4">
+                                  ${listing.pricing}
+                                </p>
+                                <div className=" flex items-center space-x-1 text-grey4">
+                                  <span>
+                                    <FiMapPin />
+                                  </span>
+
+                                  <p>{listing.userAddress.state.slice(0, 8)}</p>
+                                </div>
                               </div>
                             </div>
 
@@ -242,10 +248,6 @@ const Listing = () => {
                                 }`}
                               ></span>
                             </div>
-
-                            {/* <h4 className="font-extrabold text-[18px]">
-                              {listing.businessName}
-                            </h4> */}
                           </div>
                         </div>
                       </Link>
@@ -277,7 +279,7 @@ const Listing = () => {
               {currentCategory === "Open" && activeListings.length === 0 && (
                 <div className="w-[700px] flex items-center justify-center h-[300px] ">
                   <p className="text-center text-grey5 text-[15px]">
-                    Open task is empty
+                    Open listing is empty
                   </p>
                 </div>
               )}
@@ -288,9 +290,9 @@ const Listing = () => {
             {currentCategory === "All" && (
               <div className="flex flex-col justify-center items-center">
                 <div className=" grid grid-cols-2 gap-2 w-[700px] ml-16  ">
-                  {currentAllTasks.map((listing: listingData) => (
+                  {currentAllListings.map((listing: listingData) => (
                     <Link
-                      href={`/dashboard/customer/my-tasks/${listing.id} `}
+                      href={`/dashboard/service-provider/my-listings/${listing.id} `}
                       key={listing.id}
                     >
                       <div className="border-[1.5px] space-y-4 flex-col justify-center items-center border-grey3 hover:border-[#FE9B07] rounded-2xl shadow-lg p-4 my-5 flex group transition-colors duration-200 h-[250px] w-[220px]">
@@ -302,14 +304,20 @@ const Listing = () => {
                         />
 
                         <div className="flex justify-between w-[190px] items-center">
-                          <div className="flex flex-col justify-center text-[13px]  space-y-2">
-                            <p className="font-extrabold">${listing.pricing}</p>
-                            <div className=" flex items-center space-x-1 text-grey4">
-                              <span>
-                                <FiMapPin />
-                              </span>
+                          <div className="flex flex-col space-y-2">
+                            <h4 className="font-extrabold text-[18px]">
+                              {listing.businessName}
+                            </h4>
 
-                              <p>{listing.userAddress.state}</p>
+                            <div className="flex items-center text-[13px]  space-x-2">
+                              <p className=" text-grey4">${listing.pricing}</p>
+                              <div className=" flex items-center space-x-1 text-grey4">
+                                <span>
+                                  <FiMapPin />
+                                </span>
+
+                                <p>{listing.userAddress.state.slice(0, 8)}</p>
+                              </div>
                             </div>
                           </div>
 
@@ -328,10 +336,6 @@ const Listing = () => {
                               }`}
                             ></span>
                           </div>
-
-                          {/* <h4 className="font-extrabold text-[18px]">
-                              {listing.businessName}
-                            </h4> */}
                         </div>
                       </div>
                     </Link>
@@ -363,7 +367,7 @@ const Listing = () => {
             {currentCategory === "All" && listingData.length === 0 && (
               <div className="w-[700px] flex items-center justify-center h-[300px] ">
                 <p className="text-center text-grey5 text-[15px]">
-                  All task is empty
+                  All listing is empty
                 </p>
               </div>
             )}
@@ -375,7 +379,7 @@ const Listing = () => {
                 <div className=" grid grid-cols-2 gap-2 w-[700px] ml-16  ">
                   {currentCLosedListings.map((listing: listingData) => (
                     <Link
-                      href={`/dashboard/customer/my-tasks/${listing.id} `}
+                      href={`/dashboard/service-provider/my-listings/${listing.id} `}
                       key={listing.id}
                     >
                       <div className="border-[1.5px] space-y-4 flex-col justify-center items-center border-grey3 hover:border-[#FE9B07] rounded-2xl shadow-lg p-4 my-5 flex group transition-colors duration-200 h-[250px] w-[220px]">
@@ -387,14 +391,20 @@ const Listing = () => {
                         />
 
                         <div className="flex justify-between w-[190px] items-center">
-                          <div className="flex flex-col justify-center text-[13px]  space-y-2">
-                            <p className="font-extrabold">${listing.pricing}</p>
-                            <div className=" flex items-center space-x-1 text-grey4">
-                              <span>
-                                <FiMapPin />
-                              </span>
+                          <div className="flex flex-col space-y-2">
+                            <h4 className="font-extrabold text-[18px]">
+                              {listing.businessName}
+                            </h4>
 
-                              <p>{listing.userAddress.state}</p>
+                            <div className="flex items-center text-[13px]  space-x-2">
+                              <p className=" text-grey4">${listing.pricing}</p>
+                              <div className=" flex items-center space-x-1 text-grey4">
+                                <span>
+                                  <FiMapPin />
+                                </span>
+
+                                <p>{listing.userAddress.state.slice(0, 8)}</p>
+                              </div>
                             </div>
                           </div>
 
@@ -413,10 +423,6 @@ const Listing = () => {
                               }`}
                             ></span>
                           </div>
-
-                          {/* <h4 className="font-extrabold text-[18px]">
-                           {listing.businessName}
-                         </h4> */}
                         </div>
                       </div>
                     </Link>
@@ -449,13 +455,21 @@ const Listing = () => {
             {currentCategory === "Closed" && inactiveListings.length === 0 && (
               <div className="w-[700px] flex items-center justify-center h-[300px]">
                 <p className="text-center text-grey5 text-[15px]">
-                  Closed task is empty
+                  Closed listing is empty
                 </p>
               </div>
             )}
 
             {/* <p className="text-center text-red4 text-[15px]">{errorMsg}</p> */}
           </div>
+        </div>
+
+        <div className="flex justify-center items-center w-[700px] my-2">
+          <Link href="/dashboard/service-provider/my-listings/create-listing">
+            <button className="bg-purpleBase text-[15px] rounded-lg border-none px-4 py-2 text-white hover:bg-purpleHover">
+              Create New Listing
+            </button>
+          </Link>
         </div>
       </div>
     </SPDashboardLayout>
