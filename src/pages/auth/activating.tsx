@@ -93,28 +93,29 @@ const VerifyEmail = () => {
         <div className="flex flex-col justify-center items-center  relative ">
           <div className="items-center  flex flex-col justify-center space-y-[50px]">
             <div className="flex flex-col justify-center items-center  h-[220px] mt-5 ">
-              {/* {loading && (
+              {loading && (
                 <div>
                   <Image src={newloader} width={150} height={150} alt="" />
                 </div>
-              )} */}
+              )}
 
-              {/* {verified && ( */}
-              <div
-                className={`flex flex-col items-center justify-center ${styles.animation}`}
-              >
-                <Image src={success} width={130} height={130} alt="" />
+              {verified && (
+                <div
+                  className={`flex flex-col items-center justify-center ${styles.animation}`}
+                >
+                  <Image src={success} width={130} height={130} alt="" />
 
-                <p className="text-center mt-4 font-bold">
-                  Your email has been verified successfully.
-                </p>
-              </div>
+                  <p className="text-center mt-4 font-bold">
+                    Your email has been verified successfully.
+                  </p>
+                </div>
+              )}
 
-              {/* {error && (
+              {error && (
                 <div className="text-red5">
                   Email already verified. Please log in
                 </div>
-              )} */}
+              )}
             </div>
 
             <div className="flex justify-center items-center relative w-[1100px] ">
