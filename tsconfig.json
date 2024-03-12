@@ -18,8 +18,11 @@
       "@/*": ["./src/*"]
     },
     "typeRoots": ["node_modules/@types"],
-    "types": ["node", "react"]
+    "types": ["node", "react"],
+    "downlevelIteration": true // Add this line
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/pages/terms-and-condition"],
   "exclude": ["node_modules"]
 }
+
+
