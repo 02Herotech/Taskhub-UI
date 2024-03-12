@@ -376,29 +376,29 @@ const CreateListings = () => {
     // // Convert the set to an array and stringify it
     // apiFormData.append("availableDays", JSON.stringify([...availableDaysSet]));
 
-    // Filter out null, empty, and undefined values from availableDays array
-    const filteredAvailableDays = formData.availableDays.filter(
-      (day) => day !== null && day !== undefined && day !== ""
-    );
+    // // Filter out null, empty, and undefined values from availableDays array
+    // const filteredAvailableDays = formData.availableDays.filter(
+    //   (day) => day !== null && day !== undefined && day !== ""
+    // );
 
-    // Check if there are any invalid values in the availableDays array
-    const invalidValues = filteredAvailableDays.filter(
-      (day) => !(day in AvailableDays)
-    );
-    if (invalidValues.length > 0) {
-      console.error("Invalid values in availableDays:", invalidValues);
-      // Handle the error appropriately, such as displaying a message to the user
-    }
+    // // Check if there are any invalid values in the availableDays array
+    // const invalidValues = filteredAvailableDays.filter(
+    //   (day) => !(day in AvailableDays)
+    // );
+    // if (invalidValues.length > 0) {
+    //   console.error("Invalid values in availableDays:", invalidValues);
+    //   // Handle the error appropriately, such as displaying a message to the user
+    // }
 
-    // Convert the filtered array to a set of enums
-    const availableDaysSet = new Set(
-      filteredAvailableDays.map(
-        (day) => AvailableDays[day as keyof typeof AvailableDays]
-      )
-    );
+    // // Convert the filtered array to a set of enums
+    // const availableDaysSet = new Set(
+    //   filteredAvailableDays.map(
+    //     (day) => AvailableDays[day as keyof typeof AvailableDays]
+    //   )
+    // );
 
-    // Convert the set to an array and stringify it
-    apiFormData.append("availableDays", JSON.stringify([...availableDaysSet]));
+    // // Convert the set to an array and stringify it
+    // apiFormData.append("availableDays", JSON.stringify([...availableDaysSet]));
     // apiFormData.append("availableDays", JSON.stringify(formData.availableDays));
     apiFormData.append("available", formData.available.toString());
     apiFormData.append("startHour", formData.startHour);
