@@ -74,7 +74,7 @@ const SignupConfirmation = () => {
             </div>
           </div>
 
-          <div className="py-4 px-6 bg-white rounded-full absolute bottom-44">
+          {/* <div className="py-4 px-6 bg-white rounded-full absolute bottom-44">
             <Link
               href="/auth/login"
               className="flex items-center bg-purpleBase hover:bg-purpleHover py-2 px-8 rounded-full text-white "
@@ -84,7 +84,7 @@ const SignupConfirmation = () => {
                 <IoIosArrowRoundForward />
               </span>
             </Link>
-          </div>
+          </div> */}
 
           <div className="bg-[#FE9B07AB] rounded-full h-[60px] w-[60px] absolute top-20 left-16"></div>
           <div className="bg-[#FE9B07AB] rounded-full h-[30px] w-[30px] absolute top-8 right-24"></div>
