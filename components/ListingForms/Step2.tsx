@@ -30,9 +30,17 @@ const Step2 = ({
   handleChange2,
   setFormData,
 }: Step2Props) => {
-  const [notEmptyError1, setNotEmptyError1] = useState(false);
+  const [checkBox, setCheckBox] = useState(false);
 
-  const daysOfWeek = ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"];
+  const daysOfWeek = [
+    "MONDAY",
+    "TUESDAY",
+    "WEDNESDAY",
+    "THURSDAY",
+    "FRIDAY",
+    "SATURDAY",
+    "SUNDAY",
+  ];
 
   // To hand checked days
 
@@ -45,6 +53,7 @@ const Step2 = ({
           )
         : [...prevState.availableDays, day],
     }));
+    setCheckBox(true);
   };
 
   // Check if necessary inputs are filled for each step
@@ -125,9 +134,12 @@ const Step2 = ({
             </div>
 
             <div>
-              <p className="font-semibold ml-5">
-                Choose your business working Days and Hour
-              </p>
+              <div className="flex space-x-2">
+                <p className="font-semibold ml-5">
+                  Choose your business working Days and Hour
+                </p>
+                <span className={`text-red10`}>*</span>
+              </div>
               <div className="flex items-center text-[15px] ml-5 mt-8">
                 <p className="text-md font-semibold">TIME:</p>
 
@@ -173,7 +185,7 @@ const Step2 = ({
                       } transition-colors duration-200`}
                       onClick={() => handleCheckBoxChange(day)} // Handle click event on label
                     >
-                      {day}
+                      {day.slice(0, 3)}
                     </label>
                   ))}
                 </div>
@@ -196,7 +208,7 @@ const Step2 = ({
 
         <button
           className={` py-3 bg-purpleBase px-6 rounded-lg text-white w-[200px] hover:bg-purpleHover cursor-pointer flex justify-center disabled:opacity-50`}
-          disabled={!isAllFieldsFilled()}
+          disabled={!isAllFieldsFilled() || !checkBox}
           onClick={nextStep}
         >
           <p>Save & Continue</p>

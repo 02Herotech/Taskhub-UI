@@ -30,6 +30,9 @@ interface Step4Props {
   isSuccessful: any;
   errMsg: any;
   isLoading: any;
+  image1: any;
+  image2: any;
+  image3: any;
 }
 
 const Step4 = ({
@@ -44,6 +47,9 @@ const Step4 = ({
   isSuccessful,
   errMsg,
   isLoading,
+  image1,
+  image2,
+  image3,
 }: Step4Props) => {
   const isAllFieldsFilled = () => {
     const requiredFields: (keyof FormState)[] = [
@@ -197,11 +203,14 @@ const Step4 = ({
             </div>
 
             <div className="my-16">
-              <h3 className="text-md font-extrabold mb-5">BUSINESS IMAGE</h3>
-              <p className="text-[13px] font-semibold">
-                Images (up to 3) <br />
-                Get noticed with visual examples of your services
-              </p>
+              <div className="flex space-x-1">
+                <h3 className="text-md font-extrabold mb-5">BUSINESS IMAGE</h3>
+                <span className={`text-red10`}>*</span>
+              </div>
+              <div className="flex flex-col space-y-3 font-bold">
+                <p> Images (up to 3)</p>
+                <p>Get noticed with visual examples of your services</p>
+              </div>
 
               <div className=" flex flex-col text-[15px] mt-10 justify-between space-y-10">
                 <input
@@ -252,7 +261,13 @@ const Step4 = ({
               <button
                 type="submit"
                 className={` py-3 bg-purpleBase px-6 rounded-lg text-white w-[200px] hover:bg-purpleHover cursor-pointer flex justify-center disabled:opacity-50`}
-                disabled={!isAllFieldsFilled() || isLoading}
+                disabled={
+                  !isAllFieldsFilled() ||
+                  isLoading ||
+                  !image1 ||
+                  !image2 ||
+                  !image3
+                }
               >
                 {isLoading ? "Submitting" : "Submit"}
               </button>

@@ -19,6 +19,35 @@ const Step1 = ({
 }: Step1Props) => {
   const [notEmptyError1, setNotEmptyError1] = useState(false);
 
+  // Assuming you have a mapping of category IDs to their names
+
+  const categoryNames = {
+    CATEGORY1: "HOME SERVICES",
+    CATEGORY2: "PERSONAL SERVICES",
+    CATEGORY3: "EDUCATION & TUTORING",
+    CATEGORY4: "PROFESSIONAL SERVICES",
+    CATEGORY5: "AUTOMOTIVE SERVICES",
+    CATEGORY6: "HEALTH & FITNESS",
+    CATEGORY7: "TECHNOLOGY & ELECTRONICS",
+    CATEGORY8: "HOME IMPROVEMENT",
+    CATEGORY9: "REAL ESTATE SERVICES",
+    CATEGORY10: "DELIVERY & LOGISTICS",
+    CATEGORY11: "ART & CREATIVITY",
+    CATEGORY12: "WEDDING SERVICES",
+    CATEGORY13: "CHILDCARE & BABYSITTING",
+    CATEGORY14: "TRAVEL & ADVENTURE",
+  };
+
+  // Function to retrieve the category name based on the ID
+  // const getCategoryName = (categoryId: string | number) => {
+  //   // Check if the category ID exists in the mapping
+  //   if (categoryNames[categoryId]) {
+  //     return categoryNames[categoryId];
+  //   } else {
+  //     return "Unknown Category"; // Default value if category ID is not found
+  //   }
+  // };
+
   // Check if necessary inputs are filled for each step
 
   const isAllFieldsFilled = () => {
@@ -70,7 +99,11 @@ const Step1 = ({
             id="serviceCategories"
             className="border-grey4 border-[1.5px] rounded-lg p-2 w-[350px]  focus:border-grey4 focus:outline-none text-grey4"
             required
-            value={listingData?.serviceCategory}
+            value={
+              categoryNames[
+                listingData?.serviceCategory as keyof typeof categoryNames
+              ] || ""
+            }
             readOnly
           />
         </div>
