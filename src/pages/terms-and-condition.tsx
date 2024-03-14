@@ -9,7 +9,6 @@ const Terms = () => {
       <Nav />
       <div>
         <TermsAndConditions />
-        {/* <BackButton btnLink='/auth/authSignup' btnValue='Go back' /> */}
       </div>
       <Footer />
     </div>

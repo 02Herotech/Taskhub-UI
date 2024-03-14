@@ -338,9 +338,10 @@ const CreateListings = () => {
 
     console.log("formdata:", formData);
 
-    // const availableDaysEnum: AvailableDays[] = formData.availableDays.map(
-    //   (day: string) => AvailableDays[day as keyof typeof AvailableDays]
-    // );
+    const availableDaysSet = new Set<string>(
+      formData.availableDays.map((day) => String(day))
+    );
+    console.log("Set of available day: ", availableDaysSet);
 
     const apiFormData = new FormData();
     apiFormData.append("businessName", formData.businessName);
@@ -348,58 +349,9 @@ const CreateListings = () => {
     apiFormData.append("subCategory", selectedSubCategory);
     apiFormData.append("serviceDescription ", formData.serviceDescription);
     apiFormData.append("pricing", formData.pricing);
-
-    // const availableDaysSet = new Set(
-    //   formData.availableDays.map(
-    //     (day) => AvailableDays[day as keyof typeof AvailableDays]
-    //   )
-    // );
-    // apiFormData.append("availableDays", JSON.stringify([...availableDaysSet]));
-
-    // const availableDaysArray = Array.from(formData.availableDays).map(
-    //   (day) => AvailableDays[day as keyof typeof AvailableDays]
-    // );
-    // apiFormData.append("availableDays", JSON.stringify(availableDaysArray));
-
-    // // Filter out null values from availableDays array
-    // const filteredAvailableDays = formData.availableDays.filter(
-    //   (day) => day !== null
-    // );
-
-    // // Convert the filtered array to a set of enums
-    // const availableDaysSet = new Set(
-    //   filteredAvailableDays.map(
-    //     (day) => AvailableDays[day as keyof typeof AvailableDays]
-    //   )
-    // );
-
-    // // Convert the set to an array and stringify it
-    // apiFormData.append("availableDays", JSON.stringify([...availableDaysSet]));
-
-    // // Filter out null, empty, and undefined values from availableDays array
-    // const filteredAvailableDays = formData.availableDays.filter(
-    //   (day) => day !== null && day !== undefined && day !== ""
-    // );
-
-    // // Check if there are any invalid values in the availableDays array
-    // const invalidValues = filteredAvailableDays.filter(
-    //   (day) => !(day in AvailableDays)
-    // );
-    // if (invalidValues.length > 0) {
-    //   console.error("Invalid values in availableDays:", invalidValues);
-    //   // Handle the error appropriately, such as displaying a message to the user
-    // }
-
-    // // Convert the filtered array to a set of enums
-    // const availableDaysSet = new Set(
-    //   filteredAvailableDays.map(
-    //     (day) => AvailableDays[day as keyof typeof AvailableDays]
-    //   )
-    // );
-
-    // // Convert the set to an array and stringify it
-    // apiFormData.append("availableDays", JSON.stringify([...availableDaysSet]));
-    // apiFormData.append("availableDays", JSON.stringify(formData.availableDays));
+    availableDaysSet.forEach((day) =>
+      apiFormData.append("availableDays[]", day)
+    );
     apiFormData.append("available", formData.available.toString());
     apiFormData.append("startHour", formData.startHour);
     apiFormData.append("closeMinute", formData.closeMinute);
@@ -428,12 +380,7 @@ const CreateListings = () => {
       );
       console.log(response);
       if (response.status === 201) {
-        // setIsLoading(false);
-        setIsSuccessful(true);
-
-        setTimeout(() => {
-          route.push("/dashboard/service-provider/my-listings");
-        }, 2000);
+        route.push("/dashboard/service-provider/my-listings");
       }
       resetForm();
     } catch (error) {
@@ -518,8 +465,6 @@ const CreateListings = () => {
             handleImage2={handleImage2}
             handleImage3={handleImage3}
             handleSubmit={handleSubmit}
-            // notEmptyError1={notEmptyError1}
-            isSuccessful={isSuccessful}
             errMsg={errMsg}
             isLoading={isLoading}
             image1={image1}

@@ -131,7 +131,7 @@ const Listing = () => {
   }, [listingData]);
 
   // Calculate the indexes for the listings to be displayed on the current page
-  const listingsPerPage = 4;
+  const listingsPerPage = 6;
   const [currentPage, setCurrentPage] = useState(1);
 
   const indexOfLastListing = currentPage * listingsPerPage;
@@ -169,8 +169,8 @@ const Listing = () => {
           My Listings
         </h1>
 
-        <div className="flex justify-center mt-10 w-[700px]">
-          <div className="flex w-[400px] justify-evenly items-center">
+        <div className="flex justify-start mt-16 w-[700px]">
+          <div className="flex w-[350px] justify-between items-center">
             {catgeory.map((category) => (
               <button
                 key={category.id}
@@ -190,7 +190,7 @@ const Listing = () => {
           </div>
         </div>
 
-        <div className="my-10 flex justify-around w-[700px]">
+        <div className="my-10 flex justify-around w-full">
           {isLoading ? (
             <div className="w-[700px] flex items-center justify-center h-[300px] ">
               <Image src={loader} alt="loader" width={150} />
@@ -198,14 +198,14 @@ const Listing = () => {
           ) : (
             <div>
               {currentCategory === "Open" && (
-                <div className="flex flex-col justify-center items-center">
-                  <div className=" grid grid-cols-2 gap-2 w-[700px] ml-16  ">
+                <div className="flex flex-col justify-center items-start  w-[900px]">
+                  <div className=" grid grid-cols-3 gap-2   w-[800px]">
                     {currentActiveListings.map((listing) => (
                       <Link
                         href={`/dashboard/service-provider/my-listings/${listing.id} `}
                         key={listing.id}
                       >
-                        <div className="border-[1.5px] flex-col justify-around space-y-2 items-center border-grey3 hover:border-[#FE9B07] rounded-2xl shadow-lg px-3 py-4 my-5 flex group transition-colors duration-200 h-[250px] w-[220px]">
+                        <div className="border-[1.5px] flex-col justify-around space-y-2 items-center border-grey3 hover:border-[#FE9B07] rounded-2xl shadow-sm px-3 py-4 my-5 flex group transition-colors duration-200 h-[250px] w-[220px]">
                           <img
                             src={listing.businessPictures[0]}
                             alt=""
@@ -255,22 +255,24 @@ const Listing = () => {
                   </div>
 
                   {currentCategory === "Open" && activeListings.length > 0 && (
-                    <div className="flex justify-center items-center my-10 space-x-5">
-                      <button
-                        onClick={() => setCurrentPage(currentPage - 1)}
-                        disabled={currentPage === 1}
-                        className="border rounded-full p-2 hover:border-[#FE9B07] hover:text-[#FE9B07] cursor-pointer disabled:border-grey4 disabled:text-grey4"
-                      >
-                        <IoIosArrowBack />
-                      </button>
-                      <p>{currentPage}</p>
-                      <button
-                        onClick={() => setCurrentPage(currentPage + 1)}
-                        // disabled={currentPage === nthPageforAll}
-                        className="border rounded-full p-2 hover:border-[#FE9B07] hover:text-[#FE9B07] cursor-pointer disabled:border-grey4 disabled:text-grey4"
-                      >
-                        <IoIosArrowForward />
-                      </button>
+                    <div className="w-[800px] flex justify-center  ">
+                      <div className="flex justify-center items-center my-10 space-x-5 ">
+                        <button
+                          onClick={() => setCurrentPage(currentPage - 1)}
+                          disabled={currentPage === 1}
+                          className="border rounded-full p-2 hover:border-[#FE9B07] hover:text-[#FE9B07] cursor-pointer disabled:border-grey4 disabled:text-grey4"
+                        >
+                          <IoIosArrowBack />
+                        </button>
+                        <p>{currentPage}</p>
+                        <button
+                          onClick={() => setCurrentPage(currentPage + 1)}
+                          // disabled={currentPage === nthPageforAll}
+                          className="border rounded-full p-2 hover:border-[#FE9B07] hover:text-[#FE9B07] cursor-pointer disabled:border-grey4 disabled:text-grey4"
+                        >
+                          <IoIosArrowForward />
+                        </button>
+                      </div>
                     </div>
                   )}
                 </div>
@@ -288,14 +290,14 @@ const Listing = () => {
 
           <div>
             {currentCategory === "All" && (
-              <div className="flex flex-col justify-center items-center">
-                <div className=" grid grid-cols-2 gap-2 w-[700px] ml-16  ">
+              <div className="flex flex-col justify-center items-start  w-[900px]">
+                <div className=" grid grid-cols-3 gap-2   w-[800px]">
                   {currentAllListings.map((listing: listingData) => (
                     <Link
                       href={`/dashboard/service-provider/my-listings/${listing.id} `}
                       key={listing.id}
                     >
-                      <div className="border-[1.5px] space-y-4 flex-col justify-center items-center border-grey3 hover:border-[#FE9B07] rounded-2xl shadow-lg p-4 my-5 flex group transition-colors duration-200 h-[250px] w-[220px]">
+                      <div className="border-[1.5px] space-y-4 flex-col justify-center items-center border-grey3 hover:border-[#FE9B07] rounded-2xl shadow-sm p-4 my-5 flex group transition-colors duration-200 h-[250px] w-[220px]">
                         <img
                           src={listing.businessPictures[0]}
                           alt=""
@@ -343,22 +345,24 @@ const Listing = () => {
                 </div>
 
                 {currentCategory === "All" && listingData.length > 0 && (
-                  <div className="flex justify-center items-center my-10 space-x-5">
-                    <button
-                      onClick={() => setCurrentPage(currentPage - 1)}
-                      disabled={currentPage === 1}
-                      className="border rounded-full p-2 hover:border-[#FE9B07] hover:text-[#FE9B07] cursor-pointer disabled:border-grey4 disabled:text-grey4"
-                    >
-                      <IoIosArrowBack />
-                    </button>
-                    <p>{currentPage}</p>
-                    <button
-                      onClick={() => setCurrentPage(currentPage + 1)}
-                      disabled={currentPage === nthPageforActive}
-                      className="border rounded-full p-2 hover:border-[#FE9B07] hover:text-[#FE9B07] cursor-pointer disabled:border-grey4 disabled:text-grey4"
-                    >
-                      <IoIosArrowForward />
-                    </button>
+                  <div className="w-[800px] flex justify-center  ">
+                    <div className="flex justify-center items-center my-10 space-x-5 ">
+                      <button
+                        onClick={() => setCurrentPage(currentPage - 1)}
+                        disabled={currentPage === 1}
+                        className="border rounded-full p-2 hover:border-[#FE9B07] hover:text-[#FE9B07] cursor-pointer disabled:border-grey4 disabled:text-grey4"
+                      >
+                        <IoIosArrowBack />
+                      </button>
+                      <p>{currentPage}</p>
+                      <button
+                        onClick={() => setCurrentPage(currentPage + 1)}
+                        disabled={currentPage === nthPageforActive}
+                        className="border rounded-full p-2 hover:border-[#FE9B07] hover:text-[#FE9B07] cursor-pointer disabled:border-grey4 disabled:text-grey4"
+                      >
+                        <IoIosArrowForward />
+                      </button>
+                    </div>
                   </div>
                 )}
               </div>
@@ -375,14 +379,14 @@ const Listing = () => {
 
           <div>
             {currentCategory === "Closed" && (
-              <div className="flex flex-col justify-center items-center">
-                <div className=" grid grid-cols-2 gap-2 w-[700px] ml-16  ">
+              <div className="flex flex-col justify-center items-start  w-[900px]">
+                <div className=" grid grid-cols-3 gap-2   w-[800px]">
                   {currentCLosedListings.map((listing: listingData) => (
                     <Link
                       href={`/dashboard/service-provider/my-listings/${listing.id} `}
                       key={listing.id}
                     >
-                      <div className="border-[1.5px] space-y-4 flex-col justify-center items-center border-grey3 hover:border-[#FE9B07] rounded-2xl shadow-lg p-4 my-5 flex group transition-colors duration-200 h-[250px] w-[220px]">
+                      <div className="border-[1.5px] space-y-4 flex-col justify-center items-center border-grey3 hover:border-[#FE9B07] rounded-2xl shadow-sm p-4 my-5 flex group transition-colors duration-200 h-[250px] w-[220px]">
                         <img
                           src={listing.businessPictures[0]}
                           alt=""
@@ -431,22 +435,24 @@ const Listing = () => {
 
                 {currentCategory === "Closed" &&
                   inactiveListings.length > 0 && (
-                    <div className="flex justify-center items-center my-10 space-x-5">
-                      <button
-                        onClick={() => setCurrentPage(currentPage - 1)}
-                        disabled={currentPage === 1}
-                        className="border rounded-full p-2 hover:border-[#FE9B07] hover:text-[#FE9B07] cursor-pointer disabled:border-grey4 disabled:text-grey4"
-                      >
-                        <IoIosArrowBack />
-                      </button>
-                      <p>{currentPage}</p>
-                      <button
-                        onClick={() => setCurrentPage(currentPage + 1)}
-                        disabled={currentPage === nthPageforClosed}
-                        className="border rounded-full p-2 hover:border-[#FE9B07] hover:text-[#FE9B07] cursor-pointer disabled:border-grey4 disabled:text-grey4"
-                      >
-                        <IoIosArrowForward />
-                      </button>
+                    <div className="w-[800px] flex justify-center  ">
+                      <div className="flex justify-center items-center my-10 space-x-5 ">
+                        <button
+                          onClick={() => setCurrentPage(currentPage - 1)}
+                          disabled={currentPage === 1}
+                          className="border rounded-full p-2 hover:border-[#FE9B07] hover:text-[#FE9B07] cursor-pointer disabled:border-grey4 disabled:text-grey4"
+                        >
+                          <IoIosArrowBack />
+                        </button>
+                        <p>{currentPage}</p>
+                        <button
+                          onClick={() => setCurrentPage(currentPage + 1)}
+                          disabled={currentPage === nthPageforClosed}
+                          className="border rounded-full p-2 hover:border-[#FE9B07] hover:text-[#FE9B07] cursor-pointer disabled:border-grey4 disabled:text-grey4"
+                        >
+                          <IoIosArrowForward />
+                        </button>
+                      </div>
                     </div>
                   )}
               </div>
@@ -464,7 +470,7 @@ const Listing = () => {
           </div>
         </div>
 
-        <div className="flex justify-center items-center w-[700px] my-2">
+        <div className="flex justify-center items-center w-[800px] my-2">
           <Link href="/dashboard/service-provider/my-listings/create-listing">
             <button className="bg-purpleBase text-[15px] rounded-lg border-none px-4 py-2 text-white hover:bg-purpleHover">
               Create New Listing

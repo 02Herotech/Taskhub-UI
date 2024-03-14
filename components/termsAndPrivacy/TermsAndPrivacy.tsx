@@ -6,8 +6,8 @@ import styles from "./styles.module.css";
 export const TermsAndConditions = () => {
   return (
     <div className={`text-justify pb-20 pt-36 px-20 max-w-7xl mx-auto`}>
-      <h3 className={`text-xl text-center my-5 ${revalia.className}`}>
-        TERMS AND CONDITIONS
+      <h3 className={`text-xl text-center my-5 font-extrabold`}>
+        TaskHub Terms and Conditions
       </h3>
       <p className="font-extrabold text-center text-[16px] my-4">
         THIS AGREEMENT INCLUDES A CLASS ACTION WAIVEVR AND REQUIRES <br /> THE

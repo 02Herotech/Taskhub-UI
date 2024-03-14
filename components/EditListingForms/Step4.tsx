@@ -42,7 +42,6 @@ const Step4 = ({
     const requiredFields: (keyof FormState)[] = [
       "streetNumber",
       "streetName",
-      "unitNumber",
       "suburb",
       "state",
       "postCode",

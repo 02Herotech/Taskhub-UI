@@ -1,18 +1,16 @@
-import React from 'react'
-import Nav from '../../components/nav/Nav'
-import Footer from '../../components/footer/Footer'
-
+import React from "react";
+import Nav from "../../components/nav/Nav";
+import Footer from "../../components/footer/Footer";
+import Privacy from "../../components/Privacy";
 
 const privacy = () => {
-    return (
-        <div className={`min-h-screen`}>
-            <Nav />
-            <div className="container mx-auto px-4 py-8 text-black">
-                <h1 className="text-3xl font-extrabold mb-6">Privacy</h1>
+  return (
+    <div className={`min-h-screen`}>
+      <Nav />
+      <Privacy />
+      <Footer />
+    </div>
+  );
+};
 
-            </div>
-            <Footer />
-        </div>)
-}
-
-export default privacy
+export default privacy;
