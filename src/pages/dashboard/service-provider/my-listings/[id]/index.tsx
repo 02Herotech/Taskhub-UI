@@ -85,7 +85,7 @@ const ListingDetails = () => {
 
       console.log("listingID: ", response);
       setListingData(response.data);
-      console.log("listingDatat:", listingData);
+      // console.log("listingDatat:", listingData);
     } catch (error) {
       console.error(error);
       setErrorMsg("Error loading listiing");
@@ -102,8 +102,36 @@ const ListingDetails = () => {
     // Redirect to the edit page with the listing ID
     router.push(`/dashboard/service-provider/my-listings/edit/${id}`);
   };
-  // localhost:3000/dashboard/service-provider/my-listings/edit/27
-  http: return (
+
+  // To delete listing
+
+  const handleDelete = async () => {
+    const listingId = parseInt(id as string, 10);
+    console.log("id value: ", listingId);
+    try {
+      if (!userToken || !id) {
+        return;
+      }
+
+      const response = await axios.delete(
+        `${process.env.NEXT_PUBLIC_API_URL}listing/delete-listing/${listingId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${userToken}`,
+          },
+        }
+      );
+
+      // console.log("deleteListing: ", response);
+      if (response.status === 200) {
+        router.push("/dashboard/service-provider/my-listings");
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  return (
     <SPDashboardLayout>
       <div
         className={`my-16 flex flex-col justify-center items-start w-[900px] `}
@@ -138,7 +166,7 @@ const ListingDetails = () => {
                 </p>
                 <p
                   className=" hover:text-grey6 hover:border-b-[1.5px] cursor-pointer h-[20px] px-2"
-                  // onClick={handleDelete}
+                  onClick={handleDelete}
                 >
                   Delete
                 </p>
@@ -241,14 +269,29 @@ const ListingDetails = () => {
                 Array.isArray(listingData.availableDays) &&
                 listingData.availableDays.length > 0 ? (
                   <div className="flex space-x-2">
-                    {listingData.availableDays.map((day, index) => (
-                      <span
-                        key={index}
-                        className="bg-[#14782F] rounded-xl font-bold py-2 px-3 text-white"
-                      >
-                        {day.slice(0, 3)}
-                      </span>
-                    ))}
+                    {listingData.availableDays
+                      .map((day) => day.toUpperCase()) // Convert days to uppercase for consistent comparison
+                      .sort((a, b) => {
+                        const daysOrder = [
+                          "MONDAY",
+                          "TUESDAY",
+                          "WEDNESDAY",
+                          "THURSDAY",
+                          "FRIDAY",
+                          "SATURDAY",
+                          "SUNDAY",
+                        ];
+                        return daysOrder.indexOf(a) - daysOrder.indexOf(b);
+                      })
+                      .map((day, index) => (
+                        <span
+                          key={index}
+                          className="bg-[#14782F] rounded-xl font-bold py-2 px-3 text-white"
+                        >
+                          {day.slice(0, 3)}{" "}
+                          {/* Display first three letters of day */}
+                        </span>
+                      ))}
                   </div>
                 ) : (
                   <p className="bg-[#14782F] rounded-xl font-bold py-2 text-center text-white w-[150px]">

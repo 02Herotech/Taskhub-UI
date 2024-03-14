@@ -171,8 +171,8 @@ const MyTask = () => {
           ) : (
             <div>
               {currentCategory === "Open" && (
-                <div className="flex flex-col">
-                  <div className=" flex flex-col space-y-2  w-[700px]">
+                <div className="flex flex-col ">
+                  <div className=" flex flex-col items-center bg-[#F8E9FE]/[0.5] px-5">
                     {currentActiveTasks.map((task) => (
                       <Link
                         href={`/dashboard/customer/my-tasks/${task.id} `}
@@ -287,13 +287,13 @@ const MyTask = () => {
           <div>
             {currentCategory === "All" && (
               <div className="flex flex-col">
-                <div className=" flex flex-col space-y-2  w-[700px]">
+                <div className=" flex flex-col items-center bg-[#F8E9FE]/[0.5] px-5">
                   {currentAllTasks.map((task: taskData) => (
                     <Link
                       href={`/dashboard/customer/my-tasks/${task.id} `}
                       key={task.id}
                     >
-                      <div className="border-[1.5px] border-grey3 hover:border-[#FE9B07] rounded-lg shadow-lg p-4 my-5 w-full flex group transition-colors duration-200 space-x-2">
+                      <div className="border-[1.5px] border-grey3 hover:border-[#FE9B07]  hover:bg-[#F2F0F3] rounded-lg shadow-lg p-4 my-5 w-full flex group transition-colors duration-200 space-x-2 bg-[#FBFAFB]">
                         <div
                           className={`w-[100px] h-[100px] rounded-[50%] border-2 border-grey3 flex justify-center items-center group-hover:border-[#FE9B07] transition-colors duration-200 `}
                         >
@@ -401,13 +401,13 @@ const MyTask = () => {
           <div>
             {currentCategory === "Closed" && (
               <div className="flex flex-col">
-                <div className=" flex flex-col space-y-2  w-[700px]">
+                <div className=" flex flex-col items-center bg-[#F8E9FE]/[0.5] px-5">
                   {currentCLosedTasks.map((task: taskData) => (
                     <Link
                       href={`/dashboard/customer/my-tasks/${task.id} `}
                       key={task.id}
                     >
-                      <div className="border-[1.5px] border-grey3 hover:border-[#FE9B07] rounded-lg shadow-lg p-4 my-5 w-full flex group transition-colors duration-200 space-x-2">
+                      <div className="border-[1.5px] border-grey3 hover:border-[#FE9B07]  hover:bg-[#F2F0F3] rounded-lg shadow-lg p-4 my-5 w-full flex group transition-colors duration-200 space-x-2 bg-[#FBFAFB]">
                         <div
                           className={`w-[100px] h-[100px] rounded-[50%] border-2 border-grey3 flex justify-center items-center group-hover:border-[#FE9B07] transition-colors duration-200 `}
                         >
