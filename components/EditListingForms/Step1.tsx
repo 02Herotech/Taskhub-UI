@@ -38,16 +38,6 @@ const Step1 = ({
     CATEGORY14: "TRAVEL & ADVENTURE",
   };
 
-  // Function to retrieve the category name based on the ID
-  // const getCategoryName = (categoryId: string | number) => {
-  //   // Check if the category ID exists in the mapping
-  //   if (categoryNames[categoryId]) {
-  //     return categoryNames[categoryId];
-  //   } else {
-  //     return "Unknown Category"; // Default value if category ID is not found
-  //   }
-  // };
-
   // Check if necessary inputs are filled for each step
 
   const isAllFieldsFilled = () => {

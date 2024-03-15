@@ -140,13 +140,15 @@ const ListingDetails = () => {
           Listing Details
         </h1>
 
-        <p className="text-center w-[700px] text-red10 mt-4 -mb-4">
-          {errorMsg}
-        </p>
+        {errorMsg && (
+          <p className="text-center w-[900px] text-red10 mt-4 -mb-4">
+            {errorMsg}
+          </p>
+        )}
 
         {isLoading ? (
-          <div className="w-[700px] flex items-center justify-center h-[300px] ">
-            <Image src={loader} alt="loader" width={150} />
+          <div className="w-[900px] flex items-center justify-center h-[300px] ">
+            <Image src={loader} alt="loader" width={80} />
           </div>
         ) : (
           <div className="flex  flex-col mt-16 w-[900px] bg-[#FBFAFB] rounded-2xl shadow-xl p-10 relative ">

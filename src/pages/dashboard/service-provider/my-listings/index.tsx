@@ -169,7 +169,7 @@ const Listing = () => {
           My Listings
         </h1>
 
-        <div className="flex justify-start mt-16 w-[700px]">
+        <div className="flex justify-center mt-16 w-[800px] ">
           <div className="flex w-[350px] justify-between items-center">
             {catgeory.map((category) => (
               <button
@@ -190,30 +190,30 @@ const Listing = () => {
           </div>
         </div>
 
-        <div className="my-10 flex justify-around w-full">
+        <div className="my-10">
           {isLoading ? (
-            <div className="w-[700px] flex items-center justify-center h-[300px] ">
-              <Image src={loader} alt="loader" width={150} />
+            <div className="w-[800px] flex items-center justify-center h-[300px] ">
+              <Image src={loader} alt="loader" width={80} />
             </div>
           ) : (
             <div>
               {currentCategory === "Open" && (
-                <div className="flex flex-col justify-center items-start  w-[900px]">
-                  <div className=" grid grid-cols-3 gap-2   w-[800px]">
+                <div className="flex flex-col justify-center items-center  w-[800px]  ">
+                  <div className=" grid grid-cols-3 gap-10">
                     {currentActiveListings.map((listing) => (
                       <Link
                         href={`/dashboard/service-provider/my-listings/${listing.id} `}
                         key={listing.id}
                       >
-                        <div className="border-[1.5px] flex-col justify-around space-y-2 items-center border-grey3 hover:border-[#FE9B07] rounded-2xl shadow-sm px-3 py-4 my-5 flex group transition-colors duration-200 h-[250px] w-[220px]">
+                        <div className="border-[1.5px] flex-col justify-around space-y-2 items-center border-grey3 hover:border-[#FE9B07] rounded-xl shadow-sm px-3 py-4 my-5 flex group transition-colors duration-200 h-[230px] w-[180px]">
                           <img
                             src={listing.businessPictures[0]}
                             alt=""
                             width={200}
-                            className={`rounded-2xl bg-cover h-[170px] border-[1.5px] border-grey3 group-hover:border-[#FE9B07] transition-colors duration-200 w-[200px]`}
+                            className={`rounded-xl bg-cover h-[150px] border-[1.5px] border-grey3 group-hover:border-[#FE9B07] transition-colors duration-200 w-[180px]`}
                           />
 
-                          <div className="flex justify-between w-[190px] items-center ">
+                          <div className="flex justify-between w-[150px] items-center">
                             <div className="flex flex-col space-y-2">
                               <h4 className="font-extrabold text-[18px]">
                                 {listing.businessName}
@@ -279,7 +279,7 @@ const Listing = () => {
               )}
 
               {currentCategory === "Open" && activeListings.length === 0 && (
-                <div className="w-[700px] flex items-center justify-center h-[300px] ">
+                <div className="w-[800px] flex items-center justify-center h-[300px]">
                   <p className="text-center text-grey5 text-[15px]">
                     Open listing is empty
                   </p>
@@ -290,22 +290,22 @@ const Listing = () => {
 
           <div>
             {currentCategory === "All" && (
-              <div className="flex flex-col justify-center items-start  w-[900px]">
-                <div className=" grid grid-cols-3 gap-2   w-[800px]">
+              <div className="flex flex-col justify-center items-center  w-[800px]  ">
+                <div className=" grid grid-cols-3 gap-10">
                   {currentAllListings.map((listing: listingData) => (
                     <Link
                       href={`/dashboard/service-provider/my-listings/${listing.id} `}
                       key={listing.id}
                     >
-                      <div className="border-[1.5px] space-y-4 flex-col justify-center items-center border-grey3 hover:border-[#FE9B07] rounded-2xl shadow-sm p-4 my-5 flex group transition-colors duration-200 h-[250px] w-[220px]">
+                      <div className="border-[1.5px] flex-col justify-around space-y-2 items-center border-grey3 hover:border-[#FE9B07] rounded-xl shadow-sm px-3 py-4 my-5 flex group transition-colors duration-200 h-[230px] w-[180px]">
                         <img
                           src={listing.businessPictures[0]}
                           alt=""
                           width={200}
-                          className={`rounded-2xl object-cover h-[170px] border-[1.5px] border-grey3 group-hover:border-[#FE9B07] transition-colors duration-200`}
+                          className={`rounded-xl bg-cover h-[150px] border-[1.5px] border-grey3 group-hover:border-[#FE9B07] transition-colors duration-200 w-[180px]`}
                         />
 
-                        <div className="flex justify-between w-[190px] items-center">
+                        <div className="flex justify-between w-[150px] items-center">
                           <div className="flex flex-col space-y-2">
                             <h4 className="font-extrabold text-[18px]">
                               {listing.businessName}
@@ -369,7 +369,7 @@ const Listing = () => {
             )}
 
             {currentCategory === "All" && listingData.length === 0 && (
-              <div className="w-[700px] flex items-center justify-center h-[300px] ">
+              <div className="w-[800px] flex items-center justify-center h-[300px] ">
                 <p className="text-center text-grey5 text-[15px]">
                   All listing is empty
                 </p>
@@ -379,22 +379,22 @@ const Listing = () => {
 
           <div>
             {currentCategory === "Closed" && (
-              <div className="flex flex-col justify-center items-start  w-[900px]">
-                <div className=" grid grid-cols-3 gap-2   w-[800px]">
+              <div className="flex flex-col justify-center items-center  w-[800px] ">
+                <div className=" grid grid-cols-3 gap-10">
                   {currentCLosedListings.map((listing: listingData) => (
                     <Link
                       href={`/dashboard/service-provider/my-listings/${listing.id} `}
                       key={listing.id}
                     >
-                      <div className="border-[1.5px] space-y-4 flex-col justify-center items-center border-grey3 hover:border-[#FE9B07] rounded-2xl shadow-sm p-4 my-5 flex group transition-colors duration-200 h-[250px] w-[220px]">
+                      <div className="border-[1.5px] flex-col justify-around space-y-2 items-center border-grey3 hover:border-[#FE9B07] rounded-xl shadow-sm px-3 py-4 my-5 flex group transition-colors duration-200 h-[230px] w-[180px]">
                         <img
                           src={listing.businessPictures[0]}
                           alt=""
                           width={200}
-                          className={`rounded-2xl object-cover h-[170px] border-[1.5px] border-grey3 group-hover:border-[#FE9B07] transition-colors duration-200`}
+                          className={`rounded-xl bg-cover h-[150px] border-[1.5px] border-grey3 group-hover:border-[#FE9B07] transition-colors duration-200 w-[180px]`}
                         />
 
-                        <div className="flex justify-between w-[190px] items-center">
+                        <div className="flex justify-between w-[150px] items-center">
                           <div className="flex flex-col space-y-2">
                             <h4 className="font-extrabold text-[18px]">
                               {listing.businessName}
@@ -459,7 +459,7 @@ const Listing = () => {
             )}
 
             {currentCategory === "Closed" && inactiveListings.length === 0 && (
-              <div className="w-[700px] flex items-center justify-center h-[300px]">
+              <div className="w-[800px] flex items-center justify-center h-[300px]">
                 <p className="text-center text-grey5 text-[15px]">
                   Closed listing is empty
                 </p>
@@ -470,7 +470,7 @@ const Listing = () => {
           </div>
         </div>
 
-        <div className="flex justify-center items-center w-[800px] my-2">
+        <div className="flex justify-center items-center w-[800px]  my-2">
           <Link href="/dashboard/service-provider/my-listings/create-listing">
             <button className="bg-purpleBase text-[15px] rounded-lg border-none px-4 py-2 text-white hover:bg-purpleHover">
               Create New Listing
