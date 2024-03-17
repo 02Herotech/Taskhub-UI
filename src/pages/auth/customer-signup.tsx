@@ -2,16 +2,16 @@
 import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import logo from "../../../public/logo.png";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import { useCustomerSignUpMutation } from "@/redux/features/auth/api";
+import { BsArrowLeftCircle } from "react-icons/bs";
+
 // import { useRouter } from 'next/dist/client/router'
 
-import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
-import logoImg from "../../../public/logo.png";
+import logoImg from "../../../public/newlogo.png";
 import { BackButton } from "../../../components/buttons/Button";
-import { useCustomerSignUpMutation } from "@/redux/features/auth/api";
 import router from "next/router";
 import flag from "../../../public/flag.jpg";
-import { BsArrowLeftCircle } from "react-icons/bs";
 
 interface FormState {
   firstName: string;
@@ -208,16 +208,9 @@ const CustomerSignup: React.FC<FormState> = () => {
       <div
         className={`p-5 flex h-[80px] drop-shadow-md fixed z-50 w-full bg-white font-extrabold justify-center`}
       >
-        <div className="w-[80em]">
-          <Link href="/" className={`flex space-x-3 items-center`}>
-            <Image
-              src={logoImg}
-              width={50}
-              height={40}
-              alt=""
-              className={`mt-[-10px]`}
-            />
-            <h4 className={`text-sm font-extrabold `}>TaskHub</h4>
+        <div className="w-[80em] flex justify-start ">
+          <Link href="/" className={`flex items-center `}>
+            <Image src={logoImg} width={120} alt="" />
           </Link>
         </div>
       </div>

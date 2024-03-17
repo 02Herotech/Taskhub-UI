@@ -7,6 +7,7 @@ import { PiNotepad } from "react-icons/pi";
 import { FaArrowLeftLong } from "react-icons/fa6";
 import Image from "next/image";
 import { BsThreeDots } from "react-icons/bs";
+import { IoClose } from "react-icons/io5";
 
 import CustomerDashboardLayout from "../../../../../../components/customerdashboardLayout";
 import loader from "../../../../../../public/taskhub-newloader.gif";
@@ -34,6 +35,7 @@ const TaskDetails = () => {
   const [isOpened, setIsOpened] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
   const [idValue, setIdValue] = useState("");
+  const [isEnlarged, setIsEnlarged] = useState(false);
 
   const { data: session } = useSession();
 
@@ -127,7 +129,7 @@ const TaskDetails = () => {
 
         {isLoading ? (
           <div className="w-[700px] flex items-center justify-center h-[500px] ">
-            <Image src={loader} alt="loader" width={150} />
+            <Image src={loader} alt="loader" width={80} />
           </div>
         ) : (
           <div className="flex  flex-col mt-16 w-[700px] rounded-2xl shadow-md p-10 relative  bg-[#F8E9FE]/[0.5]">
@@ -229,12 +231,37 @@ const TaskDetails = () => {
                       src={task.taskImage}
                       alt="Task Reference Img"
                       width={300}
-                      className=" rounded-2xl"
+                      className=" rounded-2xl cursor-pointer"
+                      onClick={() => setIsEnlarged(true)}
                     />
                   </div>
                 </div>
               ))}
             </div>
+
+            {isEnlarged && (
+              <div className="bg-black bg-opacity-80 absolute inset-0 flex justify-center items-center h-full w-full ">
+                {taskData.map((task, index) => (
+                  <div
+                    key={index}
+                    className=" h-full w-full flex justify-center items-center relative"
+                  >
+                    <img
+                      src={task.taskImage}
+                      alt="Task Reference Img"
+                      width={600}
+                      className=" h-[400px]"
+                    />
+                    <span
+                      className="text-white absolute top-3 right-5 text-[20px] hover:text-grey4 cursor-pointer"
+                      onClick={() => setIsEnlarged(false)}
+                    >
+                      <IoClose />
+                    </span>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         )}
 

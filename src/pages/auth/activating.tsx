@@ -6,13 +6,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { IoIosArrowRoundForward } from "react-icons/io";
 
-import logoImg from "../../../public/logo.png";
+import logoImg from "../../../public/newlogo.png";
 import loader from "../../../public/loader.svg";
 import newloader from "../../../public/newloader.gif";
 import success from "../../../public/success.svg";
 import styles from "../../styles/animation.module.css";
-
-import welcome from "../../../public/welcome.svg";
 
 import image1 from "../../../public/activationImage1.jpg";
 import image2 from "../../../public/activationImage2.jpg";
@@ -73,16 +71,9 @@ const VerifyEmail = () => {
       <div
         className={`p-5 flex h-[80px] drop-shadow-md fixed z-50 w-full bg-white font-extrabold justify-center`}
       >
-        <div className="w-[80em] flex ">
-          <Link href="/" className={`flex space-x-3 items-center p-2`}>
-            <Image
-              src={logoImg}
-              width={50}
-              height={40}
-              alt=""
-              className={`mt-[-10px]`}
-            />
-            <h4 className={`text-sm font-extrabold `}>TaskHub</h4>
+        <div className="w-[80em] flex justify-start  ">
+          <Link href="/" className={`flex  items-center p-1 `}>
+            <Image src={logoImg} width={120} alt="" />
           </Link>
         </div>
       </div>

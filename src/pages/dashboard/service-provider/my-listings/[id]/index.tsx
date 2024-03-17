@@ -6,6 +6,7 @@ import Image from "next/image";
 import { FiMapPin } from "react-icons/fi";
 import { BsThreeDots } from "react-icons/bs";
 import { FaArrowLeftLong } from "react-icons/fa6";
+import { IoClose } from "react-icons/io5";
 
 import SPDashboardLayout from "../../../../../../components/spdashboardLayout";
 import loader from "../../../../../../public/taskhub-newloader.gif";
@@ -61,6 +62,8 @@ const ListingDetails = () => {
   const [isOpened, setIsOpened] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
   const [idValue, setIdValue] = useState("");
+  const [isEnlarged, setIsEnlarged] = useState(false);
+  const [selectedImage, setSelectedImage] = useState<string>("");
 
   const userToken = session?.user?.accessToken;
 
@@ -131,6 +134,11 @@ const ListingDetails = () => {
     }
   };
 
+  const handleShowImage = (imageUrl: string) => {
+    setSelectedImage(imageUrl);
+    setIsEnlarged(true);
+  };
+
   return (
     <SPDashboardLayout>
       <div
@@ -151,13 +159,14 @@ const ListingDetails = () => {
             <Image src={loader} alt="loader" width={80} />
           </div>
         ) : (
-          <div className="flex  flex-col mt-16 w-[900px] bg-[#FBFAFB] rounded-2xl shadow-xl p-10 relative ">
+          <div className="flex border border-green4 flex-col mt-16 w-[900px] bg-[#FBFAFB] rounded-2xl shadow-xl p-10 relative ">
             <span
               className="absolute top-2 right-5 text-grey4  cursor-pointer hover:text-grey6"
               onClick={() => setIsOpened(!isOpened)}
             >
               <BsThreeDots />
             </span>
+
             {isOpened && (
               <div className="flex flex-col text-[12px]  text-grey4 absolute right-8 top-6 items-center space-y-1">
                 <p
@@ -333,12 +342,31 @@ const ListingDetails = () => {
                       alt="Service Images"
                       width={300}
                       height={200}
-                      className="rounded-xl bg-cover h-[200px] w[300px]"
+                      className="rounded-xl bg-cover h-[200px] w[300px] cursor-pointer"
+                      onClick={() => handleShowImage(image)}
                     />
                   </div>
                 ))}
               </div>
             </div>
+            {isEnlarged && (
+              <div className="bg-black border border-red5 bg-opacity-80 absolute inset-0 flex justify-center items-center h-full w-full ">
+                <div className=" h-full w-full flex justify-center items-center relative">
+                  <img
+                    src={selectedImage}
+                    alt="Listing Img"
+                    width={600}
+                    className=" h-[400px]"
+                  />
+                  <span
+                    className="text-white absolute top-3 right-5 text-[20px] hover:text-grey4 cursor-pointer"
+                    onClick={() => setIsEnlarged(false)}
+                  >
+                    <IoClose />
+                  </span>
+                </div>
+              </div>
+            )}
           </div>
         )}
 
