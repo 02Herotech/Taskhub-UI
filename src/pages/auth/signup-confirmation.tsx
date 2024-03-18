@@ -37,7 +37,7 @@ const SignupConfirmation = () => {
                 </p>
                 <p className="text-[15px] font-semibold">
                   But first, kindly use the link sent to your email address to
-                  verify to email
+                  verify the email
                 </p>
               </div>
             </div>
