@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-import logoImg from "../../../public/logo.png";
+import logoImg from "../../../public/newlogo.png";
 import loader from "../../../public/loader.svg";
 import success from "../../../public/success.svg";
 import styles from "../../styles/animation.module.css";
@@ -14,10 +14,15 @@ const ChangePassword = () => {
   const [token, setToken] = useState<string>("");
 
   const [changed, setChanged] = useState(false);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    if (!token) {
+      setError("No token. Please try again");
+      return;
+    }
+
     const urlParams = window.location.search.split("?")[1];
     setToken(urlParams);
   }, []);
@@ -28,11 +33,11 @@ const ChangePassword = () => {
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_API_URL}change-password/change?${token}`
       );
-      console.log(response);
+      // console.log(response);
       setChanged(true);
     } catch (error) {
-      console.error("Error changing password:", error);
-      setError(true);
+      console.error(error);
+      setError("Error changing password. Please try again later");
     } finally {
       setLoading(false);
     }
@@ -50,18 +55,9 @@ const ChangePassword = () => {
         className={`p-5 flex h-[80px] drop-shadow-md fixed z-50 w-full bg-white font-extrabold justify-center`}
       >
         <div className="w-[80em] flex justify-start">
-          <div className="">
-            <Link href="/" className={`flex space-x-3 items-center`}>
-              <Image
-                src={logoImg}
-                width={50}
-                height={40}
-                alt=""
-                className={`mt-[-10px]`}
-              />
-              <h4 className={`text-sm font-extrabold `}>TaskHub</h4>
-            </Link>
-          </div>
+          <Link href="/" className={`flex  items-center`}>
+            <Image src={logoImg} width={120} alt="" />
+          </Link>
         </div>
       </div>
 
@@ -94,7 +90,7 @@ const ChangePassword = () => {
           </div>
         )}
 
-        {error && <div>Error changing password. Please try again later</div>}
+        {error && <div className="text-red5">{error}</div>}
       </div>
     </div>
   );

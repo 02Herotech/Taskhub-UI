@@ -23,6 +23,9 @@ interface FormState {
   unitNumber: string;
   error1: string;
   error2: string;
+  image1: File | undefined;
+  image2: File | undefined;
+  image3: File | undefined;
 }
 
 interface listingData {
@@ -39,18 +42,8 @@ interface listingData {
   closeMinute: number;
   closeHour: number;
   startMinute: number;
-  availableFrom: {
-    hour: number;
-    minute: number;
-    second: number;
-    nano: number;
-  };
-  availableTo: {
-    hour: number;
-    minute: number;
-    second: number;
-    nano: number;
-  };
+  availableFrom: [];
+  availableTo: [];
   userAddress: {
     id: number;
     streetNumber: string;
@@ -64,19 +57,6 @@ interface listingData {
   stripeId: string;
   businessPictures: ["string"];
 }
-
-// {
-//   "businessName": "string",
-//   "serviceDescription": "string",
-//   "pricing": 0,
-//   "available": true,
-//   "streetNumber": "string",
-//   "streetName": "string",
-//   "suburb": "string",
-//   "state": "string",
-//   "postCode": "string",
-//   "unitNumber": "string"
-// }
 
 const EditListing = () => {
   const [listingData, setListingData] = useState<listingData | null>(null);
@@ -94,6 +74,9 @@ const EditListing = () => {
     postCode: "",
     error1: "",
     error2: "",
+    image1: undefined,
+    image2: undefined,
+    image3: undefined,
   });
 
   const [notEmptyError1, setNotEmptyError1] = useState(false);
@@ -137,6 +120,9 @@ const EditListing = () => {
 
   const [isLoading, setIsLoading] = useState(true);
   const [errorMsg, setErrorMsg] = useState("");
+  const [image1, setImage1] = useState(false);
+  const [image2, setImage2] = useState(false);
+  const [image3, setImage3] = useState(false);
 
   const userToken = session?.user?.accessToken;
   const listingId = parseInt(id as string, 10);
@@ -160,8 +146,10 @@ const EditListing = () => {
       );
 
       console.log("listingID: ", response);
-      setListingData(response.data);
-      console.log("listingDatat:", listingData);
+      if (response.status === 200) {
+        setListingData(response.data);
+        console.log("listingData:", listingData);
+      }
     } catch (error) {
       console.error(error);
       setErrorMsg("Error fetching listing");
@@ -256,6 +244,31 @@ const EditListing = () => {
     }));
   };
 
+  // To handle images
+
+  const handleImage1 = (e: any) => {
+    setFormData((preData) => ({
+      ...preData,
+      image1: e.target.files[0],
+    }));
+    setImage1(true);
+  };
+
+  const handleImage2 = (e: any) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      image2: e.target.files[0],
+    }));
+    setImage2(true);
+  };
+
+  const handleImage3 = (e: any) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      image3: e.target.files[0],
+    }));
+    setImage3(true);
+  };
   //   To reset the form
 
   const resetForm = () => {
@@ -272,6 +285,9 @@ const EditListing = () => {
       postCode: "",
       error1: "",
       error2: "",
+      image1: undefined,
+      image2: undefined,
+      image3: undefined,
     });
   };
 
@@ -283,36 +299,29 @@ const EditListing = () => {
     setIsLoading(true);
     console.log(formData);
 
-    const businessNameValue = formData.businessName;
-    const serviceDescriptionValue = formData.serviceDescription;
-    const pricingValue = formData.pricing;
-    const availableValue = formData.available;
-    const streetNumberValue = formData.streetNumber;
-    const streetNameValue = formData.streetName;
-    const suburbValue = formData.suburb;
-    const stateValue = formData.state;
-    const postCodeValue = formData.postCode;
-    const unitNumberValue = formData.unitNumber;
+    const apiFormData = new FormData();
+    apiFormData.append("businessName", formData.businessName);
+    apiFormData.append("serviceDescription", formData.serviceDescription);
+    apiFormData.append("pricing", formData.pricing);
+    apiFormData.append("available", formData.available.toString());
+    apiFormData.append("streetNumber", formData.streetNumber);
+    apiFormData.append("streetName", formData.streetName);
+    apiFormData.append("suburb", formData.suburb);
+    apiFormData.append("state", formData.state);
+    apiFormData.append("postCode", formData.postCode);
+    apiFormData.append("unitNumber", formData.unitNumber);
+    formData.image1 && apiFormData.append("image1", formData.image1);
+    formData.image2 && apiFormData.append("image2", formData.image2);
+    formData.image3 && apiFormData.append("image3", formData.image3);
 
     try {
       const response = await axios.patch(
         `${process.env.NEXT_PUBLIC_API_URL}listing/update-listing/${listingId}`,
-        {
-          businessName: businessNameValue,
-          serviceDescription: serviceDescriptionValue,
-          pricing: pricingValue,
-          available: availableValue,
-          streetNumber: streetNumberValue,
-          streetName: streetNameValue,
-          suburb: suburbValue,
-          state: stateValue,
-          postCode: postCodeValue,
-          unitNumber: unitNumberValue,
-        },
+        apiFormData,
         {
           headers: {
             Authorization: `Bearer ${userToken}`,
-            "Content-Type": "application/json",
+            "Content-Type": "multipart/form-data",
           },
         }
       );
@@ -397,10 +406,15 @@ const EditListing = () => {
             handleChange4={handleChange4}
             formData={formData}
             handleSubmit={handleSubmit}
-            isSuccessful={isSuccessful}
             errMsg={errMsg}
             isLoading={isLoading}
             listingData={listingData}
+            handleImage1={handleImage1}
+            handleImage2={handleImage2}
+            handleImage3={handleImage3}
+            image1={image1}
+            image2={image2}
+            image3={image3}
           />
         )}
       </div>

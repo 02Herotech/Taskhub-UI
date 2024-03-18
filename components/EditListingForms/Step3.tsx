@@ -30,6 +30,7 @@ const Step3 = ({
     );
   };
 
+  console.log(listingData?.pricing);
   return (
     <div className="my-16 flex flex-col justify-center items-start w-[900px]">
       <h1 className="text-lg font-extrabold">Pricing</h1>

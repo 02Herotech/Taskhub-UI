@@ -8,9 +8,6 @@ import { signOut, useSession } from "next-auth/react";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { FaRegUser } from "react-icons/fa";
-
-import { IoIosNotificationsOutline } from "react-icons/io";
-
 import { RxDashboard } from "react-icons/rx";
 import { IoPersonOutline } from "react-icons/io5";
 import { IoClipboardOutline } from "react-icons/io5";
@@ -19,9 +16,10 @@ import { FiHelpCircle, FiMessageCircle } from "react-icons/fi";
 import { FiLogOut } from "react-icons/fi";
 import { GoGear, GoPulse } from "react-icons/go";
 import { TfiWallet } from "react-icons/tfi";
+import { IoIosNotificationsOutline } from "react-icons/io";
 
 import portrait from "./../../public/dashboardAssets/portrait.jpg";
-import taskHub from "./../../public/dashboardAssets/TASK.png";
+import taskHub from "./../../public/newlogo.png";
 import Footer from "../footer/Footer";
 
 interface IProps {
@@ -98,10 +96,11 @@ function SPDashboardLayout(props: IProps) {
       <div
         className={`flex justify-between px-6 py-3 border-b-[1.5px] border-grey4 z-50`}
       >
-        <Link href="/" className={`flex justify-center items-center`}>
-          <Image src={taskHub} className={`mx-2`} alt="task-hub" />
-          <h3 className={`text-lg font-extrabold`}>TaskHub</h3>
-        </Link>
+        <div className="flex items-center">
+          <Link href="/" className={`flex justify-center items-center  p-1`}>
+            <Image src={taskHub} width={120} alt="task-hub" />
+          </Link>
+        </div>
         <div
           className={`flex justify-around items-center bg-purpleBase rounded-md px-3 py-2 text-white space-x-4`}
         >

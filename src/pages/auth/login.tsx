@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
-import logo from "../../../public/logo.png";
+import logo from "../../../public/newlogo.png";
 
 import google from "../../../public/google.png";
 import Head from "next/head";
@@ -123,18 +123,9 @@ const Login: React.FC<FormState> = () => {
           className={`p-5 flex h-[80px] drop-shadow-md fixed z-50 w-full bg-white font-extrabold justify-center`}
         >
           <div className="w-[80em] flex justify-start">
-            <div className="">
-              <Link href="/" className={`flex space-x-3 items-center`}>
-                <Image
-                  src={logo}
-                  width={50}
-                  height={40}
-                  alt=""
-                  className={`mt-[-10px]`}
-                />
-                <h4 className={`text-sm font-extrabold `}>TaskHub</h4>
-              </Link>
-            </div>
+            <Link href="/" className={`flex p-1 items-center`}>
+              <Image src={logo} width={120} alt="" />
+            </Link>
           </div>
         </div>
 

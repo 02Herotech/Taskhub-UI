@@ -1,10 +1,9 @@
 import React from "react";
 import Link from "next/link";
-import logoImg from "../../../public/logo.png";
+import logoImg from "../../../public/newlogo.png";
 import Image from "next/image";
 import { IoIosArrowRoundForward } from "react-icons/io";
 
-import welcome from "../../../public/welcome.svg";
 import image1 from "../../../public/activationChat1.png";
 import image2 from "../../../public/signupConfirm2.png";
 import image3 from "../../../public/signupConfirm3.png";
@@ -16,16 +15,9 @@ const SignupConfirmation = () => {
       <div
         className={`p-5 flex h-[80px] drop-shadow-md fixed z-50 w-full bg-white font-extrabold justify-center`}
       >
-        <div className="w-[80em] flex ">
-          <Link href="/" className={`flex space-x-3 items-center p-2`}>
-            <Image
-              src={logoImg}
-              width={50}
-              height={40}
-              alt=""
-              className={`mt-[-10px]`}
-            />
-            <h4 className={`text-sm font-extrabold `}>TaskHub</h4>
+        <div className="w-[80em] flex justify-start">
+          <Link href="/" className={`flex items-center px-2 py-1`}>
+            <Image src={logoImg} width={120} alt="" />
           </Link>
         </div>
       </div>
@@ -44,8 +36,8 @@ const SignupConfirmation = () => {
                   We’re thrilled to have you onboard!
                 </p>
                 <p className="text-[15px] font-semibold">
-                  Before first, kindly use the link sent to your email address
-                  to verify to email
+                  But first, kindly use the link sent to your email address to
+                  verify to email
                 </p>
               </div>
             </div>

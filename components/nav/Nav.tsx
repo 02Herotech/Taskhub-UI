@@ -8,7 +8,7 @@ import { useSession } from "next-auth/react";
 import { signOut } from "next-auth/react";
 import axios from "axios";
 
-import logoImg from "../../public/logo.png";
+import logoImg from "../../public/newlogo.png";
 import { Button } from "../buttons/Button";
 import { poppins } from "@/styles/font";
 
@@ -58,16 +58,9 @@ const Nav = () => {
         <div
           className={`max-w-7xl mx-auto px-8 py-3 flex items-center justify-between font-extrabold`}
         >
-          <div>
-            <Link href="/" className={`flex space-x-3 items-center`}>
-              <Image
-                src={logoImg}
-                width={50}
-                height={40}
-                alt=""
-                className={`mt-[-10px]`}
-              />
-              <h4 className={`text-sm font-extrabold `}>TaskHub</h4>
+          <div className="">
+            <Link href="/" className={`flex items-center  p-1`}>
+              <Image src={logoImg} width={120} alt="" className={``} />
             </Link>
           </div>
 
