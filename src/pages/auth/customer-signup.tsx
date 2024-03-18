@@ -12,6 +12,7 @@ import logoImg from "../../../public/newlogo.png";
 import { BackButton } from "../../../components/buttons/Button";
 import router from "next/router";
 import flag from "../../../public/flag.jpg";
+import Head from "next/head";
 
 interface FormState {
   firstName: string;
@@ -204,82 +205,86 @@ const CustomerSignup: React.FC<FormState> = () => {
   };
 
   return (
-    <div className={` w-full overflow-x-hidden`}>
-      <div
-        className={`p-5 flex h-[80px] drop-shadow-md fixed z-50 w-full bg-white font-extrabold justify-center`}
-      >
-        <div className="w-[80em] flex justify-start ">
-          <Link href="/" className={`flex items-center `}>
-            <Image src={logoImg} width={120} alt="" />
-          </Link>
-        </div>
-      </div>
-
-      <div
-        className={`flex justify-center mt-[120px] items-center flex-col min-h-screen mb-16`}
-      >
-        <div className={` p-3 space-y-5 text-center mb-2`}>
-          <div className={`text-lg font-extrabold w-full  `}>
-            <h1>Create your TaskHub Customer account</h1>
-          </div>
-
-          <div
-            className={`flex justify-center items-center font-[600] w-[300px]  mx-auto`}
-          >
-            <h5>Already have an account?</h5>
-            <Link
-              href="/auth/login"
-              className={`text-purpleBase flex justify-center items-center hover:text-[17px] w-[60px] h-[30px] ml-1`}
-            >
-              Log in
+    <div>
+      <Head>
+        <title>TaskHub | Customer Sign Up</title>
+      </Head>
+      <div className={` w-full overflow-x-hidden`}>
+        <div
+          className={`p-5 flex h-[80px] drop-shadow-md fixed z-50 w-full bg-white font-extrabold justify-center`}
+        >
+          <div className="w-[80em] flex justify-start ">
+            <Link href="/" className={`flex items-center `}>
+              <Image src={logoImg} width={120} alt="" />
             </Link>
           </div>
         </div>
 
-        <div className="mb-10 w-[500px] mt-10">
-          <form action="" onSubmit={onSubmit}>
-            <div className={`space-y-4 mb-10`}>
-              <div className={`flex justify-between`}>
-                <div className={`flex flex-col basis-[48%]`}>
-                  <label
-                    htmlFor="firstName"
-                    className={`font-extrabold text-[16px]  my-3`}
-                  >
-                    First Name <span className={`text-red10`}>*</span>
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="First name"
-                    id="firstName"
-                    name="firstName"
-                    className={` border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl`}
-                    value={formData.firstName}
-                    onChange={handleChange}
-                    required
-                  />
+        <div
+          className={`flex justify-center mt-[120px] items-center flex-col min-h-screen mb-16`}
+        >
+          <div className={` p-3 space-y-5 text-center mb-2`}>
+            <div className={`text-lg font-extrabold w-full  `}>
+              <h1>Create your TaskHub Customer account</h1>
+            </div>
+
+            <div
+              className={`flex justify-center items-center font-[600] w-[300px]  mx-auto`}
+            >
+              <h5>Already have an account?</h5>
+              <Link
+                href="/auth/login"
+                className={`text-purpleBase flex justify-center items-center hover:text-[17px] w-[60px] h-[30px] ml-1`}
+              >
+                Log in
+              </Link>
+            </div>
+          </div>
+
+          <div className="mb-10 w-[500px] mt-10">
+            <form action="" onSubmit={onSubmit}>
+              <div className={`space-y-4 mb-10`}>
+                <div className={`flex justify-between`}>
+                  <div className={`flex flex-col basis-[48%]`}>
+                    <label
+                      htmlFor="firstName"
+                      className={`font-extrabold text-[16px]  my-3`}
+                    >
+                      First Name <span className={`text-red10`}>*</span>
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="First name"
+                      id="firstName"
+                      name="firstName"
+                      className={` border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl`}
+                      value={formData.firstName}
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
+
+                  <div className={`flex flex-col basis-[48%]`}>
+                    <label
+                      htmlFor="lastName"
+                      className={`font-bold text-[16px]  my-3`}
+                    >
+                      Last Name <span className={`text-red10`}>*</span>
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="Last name"
+                      id="lastName"
+                      name="lastName"
+                      className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl`}
+                      value={formData.lastName}
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
                 </div>
 
-                <div className={`flex flex-col basis-[48%]`}>
-                  <label
-                    htmlFor="lastName"
-                    className={`font-bold text-[16px]  my-3`}
-                  >
-                    Last Name <span className={`text-red10`}>*</span>
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="Last name"
-                    id="lastName"
-                    name="lastName"
-                    className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl`}
-                    value={formData.lastName}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-              </div>
-
-              {/* <div className={`flex flex-col`}>
+                {/* <div className={`flex flex-col`}>
                                 <label
                                     htmlFor="address"
                                     className={`font-bold text-[16px] my-3`}
@@ -298,190 +303,199 @@ const CustomerSignup: React.FC<FormState> = () => {
                                 />
                             </div> */}
 
-              <div className={`flex flex-col`}>
-                <label
-                  htmlFor="phoneNumber"
-                  className={`font-bold text-[16px] my-3`}
-                >
-                  Phone Number <span className={`text-red10`}>*</span>
-                </label>
-                <div className={`flex items-center justify-around`}>
-                  <h4
-                    className={`flex border-medium border-[1px] text-base text-black font-bold px-5 py-3 rounded-xl`}
+                <div className={`flex flex-col`}>
+                  <label
+                    htmlFor="phoneNumber"
+                    className={`font-bold text-[16px] my-3`}
                   >
-                    <Image
-                      src={flag}
-                      width={30}
-                      alt="AUS Flag"
-                      className="mr-1"
+                    Phone Number <span className={`text-red10`}>*</span>
+                  </label>
+                  <div className={`flex items-center justify-around`}>
+                    <h4
+                      className={`flex border-medium border-[1px] text-base text-black font-bold px-5 py-3 rounded-xl`}
+                    >
+                      <Image
+                        src={flag}
+                        width={30}
+                        alt="AUS Flag"
+                        className="mr-1"
+                      />
+                      +61
+                    </h4>
+                    <input
+                      type="tel"
+                      placeholder="Enter phone number"
+                      name="phoneNumber"
+                      id="phoneNumber"
+                      className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl w-[78%]`}
+                      value={formData.phoneNumber}
+                      onChange={handleChange}
+                      onKeyDown={handlePhoneNumberKeyDown}
+                      required
+                      maxLength={9}
+                      minLength={9}
                     />
-                    +61
-                  </h4>
-                  <input
-                    type="tel"
-                    placeholder="Enter phone number"
-                    name="phoneNumber"
-                    id="phoneNumber"
-                    className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl w-[78%]`}
-                    value={formData.phoneNumber}
-                    onChange={handleChange}
-                    onKeyDown={handlePhoneNumberKeyDown}
-                    required
-                    maxLength={9}
-                    minLength={9}
-                  />
+                  </div>
                 </div>
-              </div>
 
-              <div className={`flex flex-col`}>
-                <label htmlFor="email" className={`font-bold text-[16px] my-3`}>
-                  Email <span className={`text-red10`}>*</span>
-                </label>
-                <input
-                  type="email"
-                  placeholder="Enter your email-address"
-                  id="email"
-                  name="email"
-                  className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl w-full`}
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                  autoComplete="username"
-                />
-              </div>
-
-              <div className={`flex flex-col`}>
-                <label
-                  htmlFor="password"
-                  className={`font-bold text-[16px] my-3 flex  items-center w-[500px] h-[30px] `}
-                >
-                  Password <span className={`text-red10`}>*</span>
-                  <p className={`text-red10 p-2  my-0 py-0 text-[10px]`}>
-                    {formData.error1}
-                  </p>
-                </label>
-                <div className={`relative`}>
+                <div className={`flex flex-col`}>
+                  <label
+                    htmlFor="email"
+                    className={`font-bold text-[16px] my-3`}
+                  >
+                    Email <span className={`text-red10`}>*</span>
+                  </label>
                   <input
-                    type={showPassword ? "text" : "password"}
-                    id="password"
-                    name="password"
-                    placeholder="Enter your password"
+                    type="email"
+                    placeholder="Enter your email-address"
+                    id="email"
+                    name="email"
                     className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl w-full`}
-                    value={formData.password}
+                    value={formData.email}
                     onChange={handleChange}
                     required
-                    maxLength={15}
-                    autoComplete="new-password"
+                    autoComplete="username"
                   />
-                  <button
-                    type="button"
-                    onClick={togglePasswordVisibility}
-                    className="absolute inset-y-0 right-0 pr-3 flex items-center focus:outline-none"
-                  >
-                    {showPassword ? (
-                      <AiOutlineEye className="h-5 w-5 text-black" />
-                    ) : (
-                      <AiOutlineEyeInvisible className="h-5 w-5 text-black" />
-                    )}
-                  </button>
                 </div>
-              </div>
 
-              <div className={`flex flex-col`}>
-                <label
-                  htmlFor="password"
-                  className={`font-bold text-[16px] my-3 flex  items-center w-[500px] h-[30px] `}
-                >
-                  Confirm Password <span className={`text-red10`}>*</span>
-                  <p className={`text-red10 p-2  my-0 py-0 text-[10px]`}>
-                    {formData.error2}
-                  </p>
-                </label>
-                <div className={`relative`}>
+                <div className={`flex flex-col`}>
+                  <label
+                    htmlFor="password"
+                    className={`font-bold text-[16px] my-3 flex  items-center w-[500px] h-[30px] `}
+                  >
+                    Password <span className={`text-red10`}>*</span>
+                    <p className={`text-red10 p-2  my-0 py-0 text-[10px]`}>
+                      {formData.error1}
+                    </p>
+                  </label>
+                  <div className={`relative`}>
+                    <input
+                      type={showPassword ? "text" : "password"}
+                      id="password"
+                      name="password"
+                      placeholder="Enter your password"
+                      className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl w-full`}
+                      value={formData.password}
+                      onChange={handleChange}
+                      required
+                      maxLength={15}
+                      autoComplete="new-password"
+                    />
+                    <button
+                      type="button"
+                      onClick={togglePasswordVisibility}
+                      className="absolute inset-y-0 right-0 pr-3 flex items-center focus:outline-none"
+                    >
+                      {showPassword ? (
+                        <AiOutlineEye className="h-5 w-5 text-black" />
+                      ) : (
+                        <AiOutlineEyeInvisible className="h-5 w-5 text-black" />
+                      )}
+                    </button>
+                  </div>
+                </div>
+
+                <div className={`flex flex-col`}>
+                  <label
+                    htmlFor="password"
+                    className={`font-bold text-[16px] my-3 flex  items-center w-[500px] h-[30px] `}
+                  >
+                    Confirm Password <span className={`text-red10`}>*</span>
+                    <p className={`text-red10 p-2  my-0 py-0 text-[10px]`}>
+                      {formData.error2}
+                    </p>
+                  </label>
+                  <div className={`relative`}>
+                    <input
+                      type={showConfirmPassword ? "text" : "password"}
+                      id="confirmPassword"
+                      name="confirmPassword"
+                      placeholder="Enter your password"
+                      className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl w-full`}
+                      value={formData.confirmPassword}
+                      onChange={handleChange}
+                      required
+                      maxLength={15}
+                      autoComplete="new-password"
+                    />
+                    <button
+                      type="button"
+                      onClick={toggleConfirmPasswordVisibility}
+                      className="absolute inset-y-0 right-0 pr-3 flex items-center focus:outline-none"
+                    >
+                      {showConfirmPassword ? (
+                        <AiOutlineEye className="h-5 w-5 text-black" />
+                      ) : (
+                        <AiOutlineEyeInvisible className="h-5 w-5 text-black" />
+                      )}
+                    </button>
+                  </div>
+                </div>
+
+                <div className={`space-x-2 flex`}>
                   <input
-                    type={showConfirmPassword ? "text" : "password"}
-                    id="confirmPassword"
-                    name="confirmPassword"
-                    placeholder="Enter your password"
-                    className={`border-medium border-[1px] text-base text-black font-bold py-3 px-5 rounded-xl w-full`}
-                    value={formData.confirmPassword}
                     onChange={handleChange}
+                    type="checkbox"
+                    name="agreement"
+                    id="agreement"
                     required
-                    maxLength={15}
-                    autoComplete="new-password"
                   />
-                  <button
-                    type="button"
-                    onClick={toggleConfirmPasswordVisibility}
-                    className="absolute inset-y-0 right-0 pr-3 flex items-center focus:outline-none"
+                  <label
+                    htmlFor="agreement"
+                    className={`font-bold text-[12px]`}
                   >
-                    {showConfirmPassword ? (
-                      <AiOutlineEye className="h-5 w-5 text-black" />
-                    ) : (
-                      <AiOutlineEyeInvisible className="h-5 w-5 text-black" />
-                    )}
-                  </button>
+                    I agree to all
+                    <Link
+                      href="/terms-and-condition"
+                      className={`text-purpleBase hover:underline`}
+                    >
+                      {" "}
+                      Terms of service{" "}
+                    </Link>{" "}
+                    and
+                    <Link
+                      href="/privacy"
+                      className={`text-purpleBase hover:underline `}
+                    >
+                      {" "}
+                      Privacy
+                    </Link>
+                  </label>
                 </div>
               </div>
 
-              <div className={`space-x-2 flex`}>
-                <input
-                  onChange={handleChange}
-                  type="checkbox"
-                  name="agreement"
-                  id="agreement"
-                  required
-                />
-                <label htmlFor="agreement" className={`font-bold text-[12px]`}>
-                  I agree to all
-                  <Link
-                    href="/terms-and-condition"
-                    className={`text-purpleBase hover:underline`}
-                  >
-                    {" "}
-                    Terms of service{" "}
-                  </Link>{" "}
-                  and
-                  <Link
-                    href="/privacy"
-                    className={`text-purpleBase hover:underline `}
-                  >
-                    {" "}
-                    Privacy
-                  </Link>
-                </label>
+              <div className={`flex justify-center items-center`}>
+                <button
+                  type="submit"
+                  className={`w-full bg-purpleBase text-white py-2 px-4 rounded-md hover:bg-purple5  ${
+                    isAllFieldsFilled() ? "" : "opacity-50"
+                  }`}
+                  disabled={!isAllFieldsFilled() || isLoading}
+                >
+                  {isLoading ? "Creating..." : "Create Account"}
+                </button>
               </div>
-            </div>
+              {signupError && (
+                <div className="text-red10 mt-4 text-center mb-2">
+                  {/*{alert(signupError)}*/}
+                  {signupError}
+                </div>
+              )}
+            </form>
+          </div>
 
-            <div className={`flex justify-center items-center`}>
-              <button
-                type="submit"
-                className={`w-full bg-purpleBase text-white py-2 px-4 rounded-md hover:bg-purple5  ${
-                  isAllFieldsFilled() ? "" : "opacity-50"
-                }`}
-                disabled={!isAllFieldsFilled() || isLoading}
-              >
-                {isLoading ? "Creating..." : "Create Account"}
+          <div
+            className={`flex justify-center items-center h-[35px] w-[150px]`}
+          >
+            <Link href="/" className="text-base font-extrabold hover:scale-110">
+              <button className="flex justify-center items-center">
+                <span className="mr-1">
+                  <BsArrowLeftCircle />
+                </span>
+                Back Home
               </button>
-            </div>
-            {signupError && (
-              <div className="text-red10 mt-4 text-center mb-2">
-                {/*{alert(signupError)}*/}
-                {signupError}
-              </div>
-            )}
-          </form>
-        </div>
-
-        <div className={`flex justify-center items-center h-[35px] w-[150px]`}>
-          <Link href="/" className="text-base font-extrabold hover:scale-110">
-            <button className="flex justify-center items-center">
-              <span className="mr-1">
-                <BsArrowLeftCircle />
-              </span>
-              Back Home
-            </button>
-          </Link>
+            </Link>
+          </div>
         </div>
       </div>
     </div>

@@ -8,6 +8,7 @@ const privacy = () => {
     <div className={`min-h-screen`}>
       <Nav />
       <Privacy />
+
       <Footer />
     </div>
   );

@@ -59,7 +59,7 @@ function CustomerDashboardLayout(props: IProps) {
 
   useEffect(() => {
     handleUserProfile();
-  }, [userID]);
+  });
 
   const contactClick = () => {
     setIsOpen(!isOpen);
