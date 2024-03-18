@@ -355,8 +355,8 @@ const ListingDetails = () => {
                   <img
                     src={selectedImage}
                     alt="Listing Img"
-                    width={600}
-                    className=" h-[400px]"
+                    width={650}
+                    className="scale-75"
                   />
                   <span
                     className="text-white absolute top-3 right-5 text-[20px] hover:text-grey4 cursor-pointer"

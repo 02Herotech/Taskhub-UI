@@ -7,6 +7,8 @@ import Link from "next/link";
 import { FaRegUser } from "react-icons/fa";
 import axios from "axios";
 import Head from "next/head";
+import { MdOutlineCameraAlt } from "react-icons/md";
+import { IoClose } from "react-icons/io5";
 
 import CustomerDashboardLayout from "../../../../components/customerdashboardLayout";
 
@@ -15,6 +17,8 @@ const CustomerDashboard = () => {
   const [suburb, setSuburb] = useState("");
   const [state, setState] = useState("");
   const [profilePicture, setProfilePicture] = useState(null);
+  const [isHovered, setIsHovered] = useState(false);
+  const [showProfileDialogue, setShowProfileDialogue] = useState(false);
 
   const { data: session } = useSession();
 
@@ -69,27 +73,52 @@ const CustomerDashboard = () => {
         </div>
       )}
 
-      <div className={`m-10 w-[900px] flex flex-col justify-center`}>
+      <div
+        className={`m-10 w-[1000px] flex flex-col justify-start relative h-full p-10`}
+      >
         <div className={`flex items-center justify-between`}>
           <div className="flex justify-center items-center">
             {profilePicture === "" || profilePicture === null ? (
-              <span
-                className={` bg-grey3 rounded-[50%] border-[2px] border-[#FE9B07] border-whiten p-7 text-[80px] text-white`}
+              <div
+                className={` bg-grey3 rounded-[50%] border-2 border-[#FE9B07] border-whiten p-7 text-[80px] text-white relative `}
+                onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={() => setIsHovered(false)}
               >
                 <FaRegUser />
-              </span>
+
+                {isHovered && (
+                  <span
+                    className="bg-black bg-opacity-60 text-white text-[60px] absolute inset-0 flex justify-center items-center rounded-[50%] transition-opacity duration-1000 cursor-pointer"
+                    onClick={() => setShowProfileDialogue(true)}
+                  >
+                    <MdOutlineCameraAlt />
+                  </span>
+                )}
+              </div>
             ) : (
               <div
-                className={`w-[160px] h-[160px] rounded-[50%] border-2 border-[#FE9B07] flex justify-center items-center`}
+                className={`w-[140px] h-[140px] rounded-[50%] border-2 relative border-[#FE9B07] flex justify-center items-center`}
+                onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={() => setIsHovered(false)}
               >
                 <img
                   src={profilePicture}
                   alt="customer-image"
-                  className={`rounded-[50%] object-cover h-[150px]`}
-                  width={150}
+                  className={`rounded-[50%] object-cover h-[130px]`}
+                  width={130}
                 />
+
+                {isHovered && (
+                  <span
+                    className="bg-black bg-opacity-60 text-white text-[60px] absolute inset-0 flex justify-center items-center rounded-[50%] transition-opacity duration-1000 cursor-pointer"
+                    onClick={() => setShowProfileDialogue(true)}
+                  >
+                    <MdOutlineCameraAlt />
+                  </span>
+                )}
               </div>
             )}
+
             <div className={`flex flex-col justify-center items-start ml-5`}>
               <div
                 className={`flex items-center justify-center text-[18px] font-extrabold`}
@@ -125,6 +154,50 @@ const CustomerDashboard = () => {
             />
           </div>
         </div>
+
+        {showProfileDialogue && (
+          <div className="bg-black bg-opacity-60 w-full h-full flex justify-center items-center absolute inset-0 transition-opacity duration-1000">
+            <div className="relative">
+              <div className="bg-white rounded-2xl w-[500px] h-[500px] flex flex-col justify-center items-center space-y-10">
+                <div className=" relative  ">
+                  {profilePicture === "" || profilePicture === null ? (
+                    <span
+                      className={` bg-grey3 rounded-[50%] border-2 border-[#FE9B07]  p-7 text-[130px] text-white cursor-pointer`}
+                    >
+                      <FaRegUser />
+                    </span>
+                  ) : (
+                    <div
+                      className={`w-[250px] h-[250px]  rounded-[50%] border-2 border-[#FE9B07] flex justify-center items-center`}
+                    >
+                      <img
+                        src={profilePicture}
+                        alt="customer-image"
+                        className={`rounded-[50%] object-cover h-[240px]`}
+                        width={240}
+                      />
+                    </div>
+                  )}
+                </div>
+                <div className="border block ">
+                  <label htmlFor="pictureProfile">
+                    <input type="file" accept="image/*" className="hidden" />
+                    <div className="border bg-green4 rounded-xl px-5 py-3">
+                      <span>Upload</span>
+                    </div>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <span
+              className=" top-5 right-5 text-white text-[30px] absolute hover:text-grey5 cursor-pointer"
+              onClick={() => setShowProfileDialogue(false)}
+            >
+              <IoClose />
+            </span>
+          </div>
+        )}
       </div>
     </CustomerDashboardLayout>
   );

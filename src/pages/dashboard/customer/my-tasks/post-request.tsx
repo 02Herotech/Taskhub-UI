@@ -480,6 +480,7 @@ const PostRequest = () => {
               required
               onChange={handleImage}
               ref={taskImageRef}
+              accept="image/*"
             />
 
             <input
