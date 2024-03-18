@@ -56,7 +56,7 @@ const MyTask = () => {
   const [emptyMsg, setEmptyMsg] = useState("");
 
   const handleFetchTask = async () => {
-    await new Promise((resolve) => setTimeout(resolve, 3000));
+    // await new Promise((resolve) => setTimeout(resolve, 3000));
 
     if (!userToken) {
       return; // Skip fetching if userToken is not available

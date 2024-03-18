@@ -337,7 +337,9 @@ const CompleteRegistration = () => {
                     onChange={handleChange}
                     required
                   >
-                    <option value="">--Select ID Type--</option>
+                    <option value="" disabled>
+                      --Select ID Type--
+                    </option>
                     <option value="International Passport">
                       International Passport
                     </option>

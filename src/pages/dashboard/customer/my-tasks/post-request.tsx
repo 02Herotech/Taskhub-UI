@@ -286,7 +286,7 @@ const PostRequest = () => {
   // To submit form
 
   const { data: session } = useSession();
-  const userToken = session?.user.accessToken;
+  const userToken = session?.user?.accessToken;
 
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();

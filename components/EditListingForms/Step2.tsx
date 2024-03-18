@@ -137,7 +137,7 @@ const Step2 = ({
               <div className="flex items-center space-x-3 text-[15px] ml-5 mt-8">
                 <p className="text-md font-semibold">DAYS:</p>
 
-                {listingData &&
+                {/* {listingData &&
                 Array.isArray(listingData.availableDays) &&
                 listingData.availableDays.length > 0 ? (
                   <div className="flex space-x-2">
@@ -154,6 +154,40 @@ const Step2 = ({
                         </span>
                       )
                     )}
+                  </div>
+                ) : (
+                  <p className="bg-[#14782F] rounded-xl font-bold py-2 text-center text-white w-[150px]">
+                    Not Available
+                  </p>
+                )} */}
+
+                {listingData &&
+                Array.isArray(listingData.availableDays) &&
+                listingData.availableDays.length > 0 ? (
+                  <div className="flex space-x-2">
+                    {listingData.availableDays
+                      .map((day: any) => day.toUpperCase()) // Convert days to uppercase for consistent comparison
+                      .sort((a: any, b: any) => {
+                        const daysOrder = [
+                          "MONDAY",
+                          "TUESDAY",
+                          "WEDNESDAY",
+                          "THURSDAY",
+                          "FRIDAY",
+                          "SATURDAY",
+                          "SUNDAY",
+                        ];
+                        return daysOrder.indexOf(a) - daysOrder.indexOf(b);
+                      })
+                      .map((day: any, index: any) => (
+                        <span
+                          key={index}
+                          className="bg-[#14782F] rounded-xl font-bold py-2 px-3 text-white"
+                        >
+                          {day.slice(0, 3)}{" "}
+                          {/* Display first three letters of day */}
+                        </span>
+                      ))}
                   </div>
                 ) : (
                   <p className="bg-[#14782F] rounded-xl font-bold py-2 text-center text-white w-[150px]">

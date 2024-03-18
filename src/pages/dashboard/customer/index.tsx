@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Image from "next/image";
 import { MdVerified } from "react-icons/md";
 import { GrLocation, GrSearch } from "react-icons/gr";
 import { useSession } from "next-auth/react";
@@ -7,18 +6,36 @@ import Link from "next/link";
 import { FaRegUser } from "react-icons/fa";
 import axios from "axios";
 import Head from "next/head";
-import { MdOutlineCameraAlt } from "react-icons/md";
 import { IoClose } from "react-icons/io5";
+import { useRef } from "react";
+import newloader from "../../../../public/newloader.gif";
+import Image from "next/image";
 
 import CustomerDashboardLayout from "../../../../components/customerdashboardLayout";
+
+interface FormState {
+  image: File | undefined;
+}
 
 const CustomerDashboard = () => {
   const [completeReg, setCompleteReg] = useState(true);
   const [suburb, setSuburb] = useState("");
   const [state, setState] = useState("");
   const [profilePicture, setProfilePicture] = useState(null);
-  const [isHovered, setIsHovered] = useState(false);
   const [showProfileDialogue, setShowProfileDialogue] = useState(false);
+  const inputRef = useRef<HTMLInputElement | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [responseMsg, setResponseMsg] = useState("");
+
+  const [newPictureProfile, setNewPictureProfile] = useState<File | null>(null);
+
+  const [formData, setFormData] = useState<{ image: File | undefined }>({
+    image: undefined,
+  });
+
+  const handleUploadImg = () => {
+    inputRef.current?.click();
+  };
 
   const { data: session } = useSession();
 
@@ -51,8 +68,66 @@ const CustomerDashboard = () => {
 
   useEffect(() => {
     handleUserProfile();
-  }, [userID]);
+  });
 
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (files && files.length > 0) {
+      const file = files[0];
+      if (file.type.substring(0, 5) === "image") {
+        setNewPictureProfile(file);
+        console.log("newp:", newPictureProfile);
+        setFormData((prevData) => ({
+          ...prevData,
+          image: file,
+        }));
+      }
+    }
+  };
+
+  const handleCloseDialogue = () => {
+    setShowProfileDialogue(false);
+    setNewPictureProfile(null);
+  };
+
+  // To submit form
+
+  // const { data: session } = useSession();
+  const userToken = session?.user?.accessToken;
+
+  const handleSubmit = async (e: { preventDefault: () => void }) => {
+    e.preventDefault();
+
+    console.log("formdata:", formData);
+    setIsLoading(true);
+
+    const apiFormData = new FormData();
+    apiFormData.append("image", formData.image!);
+
+    try {
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_API_URL}customer/profile_picture`,
+        apiFormData,
+        {
+          headers: {
+            Authorization: `Bearer ${userToken}`,
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      if (response.status === 200) {
+        handleCloseDialogue();
+        handleUserProfile();
+      }
+    } catch (error: any) {
+      setResponseMsg("Error! Please try again");
+    } finally {
+      setIsLoading(false);
+      setTimeout(() => {
+        setResponseMsg("");
+      }, 2000);
+    }
+  };
   return (
     <CustomerDashboardLayout>
       <Head>
@@ -80,26 +155,15 @@ const CustomerDashboard = () => {
           <div className="flex justify-center items-center">
             {profilePicture === "" || profilePicture === null ? (
               <div
-                className={` bg-grey3 rounded-[50%] border-2 border-[#FE9B07] border-whiten p-7 text-[80px] text-white relative `}
-                onMouseEnter={() => setIsHovered(true)}
-                onMouseLeave={() => setIsHovered(false)}
+                className={` bg-grey3 rounded-[50%] border-2 border-[#FE9B07] border-whiten p-7 text-[80px] text-white relative cursor-pointer `}
+                onClick={() => setShowProfileDialogue(true)}
               >
                 <FaRegUser />
-
-                {isHovered && (
-                  <span
-                    className="bg-black bg-opacity-60 text-white text-[60px] absolute inset-0 flex justify-center items-center rounded-[50%] transition-opacity duration-1000 cursor-pointer"
-                    onClick={() => setShowProfileDialogue(true)}
-                  >
-                    <MdOutlineCameraAlt />
-                  </span>
-                )}
               </div>
             ) : (
               <div
-                className={`w-[140px] h-[140px] rounded-[50%] border-2 relative border-[#FE9B07] flex justify-center items-center`}
-                onMouseEnter={() => setIsHovered(true)}
-                onMouseLeave={() => setIsHovered(false)}
+                className={`w-[140px] h-[140px] rounded-[50%] border-2 relative border-[#FE9B07] flex justify-center items-center cursor-pointer`}
+                onClick={() => setShowProfileDialogue(true)}
               >
                 <img
                   src={profilePicture}
@@ -107,15 +171,6 @@ const CustomerDashboard = () => {
                   className={`rounded-[50%] object-cover h-[130px]`}
                   width={130}
                 />
-
-                {isHovered && (
-                  <span
-                    className="bg-black bg-opacity-60 text-white text-[60px] absolute inset-0 flex justify-center items-center rounded-[50%] transition-opacity duration-1000 cursor-pointer"
-                    onClick={() => setShowProfileDialogue(true)}
-                  >
-                    <MdOutlineCameraAlt />
-                  </span>
-                )}
               </div>
             )}
 
@@ -130,15 +185,13 @@ const CustomerDashboard = () => {
                 {completeReg && <MdVerified className={`text-green4 ml-2`} />}
               </div>
 
-              {completeReg ? (
+              {completeReg && (
                 <div className={`flex text-[13px] items-center justify-center`}>
                   <GrLocation className={`mr-1`} />
                   <p>
                     {suburb}, {state}
                   </p>
                 </div>
-              ) : (
-                ""
               )}
             </div>
           </div>
@@ -158,7 +211,7 @@ const CustomerDashboard = () => {
         {showProfileDialogue && (
           <div className="bg-black bg-opacity-60 w-full h-full flex justify-center items-center absolute inset-0 transition-opacity duration-1000">
             <div className="relative">
-              <div className="bg-white rounded-2xl w-[500px] h-[500px] flex flex-col justify-center items-center space-y-10">
+              <div className="bg-white rounded-2xl w-[500px] h-[500px] flex flex-col justify-center items-center space-y-20">
                 <div className=" relative  ">
                   {profilePicture === "" || profilePicture === null ? (
                     <span
@@ -167,32 +220,88 @@ const CustomerDashboard = () => {
                       <FaRegUser />
                     </span>
                   ) : (
-                    <div
-                      className={`w-[250px] h-[250px]  rounded-[50%] border-2 border-[#FE9B07] flex justify-center items-center`}
-                    >
-                      <img
-                        src={profilePicture}
-                        alt="customer-image"
-                        className={`rounded-[50%] object-cover h-[240px]`}
-                        width={240}
-                      />
+                    <div>
+                      {newPictureProfile === null ? (
+                        <div>
+                          <div
+                            className={`w-[250px] h-[250px]  rounded-[50%] border-2 border-[#FE9B07] flex justify-center items-center`}
+                          >
+                            <img
+                              src={profilePicture}
+                              alt="customer-image"
+                              className={`rounded-[50%] object-cover h-[240px]`}
+                              width={240}
+                            />
+                          </div>
+                        </div>
+                      ) : (
+                        <div
+                          className={`w-[250px] h-[250px]  rounded-[50%] border-2 border-[#FE9B07] flex justify-center items-center`}
+                        >
+                          {newPictureProfile && (
+                            <img
+                              src={URL.createObjectURL(newPictureProfile)}
+                              width={240}
+                              className={`rounded-[50%] object-cover h-[240px]`}
+                              alt="New Profile"
+                            />
+                          )}
+                        </div>
+                      )}
                     </div>
                   )}
                 </div>
-                <div className="border block ">
-                  <label htmlFor="pictureProfile">
-                    <input type="file" accept="image/*" className="hidden" />
-                    <div className="border bg-green4 rounded-xl px-5 py-3">
-                      <span>Upload</span>
+
+                {isLoading ? (
+                  <div className="h-[80px]">
+                    <Image src={newloader} width={80} alt="loader" />
+                  </div>
+                ) : (
+                  <div className="flex flex-col space-y-5 h-[80px] ">
+                    <form onSubmit={handleSubmit}>
+                      <div
+                        className={`flex w-[300px] ${
+                          newPictureProfile
+                            ? "justify-between"
+                            : "justify-center"
+                        }  items-center`}
+                      >
+                        <div
+                          className=" cursor-pointer"
+                          onClick={handleUploadImg}
+                        >
+                          <span className="bg-purpleBase hover:bg-purpleHover   text-white px-4 py-2 rounded-xl">
+                            {newPictureProfile ? " Change" : "Upload"}
+                          </span>
+                          <input
+                            type="file"
+                            accept="image/*"
+                            className="hidden"
+                            ref={inputRef}
+                            onChange={handleImageChange}
+                          />
+                        </div>
+                        {newPictureProfile && (
+                          <button
+                            type="submit"
+                            className="bg-[#34A853] rounded-xl py-2 px-4 text-white hover:bg-[#307243]"
+                          >
+                            Save
+                          </button>
+                        )}
+                      </div>
+                    </form>
+                    <div className={`text-[15px] text-center text-red6 `}>
+                      {responseMsg}
                     </div>
-                  </label>
-                </div>
+                  </div>
+                )}
               </div>
             </div>
 
             <span
               className=" top-5 right-5 text-white text-[30px] absolute hover:text-grey5 cursor-pointer"
-              onClick={() => setShowProfileDialogue(false)}
+              onClick={handleCloseDialogue}
             >
               <IoClose />
             </span>
