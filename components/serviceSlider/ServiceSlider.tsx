@@ -79,7 +79,7 @@ const ServiceSlider = () => {
         </p>
       </div>
 
-      <div className="flex justify-center items-center ">
+      {/* <div className="flex justify-center items-center ">
         <div
           className={`bg-[#969696] hover:bg-[#828282] cursor-pointer h-[50px] w-[150px] flex justify-center items-center`}
           onClick={() => {
@@ -91,7 +91,7 @@ const ServiceSlider = () => {
             {open ? <SlArrowDown /> : <SlArrowUp />}
           </span>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
