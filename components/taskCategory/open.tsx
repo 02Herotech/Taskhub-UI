@@ -81,13 +81,13 @@ const OpenTaskCategory = ({
                               {task.taskServiceName}
                             </h4>
                             <div className="flex space-x-3 items-center text-[12px]">
-                              <div className=" flex items-center space-x-1 bg-[#F8E9FE] text-green6 rounded-lg py-1 px-2 ">
+                              <div className=" flex items-center space-x-1 bg-[#F8E9FE] text-green6 rounded-lg py-1 px-2 font-bold">
                                 <span>
                                   <FiMapPin />
                                 </span>
                                 <p>{task.userAddress.slice(0, 15)}</p>
                               </div>
-                              <p className="bg-[#F8E9FE] rounded-lg py-1 px-2 ">
+                              <p className="bg-[#F8E9FE] rounded-lg py-1 px-2 font-bold">
                                 ${task.customerBudget}
                               </p>
                             </div>

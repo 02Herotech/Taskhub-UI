@@ -66,7 +66,6 @@ const MPListingDetails = () => {
   const [idValue, setIdValue] = useState("");
   const [isEnlarged, setIsEnlarged] = useState(false);
   const [selectedImage, setSelectedImage] = useState<string>("");
-  const [currentIndex, setCurrentIndex] = useState(0);
 
   const handleFetchListingDetails = async () => {
     const listingId = parseInt(id as string, 10);
@@ -83,7 +82,7 @@ const MPListingDetails = () => {
       // console.log("listingDatat:", listingData);
     } catch (error) {
       console.error(error);
-      setErrorMsg("Error loading listiing");
+      setErrorMsg("Error loading details");
     } finally {
       setIsLoading(false);
     }
@@ -161,7 +160,7 @@ const MPListingDetails = () => {
                   </h2>
                   <div className="flex items-center space-x-2">
                     <p className="text-[12px]">{listingData?.subCategory}</p>
-                    <div
+                    {/* <div
                       className={` w-[12px] h-[12px]  rounded-[50%] border-[1.5px] border-green4 relative flex justify-center items-center ${
                         listingData?.available === true
                           ? " border-green5"
@@ -175,7 +174,7 @@ const MPListingDetails = () => {
                             : " bg-red5"
                         }`}
                       ></span>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
 

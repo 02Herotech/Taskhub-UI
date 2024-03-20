@@ -87,7 +87,9 @@ const Nav = () => {
               className={`p-2 hover:text-purpleBase ${
                 (router.pathname === "/marketplace" ||
                   router.pathname === "/marketplace/listing" ||
-                  router.pathname === "/marketplace/listing/[id]") &&
+                  router.pathname === "/marketplace/listing/[id]" ||
+                  router.pathname === "/marketplace/task/[id]" ||
+                  router.pathname === "/marketplace/task") &&
                 "text-purpleBase"
               }`}
             >

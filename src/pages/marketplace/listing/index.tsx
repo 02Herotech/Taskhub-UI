@@ -1,24 +1,14 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { FiMapPin } from "react-icons/fi";
-import { FaArrowRightLong } from "react-icons/fa6";
 import Link from "next/link";
 import Image from "next/image";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
-import Head from "next/head";
 import { FiTool } from "react-icons/fi";
-import { BiVector } from "react-icons/bi";
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/router";
 import { FiSearch } from "react-icons/fi";
 import { IoClose } from "react-icons/io5";
 
-// import ServiceSlider from "../../../components/serviceSlider/ServiceSlider";
-// import Nav from "../../../components/nav/Nav";
-// import NewFooter from "../../../components/NewFooter/NewFooter";
 import { poppins } from "@/styles/font";
-// import ListingComp from "../../../components/marketplaceListing";
-
 import loader from "../../../../public/taskhub-newloader.gif";
 import Nav from "../../../../components/nav/Nav";
 import ServiceSlider from "../../../../components/serviceSlider/ServiceSlider";
@@ -487,7 +477,7 @@ const ServiceListing = () => {
                                       </div>
                                     </div>
 
-                                    <div
+                                    {/* <div
                                       className={`w-[12px] h-[12px] rounded-[50%] border-[1.5px] border-green4 relative flex justify-center items-center ${
                                         listing.available === true
                                           ? "border-green5"
@@ -501,7 +491,7 @@ const ServiceListing = () => {
                                             : "bg-red5"
                                         }`}
                                       ></span>
-                                    </div>
+                                    </div> */}
                                   </div>
                                 </div>
                               </div>

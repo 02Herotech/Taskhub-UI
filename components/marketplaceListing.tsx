@@ -176,7 +176,7 @@ const ListingComp = () => {
                         </div>
                       </div>
 
-                      <div
+                      {/* <div
                         className={`w-[12px] h-[12px] rounded-[50%] border-[1.5px] border-green4 relative flex justify-center items-center ${
                           listing.available === true
                             ? "border-green5"
@@ -188,7 +188,7 @@ const ListingComp = () => {
                             listing.available === true ? "bg-green5" : "bg-red5"
                           }`}
                         ></span>
-                      </div>
+                      </div> */}
                     </div>
                   </div>
                 </div>
