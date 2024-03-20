@@ -76,7 +76,7 @@ const CustomerDashboard = () => {
       const file = files[0];
       if (file.type.substring(0, 5) === "image") {
         setNewPictureProfile(file);
-        console.log("newp:", newPictureProfile);
+        console.log("newp:", file);
         setFormData((prevData) => ({
           ...prevData,
           image: file,
@@ -155,7 +155,7 @@ const CustomerDashboard = () => {
           <div className="flex justify-center items-center">
             {profilePicture === "" || profilePicture === null ? (
               <div
-                className={` bg-grey3 rounded-[50%] border-2 border-[#FE9B07] border-whiten p-7 text-[80px] text-white relative cursor-pointer `}
+                className={` bg-grey3 rounded-[50%] border-2 border-[#FE9B07] border-whiten p-7 text-[80px] text-white flex justify-center items-center cursor-pointer  `}
                 onClick={() => setShowProfileDialogue(true)}
               >
                 <FaRegUser />
@@ -212,16 +212,27 @@ const CustomerDashboard = () => {
           <div className="bg-black bg-opacity-60 w-full h-full flex justify-center items-center absolute inset-0 transition-opacity duration-1000">
             <div className="relative">
               <div className="bg-white rounded-2xl w-[500px] h-[500px] flex flex-col justify-center items-center space-y-20">
-                <div className=" relative  ">
-                  {profilePicture === "" || profilePicture === null ? (
-                    <span
-                      className={` bg-grey3 rounded-[50%] border-2 border-[#FE9B07]  p-7 text-[130px] text-white cursor-pointer`}
+                <div className=" ">
+                  {newPictureProfile ? (
+                    <div
+                      className={`w-[250px] h-[250px]  rounded-[50%] border-2 border-[#FE9B07] flex justify-center items-center`}
                     >
-                      <FaRegUser />
-                    </span>
+                      <img
+                        src={URL.createObjectURL(newPictureProfile)}
+                        width={240}
+                        className={`rounded-[50%] object-cover h-[240px]`}
+                        alt="New Profile"
+                      />
+                    </div>
                   ) : (
                     <div>
-                      {newPictureProfile === null ? (
+                      {profilePicture === "" || profilePicture === null ? (
+                        <span
+                          className={` bg-grey3 rounded-[50%] border-2 border-[#FE9B07] border-whiten p-[78px] text-[80px] text-white flex justify-center items-center  `}
+                        >
+                          <FaRegUser />
+                        </span>
+                      ) : (
                         <div>
                           <div
                             className={`w-[250px] h-[250px]  rounded-[50%] border-2 border-[#FE9B07] flex justify-center items-center`}
@@ -233,19 +244,6 @@ const CustomerDashboard = () => {
                               width={240}
                             />
                           </div>
-                        </div>
-                      ) : (
-                        <div
-                          className={`w-[250px] h-[250px]  rounded-[50%] border-2 border-[#FE9B07] flex justify-center items-center`}
-                        >
-                          {newPictureProfile && (
-                            <img
-                              src={URL.createObjectURL(newPictureProfile)}
-                              width={240}
-                              className={`rounded-[50%] object-cover h-[240px]`}
-                              alt="New Profile"
-                            />
-                          )}
                         </div>
                       )}
                     </div>
@@ -271,7 +269,9 @@ const CustomerDashboard = () => {
                           onClick={handleUploadImg}
                         >
                           <span className="bg-purpleBase hover:bg-purpleHover   text-white px-4 py-2 rounded-xl">
-                            {newPictureProfile ? " Change" : "Upload"}
+                            {newPictureProfile
+                              ? " Change photo"
+                              : "Upload photo"}
                           </span>
                           <input
                             type="file"

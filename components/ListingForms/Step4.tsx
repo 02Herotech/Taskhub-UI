@@ -202,6 +202,7 @@ const Step4 = ({
                 name="image1"
                 id="image1"
                 // className="file:h-[100px] file:w-[200px] file:bg-transparent file:rounded-lg file:border-[1.5px] file:border-grey4 w-[200px]"
+                className="w-[215px] "
                 onChange={handleImage1}
                 accept="image/*"
               />
@@ -211,6 +212,7 @@ const Step4 = ({
                 name="image2"
                 id="image2"
                 // className="file:h-[100px] file:w-[200px] file:bg-transparent file:rounded-lg file:border-[1.5px] file:border-grey4 w-[200px]"
+                className="w-[215px] "
                 onChange={handleImage2}
                 accept="image/*"
               />
@@ -222,6 +224,7 @@ const Step4 = ({
                 // className="file:h-[100px] file:w-[100px] file:bg-transparent file:rounded-lg file:border-[1.5px] file:border-grey4 w-[100px]"
                 onChange={handleImage3}
                 accept="image/*"
+                className="w-[215px] "
               />
             </div>
           </div>

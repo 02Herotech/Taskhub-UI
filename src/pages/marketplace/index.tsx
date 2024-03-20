@@ -9,6 +9,7 @@ import Nav from "../../../components/nav/Nav";
 import NewFooter from "../../../components/NewFooter/NewFooter";
 import { poppins } from "@/styles/font";
 import ListingComp from "../../../components/marketplaceListing";
+import TaskComp from "../../../components/marketplaceTask";
 
 interface taskData {
   id: number;
@@ -64,7 +65,9 @@ const Marketplace = () => {
               </span>
               <p className="text-white">Task Requests</p>
             </div>
-            <div></div>
+            <div className="flex flex-col justify-center items-center w-full  my-10">
+              <TaskComp />
+            </div>
           </div>
         </div>
       </main>

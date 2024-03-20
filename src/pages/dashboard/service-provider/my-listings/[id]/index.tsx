@@ -315,7 +315,7 @@ const ListingDetails = () => {
                 <span className="">
                   <FiMapPin />
                 </span>
-                <div className="flex space-x-2">
+                <div className="flex space-x-[4px]">
                   <p>{listingData?.userAddress?.streetNumber},</p>
                   <p>{listingData?.userAddress?.streetName},</p>
                   {listingData?.userAddress?.unitNumber && (

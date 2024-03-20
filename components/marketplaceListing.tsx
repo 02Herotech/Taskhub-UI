@@ -15,6 +15,7 @@ interface listingData {
   content: [
     {
       id: number;
+      posterId: number;
       businessName: string;
       serviceCategory: string;
       subCategory: string;
@@ -64,6 +65,7 @@ const ListingComp = () => {
     content: [
       {
         id: 0,
+        posterId: 0,
         businessName: "",
         serviceCategory: "",
         subCategory: "",
@@ -143,49 +145,54 @@ const ListingComp = () => {
         <div className="flex flex-col space-y-8">
           <div className="grid grid-cols-5 gap-10">
             {listingData.content.slice(0, 10).map((listing, index) => (
-              <div key={listing.id}>
-                <div className="border-[1.5px] cursor-pointer flex-col justify-around space-y-2 items-center border-grey3 hover:border-[#FE9B07] rounded-xl shadow-sm px-3 py-4 my-5 flex group transition-colors duration-200 h-[230px] w-[180px]">
-                  <img
-                    src={listing.businessPictures[0]}
-                    alt=""
-                    width={180}
-                    className={`rounded-xl bg-cover h-[150px] border-[1.5px] border-grey3 group-hover:border-[#FE9B07] transition-colors duration-200 w-[180px]`}
-                  />
+              <Link
+                href={`/marketplace/listing/${listing.id} `}
+                key={listing.id}
+              >
+                <div>
+                  <div className="border-[1.5px] cursor-pointer flex-col justify-around space-y-2 items-center border-grey3 hover:border-[#FE9B07] rounded-xl shadow-sm px-3 py-4 my-5 flex group transition-colors duration-200 h-[230px] w-[180px]">
+                    <img
+                      src={listing.businessPictures[0]}
+                      alt=""
+                      width={180}
+                      className={`rounded-xl bg-cover h-[150px] border-[1.5px] border-grey3 group-hover:border-[#FE9B07] transition-colors duration-200 w-[180px]`}
+                    />
 
-                  <div className="flex justify-between w-[150px] items-center">
-                    <div className="flex flex-col space-y-2">
-                      <h4 className="font-extrabold text-[18px]">
-                        {listing.businessName}
-                      </h4>
+                    <div className="flex justify-between w-[150px] items-center">
+                      <div className="flex flex-col space-y-2">
+                        <h4 className="font-extrabold text-[18px]">
+                          {listing.businessName}
+                        </h4>
 
-                      <div className="flex items-center text-[13px] space-x-2">
-                        <p className="text-grey4">${listing.pricing}</p>
-                        <div className="flex items-center space-x-1 text-grey4">
-                          <span>
-                            <FiMapPin />
-                          </span>
+                        <div className="flex items-center text-[13px] space-x-2">
+                          <p className="text-grey4">${listing.pricing}</p>
+                          <div className="flex items-center space-x-1 text-grey4">
+                            <span>
+                              <FiMapPin />
+                            </span>
 
-                          <p>{listing.userAddress.state.slice(0, 8)}</p>
+                            <p>{listing.userAddress.state.slice(0, 8)}</p>
+                          </div>
                         </div>
                       </div>
-                    </div>
 
-                    <div
-                      className={`w-[12px] h-[12px] rounded-[50%] border-[1.5px] border-green4 relative flex justify-center items-center ${
-                        listing.available === true
-                          ? "border-green5"
-                          : "border-red5"
-                      }`}
-                    >
-                      <span
-                        className={`w-[6px] h-[6px] block rounded-[50%] ${
-                          listing.available === true ? "bg-green5" : "bg-red5"
+                      <div
+                        className={`w-[12px] h-[12px] rounded-[50%] border-[1.5px] border-green4 relative flex justify-center items-center ${
+                          listing.available === true
+                            ? "border-green5"
+                            : "border-red5"
                         }`}
-                      ></span>
+                      >
+                        <span
+                          className={`w-[6px] h-[6px] block rounded-[50%] ${
+                            listing.available === true ? "bg-green5" : "bg-red5"
+                          }`}
+                        ></span>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
           <div className="flex justify-end w-full">

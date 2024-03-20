@@ -73,10 +73,22 @@ const Nav = () => {
             >
               Home
             </Link>
+            {/* <Link
+              href="/marketplace"
+              className={`p-2 hover:text-purpleBase ${
+                isLinkActive("/marketplace") && "text-purpleBase"
+              }`}
+            >
+              Marketplace
+            </Link> */}
+
             <Link
               href="/marketplace"
               className={`p-2 hover:text-purpleBase ${
-                isLinkActive("/services") && "text-purpleBase"
+                (router.pathname === "/marketplace" ||
+                  router.pathname === "/marketplace/listing" ||
+                  router.pathname === "/marketplace/listing/[id]") &&
+                "text-purpleBase"
               }`}
             >
               Marketplace

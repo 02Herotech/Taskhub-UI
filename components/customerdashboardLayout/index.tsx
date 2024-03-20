@@ -143,7 +143,11 @@ function CustomerDashboardLayout(props: IProps) {
             <ul>
               <li
                 className={`text-[20px] hover:text-[#FE9B07] ${
-                  isLinkActive("/dashboard/customer/settings") &&
+                  (router.pathname === "/dashboard/customer/settings" ||
+                    router.pathname ===
+                      "/dashboard/customer/settings/change-password" ||
+                    router.pathname ===
+                      "/dashboard/customer/settings/deactivate") &&
                   "text-[#FE9B07]"
                 } `}
               >
@@ -210,7 +214,10 @@ function CustomerDashboardLayout(props: IProps) {
               <Link
                 href="/dashboard/customer/my-tasks"
                 className={`flex items-center gap-[10px] hover:text-[#FE9B07] mb-14 ${
-                  isLinkActive("/dashboard/customer/my-tasks") &&
+                  (router.pathname === "/dashboard/customer/my-tasks" ||
+                    router.pathname === "/dashboard/customer/my-tasks/[id]" ||
+                    router.pathname ===
+                      "/dashboard/customer/my-tasks/post-request") &&
                   "text-[#FE9B07]"
                 }`}
               >
