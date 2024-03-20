@@ -146,7 +146,11 @@ function SPDashboardLayout(props: IProps) {
             <ul>
               <li
                 className={`text-[20px] hover:text-[#FE9B07] ${
-                  isLinkActive("/dashboard/service-provider/settings") &&
+                  (router.pathname === "/dashboard/service-provider/settings" ||
+                    router.pathname ===
+                      "/dashboard/service-provider/settings/change-password" ||
+                    router.pathname ===
+                      "/dashboard/service-provider/settings/deactivate") &&
                   "text-[#FE9B07]"
                 } `}
               >
@@ -214,7 +218,14 @@ function SPDashboardLayout(props: IProps) {
               <Link
                 href="/dashboard/service-provider/my-listings"
                 className={`flex items-center gap-[10px] hover:text-[#FE9B07] mb-14 ${
-                  isLinkActive("/dashboard/service-provider/my-listings") &&
+                  (router.pathname ===
+                    "/dashboard/service-provider/my-listings" ||
+                    router.pathname ===
+                      "/dashboard/service-provider/my-listings/create-listing" ||
+                    router.pathname ===
+                      "/dashboard/service-provider/my-listings/edit/[id]" ||
+                    router.pathname ===
+                      "/dashboard/service-provider/my-listings/[id]") &&
                   "text-[#FE9B07]"
                 }`}
               >

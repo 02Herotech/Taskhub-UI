@@ -1,19 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Head from "next/head";
 import { FiTool } from "react-icons/fi";
 import { BiVector } from "react-icons/bi";
 import { useSession } from "next-auth/react";
-import axios from "axios";
-import { FiMapPin } from "react-icons/fi";
 
 import ServiceSlider from "../../../components/serviceSlider/ServiceSlider";
 import Nav from "../../../components/nav/Nav";
 import NewFooter from "../../../components/NewFooter/NewFooter";
-import ServiceCategoryDetails from "../../../components/ServiceCategory/ServiceCategoryDetails";
 import { poppins } from "@/styles/font";
-import { HiMiniBars4 } from "react-icons/hi2";
-import { BiSolidQuoteAltLeft } from "react-icons/bi";
 import ListingComp from "../../../components/marketplaceListing";
+import TaskComp from "../../../components/marketplaceTask";
 
 interface taskData {
   id: number;
@@ -69,7 +65,9 @@ const Marketplace = () => {
               </span>
               <p className="text-white">Task Requests</p>
             </div>
-            <div></div>
+            <div className="flex flex-col justify-center items-center w-full  my-10">
+              <TaskComp />
+            </div>
           </div>
         </div>
       </main>
