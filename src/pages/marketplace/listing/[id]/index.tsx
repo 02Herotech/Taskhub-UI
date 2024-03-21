@@ -9,6 +9,7 @@ import { FaArrowLeftLong } from "react-icons/fa6";
 import { IoClose } from "react-icons/io5";
 import { poppins } from "@/styles/font";
 import { FiTool } from "react-icons/fi";
+import { BsChat } from "react-icons/bs";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
 import Nav from "../../../../../components/nav/Nav";
@@ -16,42 +17,26 @@ import ServiceSlider from "../../../../../components/serviceSlider/ServiceSlider
 import NewFooter from "../../../../../components/NewFooter/NewFooter";
 import loader from "../../../../../public/taskhub-newloader.gif";
 
-interface listingData {
-  length: number;
+interface ListingData {
   id: number;
-  posterID: number;
+  posterId: number;
   businessName: string;
-  serviceCategory: string;
   subCategory: string;
   serviceDescription: string;
-  serviceName: string;
-  pricing: number;
-  availableDays: [string];
-  available: boolean;
   startHour: number;
   closeMinute: number;
   closeHour: number;
   startMinute: number;
-  availableFrom: {
-    hour: number;
-    minute: number;
-  };
-  availableTo: {
-    hour: number;
-    minute: number;
-  };
+  availableDays: string[];
   userAddress: {
-    id: number;
     streetNumber: string;
     streetName: string;
     unitNumber: string;
     suburb: string;
     state: string;
-    postCode: string;
   };
-  deleted: boolean;
-  stripeId: string;
-  businessPictures: ["string"];
+  pricing: number;
+  businessPictures: string[];
 }
 
 const MPListingDetails = () => {
@@ -59,17 +44,15 @@ const MPListingDetails = () => {
   const { id } = router.query;
   const { data: session } = useSession();
 
-  const [listingData, setListingData] = useState<listingData | null>(null);
+  const [listingData, setListingData] = useState<ListingData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isOpened, setIsOpened] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
-  const [idValue, setIdValue] = useState("");
   const [isEnlarged, setIsEnlarged] = useState(false);
   const [selectedImage, setSelectedImage] = useState<string>("");
 
   const handleFetchListingDetails = async () => {
     const listingId = parseInt(id as string, 10);
-    console.log("id value: ", listingId);
     try {
       setIsLoading(true);
 
@@ -77,9 +60,9 @@ const MPListingDetails = () => {
         `${process.env.NEXT_PUBLIC_API_URL}listing/get-listing/${listingId}`
       );
 
-      console.log("listingID: ", response);
-      setListingData(response.data);
-      // console.log("listingDatat:", listingData);
+      if (response.status === 200) {
+        setListingData(response.data);
+      }
     } catch (error) {
       console.error(error);
       setErrorMsg("Error loading details");
@@ -89,7 +72,9 @@ const MPListingDetails = () => {
   };
 
   useEffect(() => {
-    handleFetchListingDetails();
+    if (id) {
+      handleFetchListingDetails();
+    }
   }, [id]);
 
   const handleShowImage = (imageUrl: string) => {
@@ -101,6 +86,39 @@ const MPListingDetails = () => {
     window.history.back();
   };
 
+  const handleEditClick = () => {
+    if (id) {
+      router.push(`/dashboard/service-provider/my-listings/edit/${id}`);
+    }
+  };
+
+  const userToken = session?.user?.accessToken;
+
+  const handleDelete = async () => {
+    const listingId = parseInt(id as string, 10);
+    try {
+      if (!userToken || !id) {
+        return;
+      }
+
+      const response = await axios.delete(
+        `${process.env.NEXT_PUBLIC_API_URL}listing/delete-listing/${listingId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${userToken}`,
+          },
+        }
+      );
+
+      if (response.status === 200) {
+        router.push("/dashboard/service-provider/my-listings");
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  // console.log("role:", session?.user?.user?.roles[0]);
   return (
     <div>
       <Nav />
@@ -117,41 +135,59 @@ const MPListingDetails = () => {
             <p className="text-white">Service Listings</p>
           </div>
 
+          {/* Render error message if errorMsg is not empty */}
           {errorMsg && (
             <p className="text-center w-[900px] text-red10 mt-4 -mb-4">
               {errorMsg}
             </p>
           )}
 
-          {isLoading ? (
+          {/* Render loader when isLoading is true */}
+          {isLoading && !listingData && (
             <div className="w-[900px] flex items-center justify-center h-[300px] ">
               <Image src={loader} alt="loader" width={80} />
             </div>
-          ) : (
-            <div className="flex border border-green4 flex-col mt-16 w-[900px] bg-[#FBFAFB] rounded-2xl shadow-xl p-10 relative ">
-              {/* <span
-                className="absolute top-2 right-5 text-grey4  cursor-pointer hover:text-grey6"
-                onClick={() => setIsOpened(!isOpened)}
-              >
-                <BsThreeDots />
-              </span> */}
+          )}
 
-              {/* {isOpened && (
-              <div className="flex flex-col text-[12px]  text-grey4 absolute right-8 top-6 items-center space-y-1">
-                <p
-                  onClick={handleEditClick}
-                  className=" hover:text-grey6 hover:border-b-[1.5px] cursor-pointer h-[20px] px-2 "
-                >
-                  Edit
-                </p>
-                <p
-                  className=" hover:text-grey6 hover:border-b-[1.5px] cursor-pointer h-[20px] px-2"
-                  onClick={handleDelete}
-                >
-                  Delete
-                </p>
+          {listingData && (
+            <div className="flex border border-green4 flex-col mt-16 w-[900px] bg-[#FBFAFB] rounded-2xl shadow-xl p-10 relative ">
+              <div className="absolute top-3 right-6">
+                {session?.user?.user?.id === listingData?.posterId ? (
+                  <span
+                    className=" text-grey4  cursor-pointer hover:text-grey6"
+                    onClick={() => setIsOpened(!isOpened)}
+                  >
+                    <BsThreeDots />
+                  </span>
+                ) : (
+                  <div>
+                    {session?.user?.user?.roles[0] === "CUSTOMER" ? (
+                      <div className="bg-purpleBase text-white px-4 py-2 cursor-pointer rounded-xl text-[14px] hover:bg-purpleHover">
+                        Book Service
+                      </div>
+                    ) : (
+                      ""
+                    )}
+                  </div>
+                )}
               </div>
-             )} */}
+
+              {isOpened && (
+                <div className="flex flex-col text-[12px]  text-grey4 absolute right-8 top-6 items-center space-y-1">
+                  <p
+                    onClick={handleEditClick}
+                    className=" hover:text-grey6 hover:border-b-[1.5px] cursor-pointer h-[20px] px-2 "
+                  >
+                    Edit
+                  </p>
+                  <p
+                    className=" hover:text-grey6 hover:border-b-[1.5px] cursor-pointer h-[20px] px-2"
+                    onClick={handleDelete}
+                  >
+                    Delete
+                  </p>
+                </div>
+              )}
 
               <div className="flex flex-col space-y-8">
                 <div className="flex flex-col">
@@ -301,6 +337,17 @@ const MPListingDetails = () => {
                   <h4 className="font-bold text-[15px]">Pricing:</h4>
                   <p className="text-[13px]">${listingData?.pricing}</p>
                 </div>
+
+                {session?.user?.user?.roles[0] === "CUSTOMER" && (
+                  <div className=" flex  items-center justify-start">
+                    <div className="flex space-x-1 items-center bg-purpleBase text-white px-4 py-2 cursor-pointer rounded-xl text-[14px] hover:bg-purpleHover">
+                      <span className="text-[12px]">
+                        <BsChat />
+                      </span>
+                      <p>Send message</p>
+                    </div>
+                  </div>
+                )}
 
                 <div className="flex space-x-3">
                   {listingData?.businessPictures.map((image, index) => (
