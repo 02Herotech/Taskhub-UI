@@ -13,6 +13,7 @@ import loader from "../../../../public/taskhub-newloader.gif";
 import Nav from "../../../../components/nav/Nav";
 import ServiceSlider from "../../../../components/serviceSlider/ServiceSlider";
 import NewFooter from "../../../../components/NewFooter/NewFooter";
+import { FaArrowLeftLong } from "react-icons/fa6";
 
 interface listingData {
   totalElements: number;
@@ -270,6 +271,10 @@ const ServiceListing = () => {
     setNthPageForSearchListing(updatedNthPageForSearchListings);
   }, [currentSearchPage, searchListing]);
 
+  const goBack = () => {
+    window.history.back();
+  };
+
   return (
     <div>
       <Nav />
@@ -337,8 +342,13 @@ const ServiceListing = () => {
                     )}
 
                     {searchListing.length > 0 && (
-                      <div className="flex flex-col w-[1100px] justify-center items-center border">
-                        <div className="grid grid-cols-5 gap-10 border">
+                      <div className="flex flex-col w-[1100px] justify-center items-center ">
+                        <div className="flex justify-start w-full mb-5">
+                          <h3 className="text-grey6 text-[25px]">
+                            Result from search
+                          </h3>
+                        </div>
+                        <div className="grid grid-cols-5 gap-10 ">
                           {currentSearchListings
                             .slice(0, 15)
                             .map((listing, index) => (
@@ -498,7 +508,16 @@ const ServiceListing = () => {
                             </Link>
                           ))}
                         </div>
-                        <div className="flex justify-center w-[1100px] my-10">
+                        <div className="flex justify-between w-[1100px] my-10">
+                          <div
+                            onClick={goBack}
+                            className="flex px-2 py-1 items-center space-x-1 hover:text-[#FE9B07] hover:scale-110 cursor-pointer"
+                          >
+                            <span>
+                              <FaArrowLeftLong />
+                            </span>
+                            <p>Back</p>
+                          </div>
                           <div className="flex justify-center items-center space-x-5">
                             <button
                               onClick={handlePreviousPage}

@@ -140,7 +140,7 @@ const Nav = () => {
             {session ? (
               session?.user.user.roles[0] === customer ? (
                 <div>
-                  <Link href="dashboard/customer">
+                  <Link href="/dashboard/customer">
                     <button className="px-3 border-[2px] border-purpleBase bg-purpleBase text-white text-base font-extralight h-[45px] hover:bg-purple7 rounded-md">
                       Dashboard
                     </button>
@@ -148,7 +148,7 @@ const Nav = () => {
                 </div>
               ) : (
                 <div>
-                  <Link href="dashboard/service-provider">
+                  <Link href="/dashboard/service-provider">
                     <button className="px-3 border-[2px] border-purpleBase bg-purpleBase text-white text-base font-extralight h-[45px] hover:bg-purple7 rounded-md">
                       Dashboard
                     </button>

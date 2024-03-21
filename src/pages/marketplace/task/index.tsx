@@ -7,6 +7,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { CiCalendar } from "react-icons/ci";
 import { BiVector } from "react-icons/bi";
+import { FaArrowLeftLong } from "react-icons/fa6";
 
 import { poppins } from "@/styles/font";
 import loader from "../../../../public/taskhub-newloader.gif";
@@ -101,6 +102,10 @@ const MPTask = () => {
     setCurrentPage((prevPage) => prevPage - 1); // Update currentPage using functional form to ensure the correct value is used
   };
 
+  const goBack = () => {
+    window.history.back();
+  };
+
   return (
     <div>
       <Nav />
@@ -181,7 +186,17 @@ const MPTask = () => {
                 ))}
               </div>
 
-              <div className="flex justify-center w-[1100px] my-10">
+              <div className="flex justify-between w-[1100px] my-10">
+                <div
+                  onClick={goBack}
+                  className="flex px-2 py-1 items-center space-x-1 hover:text-[#FE9B07] hover:scale-110 cursor-pointer"
+                >
+                  <span>
+                    <FaArrowLeftLong />
+                  </span>
+                  <p>Back</p>
+                </div>
+
                 <div className="flex justify-center items-center space-x-5">
                   <button
                     onClick={handlePreviousPage}

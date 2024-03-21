@@ -12,6 +12,7 @@ import { useSession } from "next-auth/react";
 import { SlLocationPin } from "react-icons/sl";
 import { PiNotepad } from "react-icons/pi";
 import { FaArrowLeftLong } from "react-icons/fa6";
+import { BsChat } from "react-icons/bs";
 
 import { BsThreeDots } from "react-icons/bs";
 import { IoClose } from "react-icons/io5";
@@ -21,9 +22,6 @@ import loader from "../../../../../public/taskhub-newloader.gif";
 import Nav from "../../../../../components/nav/Nav";
 import ServiceSlider from "../../../../../components/serviceSlider/ServiceSlider";
 import NewFooter from "../../../../../components/NewFooter/NewFooter";
-// import Nav from "../../../../components/nav/Nav";
-// import ServiceSlider from "../../../../components/serviceSlider/ServiceSlider";
-// import NewFooter from "../../../../components/NewFooter/NewFooter";
 
 interface taskData {
   id: number;
@@ -48,6 +46,7 @@ const MPTaskDetails = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
   const [isEnlarged, setIsEnlarged] = useState(false);
+  const [isOpened, setIsOpened] = useState(false);
 
   const handleFetchTaskDetails = async () => {
     const listingId = parseInt(id as string, 10);
@@ -78,6 +77,36 @@ const MPTaskDetails = () => {
     window.history.back();
   };
 
+  const taskId = parseInt(id as string, 10);
+  console.log("id value: ", taskId);
+
+  const userToken = session?.user?.accessToken;
+
+  const handleDelete = async () => {
+    try {
+      if (!userToken || !id) {
+        return;
+      }
+      console.log(userToken);
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_API_URL}task/delete-task/${taskId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${userToken}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      console.log("delete res", response);
+      if (response.status === 200) {
+        router.push("/dashboard/customer/my-tasks");
+      }
+    } catch (error: any) {
+      console.error(error.message);
+      setErrorMsg(error.message);
+    }
+  };
+
   return (
     <div>
       <Nav />
@@ -99,14 +128,31 @@ const MPTaskDetails = () => {
             </div>
           ) : (
             <div className="flex  flex-col mt-16 w-[700px] rounded-2xl shadow-md p-10 relative  bg-[#F8E9FE]/[0.5]">
-              {/* <span
-                className="absolute top-2 right-5 text-grey4  cursor-pointer hover:text-grey6"
-                onClick={() => setIsOpened(!isOpened)}
-              >
-                <BsThreeDots />
-              </span> */}
+              <div className="absolute top-3 right-6">
+                {session?.user?.user?.id === taskData?.posterId ? (
+                  <span
+                    className=" text-grey4  cursor-pointer hover:text-grey6"
+                    onClick={() => setIsOpened(!isOpened)}
+                  >
+                    <BsThreeDots />
+                  </span>
+                ) : (
+                  <div>
+                    {session?.user?.user?.roles[0] === "SERVICE_PROVIDER" ? (
+                      <div className="flex space-x-1 items-center bg-purpleBase text-white px-4 py-2 cursor-pointer rounded-xl text-[14px] hover:bg-purpleHover">
+                        <span className="text-[12px]">
+                          <BsChat />
+                        </span>
+                        <p>Send message</p>
+                      </div>
+                    ) : (
+                      ""
+                    )}
+                  </div>
+                )}
+              </div>
 
-              {/* {isOpened && (
+              {isOpened && (
                 <div className="flex flex-col text-[12px]  text-grey4 absolute right-8 top-6 items-center space-y-1">
                   <p className=" hover:text-grey6 hover:border-b-[1.5px] cursor-pointer h-[20px] px-2 ">
                     Edit
@@ -121,7 +167,7 @@ const MPTaskDetails = () => {
                     Delete
                   </p>
                 </div>
-              )} */}
+              )}
 
               <div>
                 {/* {taskData.map((task, index) => key={index} ( */}
