@@ -227,7 +227,9 @@ function CustomerDashboardLayout(props: IProps) {
               <Link
                 href="/dashboard/customer/bookings"
                 className={`flex items-center gap-[10px] hover:text-[#FE9B07] mb-14 ${
-                  isLinkActive("/dashboard/customer/bookings") &&
+                  (router.pathname === "/dashboard/customer/bookings" ||
+                    router.pathname ===
+                      "/dashboard/customer/bookings/new-booking") &&
                   "text-[#FE9B07]"
                 }`}
               >

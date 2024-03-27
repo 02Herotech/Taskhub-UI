@@ -6,6 +6,7 @@ import { revalia } from "@/styles/font";
 import Image from "next/image";
 import { LuMapPin } from "react-icons/lu";
 import { IoSearch } from "react-icons/io5";
+import { IoClose } from "react-icons/io5";
 
 import styles from "./herosection.module.css";
 import heroImage1 from "../../public/newheroimage1.png";
@@ -29,7 +30,62 @@ const useImageTransition = (images: any, transitionDuration: any) => {
   return currentImageIndex;
 };
 
+interface searchListing {
+  id: number;
+  posterId: number;
+  businessName: string;
+  serviceCategory: string;
+  subCategory: string;
+  serviceDescription: string;
+  serviceName: string;
+  pricing: number;
+  availableDays: [string];
+  available: boolean;
+  startHour: number;
+  closeMinute: number;
+  closeHour: number;
+  startMinute: number;
+  availableFrom: {
+    hour: number;
+    minute: number;
+    second: number;
+    nano: number;
+  };
+  availableTo: {
+    hour: number;
+    minute: number;
+    second: number;
+    nano: number;
+  };
+  userAddress: {
+    id: number;
+    streetNumber: string;
+    streetName: string;
+    unitNumber: string;
+    suburb: string;
+    state: string;
+    postCode: string;
+  };
+  deleted: boolean;
+  stripeId: string;
+  businessPictures: [""];
+}
+
 const HeroSection = () => {
+  const [search, setSearch] = useState("");
+  const [searchListing, setSearchListing] = useState<searchListing[]>([]);
+  const [searching, setSearching] = useState(false);
+
+  const handleSearchChange = (e: any) => {
+    setSearch(e.target.value); // Update the search state with the input value
+  };
+
+  const handleClearSearch = () => {
+    setSearch("");
+    setSearchListing([]); // Clear the search state
+    setSearching(false);
+  };
+
   // Image1 transition
   const images1 = [heroImage1, heroImage4];
   const currentImageIndex1 = useImageTransition(images1, 3000);
@@ -92,13 +148,23 @@ const HeroSection = () => {
               </div>
             </div>
 
-            <div className="w-full border-[1.5px] border-[#969696] bg-white text-[#969696] p-2 rounded-lg text-[14px] relative">
+            <div className="w-full  flex items-center border-[1.5px] border-[#969696] bg-white relative text-[#969696] p-2 rounded-lg text-[14px] space-x-2">
               <input
                 type="text"
                 placeholder="I am looking for..."
-                className="w-full focus:outline-none "
+                className=" focus:outline-none  w-[250px] text-grey6 "
+                onChange={handleSearchChange}
+                value={search}
               />
-              <span className="absolute top-2 right-2 text-[20px]">
+              {search && (
+                <span
+                  className="text-[20px] text-grey4 cursor-pointer hover:text-grey6"
+                  onClick={handleClearSearch}
+                >
+                  <IoClose />
+                </span>
+              )}
+              <span className=" right-2 top-2 text-[20px] absolute">
                 <IoSearch />
               </span>
             </div>

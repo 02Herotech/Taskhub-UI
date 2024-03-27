@@ -1,28 +1,24 @@
-import React from 'react';
-import SPDashboardLayout from '../../../../components/spdashboardLayout';
+import React from "react";
+import SPDashboardLayout from "../../../../components/spdashboardLayout";
 import customer from "../../../../public/dashboardAssets/portrait.jpg";
-import styles from "../customer/styles.module.scss"
-import Image from 'next/image';
-import {MdVerified} from "react-icons/md";
-import {GrLocation, GrSearch} from "react-icons/gr";
+import styles from "../customer/styles.module.scss";
+import Image from "next/image";
+import { MdVerified } from "react-icons/md";
+import { GrLocation, GrSearch } from "react-icons/gr";
 import Card from "../../../../components/card2/Card";
 import Picture1 from "../../../../public/customerAssets/close-up-collection-make-up-beauty-products.jpg";
 import Picture2 from "../../../../public/customerAssets/vintage-sewing-machine-with-thread-measuring-tape.jpg";
-
 
 // interface IProps {
 
 // }
 
 const Billings = () => {
-    return (
-     
+  return (
+    <SPDashboardLayout>
+      <p>Billings and Payment</p>
 
-            <SPDashboardLayout>
-
-            <p>Billings and Payment</p>
-                
-                {/* <div className={styles.mainContainer}>
+      {/* <div className={styles.mainContainer}>
 
                     <div>
                         <div className={styles.customerDetails}>
@@ -55,7 +51,7 @@ const Billings = () => {
                         </button>
                     </div> */}
 
-                    {/* <div className={styles.cardsDiv}>
+      {/* <div className={styles.cardsDiv}>
                         <Card
                             image={Picture1}
                             title={"HEADIE’S Clean Agent"}
@@ -94,9 +90,9 @@ const Billings = () => {
                         />
 
                     </div> */}
-                {/* </div> */}
-            </SPDashboardLayout>
-    );
-}
- 
+      {/* </div> */}
+    </SPDashboardLayout>
+  );
+};
+
 export default Billings;

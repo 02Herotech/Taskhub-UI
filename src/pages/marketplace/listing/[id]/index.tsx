@@ -11,6 +11,7 @@ import { poppins } from "@/styles/font";
 import { FiTool } from "react-icons/fi";
 import { BsChat } from "react-icons/bs";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+import Link from "next/link";
 
 import Nav from "../../../../../components/nav/Nav";
 import ServiceSlider from "../../../../../components/serviceSlider/ServiceSlider";
@@ -163,7 +164,11 @@ const MPListingDetails = () => {
                   <div>
                     {session?.user?.user?.roles[0] === "CUSTOMER" ? (
                       <div className="bg-purpleBase text-white px-4 py-2 cursor-pointer rounded-xl text-[14px] hover:bg-purpleHover">
-                        Book Service
+                        <Link
+                          href={`/dashboard/customer/bookings/new-booking/${listingData.id}`}
+                        >
+                          Book Service
+                        </Link>
                       </div>
                     ) : (
                       ""
@@ -335,7 +340,7 @@ const MPListingDetails = () => {
 
                 <div className="">
                   <h4 className="font-bold text-[15px]">Pricing:</h4>
-                  <p className="text-[13px]">${listingData?.pricing}</p>
+                  <p className="text-[13px]"> From ${listingData?.pricing}</p>
                 </div>
 
                 {session?.user?.user?.roles[0] === "CUSTOMER" && (
