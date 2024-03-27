@@ -346,6 +346,13 @@ const Marketplace = () => {
 
   // Other service
 
+  const handleScroll = () => {
+    // window.scrollTo({ top: 0, behavior: "smooth" }); // Scrolls to the top of the page with smooth animation
+    const windowHeight = window.innerHeight;
+    const middleOfPage = windowHeight / 2;
+    window.scrollTo({ top: middleOfPage, behavior: "smooth" }); // Scrolls to the middle of the page with smooth animation
+  };
+
   const services = [
     "Accountants",
     "Building & Construction",
@@ -391,7 +398,10 @@ const Marketplace = () => {
         <div className="max-w-7xl mx-auto px-20 my-5 flex flex-col space-y-5">
           <div className="flex justify-between">
             <div className="flex items-center space-x-1 text-[14px]">
-              <span className="font-bold">
+              <span
+                className="font-bold cursor-pointer"
+                onClick={handleClearSearch}
+              >
                 <FiHome />
               </span>
               <p>/</p>
@@ -490,7 +500,7 @@ const Marketplace = () => {
                                               <FiMapPin />
                                             </span>
                                             <div className="flex space-x-1">
-                                              <div>
+                                              <div className="flex items-center">
                                                 {listing?.userAddress
                                                   ?.unitNumber && (
                                                   <p>
@@ -513,7 +523,7 @@ const Marketplace = () => {
                                                 {
                                                   listing?.userAddress
                                                     ?.streetName
-                                                }
+                                                }{" "}
                                                 St,
                                               </p>
 
@@ -613,7 +623,7 @@ const Marketplace = () => {
                                 <div className="border-[1.5px] flex-col justify-around space-y-2 items-center border-[#D9D9D9]  rounded-xl shadow-sm px-3 py-4 my-5 flex  w-[550px] h-[460px]">
                                   {listing.businessPictures.length > 0 && ( // Check if there are at least two images
                                     <img
-                                      src={listing.businessPictures[0]} // Render the second image
+                                      src={listing.businessPictures[1]} // Render the second image
                                       alt=""
                                       width={500}
                                       className="rounded-xl border-[1.5px] border-[#D9D9D9] h-[300px]"
@@ -755,7 +765,8 @@ const Marketplace = () => {
                     className="hover:font-semibold cursor-pointer"
                     onClick={() => {
                       setFilter(() => newServices); // Update the search state immediately
-                      handlefilter(newServices); // Call handlefilter after 2 seconds
+                      handlefilter(newServices);
+                      handleScroll();
                     }}
                   >
                     <p>{newServices}</p>
