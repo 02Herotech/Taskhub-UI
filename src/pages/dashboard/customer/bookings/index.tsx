@@ -1,27 +1,31 @@
-import React from 'react';
-import CustomerDashboardLayout from '../../../../components/customerdashboardLayout';
+import React from "react";
+import Head from "next/head";
+
+import CustomerDashboardLayout from "../../../../../components/customerdashboardLayout";
 import customer from "../../../../public/dashboardAssets/portrait.jpg";
-import styles from "../customer/styles.module.scss"
-import Image from 'next/image';
-import {MdVerified} from "react-icons/md";
-import {GrLocation, GrSearch} from "react-icons/gr";
-import Card from "../../../../components/card2/Card";
+import styles from "../customer/styles.module.scss";
+import Image from "next/image";
+import { MdVerified } from "react-icons/md";
+import { GrLocation, GrSearch } from "react-icons/gr";
+import Card from "../../../../../components/card2/Card";
 import Picture1 from "../../../../public/customerAssets/close-up-collection-make-up-beauty-products.jpg";
 import Picture2 from "../../../../public/customerAssets/vintage-sewing-machine-with-thread-measuring-tape.jpg";
-
 
 // interface IProps {
 
 // }
 
 const Bookings = () => {
-    return (
-     
+  return (
+    <CustomerDashboardLayout>
+      <div>
+        <Head>
+          <title>TaskHub | My Bookings</title>
+        </Head>
+      </div>
 
-            <CustomerDashboardLayout>
-
-                <p>Bookings</p>
-                {/* <div className={styles.mainContainer}>
+      <p>Bookings</p>
+      {/* <div className={styles.mainContainer}>
 
                     <div>
                         <div className={styles.customerDetails}>
@@ -54,7 +58,7 @@ const Bookings = () => {
                         </button>
                     </div> */}
 
-                    {/* <div className={styles.cardsDiv}>
+      {/* <div className={styles.cardsDiv}>
                         <Card
                             image={Picture1}
                             title={"HEADIE’S Clean Agent"}
@@ -93,9 +97,9 @@ const Bookings = () => {
                         />
 
                     </div> */}
-                {/* </div> */}
-            </CustomerDashboardLayout>
-    );
-}
- 
+      {/* </div> */}
+    </CustomerDashboardLayout>
+  );
+};
+
 export default Bookings;

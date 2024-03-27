@@ -38,7 +38,7 @@ const ServiceSlider = () => {
   }, [imageSlider, selectedImage.length]);
 
   return (
-    <div className="max-w-7xl mx-auto px-20 my-20 flex flex-col justify-center items-center">
+    <div className="max-w-7xl mx-auto px-20 mt-20 mb-6 flex flex-col justify-center items-center">
       <div className="flex w-[1000px] h-[300px] items-center justify-center">
         <div className="relative">
           <Image src={selectedImage[imageSlider]} width={700} alt="" />
@@ -70,7 +70,7 @@ const ServiceSlider = () => {
         </div>
       </div>
 
-      <div className="w-[700px] my-16 font-extrabold text-center">
+      <div className="w-[700px] my-10 font-extrabold text-center">
         <p>
           "Welcome to our Market Place! Discover a world of solution tailored
           just for you. From expert advice to top-notch sevices, we're here to

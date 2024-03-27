@@ -3,7 +3,6 @@
 import React, { ReactNode } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import Link from "next/link";
 import { signOut, useSession } from "next-auth/react";
 import axios from "axios";
 import { useState, useEffect } from "react";
@@ -16,7 +15,10 @@ import { FiHelpCircle, FiMessageCircle } from "react-icons/fi";
 import { FiLogOut } from "react-icons/fi";
 import { GoGear, GoPulse } from "react-icons/go";
 import { TfiWallet } from "react-icons/tfi";
-import { IoIosNotificationsOutline } from "react-icons/io";
+import { MdOutlineNotifications } from "react-icons/md";
+import { formatDistanceToNow } from "date-fns";
+import { IoMdArrowDropup } from "react-icons/io";
+import Link from "next/link";
 
 import portrait from "./../../public/dashboardAssets/portrait.jpg";
 import taskHub from "./../../public/newlogo.png";
@@ -24,6 +26,12 @@ import Footer from "../footer/Footer";
 
 interface IProps {
   children: ReactNode;
+}
+
+interface notificationType {
+  id: string | number;
+  message: string;
+  notificationTime: [string | number];
 }
 
 function SPDashboardLayout(props: IProps) {
@@ -35,6 +43,7 @@ function SPDashboardLayout(props: IProps) {
 
   const [isOpen, setIsOpen] = useState(false);
   const [profilePicture, setProfilePicture] = useState(null);
+  const [notification, setNotification] = useState<notificationType[]>([]);
 
   const { data: session } = useSession();
   console.log(session);
@@ -54,6 +63,7 @@ function SPDashboardLayout(props: IProps) {
       );
       if (response.status === 200) {
         setProfilePicture(response.data.profileImage);
+        setNotification(response.data.appNotificationList);
       }
     } catch (error) {
       console.error(error);
@@ -66,6 +76,15 @@ function SPDashboardLayout(props: IProps) {
 
   const contactClick = () => {
     setIsOpen(!isOpen);
+  };
+
+  const [clickedNotifications, setClickedNotifications] = useState<number[]>(
+    []
+  );
+
+  const handleNotiClick = () => {
+    setIsOpen(false);
+    router.push("/dashboard/service-provider/manage-bookings");
   };
 
   const handleLogOut = async () => {
@@ -90,11 +109,11 @@ function SPDashboardLayout(props: IProps) {
   };
 
   return (
-    <div className="max-w-7xl mx-auto">
+    <div className="max-w-7xl mx-auto relative">
       {/*Top Bar*/}
 
       <div
-        className={`flex justify-between px-6 py-3 border-b-[1.5px] border-grey4 z-50`}
+        className={`flex justify-between px-6 py-3 border-b-[1.5px] border-grey4 relative`}
       >
         <div className="flex items-center">
           <Link href="/" className={`flex justify-center items-center  p-1`}>
@@ -102,22 +121,33 @@ function SPDashboardLayout(props: IProps) {
           </Link>
         </div>
         <div
-          className={`flex justify-around items-center bg-purpleBase rounded-md px-3 py-2 text-white space-x-4`}
+          className={`flex justify-around items-center bg-purpleBase rounded-md px-3 py-2 text-white space-x-4 relative`}
         >
-          <div className={``}>
-            <span className={`text-[20px]`}>
-              <IoIosNotificationsOutline />
+          <div
+            className={`relative cursor-pointer`}
+            onClick={() => setIsOpen(!isOpen)}
+          >
+            <span className={`text-[20px] `}>
+              <MdOutlineNotifications />
             </span>
+
+            {notification.length > 0 && (
+              <span
+                className={`absolute top-[-7px] right-[3px] bg-[#FE9B07] text-[8px] text-white rounded-[50%] px-[5px] py-[1px] font-bold`}
+              >
+                {notification.length}
+              </span>
+            )}
           </div>
           <div className={`relative`}>
             <span className={`text-[20px] `}>
               <FiMessageCircle />
             </span>
-            <span
+            {/* <span
               className={`absolute top-[-7px] right-[3px] bg-[#FE9B07] text-[10px] text-white rounded-[50%] px-[4px] py-[1px]`}
             >
               5
-            </span>
+            </span> */}
           </div>
 
           <div className={``}>
@@ -159,9 +189,11 @@ function SPDashboardLayout(props: IProps) {
                 </Link>
               </li>
 
-              {/* { !isOpen ? '' :
-                                <div className='absolute top-[50px] ml-[-75px] w-[100px]'>
-                                    <span className='text-purpleBase flex justify-end mb-[-12px] text-[30px]'><IoMdArrowDropup /></span>
+              {/* {!isOpen ? (
+                ""
+              ) : (
+                <div className="absolute top-[50px] ml-[-75px] w-[100px]">
+                  <span className='text-purpleBase flex justify-end mb-[-12px] text-[30px]'><IoMdArrowDropup /></span>
 
                                     <ul className='hover: bg-purpleBase  py-2 px-4  text-[13px] flex flex-col items-center justify-center rounded-md'>
 
@@ -176,13 +208,72 @@ function SPDashboardLayout(props: IProps) {
                                             </button>
                                         </li>
                                     </ul>
-                                </div>
-                                } */}
+                </div>
+              )} */}
             </ul>
           </div>
 
           {/* <Link href="/dashboard/customer/settings" className={`text-[20px] hover:text-[#FE9B07] ${isLinkActive("/dashboard/customer/settings") && "text-[#FE9B07]"} `}><GoGear /></Link> */}
         </div>
+
+        {isOpen && (
+          <div className="absolute top-[100px] right-[5.8em] max-w-[230px]  z-50">
+            <div className=" bg-white border-grey3 text-black  text-[12px] flex flex-col justify-end items-center rounded-lg shadow-lg border-[1px] px-2 py-3 space-y-3 transition-opacity duration-1000">
+              {notification
+                .slice() // Create a copy of the array to avoid mutating the original
+                .sort((a, b) => {
+                  // Sort by comparing the notificationTime of each notification
+                  const [yearA, monthA, dayA, hourA, minuteA, secondA] =
+                    a.notificationTime.map(Number);
+                  const [yearB, monthB, dayB, hourB, minuteB, secondB] =
+                    b.notificationTime.map(Number);
+
+                  // Construct Date objects using UTC values
+                  const dateA: Date = new Date(
+                    Date.UTC(yearA, monthA - 1, dayA, hourA, minuteA, secondA)
+                  );
+                  const dateB: Date = new Date(
+                    Date.UTC(yearB, monthB - 1, dayB, hourB, minuteB, secondB)
+                  );
+
+                  // Compare dates (reverse order for descending sorting)
+                  return dateB.getTime() - dateA.getTime(); // Compare timestamps
+                })
+                .slice(0, 4) // Select only the first 4 notifications
+                .map((notif, index) => {
+                  const notificationTime = notif.notificationTime.map(Number);
+                  const [year, month, day, hour, minute, second] =
+                    notificationTime;
+
+                  // Construct the Date object using UTC values
+                  const notificationDate: Date = new Date(
+                    Date.UTC(year, month - 1, day, hour, minute, second)
+                  );
+
+                  return (
+                    <div
+                      key={index}
+                      className="flex flex-col items-center px-4 py-3 bg-[#F8E9FE8C] rounded-md cursor-pointer space-y-2"
+                      onClick={() => handleNotiClick()}
+                    >
+                      <h3 className="text-justify font-bold">
+                        {notif.message}
+                      </h3>
+                      <div className="flex justify-end w-full">
+                        <p className="text-end text-[10px] text-grey5">
+                          {formatDistanceToNow(notificationDate, {
+                            addSuffix: true,
+                          })}
+                        </p>
+                      </div>
+                    </div>
+                  );
+                })}
+
+              <button>See more</button>
+            </div>
+          </div>
+        )}
       </div>
 
       {/*sidebar*/}
@@ -240,7 +331,7 @@ function SPDashboardLayout(props: IProps) {
                 }`}
               >
                 <TfiWallet size={16} />
-                Bookings
+                Manage Bookings
               </Link>
               <Link
                 href="/dashboard/service-provider/view-jobs"
@@ -284,16 +375,12 @@ function SPDashboardLayout(props: IProps) {
           </div>
         </div>
 
-        <div className="w-full flex flex-col justify-start items-center mx-auto">
+        <div className="w-full flex flex-col justify-start items-center mx-auto ">
           {props.children}
         </div>
       </div>
 
-      {/*Footer*/}
-
       <Footer />
-
-      {/* </div> */}
     </div>
   );
 }
