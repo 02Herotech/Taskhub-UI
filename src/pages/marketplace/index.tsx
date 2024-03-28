@@ -344,7 +344,7 @@ const Marketplace = () => {
   //   return () => clearTimeout(timer);
   // }, [imageSlider, selectedImage.length]);
 
-  // Other service
+  // To scroll
 
   const handleScroll = () => {
     // window.scrollTo({ top: 0, behavior: "smooth" }); // Scrolls to the top of the page with smooth animation
@@ -352,6 +352,8 @@ const Marketplace = () => {
     const middleOfPage = windowHeight / 2;
     window.scrollTo({ top: middleOfPage, behavior: "smooth" }); // Scrolls to the middle of the page with smooth animation
   };
+
+  // Other service
 
   const services = [
     "Accountants",
@@ -623,7 +625,7 @@ const Marketplace = () => {
                                 <div className="border-[1.5px] flex-col justify-around space-y-2 items-center border-[#D9D9D9]  rounded-xl shadow-sm px-3 py-4 my-5 flex  w-[550px] h-[460px]">
                                   {listing.businessPictures.length > 0 && ( // Check if there are at least two images
                                     <img
-                                      src={listing.businessPictures[1]} // Render the second image
+                                      src={listing.businessPictures[0]} // Render the second image
                                       alt=""
                                       width={500}
                                       className="rounded-xl border-[1.5px] border-[#D9D9D9] h-[300px]"
